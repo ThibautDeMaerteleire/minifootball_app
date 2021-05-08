@@ -16,6 +16,8 @@ jobs:
       with:
         php-version: '8.0'
     - uses: actions/checkout@v2
+    - name: Dir (backend)
+      run: console.info(dir)
     - name: Change directory to server (backend)
       run: cd server
     - name: Copy .env
