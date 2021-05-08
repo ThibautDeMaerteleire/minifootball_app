@@ -22,7 +22,7 @@ jobs:
           REMOTE_USER: ${{ secrets.DEPLOY_USER }}
           REMOTE_PORT: ${{ secrets.DEPLOY_PORT }}
           SOURCE: 'client/'
-          TARGET: 'domains/thibautdemaerteleire.be/footy/client'
+          TARGET: 'domains/thibautdemaerteleire.be/public_html/footy'
 
   server:
     runs-on: ubuntu-latest
@@ -36,7 +36,7 @@ jobs:
           REMOTE_USER: ${{ secrets.DEPLOY_USER }}
           REMOTE_PORT: ${{ secrets.DEPLOY_PORT }}
           SOURCE: 'server/'
-          TARGET: 'domains/thibautdemaerteleire.be/footy/server'
+          TARGET: 'domains/thibautdemaerteleire.be/public_html/api.footy'
   
   storybook:
     runs-on: ubuntu-latest
@@ -60,4 +60,4 @@ jobs:
           REMOTE_USER: ${{ secrets.DEPLOY_USER }}
           REMOTE_PORT: ${{ secrets.DEPLOY_PORT }}
           SOURCE: 'client/build/storybook'
-          TARGET: 'domains/thibautdemaerteleire.be/footy/storybook'
+          TARGET: 'domains/thibautdemaerteleire.be/public_html/storybook.footy'
