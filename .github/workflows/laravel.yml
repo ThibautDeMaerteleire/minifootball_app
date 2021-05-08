@@ -16,10 +16,10 @@ jobs:
       with:
         php-version: '8.0'
     - uses: actions/checkout@v2
-    - name: Dir (backend)
-      run: dir
     - name: Change directory to server (backend)
       run: cd server
+    - name: Dir (backend)
+      run: dir
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Install Dependencies
