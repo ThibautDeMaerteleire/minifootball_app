@@ -12,7 +12,7 @@
     "scully:serve": "npx scully serve --",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
     "storybook": "npm run docs:json && start-storybook -p 6006",
-    "build-storybook": "npm run docs:json && build-storybook",
+    "build-storybook": "npm run docs:json && build-storybook -o 'build/storybook'",
     "chromatic": "npx chromatic --project-token=9cdd7222fff6"
   },
   "private": true,
