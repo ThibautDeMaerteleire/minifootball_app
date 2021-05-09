@@ -3,13 +3,11 @@ name: Angular
 on:
   push:
     branches:
-      - main
       - develop
       - 'feature/**'
       - 'release/**'
   pull_request:
     branches:
-      - main
       - develop
       - 'feature/**'
       - 'release/**'
