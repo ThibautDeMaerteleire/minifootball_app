@@ -7,7 +7,7 @@
 
 ### Icons
 (Ikonate)[https://ikonate.com/] <br>
-(Flag icons 3D)[https://www.uistore.design/items/flagpack-free-icons-pack-for-sketch-and-figma/] <br>
+(Flag icons 3D)[https://flagpack.xyz/] <br>
 
 ### Design systems
 (Landify landing page)[https://www.uistore.design/items/landify-free-landing-page-ui-kit-for-figma/] <br>
