@@ -46,14 +46,20 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Build prod laravel
+        working-directory: server
+        run: |
+              npm install
+              npm run production
       - name: ssh deploy server
-        uses: easingthemes/ssh-deploy@v2.1.4
+        uses: easingthemes/ssh-deploy@v2.1.5
         env:
           SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
           REMOTE_HOST: ${{ secrets.DEPLOY_HOST }}
           REMOTE_USER: ${{ secrets.DEPLOY_USER }}
           REMOTE_PORT: ${{ secrets.DEPLOY_PORT }}
           SOURCE: 'server/'
+          EXCLUDE: "/dist/, /node_modules/, /vendor/"
           TARGET: 'domains/thibautdemaerteleire.be/public_html/api.footy'
       - name: Build laravel app/api on server
         uses: appleboy/ssh-action@master
@@ -67,17 +73,6 @@ jobs:
               touch .env
               echo ${{ secrets.LARAVEL_ENV_KEYS }} > .env
               composer install --prefer-dist --no-interaction --no-suggest
-              npm install
-              npm run production
-      # - name: Build laravel app/api on server
-      #   run: |
-      #         ssh ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }} -p ${{ secrets.DEPLOY_PORT }}
-      #         cd 'domains/thibautdemaerteleire.be/public_html/api.footy'
-      #         # touch .env
-      #         # echo ${{ secrets.LARAVEL_ENV_KEYS }} > .env
-      #         composer install --prefer-dist --no-interaction --no-suggest
-      #         npm install
-      #         npm run production
   
   # storybook:
   #   runs-on: ubuntu-latest
