@@ -52,6 +52,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
         run: |
+              cd client
               npm ci
               npm run build-storybook
       # - name: ssh deploy storybook
