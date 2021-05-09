@@ -31,9 +31,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: |
+              sudo apt-get install google-chrome-stable
               npm ci
-              npm run test
               npm run lint
+              npm run test
   e2e-tests:
     runs-on: ubuntu-latest
     strategy:
@@ -48,5 +49,5 @@ jobs:
       - run: |
               sudo apt-get install google-chrome-stable
               npm ci
-              npm run e2e
               npm run lint
+              npm run e2e
