@@ -50,8 +50,8 @@ jobs:
       - uses: actions/setup-node@v1
       - name: Build storybook
         working-directory: client
-        with:
-          node-version: ${{ matrix.node-version }}
+        # with:
+        #   node-version: ${{ matrix.node-version }}
         run: |
               npm ci
               npm run build-storybook
