@@ -51,6 +51,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Build storybook
         working-directory: client
         run: |
               npm ci
