@@ -32,7 +32,7 @@ jobs:
           REMOTE_HOST: ${{ secrets.DEPLOY_HOST }}
           REMOTE_USER: ${{ secrets.DEPLOY_USER }}
           REMOTE_PORT: ${{ secrets.DEPLOY_PORT }}
-          SOURCE: 'client/build/client'
+          SOURCE: 'client/build/client/'
           TARGET: 'domains/thibautdemaerteleire.be/public_html/footy'
 
   server:
@@ -72,5 +72,5 @@ jobs:
           REMOTE_HOST: ${{ secrets.DEPLOY_HOST }}
           REMOTE_USER: ${{ secrets.DEPLOY_USER }}
           REMOTE_PORT: ${{ secrets.DEPLOY_PORT }}
-          SOURCE: 'client/build/storybook'
+          SOURCE: 'client/build/storybook/'
           TARGET: 'domains/thibautdemaerteleire.be/public_html/storybook.footy'
