@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - main
+      - develop
   pull_request:
     branches:
       - main
+      - develop
 
 
 jobs:
@@ -38,26 +40,26 @@ jobs:
           SOURCE: 'server/'
           TARGET: 'domains/thibautdemaerteleire.be/public_html/api.footy'
   
-  # storybook:
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       node-version: [14.x]
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - uses: actions/setup-node@v1
-  #     - name: Build storybook
-  #       with:
-  #         node-version: ${{ matrix.node-version }}
-  #       run: |
-  #             npm ci
-  #             npm run build-storybook
-  #     - name: ssh deploy storybook
-  #       uses: easingthemes/ssh-deploy@v2.1.4
-  #       env:
-  #         SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
-  #         REMOTE_HOST: ${{ secrets.DEPLOY_HOST }}
-  #         REMOTE_USER: ${{ secrets.DEPLOY_USER }}
-  #         REMOTE_PORT: ${{ secrets.DEPLOY_PORT }}
-  #         SOURCE: 'client/build/storybook'
-  #         TARGET: 'domains/thibautdemaerteleire.be/public_html/storybook.footy'
+  storybook:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - name: Build storybook
+        with:
+          node-version: ${{ matrix.node-version }}
+        run: |
+              npm ci
+              npm run build-storybook
+      - name: ssh deploy storybook
+        uses: easingthemes/ssh-deploy@v2.1.4
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
+          REMOTE_HOST: ${{ secrets.DEPLOY_HOST }}
+          REMOTE_USER: ${{ secrets.DEPLOY_USER }}
+          REMOTE_PORT: ${{ secrets.DEPLOY_PORT }}
+          SOURCE: 'client/build/storybook'
+          TARGET: 'domains/thibautdemaerteleire.be/public_html/storybook.footy'
