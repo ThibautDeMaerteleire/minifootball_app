@@ -1,0 +1,53 @@
+name: Angular
+
+on:
+  push:
+    branches:
+      - main
+      # - develop
+      # - 'feature/**'
+      # - 'release/**'
+  pull_request:
+    branches:
+      - main
+      # - develop
+      # - 'feature/**'
+      # - 'release/**'
+
+defaults:
+  run:
+    working-directory: client
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: |
+              sudo apt-get install google-chrome-stable
+              npm ci
+              npm run lint
+              npm run test
+  e2e-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: |
+              sudo apt-get install google-chrome-stable
+              npm ci
+              npm run lint
+              npm run e2e

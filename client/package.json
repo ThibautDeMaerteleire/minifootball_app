@@ -5,14 +5,15 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
+    "test": "ng test --watch=false --browsers=ChromeHeadless",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "scully": "npx scully --",
     "scully:serve": "npx scully serve --",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
     "storybook": "npm run docs:json && start-storybook -p 6006",
-    "build-storybook": "npm run docs:json && build-storybook"
+    "build-storybook": "npm run docs:json && build-storybook -o 'build/storybook'",
+    "chromatic": "npx chromatic --project-token=9cdd7222fff6"
   },
   "private": true,
   "dependencies": {
@@ -44,6 +45,7 @@
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",
     "babel-loader": "^8.2.2",
+    "chromatic": "^5.8.0",
     "codelyzer": "^6.0.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",

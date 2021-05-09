@@ -1,5 +1,8 @@
 # minifootball_app
 
+## Important
+[DB Scheme](https://drawsql.app/arteveldehogeschool/diagrams/minifootball-app)
+
 ## Possible assets
 
 ### Icons
