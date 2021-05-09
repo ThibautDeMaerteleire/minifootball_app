@@ -48,10 +48,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
+      - with:
+          node-version: ${{ matrix.node-version }}
       - name: Build storybook
         working-directory: client
-        with:
-          node-version: ${{ matrix.node-version }}
         run: |
               npm ci
               npm run build-storybook
