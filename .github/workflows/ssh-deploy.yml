@@ -76,7 +76,8 @@ jobs:
           script: |
                     cd 'domains/thibautdemaerteleire.be/public_html/api.footy'
                     rm -rf vendor 
-      - name: ssh deploy laravel app/api
+
+      - name: ssh deploy laravel server api
         uses: garygrossgarten/github-action-scp@release
         with:
           host: ${{ secrets.DEPLOY_HOST }}
@@ -87,6 +88,7 @@ jobs:
           rmRemote: true
           local: server/
           remote: domains/thibautdemaerteleire.be/public_html/api.footy
+      
       - name: Build laravel composer app/api on server
         uses: appleboy/ssh-action@master
         with:
