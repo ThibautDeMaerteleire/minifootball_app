@@ -22,7 +22,6 @@ jobs:
         run: |
               npm ci
               npm run build
-
       - name: Create cgi-bin
         working-directory: client/build/client
         run: mkdir cgi-bin
@@ -63,10 +62,11 @@ jobs:
               echo ${{ secrets.LARAVEL_ENV_KEYS }} >> .env
               cat .env
       - name: Remove folders
+        working-directory: server
         run: |
               rm -rf /node_modules/
               rm -rf /vendor/
-      - name: Build laravel app/api on server
+      - name: Remove vendor from ssh server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.DEPLOY_HOST }}
@@ -76,7 +76,7 @@ jobs:
           script: |
                     cd 'domains/thibautdemaerteleire.be/public_html/api.footy'
                     rm -rf vendor
-      - name: ssh deploy client
+      - name: ssh deploy laravel app/api
         uses: garygrossgarten/github-action-scp@release
         with:
           host: ${{ secrets.DEPLOY_HOST }}
@@ -87,7 +87,7 @@ jobs:
           rmRemote: true
           local: server/
           remote: domains/thibautdemaerteleire.be/public_html/api.footy
-      - name: Build laravel app/api on server
+      - name: Build laravel composer app/api on server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.DEPLOY_HOST }}
