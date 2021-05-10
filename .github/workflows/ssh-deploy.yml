@@ -86,7 +86,6 @@ jobs:
           port: ${{ secrets.DEPLOY_PORT }}
           privateKey: ${{ secrets.DEPLOY_KEY }}
           dotfiles: true
-          rmRemote: true
           local: server/
           remote: domains/thibautdemaerteleire.be/public_html/api.footy
       
