@@ -75,7 +75,7 @@ jobs:
           port: ${{ secrets.DEPLOY_PORT }}
           script: |
                     cd 'domains/thibautdemaerteleire.be/public_html/api.footy'
-                    rm -rf vendor
+                    rm -rf vendor 
       - name: ssh deploy laravel app/api
         uses: garygrossgarten/github-action-scp@release
         with:
