@@ -9,8 +9,6 @@ on:
       - main
 
 jobs:
-
-
   client:
     runs-on: ubuntu-latest
     steps:
@@ -41,68 +39,79 @@ jobs:
           remote: domains/thibautdemaerteleire.be/public_html/footy
 
 
-  # server:
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       node-version: [14.x]
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Use Node.js ${{ matrix.node-version }}
-  #       uses: actions/setup-node@v1
-  #       with:
-  #         node-version: ${{ matrix.node-version }}
-  #     - name: Build prod laravel
-  #       working-directory: server
-  #       run: |
-  #             npm install
-  #             npm run production
-  #     - name: ssh deploy server
-  #       uses: easingthemes/ssh-deploy@v2.1.5
-  #       env:
-  #         SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
-  #         REMOTE_HOST: ${{ secrets.DEPLOY_HOST }}
-  #         REMOTE_USER: ${{ secrets.DEPLOY_USER }}
-  #         REMOTE_PORT: ${{ secrets.DEPLOY_PORT }}
-  #         SOURCE: 'server/'
-  #         EXCLUDE: "/dist/, /node_modules/, /vendor/"
-  #         TARGET: 'domains/thibautdemaerteleire.be/public_html/api.footy'
-  #     - name: Build laravel app/api on server
-  #       uses: appleboy/ssh-action@master
-  #       with:
-  #         host: ${{ secrets.DEPLOY_HOST }}
-  #         username: ${{ secrets.DEPLOY_USER }}
-  #         key: ${{ secrets.DEPLOY_KEY }}
-  #         port: ${{ secrets.DEPLOY_PORT }}
-  #         script: |
-  #             cd 'domains/thibautdemaerteleire.be/public_html/api.footy'
-  #             touch .env
-  #             echo ${{ secrets.LARAVEL_ENV_KEYS }} >> .env
-  #             cat .env
-  #             composer install --prefer-dist --no-interaction --no-suggest
+  server:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Build prod laravel
+        working-directory: server
+        run: |
+              npm install
+              npm run production
+      - name: Create cgi-bin and .env
+        working-directory: server
+        run: |
+              mkdir cgi-bin
+              touch .env
+              echo ${{ secrets.LARAVEL_ENV_KEYS }} >> .env
+              cat .env
+      - name: Remove folders
+        run: |
+              rm -rf /node_modules/
+              rm -rf /vendor/
+      - name: ssh deploy client
+        uses: garygrossgarten/github-action-scp@release
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          port: ${{ secrets.DEPLOY_PORT }}
+          privateKey: ${{ secrets.DEPLOY_KEY }}
+          dotfiles: true
+          rmRemote: true
+          local: server/
+          remote: domains/thibautdemaerteleire.be/public_html/api.footy
+      - name: Build laravel app/api on server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_KEY }}
+          port: ${{ secrets.DEPLOY_PORT }}
+          script: |
+                    cd 'domains/thibautdemaerteleire.be/public_html/api.footy'
+                    composer install --prefer-dist --no-interaction --no-suggest
   
-  # storybook:
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       node-version: [14.x]
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #     - name: Use Node.js ${{ matrix.node-version }}
-  #       uses: actions/setup-node@v1
-  #       with:
-  #         node-version: ${{ matrix.node-version }}
-  #     - name: Build storybook
-  #       working-directory: client
-  #       run: |
-  #             npm ci
-  #             npm run build-storybook
-  #     - name: ssh deploy storybook
-  #       uses: easingthemes/ssh-deploy@v2.1.4
-  #       env:
-  #         SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
-  #         REMOTE_HOST: ${{ secrets.DEPLOY_HOST }}
-  #         REMOTE_USER: ${{ secrets.DEPLOY_USER }}
-  #         REMOTE_PORT: ${{ secrets.DEPLOY_PORT }}
-  #         SOURCE: 'client/build/storybook/'
-  #         TARGET: 'domains/thibautdemaerteleire.be/public_html/storybook.footy'
+  storybook:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Build storybook
+        working-directory: client
+        run: |
+              npm ci
+              npm run build-storybook
+      - name: ssh deploy storybook
+        uses: garygrossgarten/github-action-scp@release
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          port: ${{ secrets.DEPLOY_PORT }}
+          privateKey: ${{ secrets.DEPLOY_KEY }}
+          dotfiles: true
+          rmRemote: true
+          local: client/build/storybook/
+          remote: domains/thibautdemaerteleire.be/public_html/storybook.footy
