@@ -66,6 +66,16 @@ jobs:
         run: |
               rm -rf /node_modules/
               rm -rf /vendor/
+      - name: Build laravel app/api on server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_KEY }}
+          port: ${{ secrets.DEPLOY_PORT }}
+          script: |
+                    cd 'domains/thibautdemaerteleire.be/public_html/api.footy'
+                    rm -rf vendor
       - name: ssh deploy client
         uses: garygrossgarten/github-action-scp@release
         with:
