@@ -98,8 +98,11 @@ jobs:
           key: ${{ secrets.DEPLOY_KEY }}
           port: ${{ secrets.DEPLOY_PORT }}
           script: |
-                    cd 'domains/thibautdemaerteleire.be/public_html/api.footy'
+                    cd domains/thibautdemaerteleire.be/public_html/api.footy
                     composer install --prefer-dist --no-interaction --no-suggest
+                    touch .env
+                    echo ${{ secrets.LARAVEL_ENV_KEYS }} >> .env
+                    cat .env
   
   storybook:
     runs-on: ubuntu-latest
