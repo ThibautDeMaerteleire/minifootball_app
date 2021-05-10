@@ -15,12 +15,12 @@
 </IfModule>
 
 # If the requested resource doesn't exist, use index.html
-RewriteRule ^ /index.html
+# RewriteRule ^ /index.html
 
-AuthType Basic
-AuthName "restricted area"
-AuthUserFile /opt/approot/.htpasswd
-require valid-user
+# AuthType Basic
+# AuthName "restricted area"
+# AuthUserFile /opt/approot/.htpasswd
+# require valid-user
 
 <IfModule mod_headers.c>
 	Header set Cache-Control "no-cache, no-store, must-revalidate"
