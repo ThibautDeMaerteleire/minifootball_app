@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/scss/bootstrap.scss';
+
+
+// Local styles
+@import './01_abstracts/';
+@import './02_vendors/';
+@import './03_base/';
+@import './04_layout/';
+@import './05_components/';
+@import './06_pages/';
+@import './07_themes/';
+
