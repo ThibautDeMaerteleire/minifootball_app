@@ -59,7 +59,7 @@ jobs:
         run: |
               mkdir cgi-bin
               touch .env
-              echo ${{ secrets.LARAVEL_ENV_KEYS }} >> .env
+              echo '${{ secrets.LARAVEL_ENV_KEYS }}' >> .env
               cat .env
       - name: Remove folders
         working-directory: server
@@ -101,7 +101,7 @@ jobs:
                     cd domains/thibautdemaerteleire.be/public_html/api.footy
                     composer install --prefer-dist --no-interaction --no-suggest
                     touch .env
-                    echo ${{ secrets.LARAVEL_ENV_KEYS }} >> .env
+                    echo '${{ secrets.LARAVEL_ENV_KEYS }}' >> .env
                     cat .env
   
   storybook:
