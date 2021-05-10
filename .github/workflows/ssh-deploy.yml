@@ -64,8 +64,9 @@ jobs:
       - name: Remove folders
         working-directory: server
         run: |
-              rm -rf /node_modules/
-              rm -rf /vendor/
+              rm -rf node_modules
+              rm -rf vendor
+              ls
       - name: Remove vendor from ssh server
         uses: appleboy/ssh-action@master
         with:
