@@ -104,6 +104,9 @@ jobs:
         run: |
               npm ci
               npm run build-storybook
+      - name: Create cgi-bin
+        working-directory: client/build/storybook
+        run: mkdir cgi-bin        
       - name: ssh deploy storybook
         uses: garygrossgarten/github-action-scp@release
         with:
