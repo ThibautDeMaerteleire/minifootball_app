@@ -56,7 +56,7 @@ jobs:
           REMOTE_USER: ${{ secrets.DEPLOY_USER }}
           REMOTE_PORT: ${{ secrets.DEPLOY_PORT }}
           SOURCE: 'server/'
-          EXCLUDE: "/dist/, /node_modules/, /vendor/"
+          EXCLUDE: "/vendor/"
           TARGET: 'domains/thibautdemaerteleire.be/public_html/api.footy'
       - name: Build laravel app/api on server
         uses: appleboy/ssh-action@master
