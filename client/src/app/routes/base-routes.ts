@@ -7,19 +7,19 @@ import { RegisterComponent } from '../pages/register/register.component';
 import { AppRoutes } from './app-routes';
 
 export const BaseRoutes: Routes = [{
-  pathMatch: baseRoutesEnum.home,
+  path: baseRoutesEnum.home,
   redirectTo: baseRoutesEnum.landing
 }, {
-  pathMatch: baseRoutesEnum.landing,
+  path: baseRoutesEnum.landing,
   component: HomeComponent
 }, {
-  pathMatch: baseRoutesEnum.login,
+  path: baseRoutesEnum.login,
   component: LoginComponent
 }, {
-  pathMatch: baseRoutesEnum.register,
+  path: baseRoutesEnum.register,
   component: RegisterComponent
 }, {
-  pathMatch: baseRoutesEnum.app,
+  path: baseRoutesEnum.app,
   children: AppRoutes
 }, {
   path: baseRoutesEnum.error,
