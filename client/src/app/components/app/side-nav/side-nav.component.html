@@ -1,0 +1,110 @@
+<nz-layout class="app-layout">
+    <nz-sider
+        class="menu-sidebar"
+        nzCollapsible
+        nzWidth="256px"
+        nzBreakpoint="md"
+        [(nzCollapsed)]="isCollapsed"
+        [nzTrigger]="null">
+    <div class="sidebar-logo">
+        <a href="https://ng.ant.design/" target="_blank">
+        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
+        <h1>Ant Design Of Angular</h1>
+            <img
+                src="/assets/img/logo/logo_small.svg"
+                alt=""
+                class="text-green"
+            />
+        </a>
+    </div>
+    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+        <!-- <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard" nzMenuClassName="">
+            <ul>
+                <li nz-menu-item nzMatchRouter>
+                    <a routerLink="/welcome">Welcome</a>
+                </li>
+                <li nz-menu-item nzMatchRouter>
+                    <a>Monitor</a>
+                </li>
+                <li nz-menu-item nzMatchRouter>
+                    <a>Workplace</a>
+                </li>
+            </ul>
+        </li>
+        <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
+            <ul>
+                <li nz-menu-item nzMatchRouter>
+                    <a>Basic Form</a>
+                </li>
+            </ul>
+        </li> -->
+        <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''" nzSelected>
+            <i nz-icon nzType="pie-chart" nzTheme="outline"></i>
+            <span>Dashboard</span>
+        </li>
+        <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
+            <i nz-icon nzType="team" nzTheme="outline"></i>
+            <span>Teams</span>
+        </li>
+        <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
+            <i nz-icon nzType="calendar" nzTheme="outline"></i>
+            <span>Matches</span>
+        </li>
+        <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
+            <i nz-icon nzType="message" nzTheme="outline"></i>
+            <span>Messages</span>
+        </li>
+        <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
+            <i nz-icon nzType="crown" nzTheme="outline"></i>
+            <span>Birthdays</span>
+        </li>
+        <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
+            <i nz-icon nzType="euro-circle" nzTheme="outline"></i>
+            <span>Administration</span>
+        </li>
+        <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
+            <i nz-icon nzType="mail" nzTheme="outline"></i>
+            <span>Email</span>
+        </li>
+        <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
+            <i nz-icon nzType="notification" nzTheme="outline"></i>
+            <span>Updates</span>
+        </li>
+        <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
+            <i nz-icon nzType="bulb" nzTheme="outline"></i>
+            <span>Tutorials</span>
+        </li>
+        <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
+            <i nz-icon nzType="setting" nzTheme="outline"></i>
+            <span>Settings</span>
+        </li>
+        <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
+            <i nz-icon nzType="poweroff" nzTheme="outline"></i>
+            <span>Logout</span>
+        </li>
+    </ul>
+    </nz-sider>
+    <nz-layout>
+        <nz-header>
+            <div class="app-header">
+            <span 
+                class="header-trigger" 
+                (click)="isCollapsed = !isCollapsed"
+            >
+                <i 
+                    class="trigger"
+                    nz-icon
+                    [attr.nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+                ></i>
+            </span>
+            </div>
+        </nz-header>
+        <nz-content>
+            <div class="inner-content">
+
+                <ng-content></ng-content>
+
+            </div>
+        </nz-content>
+    </nz-layout>
+</nz-layout>

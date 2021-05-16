@@ -1,5 +1,7 @@
 
 import { setCompodocJson } from "@storybook/addon-docs/angular";
+import { moduleMetadata } from '@storybook/angular';
+import { AppModule } from '../src/app/app.module';
 import docJson from "../documentation.json";
 setCompodocJson(docJson);
 
@@ -13,3 +15,7 @@ export const parameters = {
     },
   },
 }
+
+export const decorators = [
+  moduleMetadata(AppModule),
+]

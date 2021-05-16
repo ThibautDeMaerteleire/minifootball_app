@@ -5,10 +5,10 @@
     "classes": [
         {
             "name": "AppPage",
-            "id": "class-AppPage-ee2067dfb1c303f41003aea7d82d51e0",
+            "id": "class-AppPage-e3ea1f4631d62652a5623d3ab757b2fc",
             "file": "e2e/src/app.po.ts",
             "type": "class",
-            "sourceCode": "import { browser, by, element } from 'protractor';\n\nexport class AppPage {\n  async navigateTo(): Promise<unknown> {\n    return browser.get(browser.baseUrl);\n  }\n\n  async getTitleText(): Promise<string> {\n    return element(by.css('app-root .content span')).getText();\n  }\n}\n",
+            "sourceCode": "import { browser, by, element } from 'protractor';\r\n\r\nexport class AppPage {\r\n  async navigateTo(): Promise<unknown> {\r\n    return browser.get(browser.baseUrl);\r\n  }\r\n\r\n  async getTitleText(): Promise<string> {\r\n    return element(by.css('app-root .content span')).getText();\r\n  }\r\n}\r\n",
             "properties": [],
             "methods": [
                 {
@@ -44,8 +44,8 @@
     "directives": [],
     "components": [
         {
-            "name": "AppComponent",
-            "id": "component-AppComponent-d4671294e0576b65be7cebd9597c3e6b",
+            "name": "App",
+            "id": "component-App-7e02a0188efa66473f379a810f3bbaf0",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -53,9 +53,7 @@
             "outputs": [],
             "providers": [],
             "selector": "app-root",
-            "styleUrls": [
-                "./app.component.scss"
-            ],
+            "styleUrls": [],
             "styles": [],
             "templateUrl": [
                 "./app.component.html"
@@ -63,36 +61,22 @@
             "viewProviders": [],
             "inputsClass": [],
             "outputsClass": [],
-            "propertiesClass": [
-                {
-                    "name": "title",
-                    "defaultValue": "'client'",
-                    "type": "string",
-                    "optional": false,
-                    "description": "",
-                    "line": 9
-                }
-            ],
+            "propertiesClass": [],
             "methodsClass": [],
             "hostBindings": [],
             "hostListeners": [],
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html',\n  styleUrls: ['./app.component.scss']\n})\nexport class AppComponent {\n  title = 'client';\n}\n",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html'\n})\nexport class App { }\n",
             "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": "",
-                    "styleUrl": "./app.component.scss"
-                }
-            ],
+            "styleUrlsData": "",
             "stylesData": "",
-            "templateData": "<router-outlet></router-outlet>\n<p>test</p>"
+            "templateData": "<router-outlet></router-outlet>\r\n"
         },
         {
             "name": "ButtonComponent",
-            "id": "component-ButtonComponent-642c6c4e474cd5a0ac760dfda26b2fc9",
+            "id": "component-ButtonComponent-44f2f1e1b3a1e0ebc1e0edafd90d05c0",
             "file": "src/stories/button.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -150,11 +134,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-button',\n  template: ` <button\n    type=\"button\"\n    (click)=\"onClick.emit($event)\"\n    [ngClass]=\"classes\"\n    [ngStyle]=\"{ 'background-color': backgroundColor }\"\n  >\n    {{ label }}\n  </button>`,\n  styleUrls: ['./button.css'],\n})\nexport default class ButtonComponent {\n  /**\n   * Is this the principal call to action on the page?\n   */\n  @Input()\n  primary = false;\n\n  /**\n   * What background color to use\n   */\n  @Input()\n  backgroundColor?: string;\n\n  /**\n   * How large should the button be?\n   */\n  @Input()\n  size: 'small' | 'medium' | 'large' = 'medium';\n\n  /**\n   * Button contents\n   *\n   * @required\n   */\n  @Input()\n  label = 'Button';\n\n  /**\n   * Optional click handler\n   */\n  @Output()\n  onClick = new EventEmitter<Event>();\n\n  public get classes(): string[] {\n    const mode = this.primary ? 'storybook-button--primary' : 'storybook-button--secondary';\n\n    return ['storybook-button', `storybook-button--${this.size}`, mode];\n  }\n}\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'storybook-button',\r\n  template: ` <button\r\n    type=\"button\"\r\n    (click)=\"onClick.emit($event)\"\r\n    [ngClass]=\"classes\"\r\n    [ngStyle]=\"{ 'background-color': backgroundColor }\"\r\n  >\r\n    {{ label }}\r\n  </button>`,\r\n  styleUrls: ['./button.css'],\r\n})\r\nexport default class ButtonComponent {\r\n  /**\r\n   * Is this the principal call to action on the page?\r\n   */\r\n  @Input()\r\n  primary = false;\r\n\r\n  /**\r\n   * What background color to use\r\n   */\r\n  @Input()\r\n  backgroundColor?: string;\r\n\r\n  /**\r\n   * How large should the button be?\r\n   */\r\n  @Input()\r\n  size: 'small' | 'medium' | 'large' = 'medium';\r\n\r\n  /**\r\n   * Button contents\r\n   *\r\n   * @required\r\n   */\r\n  @Input()\r\n  label = 'Button';\r\n\r\n  /**\r\n   * Optional click handler\r\n   */\r\n  @Output()\r\n  onClick = new EventEmitter<Event>();\r\n\r\n  public get classes(): string[] {\r\n    const mode = this.primary ? 'storybook-button--primary' : 'storybook-button--secondary';\r\n\r\n    return ['storybook-button', `storybook-button--${this.size}`, mode];\r\n  }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".storybook-button {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  font-weight: 700;\n  border: 0;\n  border-radius: 3em;\n  cursor: pointer;\n  display: inline-block;\n  line-height: 1;\n}\n.storybook-button--primary {\n  color: white;\n  background-color: #1ea7fd;\n}\n.storybook-button--secondary {\n  color: #333;\n  background-color: transparent;\n  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;\n}\n.storybook-button--small {\n  font-size: 12px;\n  padding: 10px 16px;\n}\n.storybook-button--medium {\n  font-size: 14px;\n  padding: 11px 20px;\n}\n.storybook-button--large {\n  font-size: 16px;\n  padding: 12px 24px;\n}\n",
+                    "data": ".storybook-button {\r\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\r\n  font-weight: 700;\r\n  border: 0;\r\n  border-radius: 3em;\r\n  cursor: pointer;\r\n  display: inline-block;\r\n  line-height: 1;\r\n}\r\n.storybook-button--primary {\r\n  color: white;\r\n  background-color: #1ea7fd;\r\n}\r\n.storybook-button--secondary {\r\n  color: #333;\r\n  background-color: transparent;\r\n  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;\r\n}\r\n.storybook-button--small {\r\n  font-size: 12px;\r\n  padding: 10px 16px;\r\n}\r\n.storybook-button--medium {\r\n  font-size: 14px;\r\n  padding: 11px 20px;\r\n}\r\n.storybook-button--large {\r\n  font-size: 16px;\r\n  padding: 12px 24px;\r\n}\r\n",
                     "styleUrl": "./button.css"
                 }
             ],
@@ -172,8 +156,176 @@
             }
         },
         {
+            "name": "CardBaseComponent",
+            "id": "component-CardBaseComponent-6ca6793ee056a58976bf76c5936dea1c",
+            "file": "src/app/components/shared/card/card-base/card-base.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-card-base",
+            "styleUrls": [
+                "./card-base.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./card-base.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-card-base',\n  templateUrl: './card-base.component.html',\n  styleUrls: ['./card-base.component.scss']\n})\nexport class CardBaseComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./card-base.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 8
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<p>card-base works!</p>\n"
+        },
+        {
+            "name": "DashboardComponent",
+            "id": "component-DashboardComponent-12a4b92ff8e004468d861a45306e4f3d",
+            "file": "src/app/pages/app/dashboard/dashboard.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-dashboard",
+            "styleUrls": [
+                "./dashboard.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./dashboard.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-dashboard',\r\n  templateUrl: './dashboard.component.html',\r\n  styleUrls: ['./dashboard.component.scss']\r\n})\r\nexport class DashboardComponent implements OnInit {\r\n\r\n  constructor() { }\r\n\r\n  ngOnInit(): void {\r\n  }\r\n\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./dashboard.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 8
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<p>dashboard works!</p>\r\n"
+        },
+        {
+            "name": "ErrorComponent",
+            "id": "component-ErrorComponent-458e93fbd8351015db3ad935f5f3d51f",
+            "file": "src/app/pages/error/error.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-error",
+            "styleUrls": [
+                "./error.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./error.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-error',\r\n  templateUrl: './error.component.html',\r\n  styleUrls: ['./error.component.scss']\r\n})\r\nexport class ErrorComponent implements OnInit {\r\n\r\n  constructor() { }\r\n\r\n  ngOnInit(): void {\r\n  }\r\n\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./error.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 8
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<p>error works!</p>\r\n"
+        },
+        {
             "name": "HeaderComponent",
-            "id": "component-HeaderComponent-b3356db4c3df0b8ab5eadefb7582d71c",
+            "id": "component-HeaderComponent-c349aa42f2121da4b5737d60a50fa413",
             "file": "src/stories/header.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -185,7 +337,7 @@
                 "./header.css"
             ],
             "styles": [],
-            "template": "<header>    <div class=\"wrapper\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>SB</h1>\n      </div>\n      <div>\n        <storybook-button\n          *ngIf=\"user\"\n          size=\"small\"\n          (onClick)=\"onLogout.emit($event)\"\n          label=\"Log out\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          size=\"small\"\n          (onClick)=\"onLogin.emit($event)\"\n          label=\"Log in\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          primary\n          size=\"small\"\n          (onClick)=\"onCreateAccount.emit($event)\"\n          label=\"Sign up\"\n        ></storybook-button>\n      </div>\n    </div>\n  </header>",
+            "template": "<header>    <div class=\"wrapper\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>Acme</h1>\n      </div>\n      <div>\n        <storybook-button\n          *ngIf=\"user\"\n          size=\"small\"\n          (onClick)=\"onLogout.emit($event)\"\n          label=\"Log out\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          size=\"small\"\n          (onClick)=\"onLogin.emit($event)\"\n          label=\"Log in\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          primary\n          size=\"small\"\n          (onClick)=\"onCreateAccount.emit($event)\"\n          label=\"Sign up\"\n        ></storybook-button>\n      </div>\n    </div>\n  </header>",
             "templateUrl": [],
             "viewProviders": [],
             "inputsClass": [
@@ -223,20 +375,76 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-header',\n  template: `<header>\n    <div class=\"wrapper\">\n      <div>\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\n              fill=\"#FFF\"\n            />\n            <path\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\n              fill=\"#555AB9\"\n            />\n            <path\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\n              fill=\"#91BAF8\"\n            />\n          </g>\n        </svg>\n        <h1>SB</h1>\n      </div>\n      <div>\n        <storybook-button\n          *ngIf=\"user\"\n          size=\"small\"\n          (onClick)=\"onLogout.emit($event)\"\n          label=\"Log out\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          size=\"small\"\n          (onClick)=\"onLogin.emit($event)\"\n          label=\"Log in\"\n        ></storybook-button>\n        <storybook-button\n          *ngIf=\"!user\"\n          primary\n          size=\"small\"\n          (onClick)=\"onCreateAccount.emit($event)\"\n          label=\"Sign up\"\n        ></storybook-button>\n      </div>\n    </div>\n  </header>`,\n  styleUrls: ['./header.css'],\n})\nexport default class HeaderComponent {\n  @Input()\n  user: unknown = null;\n\n  @Output()\n  onLogin = new EventEmitter<Event>();\n\n  @Output()\n  onLogout = new EventEmitter<Event>();\n\n  @Output()\n  onCreateAccount = new EventEmitter<Event>();\n}\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'storybook-header',\r\n  template: `<header>\r\n    <div class=\"wrapper\">\r\n      <div>\r\n        <svg width=\"32\" height=\"32\" viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\">\r\n          <g fill=\"none\" fillRule=\"evenodd\">\r\n            <path\r\n              d=\"M10 0h12a10 10 0 0110 10v12a10 10 0 01-10 10H10A10 10 0 010 22V10A10 10 0 0110 0z\"\r\n              fill=\"#FFF\"\r\n            />\r\n            <path\r\n              d=\"M5.3 10.6l10.4 6v11.1l-10.4-6v-11zm11.4-6.2l9.7 5.5-9.7 5.6V4.4z\"\r\n              fill=\"#555AB9\"\r\n            />\r\n            <path\r\n              d=\"M27.2 10.6v11.2l-10.5 6V16.5l10.5-6zM15.7 4.4v11L6 10l9.7-5.5z\"\r\n              fill=\"#91BAF8\"\r\n            />\r\n          </g>\r\n        </svg>\r\n        <h1>Acme</h1>\r\n      </div>\r\n      <div>\r\n        <storybook-button\r\n          *ngIf=\"user\"\r\n          size=\"small\"\r\n          (onClick)=\"onLogout.emit($event)\"\r\n          label=\"Log out\"\r\n        ></storybook-button>\r\n        <storybook-button\r\n          *ngIf=\"!user\"\r\n          size=\"small\"\r\n          (onClick)=\"onLogin.emit($event)\"\r\n          label=\"Log in\"\r\n        ></storybook-button>\r\n        <storybook-button\r\n          *ngIf=\"!user\"\r\n          primary\r\n          size=\"small\"\r\n          (onClick)=\"onCreateAccount.emit($event)\"\r\n          label=\"Sign up\"\r\n        ></storybook-button>\r\n      </div>\r\n    </div>\r\n  </header>`,\r\n  styleUrls: ['./header.css'],\r\n})\r\nexport default class HeaderComponent {\r\n  @Input()\r\n  user: unknown = null;\r\n\r\n  @Output()\r\n  onLogin = new EventEmitter<Event>();\r\n\r\n  @Output()\r\n  onLogout = new EventEmitter<Event>();\r\n\r\n  @Output()\r\n  onCreateAccount = new EventEmitter<Event>();\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".wrapper {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n  padding: 15px 20px;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n}\n\nsvg {\n  display: inline-block;\n  vertical-align: top;\n}\n\nh1 {\n  font-weight: 900;\n  font-size: 20px;\n  line-height: 1;\n  margin: 6px 0 6px 10px;\n  display: inline-block;\n  vertical-align: top;\n}\n\nbutton + button {\n  margin-left: 12px;\n}\n",
+                    "data": ".wrapper {\r\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\r\n  border-bottom: 1px solid rgba(0, 0, 0, 0.1);\r\n  padding: 15px 20px;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n}\r\n\r\nsvg {\r\n  display: inline-block;\r\n  vertical-align: top;\r\n}\r\n\r\nh1 {\r\n  font-weight: 900;\r\n  font-size: 20px;\r\n  line-height: 1;\r\n  margin: 6px 0 6px 10px;\r\n  display: inline-block;\r\n  vertical-align: top;\r\n}\r\n\r\nbutton + button {\r\n  margin-left: 12px;\r\n}\r\n",
                     "styleUrl": "./header.css"
                 }
             ],
             "stylesData": ""
         },
         {
+            "name": "HomeComponent",
+            "id": "component-HomeComponent-56fc62082e04324f0ca02348d9343623",
+            "file": "src/app/pages/home/home.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-home",
+            "styleUrls": [
+                "./home.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./home.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-home',\r\n  templateUrl: './home.component.html',\r\n  styleUrls: ['./home.component.scss']\r\n})\r\nexport class HomeComponent implements OnInit {\r\n\r\n  constructor() { }\r\n\r\n  ngOnInit(): void {\r\n  }\r\n\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./home.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 8
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<p>home works!</p>\r\n"
+        },
+        {
             "name": "InputCurrencyComponent",
-            "id": "component-InputCurrencyComponent-0a4a1028e9e8d034894465df509929c1",
-            "file": "src/app/components/form/input-currency/input-currency.component.ts",
+            "id": "component-InputCurrencyComponent-d7b3ce3b570d8c910b81481eaa8a22df",
+            "file": "src/app/components/shared/form/input-currency/input-currency.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -269,7 +477,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-input-currency',\n  templateUrl: './input-currency.component.html',\n  styleUrls: ['./input-currency.component.scss']\n})\nexport class InputCurrencyComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-input-currency',\r\n  templateUrl: './input-currency.component.html',\r\n  styleUrls: ['./input-currency.component.scss']\r\n})\r\nexport class InputCurrencyComponent implements OnInit {\r\n\r\n  constructor() { }\r\n\r\n  ngOnInit(): void {\r\n  }\r\n\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -287,12 +495,68 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<p>input-currency works!</p>\n"
+            "templateData": "<p>input-currency works!</p>\r\n"
+        },
+        {
+            "name": "LoginComponent",
+            "id": "component-LoginComponent-ba91a32eff3bea4bc859febcd467db3f",
+            "file": "src/app/pages/login/login.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-login",
+            "styleUrls": [
+                "./login.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./login.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-login',\r\n  templateUrl: './login.component.html',\r\n  styleUrls: ['./login.component.scss']\r\n})\r\nexport class LoginComponent implements OnInit {\r\n\r\n  constructor() { }\r\n\r\n  ngOnInit(): void {\r\n  }\r\n\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./login.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 8
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<p>login works!</p>\r\n"
         },
         {
             "name": "LogoComponent",
-            "id": "component-LogoComponent-1c6acf9c9e9ea2ef7afb4d30671e2b7d",
-            "file": "src/app/components/images/logo/logo.component.ts",
+            "id": "component-LogoComponent-5cade1b0abff530829f2cf7364b616c2",
+            "file": "src/app/components/shared/images/logo/logo.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -325,7 +589,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-logo',\n  templateUrl: './logo.component.html',\n  styleUrls: ['./logo.component.scss']\n})\nexport class LogoComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-logo',\r\n  templateUrl: './logo.component.html',\r\n  styleUrls: ['./logo.component.scss']\r\n})\r\nexport class LogoComponent implements OnInit {\r\n\r\n  constructor() { }\r\n\r\n  ngOnInit(): void {\r\n  }\r\n\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -343,11 +607,11 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<p>logo works!</p>\n"
+            "templateData": "<p>logo works!</p>\r\n"
         },
         {
             "name": "PageComponent",
-            "id": "component-PageComponent-9234d826e1224d81b705272b9e874f30",
+            "id": "component-PageComponent-ba5ca081e565184c4d3af7b43a1d2d85",
             "file": "src/stories/page.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -397,15 +661,251 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\n\n@Component({\n  selector: 'storybook-page',\n  template: `<article>\n    <storybook-header\n      [user]=\"user\"\n      (onLogout)=\"onLogout.emit($event)\"\n      (onLogin)=\"onLogin.emit($event)\"\n      (onCreateAccount)=\"onCreateAccount.emit($event)\"\n    ></storybook-header>\n    <section>\n      <h2>Pages in Storybook</h2>\n      <p>\n        We recommend building UIs with a\n        <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\n          <strong>component-driven</strong>\n        </a>\n        process starting with atomic components and ending with pages.\n      </p>\n      <p>\n        Render pages with mock data. This makes it easy to build and review page states without\n        needing to navigate to them in your app. Here are some handy patterns for managing page data\n        in Storybook:\n      </p>\n      <ul>\n        <li>\n          Use a higher-level connected component. Storybook helps you compose such data from the\n          \"args\" of child component stories\n        </li>\n        <li>\n          Assemble data in the page component from your services. You can mock these services out\n          using Storybook.\n        </li>\n      </ul>\n      <p>\n        Get a guided tutorial on component-driven development at\n        <a href=\"https://storybook.js.org/tutorials/\" target=\"_blank\" rel=\"noopener noreferrer\">\n          Storybook tutorials\n        </a>\n        . Read more in the\n        <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\"> docs </a>\n        .\n      </p>\n      <div class=\"tip-wrapper\">\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\n        <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\n          <g fill=\"none\" fillRule=\"evenodd\">\n            <path\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\n              id=\"a\"\n              fill=\"#999\"\n            />\n          </g>\n        </svg>\n        Viewports addon in the toolbar\n      </div>\n    </section>\n  </article>`,\n  styleUrls: ['./page.css'],\n})\n\nexport default class PageComponent {\n  @Input()\n  user: unknown = null;\n\n  @Output()\n  onLogin = new EventEmitter<Event>();\n\n  @Output()\n  onLogout = new EventEmitter<Event>();\n\n  @Output()\n  onCreateAccount = new EventEmitter<Event>();\n}\n\n// export const Page = ({ user, onLogin, onLogout, onCreateAccount }) => (\n//   <article>\n//     <Header user={user} onLogin={onLogin} onLogout={onLogout} onCreateAccount={onCreateAccount} />\n\n// );\n// Page.propTypes = {\n//   user: PropTypes.shape({}),\n//   onLogin: PropTypes.func.isRequired,\n//   onLogout: PropTypes.func.isRequired,\n//   onCreateAccount: PropTypes.func.isRequired,\n// };\n\n// Page.defaultProps = {\n//   user: null,\n// };\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'storybook-page',\r\n  template: `<article>\r\n    <storybook-header\r\n      [user]=\"user\"\r\n      (onLogout)=\"onLogout.emit($event)\"\r\n      (onLogin)=\"onLogin.emit($event)\"\r\n      (onCreateAccount)=\"onCreateAccount.emit($event)\"\r\n    ></storybook-header>\r\n    <section>\r\n      <h2>Pages in Storybook</h2>\r\n      <p>\r\n        We recommend building UIs with a\r\n        <a href=\"https://componentdriven.org\" target=\"_blank\" rel=\"noopener noreferrer\">\r\n          <strong>component-driven</strong>\r\n        </a>\r\n        process starting with atomic components and ending with pages.\r\n      </p>\r\n      <p>\r\n        Render pages with mock data. This makes it easy to build and review page states without\r\n        needing to navigate to them in your app. Here are some handy patterns for managing page data\r\n        in Storybook:\r\n      </p>\r\n      <ul>\r\n        <li>\r\n          Use a higher-level connected component. Storybook helps you compose such data from the\r\n          \"args\" of child component stories\r\n        </li>\r\n        <li>\r\n          Assemble data in the page component from your services. You can mock these services out\r\n          using Storybook.\r\n        </li>\r\n      </ul>\r\n      <p>\r\n        Get a guided tutorial on component-driven development at\r\n        <a href=\"https://storybook.js.org/tutorials/\" target=\"_blank\" rel=\"noopener noreferrer\">\r\n          Storybook tutorials\r\n        </a>\r\n        . Read more in the\r\n        <a href=\"https://storybook.js.org/docs\" target=\"_blank\" rel=\"noopener noreferrer\"> docs </a>\r\n        .\r\n      </p>\r\n      <div class=\"tip-wrapper\">\r\n        <span class=\"tip\">Tip</span> Adjust the width of the canvas with the\r\n        <svg width=\"10\" height=\"10\" viewBox=\"0 0 12 12\" xmlns=\"http://www.w3.org/2000/svg\">\r\n          <g fill=\"none\" fillRule=\"evenodd\">\r\n            <path\r\n              d=\"M1.5 5.2h4.8c.3 0 .5.2.5.4v5.1c-.1.2-.3.3-.4.3H1.4a.5.5 0 01-.5-.4V5.7c0-.3.2-.5.5-.5zm0-2.1h6.9c.3 0 .5.2.5.4v7a.5.5 0 01-1 0V4H1.5a.5.5 0 010-1zm0-2.1h9c.3 0 .5.2.5.4v9.1a.5.5 0 01-1 0V2H1.5a.5.5 0 010-1zm4.3 5.2H2V10h3.8V6.2z\"\r\n              id=\"a\"\r\n              fill=\"#999\"\r\n            />\r\n          </g>\r\n        </svg>\r\n        Viewports addon in the toolbar\r\n      </div>\r\n    </section>\r\n  </article>`,\r\n  styleUrls: ['./page.css'],\r\n})\r\n\r\nexport default class PageComponent {\r\n  @Input()\r\n  user: unknown = null;\r\n\r\n  @Output()\r\n  onLogin = new EventEmitter<Event>();\r\n\r\n  @Output()\r\n  onLogout = new EventEmitter<Event>();\r\n\r\n  @Output()\r\n  onCreateAccount = new EventEmitter<Event>();\r\n}\r\n\r\n// export const Page = ({ user, onLogin, onLogout, onCreateAccount }) => (\r\n//   <article>\r\n//     <Header user={user} onLogin={onLogin} onLogout={onLogout} onCreateAccount={onCreateAccount} />\r\n\r\n// );\r\n// Page.propTypes = {\r\n//   user: PropTypes.shape({}),\r\n//   onLogin: PropTypes.func.isRequired,\r\n//   onLogout: PropTypes.func.isRequired,\r\n//   onCreateAccount: PropTypes.func.isRequired,\r\n// };\r\n\r\n// Page.defaultProps = {\r\n//   user: null,\r\n// };\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "section {\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\n  font-size: 14px;\n  line-height: 24px;\n  padding: 48px 20px;\n  margin: 0 auto;\n  max-width: 600px;\n  color: #333;\n}\n\nh2 {\n  font-weight: 900;\n  font-size: 32px;\n  line-height: 1;\n  margin: 0 0 4px;\n  display: inline-block;\n  vertical-align: top;\n}\n\np {\n  margin: 1em 0;\n}\n\na {\n  text-decoration: none;\n  color: #1ea7fd;\n}\n\nul {\n  padding-left: 30px;\n  margin: 1em 0;\n}\n\nli {\n  margin-bottom: 8px;\n}\n\n.tip {\n  display: inline-block;\n  border-radius: 1em;\n  font-size: 11px;\n  line-height: 12px;\n  font-weight: 700;\n  background: #e7fdd8;\n  color: #66bf3c;\n  padding: 4px 12px;\n  margin-right: 10px;\n  vertical-align: top;\n}\n\n.tip-wrapper {\n  font-size: 13px;\n  line-height: 20px;\n  margin-top: 40px;\n  margin-bottom: 40px;\n}\n\n.tip-wrapper svg {\n  display: inline-block;\n  height: 12px;\n  width: 12px;\n  margin-right: 4px;\n  vertical-align: top;\n  margin-top: 3px;\n}\n\n.tip-wrapper svg path {\n  fill: #1ea7fd;\n}\n",
+                    "data": "section {\r\n  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;\r\n  font-size: 14px;\r\n  line-height: 24px;\r\n  padding: 48px 20px;\r\n  margin: 0 auto;\r\n  max-width: 600px;\r\n  color: #333;\r\n}\r\n\r\nh2 {\r\n  font-weight: 900;\r\n  font-size: 32px;\r\n  line-height: 1;\r\n  margin: 0 0 4px;\r\n  display: inline-block;\r\n  vertical-align: top;\r\n}\r\n\r\np {\r\n  margin: 1em 0;\r\n}\r\n\r\na {\r\n  text-decoration: none;\r\n  color: #1ea7fd;\r\n}\r\n\r\nul {\r\n  padding-left: 30px;\r\n  margin: 1em 0;\r\n}\r\n\r\nli {\r\n  margin-bottom: 8px;\r\n}\r\n\r\n.tip {\r\n  display: inline-block;\r\n  border-radius: 1em;\r\n  font-size: 11px;\r\n  line-height: 12px;\r\n  font-weight: 700;\r\n  background: #e7fdd8;\r\n  color: #66bf3c;\r\n  padding: 4px 12px;\r\n  margin-right: 10px;\r\n  vertical-align: top;\r\n}\r\n\r\n.tip-wrapper {\r\n  font-size: 13px;\r\n  line-height: 20px;\r\n  margin-top: 40px;\r\n  margin-bottom: 40px;\r\n}\r\n\r\n.tip-wrapper svg {\r\n  display: inline-block;\r\n  height: 12px;\r\n  width: 12px;\r\n  margin-right: 4px;\r\n  vertical-align: top;\r\n  margin-top: 3px;\r\n}\r\n\r\n.tip-wrapper svg path {\r\n  fill: #1ea7fd;\r\n}\r\n",
                     "styleUrl": "./page.css"
                 }
             ],
             "stylesData": ""
+        },
+        {
+            "name": "RegisterComponent",
+            "id": "component-RegisterComponent-e0c359f7260591a56631f9a17477ee12",
+            "file": "src/app/pages/register/register.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-register",
+            "styleUrls": [
+                "./register.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./register.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-register',\r\n  templateUrl: './register.component.html',\r\n  styleUrls: ['./register.component.scss']\r\n})\r\nexport class RegisterComponent implements OnInit {\r\n\r\n  constructor() { }\r\n\r\n  ngOnInit(): void {\r\n  }\r\n\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./register.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 8
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<p>register works!</p>\r\n"
+        },
+        {
+            "name": "SideNavComponent",
+            "id": "component-SideNavComponent-71ad75d4df2de005b8148023d6cdf7a1",
+            "file": "src/app/components/app/side-nav/side-nav.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-side-nav",
+            "styleUrls": [
+                "./side-nav.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./side-nav.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "isCollapsed",
+                    "defaultValue": "false",
+                    "type": "boolean",
+                    "optional": false,
+                    "description": "",
+                    "line": 10,
+                    "modifierKind": [
+                        114
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 14
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-side-nav',\n  templateUrl: './side-nav.component.html',\n  styleUrls: ['./side-nav.component.scss']\n})\nexport class SideNavComponent implements OnInit {\n\n  public isCollapsed: boolean = false;\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ":host {\r\n  display: flex;\r\n  text-rendering: optimizeLegibility;\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n}\r\n\r\n.app-layout {\r\n  height: 100vh;\r\n}\r\n\r\n.menu-sidebar {\r\n  position: relative;\r\n  z-index: 10;\r\n  min-height: 100vh;\r\n  box-shadow: 2px 0 6px rgba(0,21,41,.35);\r\n}\r\n\r\n.header-trigger {\r\n  height: 4rem;\r\n  padding: 1.25rem 1.5rem;\r\n  font-size: 1.25rem;\r\n  cursor: pointer;\r\n  transition: all .3s,padding 0s;\r\n}\r\n\r\n.trigger:hover {\r\n  color: #1890ff;\r\n}\r\n\r\n.sidebar-logo {\r\n  position: relative;\r\n  height: 4rem;\r\n  padding-left: 1.5rem;\r\n  overflow: hidden;\r\n  line-height: 4rem;\r\n  background: #001529;\r\n  transition: all .3s;\r\n}\r\n\r\n.sidebar-logo img {\r\n  display: inline-block;\r\n  height: 2rem;\r\n  width: 2rem;\r\n  vertical-align: middle;\r\n}\r\n\r\n.sidebar-logo h1 {\r\n  display: inline-block;\r\n  margin: 0 0 0 1.25rem;\r\n  color: #fff;\r\n  font-weight: 600;\r\n  font-size: 14px;\r\n  font-family: 'Avenir, Helvetica Neue, Arial,Helvetica, sans-serif';\r\n  vertical-align: middle;\r\n}\r\n\r\nnz-header {\r\n  padding: 0;\r\n  width: 100%;\r\n  z-index: 2;\r\n}\r\n\r\n.app-header {\r\n  position: relative;\r\n  height: 4rem;\r\n  padding: 0;\r\n  background: #fff;\r\n  box-shadow: 0 1px 4px rgba(0,21,41,.08);\r\n}\r\n\r\nnz-content {\r\n  margin: 1.5rem;\r\n}\r\n\r\n.inner-content {\r\n  padding: 1.5rem;\r\n  background: #fff;\r\n  height: 100%;\r\n}\r\n\r\n.ant-menu-submenu-title {\r\n  display: flex;\r\n  align-items: center;\r\n}\r\n",
+                    "styleUrl": "./side-nav.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 10
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<nz-layout class=\"app-layout\">\n    <nz-sider\n        class=\"menu-sidebar\"\n        nzCollapsible\n        nzWidth=\"256px\"\n        nzBreakpoint=\"md\"\n        [(nzCollapsed)]=\"isCollapsed\"\n        [nzTrigger]=\"null\">\n    <div class=\"sidebar-logo\">\n        <a href=\"https://ng.ant.design/\" target=\"_blank\">\n        <img src=\"https://ng.ant.design/assets/img/logo.svg\" alt=\"logo\">\n        <h1>Ant Design Of Angular</h1>\n        </a>\n    </div>\n    <ul nz-menu nzTheme=\"dark\" nzMode=\"inline\" [nzInlineCollapsed]=\"isCollapsed\">\n        <li nz-submenu nzOpen nzTitle=\"Dashboard\" nzIcon=\"dashboard\" nzMenuClassName=\"d-flex align-items-center\">\n            <ul>\n                <li nz-menu-item nzMatchRouter>\n                    <a routerLink=\"/welcome\">Welcome</a>\n                </li>\n                <li nz-menu-item nzMatchRouter>\n                    <a>Monitor</a>\n                </li>\n                <li nz-menu-item nzMatchRouter>\n                    <a>Workplace</a>\n                </li>\n            </ul>\n        </li>\n        <li nz-submenu nzOpen nzTitle=\"Form\" nzIcon=\"form\">\n            <ul>\n                <li nz-menu-item nzMatchRouter>\n                    <a>Basic Form</a>\n                </li>\n            </ul>\n        </li>\n    </ul>\n    </nz-sider>\n    <nz-layout>\n        <nz-header>\n            <div class=\"app-header\">\n            <span \n                class=\"header-trigger\" \n                (click)=\"isCollapsed = !isCollapsed\"\n            >\n                <i \n                    class=\"trigger\"\n                    nz-icon\n                    [attr.nzType]=\"isCollapsed ? 'menu-unfold' : 'menu-fold'\"\n                ></i>\n            </span>\n            </div>\n        </nz-header>\n        <nz-content>\n            <div class=\"inner-content\">\n\n                <ng-content></ng-content>\n\n            </div>\n        </nz-content>\n    </nz-layout>\n</nz-layout>"
+        },
+        {
+            "name": "TeamsComponent",
+            "id": "component-TeamsComponent-168125ec0099ee533b3ee94b1e76cfbb",
+            "file": "src/app/pages/app/teams/teams.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-teams",
+            "styleUrls": [
+                "./teams.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./teams.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-teams',\r\n  templateUrl: './teams.component.html',\r\n  styleUrls: ['./teams.component.scss']\r\n})\r\nexport class TeamsComponent implements OnInit {\r\n\r\n  constructor() { }\r\n\r\n  ngOnInit(): void {\r\n  }\r\n\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./teams.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 8
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<p>teams works!</p>\r\n"
+        },
+        {
+            "name": "WelcomeComponent",
+            "id": "component-WelcomeComponent-db4af437e527cdb40675967ecb64bcec",
+            "file": "src/app/pages/welcome/welcome.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-welcome",
+            "styleUrls": [
+                "./welcome.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./welcome.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-welcome',\n  templateUrl: './welcome.component.html',\n  styleUrls: ['./welcome.component.css']\n})\nexport class WelcomeComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit() {\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./welcome.component.css"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 8
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": ""
         }
     ],
     "modules": [
@@ -420,13 +920,7 @@
                     "type": "declarations",
                     "elements": [
                         {
-                            "name": "AppComponent"
-                        },
-                        {
-                            "name": "InputCurrencyComponent"
-                        },
-                        {
-                            "name": "LogoComponent"
+                            "name": "App"
                         }
                     ]
                 },
@@ -434,7 +928,13 @@
                     "type": "imports",
                     "elements": [
                         {
+                            "name": "Ant"
+                        },
+                        {
                             "name": "AppRoutingModule"
+                        },
+                        {
+                            "name": "IconsProviderModule"
                         }
                     ]
                 },
@@ -446,7 +946,7 @@
                     "type": "bootstrap",
                     "elements": [
                         {
-                            "name": "AppComponent"
+                            "name": "App"
                         }
                     ]
                 },
@@ -484,17 +984,198 @@
                     "elements": []
                 }
             ]
+        },
+        {
+            "name": "ComponentsModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "SideNavComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "SideNavComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "HomeModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "HomeComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "HomeComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "IconsProviderModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "WelcomeModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "WelcomeComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "WelcomeRoutingModule"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "WelcomeComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "WelcomeRoutingModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
         }
     ],
     "miscellaneous": {
         "variables": [
+            {
+                "name": "appInit",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/i18n.provider.ts",
+                "type": "",
+                "defaultValue": "(i18next: ITranslationService) => {\r\n  return () => i18next.init({\r\n      whitelist: ['en', 'nl', 'fr', 'de'],\r\n      fallbackLng: 'en',\r\n      debug: true,\r\n      returnEmptyString: false,\r\n      resources: {\r\n        'nl': {\r\n        }\r\n      },\r\n      ns: [\r\n        'translation',\r\n        'validation',\r\n        'error'\r\n      ],\r\n    });\r\n}"
+            },
             {
                 "name": "config",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "scully.client.config.ts",
                 "type": "ScullyConfig",
-                "defaultValue": "{\n  projectRoot: \"./src\",\n  projectName: \"client\",\n  outDir: './dist/static',\n  routes: {\n  }\n}"
+                "defaultValue": "{\r\n  projectRoot: \"./src\",\r\n  projectName: \"Footy_minifootball_app\",\r\n  outDir: './build/client/static',\r\n  routes: {\r\n  }\r\n}"
             },
             {
                 "name": "context",
@@ -510,7 +1191,7 @@
                 "subtype": "variable",
                 "file": "src/environments/environment.prod.ts",
                 "type": "object",
-                "defaultValue": "{\n  production: true\n}"
+                "defaultValue": "{\r\n  production: true\r\n}"
             },
             {
                 "name": "environment",
@@ -518,7 +1199,23 @@
                 "subtype": "variable",
                 "file": "src/environments/environment.ts",
                 "type": "object",
-                "defaultValue": "{\n  production: false\n}"
+                "defaultValue": "{\r\n  production: false\r\n}"
+            },
+            {
+                "name": "I18N_PROVIDERS",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/i18n.provider.ts",
+                "type": "[]",
+                "defaultValue": "[\r\n// {\r\n//   provide: APP_INITIALIZER,\r\n//   useFactory: appInit,\r\n//   deps: [I18NEXT_SERVICE],\r\n//   multi: true\r\n// },\r\n// {\r\n//   provide: LOCALE_ID,\r\n//   deps: [I18NEXT_SERVICE],\r\n//   useFactory: localeIdFactory\r\n// }\r\n]"
+            },
+            {
+                "name": "icons",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/icons-provider.module.ts",
+                "type": "[]",
+                "defaultValue": "[MenuFoldOutline, MenuUnfoldOutline, DashboardOutline, FormOutline]"
             },
             {
                 "name": "Large",
@@ -527,6 +1224,14 @@
                 "file": "src/stories/Button.stories.ts",
                 "type": "",
                 "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "localeIdFactory",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/i18n.provider.ts",
+                "type": "",
+                "defaultValue": "(i18next: ITranslationService) => {\r\n  return i18next.language;\r\n}"
             },
             {
                 "name": "LoggedIn",
@@ -566,7 +1271,7 @@
                 "subtype": "variable",
                 "file": "scully/plugins/plugin.ts",
                 "type": "",
-                "defaultValue": "async (html: string): Promise<string> => {\n  return html;\n}"
+                "defaultValue": "async (html: string): Promise<string> => {\r\n  return html;\r\n}"
             },
             {
                 "name": "myPlugin",
@@ -600,6 +1305,14 @@
                 "defaultValue": "Template.bind({})"
             },
             {
+                "name": "SideNav",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/app/side-nav/side-nav.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
                 "name": "Small",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -613,7 +1326,7 @@
                 "subtype": "variable",
                 "file": "src/stories/Button.stories.ts",
                 "type": "Story<Button>",
-                "defaultValue": "(args: Button) => ({\n  props: args,\n})"
+                "defaultValue": "(args: Button) => ({\r\n  props: args,\r\n})"
             },
             {
                 "name": "Template",
@@ -621,7 +1334,7 @@
                 "subtype": "variable",
                 "file": "src/stories/Header.stories.ts",
                 "type": "Story<Header>",
-                "defaultValue": "(args: Header) => ({\n  props: args,\n})"
+                "defaultValue": "(args: Header) => ({\r\n  props: args,\r\n})"
             },
             {
                 "name": "Template",
@@ -629,7 +1342,15 @@
                 "subtype": "variable",
                 "file": "src/stories/Page.stories.ts",
                 "type": "Story<Page>",
-                "defaultValue": "(args: Page) => ({\n  props: args,\n})"
+                "defaultValue": "(args: Page) => ({\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/app/side-nav/side-nav.stories.ts",
+                "type": "Story<SideNavComponent>",
+                "defaultValue": "(args: SideNavComponent) => ({\r\n  props: args,\r\n})"
             },
             {
                 "name": "validator",
@@ -642,8 +1363,170 @@
         ],
         "functions": [],
         "typealiases": [],
-        "enumerations": [],
+        "enumerations": [
+            {
+                "name": "appRoutesEnum",
+                "childs": [
+                    {
+                        "name": "dashboard",
+                        "value": "dashboard"
+                    },
+                    {
+                        "name": "teams",
+                        "value": "teams"
+                    },
+                    {
+                        "name": "team_info",
+                        "value": "teams/:id/info"
+                    },
+                    {
+                        "name": "team_specific",
+                        "value": "team/:id/overview"
+                    },
+                    {
+                        "name": "matches",
+                        "value": "matches"
+                    },
+                    {
+                        "name": "messages",
+                        "value": "messages"
+                    },
+                    {
+                        "name": "birthdays",
+                        "value": "birthdays"
+                    },
+                    {
+                        "name": "updates",
+                        "value": "updates"
+                    },
+                    {
+                        "name": "tutorials",
+                        "value": "tutorials"
+                    }
+                ],
+                "ctype": "miscellaneous",
+                "subtype": "enum",
+                "description": "",
+                "file": "src/app/constants/routes.enum.ts"
+            },
+            {
+                "name": "baseRoutesEnum",
+                "childs": [
+                    {
+                        "name": "landing",
+                        "value": ""
+                    },
+                    {
+                        "name": "home",
+                        "value": "home"
+                    },
+                    {
+                        "name": "features",
+                        "value": "features"
+                    },
+                    {
+                        "name": "pricing",
+                        "value": "pricing"
+                    },
+                    {
+                        "name": "about",
+                        "value": "about"
+                    },
+                    {
+                        "name": "contact",
+                        "value": "contact"
+                    },
+                    {
+                        "name": "faq",
+                        "value": "faq"
+                    },
+                    {
+                        "name": "privacy_policy",
+                        "value": "privacy-policy"
+                    },
+                    {
+                        "name": "terms_of_service",
+                        "value": "terms-of-service"
+                    },
+                    {
+                        "name": "login",
+                        "value": "login"
+                    },
+                    {
+                        "name": "register",
+                        "value": "register"
+                    },
+                    {
+                        "name": "forgotPassword",
+                        "value": "forgot-password"
+                    },
+                    {
+                        "name": "app",
+                        "value": "app"
+                    },
+                    {
+                        "name": "error",
+                        "value": "error/:id"
+                    }
+                ],
+                "ctype": "miscellaneous",
+                "subtype": "enum",
+                "description": "",
+                "file": "src/app/constants/routes.enum.ts"
+            },
+            {
+                "name": "languages",
+                "childs": [
+                    {
+                        "name": "en",
+                        "value": "en"
+                    },
+                    {
+                        "name": "nl",
+                        "value": "nl"
+                    },
+                    {
+                        "name": "fr",
+                        "value": "fr"
+                    },
+                    {
+                        "name": "de",
+                        "value": "de"
+                    }
+                ],
+                "ctype": "miscellaneous",
+                "subtype": "enum",
+                "description": "",
+                "file": "src/app/constants/languages.enum.ts"
+            }
+        ],
         "groupedVariables": {
+            "src/app/i18n.provider.ts": [
+                {
+                    "name": "appInit",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/i18n.provider.ts",
+                    "type": "",
+                    "defaultValue": "(i18next: ITranslationService) => {\r\n  return () => i18next.init({\r\n      whitelist: ['en', 'nl', 'fr', 'de'],\r\n      fallbackLng: 'en',\r\n      debug: true,\r\n      returnEmptyString: false,\r\n      resources: {\r\n        'nl': {\r\n        }\r\n      },\r\n      ns: [\r\n        'translation',\r\n        'validation',\r\n        'error'\r\n      ],\r\n    });\r\n}"
+                },
+                {
+                    "name": "I18N_PROVIDERS",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/i18n.provider.ts",
+                    "type": "[]",
+                    "defaultValue": "[\r\n// {\r\n//   provide: APP_INITIALIZER,\r\n//   useFactory: appInit,\r\n//   deps: [I18NEXT_SERVICE],\r\n//   multi: true\r\n// },\r\n// {\r\n//   provide: LOCALE_ID,\r\n//   deps: [I18NEXT_SERVICE],\r\n//   useFactory: localeIdFactory\r\n// }\r\n]"
+                },
+                {
+                    "name": "localeIdFactory",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/i18n.provider.ts",
+                    "type": "",
+                    "defaultValue": "(i18next: ITranslationService) => {\r\n  return i18next.language;\r\n}"
+                }
+            ],
             "scully.client.config.ts": [
                 {
                     "name": "config",
@@ -651,7 +1534,7 @@
                     "subtype": "variable",
                     "file": "scully.client.config.ts",
                     "type": "ScullyConfig",
-                    "defaultValue": "{\n  projectRoot: \"./src\",\n  projectName: \"client\",\n  outDir: './dist/static',\n  routes: {\n  }\n}"
+                    "defaultValue": "{\r\n  projectRoot: \"./src\",\r\n  projectName: \"Footy_minifootball_app\",\r\n  outDir: './build/client/static',\r\n  routes: {\r\n  }\r\n}"
                 }
             ],
             "src/test.ts": [
@@ -678,7 +1561,7 @@
                     "subtype": "variable",
                     "file": "src/environments/environment.prod.ts",
                     "type": "object",
-                    "defaultValue": "{\n  production: true\n}"
+                    "defaultValue": "{\r\n  production: true\r\n}"
                 }
             ],
             "src/environments/environment.ts": [
@@ -688,7 +1571,17 @@
                     "subtype": "variable",
                     "file": "src/environments/environment.ts",
                     "type": "object",
-                    "defaultValue": "{\n  production: false\n}"
+                    "defaultValue": "{\r\n  production: false\r\n}"
+                }
+            ],
+            "src/app/icons-provider.module.ts": [
+                {
+                    "name": "icons",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/icons-provider.module.ts",
+                    "type": "[]",
+                    "defaultValue": "[MenuFoldOutline, MenuUnfoldOutline, DashboardOutline, FormOutline]"
                 }
             ],
             "src/stories/Button.stories.ts": [
@@ -730,7 +1623,7 @@
                     "subtype": "variable",
                     "file": "src/stories/Button.stories.ts",
                     "type": "Story<Button>",
-                    "defaultValue": "(args: Button) => ({\n  props: args,\n})"
+                    "defaultValue": "(args: Button) => ({\r\n  props: args,\r\n})"
                 }
             ],
             "src/stories/Header.stories.ts": [
@@ -756,7 +1649,7 @@
                     "subtype": "variable",
                     "file": "src/stories/Header.stories.ts",
                     "type": "Story<Header>",
-                    "defaultValue": "(args: Header) => ({\n  props: args,\n})"
+                    "defaultValue": "(args: Header) => ({\r\n  props: args,\r\n})"
                 }
             ],
             "src/stories/Page.stories.ts": [
@@ -782,7 +1675,7 @@
                     "subtype": "variable",
                     "file": "src/stories/Page.stories.ts",
                     "type": "Story<Page>",
-                    "defaultValue": "(args: Page) => ({\n  props: args,\n})"
+                    "defaultValue": "(args: Page) => ({\r\n  props: args,\r\n})"
                 }
             ],
             "scully/plugins/plugin.ts": [
@@ -792,7 +1685,7 @@
                     "subtype": "variable",
                     "file": "scully/plugins/plugin.ts",
                     "type": "",
-                    "defaultValue": "async (html: string): Promise<string> => {\n  return html;\n}"
+                    "defaultValue": "async (html: string): Promise<string> => {\r\n  return html;\r\n}"
                 },
                 {
                     "name": "myPlugin",
@@ -810,10 +1703,168 @@
                     "type": "",
                     "defaultValue": "async () => []"
                 }
+            ],
+            "src/app/components/app/side-nav/side-nav.stories.ts": [
+                {
+                    "name": "SideNav",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/app/side-nav/side-nav.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/app/side-nav/side-nav.stories.ts",
+                    "type": "Story<SideNavComponent>",
+                    "defaultValue": "(args: SideNavComponent) => ({\r\n  props: args,\r\n})"
+                }
             ]
         },
         "groupedFunctions": {},
-        "groupedEnumerations": {},
+        "groupedEnumerations": {
+            "src/app/constants/routes.enum.ts": [
+                {
+                    "name": "appRoutesEnum",
+                    "childs": [
+                        {
+                            "name": "dashboard",
+                            "value": "dashboard"
+                        },
+                        {
+                            "name": "teams",
+                            "value": "teams"
+                        },
+                        {
+                            "name": "team_info",
+                            "value": "teams/:id/info"
+                        },
+                        {
+                            "name": "team_specific",
+                            "value": "team/:id/overview"
+                        },
+                        {
+                            "name": "matches",
+                            "value": "matches"
+                        },
+                        {
+                            "name": "messages",
+                            "value": "messages"
+                        },
+                        {
+                            "name": "birthdays",
+                            "value": "birthdays"
+                        },
+                        {
+                            "name": "updates",
+                            "value": "updates"
+                        },
+                        {
+                            "name": "tutorials",
+                            "value": "tutorials"
+                        }
+                    ],
+                    "ctype": "miscellaneous",
+                    "subtype": "enum",
+                    "description": "",
+                    "file": "src/app/constants/routes.enum.ts"
+                },
+                {
+                    "name": "baseRoutesEnum",
+                    "childs": [
+                        {
+                            "name": "landing",
+                            "value": ""
+                        },
+                        {
+                            "name": "home",
+                            "value": "home"
+                        },
+                        {
+                            "name": "features",
+                            "value": "features"
+                        },
+                        {
+                            "name": "pricing",
+                            "value": "pricing"
+                        },
+                        {
+                            "name": "about",
+                            "value": "about"
+                        },
+                        {
+                            "name": "contact",
+                            "value": "contact"
+                        },
+                        {
+                            "name": "faq",
+                            "value": "faq"
+                        },
+                        {
+                            "name": "privacy_policy",
+                            "value": "privacy-policy"
+                        },
+                        {
+                            "name": "terms_of_service",
+                            "value": "terms-of-service"
+                        },
+                        {
+                            "name": "login",
+                            "value": "login"
+                        },
+                        {
+                            "name": "register",
+                            "value": "register"
+                        },
+                        {
+                            "name": "forgotPassword",
+                            "value": "forgot-password"
+                        },
+                        {
+                            "name": "app",
+                            "value": "app"
+                        },
+                        {
+                            "name": "error",
+                            "value": "error/:id"
+                        }
+                    ],
+                    "ctype": "miscellaneous",
+                    "subtype": "enum",
+                    "description": "",
+                    "file": "src/app/constants/routes.enum.ts"
+                }
+            ],
+            "src/app/constants/languages.enum.ts": [
+                {
+                    "name": "languages",
+                    "childs": [
+                        {
+                            "name": "en",
+                            "value": "en"
+                        },
+                        {
+                            "name": "nl",
+                            "value": "nl"
+                        },
+                        {
+                            "name": "fr",
+                            "value": "fr"
+                        },
+                        {
+                            "name": "de",
+                            "value": "de"
+                        }
+                    ],
+                    "ctype": "miscellaneous",
+                    "subtype": "enum",
+                    "description": "",
+                    "file": "src/app/constants/languages.enum.ts"
+                }
+            ]
+        },
         "groupedTypeAliases": {}
     },
     "routes": {
@@ -822,16 +1873,45 @@
         "className": "AppModule",
         "children": [
             {
-                "name": "routes",
-                "filename": "src/app/app-routing.module.ts",
+                "name": "BaseRoutes",
+                "filename": "src/app/routes/base-routes.ts",
                 "module": "AppRoutingModule",
-                "children": [],
+                "children": [
+                    {
+                        "path": "home",
+                        "redirectTo": ""
+                    },
+                    {
+                        "path": "",
+                        "component": "HomeComponent"
+                    },
+                    {
+                        "path": "login",
+                        "component": "LoginComponent"
+                    },
+                    {
+                        "path": "register",
+                        "component": "RegisterComponent"
+                    },
+                    {
+                        "path": "app",
+                        "children": "AppRoutes"
+                    },
+                    {
+                        "path": "error/:id",
+                        "component": "ErrorComponent"
+                    },
+                    {
+                        "path": "**",
+                        "redirectTo": "/error/404"
+                    }
+                ],
                 "kind": "module"
             }
         ]
     },
     "coverage": {
-        "count": 3,
+        "count": 2,
         "status": "low",
         "files": [
             {
@@ -887,13 +1967,51 @@
                 "filePath": "src/app/app.component.ts",
                 "type": "component",
                 "linktype": "component",
-                "name": "AppComponent",
+                "name": "App",
                 "coveragePercent": 0,
-                "coverageCount": "0/2",
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
-                "filePath": "src/app/components/form/input-currency/input-currency.component.ts",
+                "filePath": "src/app/components/app/side-nav/side-nav.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "SideNavComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/app/side-nav/side-nav.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "SideNav",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/app/side-nav/side-nav.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/shared/card/card-base/card-base.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "CardBaseComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/shared/form/input-currency/input-currency.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "InputCurrencyComponent",
@@ -902,10 +2020,113 @@
                 "status": "low"
             },
             {
-                "filePath": "src/app/components/images/logo/logo.component.ts",
+                "filePath": "src/app/components/shared/images/logo/logo.component.ts",
                 "type": "component",
                 "linktype": "component",
                 "name": "LogoComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/i18n.provider.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "appInit",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/i18n.provider.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "I18N_PROVIDERS",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/i18n.provider.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "localeIdFactory",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/icons-provider.module.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "icons",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/pages/app/dashboard/dashboard.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "DashboardComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/pages/app/teams/teams.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "TeamsComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/pages/error/error.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ErrorComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/pages/home/home.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "HomeComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/pages/login/login.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "LoginComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/pages/register/register.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "RegisterComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/pages/welcome/welcome.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "WelcomeComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/3",
                 "status": "low"
