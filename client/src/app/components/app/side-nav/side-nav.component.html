@@ -1,102 +1,112 @@
-<nz-layout class="app-layout">
+<nz-layout class="vh-100">
     <nz-sider
-        class="menu-sidebar"
+        class="menu-sidebar min-vh-100 position-relative rounded-end"
         nzCollapsible
-        nzWidth="256px"
+        [nzWidth]="256"
+        [nzCollapsedWidth]="innerWidth > 768 ? 80 : 0"
         nzBreakpoint="md"
         [(nzCollapsed)]="isCollapsed"
-        [nzTrigger]="null">
-    <div class="sidebar-logo">
-        <a href="https://ng.ant.design/" target="_blank">
-        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
-        <h1>Ant Design Of Angular</h1>
-            <img
-                src="/assets/img/logo/logo_small.svg"
-                alt=""
-                class="text-green"
-            />
-        </a>
-    </div>
-    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-        <!-- <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard" nzMenuClassName="">
-            <ul>
-                <li nz-menu-item nzMatchRouter>
-                    <a routerLink="/welcome">Welcome</a>
-                </li>
-                <li nz-menu-item nzMatchRouter>
-                    <a>Monitor</a>
-                </li>
-                <li nz-menu-item nzMatchRouter>
-                    <a>Workplace</a>
-                </li>
-            </ul>
-        </li>
-        <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
-            <ul>
-                <li nz-menu-item nzMatchRouter>
-                    <a>Basic Form</a>
-                </li>
-            </ul>
-        </li> -->
-        <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''" nzSelected>
-            <i nz-icon nzType="pie-chart" nzTheme="outline"></i>
-            <span>Dashboard</span>
-        </li>
-        <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
-            <i nz-icon nzType="team" nzTheme="outline"></i>
-            <span>Teams</span>
-        </li>
-        <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
-            <i nz-icon nzType="calendar" nzTheme="outline"></i>
-            <span>Matches</span>
-        </li>
-        <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
-            <i nz-icon nzType="message" nzTheme="outline"></i>
-            <span>Messages</span>
-        </li>
-        <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
-            <i nz-icon nzType="crown" nzTheme="outline"></i>
-            <span>Birthdays</span>
-        </li>
-        <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
-            <i nz-icon nzType="euro-circle" nzTheme="outline"></i>
-            <span>Administration</span>
-        </li>
-        <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
-            <i nz-icon nzType="mail" nzTheme="outline"></i>
-            <span>Email</span>
-        </li>
-        <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
-            <i nz-icon nzType="notification" nzTheme="outline"></i>
-            <span>Updates</span>
-        </li>
-        <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
-            <i nz-icon nzType="bulb" nzTheme="outline"></i>
-            <span>Tutorials</span>
-        </li>
-        <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
-            <i nz-icon nzType="setting" nzTheme="outline"></i>
-            <span>Settings</span>
-        </li>
-        <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
-            <i nz-icon nzType="poweroff" nzTheme="outline"></i>
-            <span>Logout</span>
-        </li>
-    </ul>
+        [nzTrigger]="null"
+    >
+        <div [class]="isCollapsed ? 'p-0 m-0 d-flex align-items-center justify-content-center align-middle' : 'px-4 m-2 d-flex align-items-center justify-content-center align-middle' ">
+            <h1 [class]="!isCollapsed ? 'mb-0' : ''" >
+                <img
+                    src="/assets/img/logo/logo_white_big.png"
+                    alt="logo footy"
+                    class="logo mw-100 mh-100 h-auto w-auto"
+                />
+            </h1>
+        </div>
+        <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+            <!-- <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard" nzMenuClassName="">
+                <ul>
+                    <li nz-menu-item nzMatchRouter>
+                        <a routerLink="/welcome">Welcome</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a>Monitor</a>
+                    </li>
+                    <li nz-menu-item nzMatchRouter>
+                        <a>Workplace</a>
+                    </li>
+                </ul>
+            </li>
+            <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
+                <ul>
+                    <li nz-menu-item nzMatchRouter>
+                        <a>Basic Form</a>
+                    </li>
+                </ul>
+            </li> -->
+            <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''" nzSelected>
+                <i nz-icon nzType="pie-chart" nzTheme="outline"></i>
+                <span>Dashboard</span>
+            </li>
+            <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
+                <i nz-icon nzType="team" nzTheme="outline"></i>
+                <span>Teams</span>
+            </li>
+            <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
+                <i nz-icon nzType="calendar" nzTheme="outline"></i>
+                <span>Matches</span>
+            </li>
+
+            <li nz-submenu nzOpen nzTitle="Communication" nzIcon="comment" nzMenuClassName="">
+                <ul>
+                    <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
+                        <i nz-icon nzType="message" nzTheme="outline"></i>
+                        <span>Messages</span>
+                    </li>
+                    <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
+                        <i nz-icon nzType="mail" nzTheme="outline"></i>
+                        <span>Email</span>
+                    </li>
+                </ul>
+            </li>
+            
+            <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
+                <i nz-icon nzType="crown" nzTheme="outline"></i>
+                <span>Birthdays</span>
+            </li>
+
+            <li nz-submenu nzOpen nzTitle="Info" nzIcon="info-circle" nzMenuClassName="">
+                <ul>
+                    <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
+                        <i nz-icon nzType="notification" nzTheme="outline"></i>
+                        <span>Updates</span>
+                    </li>
+                    <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
+                        <i nz-icon nzType="bulb" nzTheme="outline"></i>
+                        <span>Tutorials</span>
+                    </li>
+                </ul>
+            </li>  
+
+            <li nz-submenu nzOpen nzTitle="Account" nzIcon="user" nzMenuClassName="">
+                <ul>
+                    <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
+                        <i nz-icon nzType="setting" nzTheme="outline"></i>
+                        <span>Settings</span>
+                    </li>
+                    <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
+                        <i nz-icon nzType="poweroff" nzTheme="outline"></i>
+                        <span>Logout</span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </nz-sider>
     <nz-layout>
-        <nz-header>
-            <div class="app-header">
-            <span 
-                class="header-trigger" 
-                (click)="isCollapsed = !isCollapsed"
-            >
+        <nz-header class="w-100 p-0">
+            <div class="app-header px-4">
                 <i 
-                    class="trigger"
+                    class="trigger h5"
+                    (click)="isCollapsed = !isCollapsed"
+                    role="button"
                     nz-icon
-                    [attr.nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+                    [nzType]="this.setIconTrigger()"
+                    nzTheme="outline"
                 ></i>
-            </span>
             </div>
         </nz-header>
         <nz-content>

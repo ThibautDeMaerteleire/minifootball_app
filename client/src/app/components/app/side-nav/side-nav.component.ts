@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 
 @Component({
@@ -8,11 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SideNavComponent implements OnInit {
 
-  public isCollapsed: boolean = false;
+  public isCollapsed = false;
+  public innerWidth: any;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.innerWidth = window.innerWidth;
   }
 
+  @HostListener('window:resize', ['$event'])onResize(ev: any) {
+    this.innerWidth = window.innerWidth;
+    console.log(this.innerWidth)
+  }
+
+  setIconTrigger(): string {
+    if(innerWidth > 768) {
+      return this.isCollapsed ? 'menu-unfold' : 'menu-fold';
+    } else {
+      return 'menu';
+    }
+  }
 }
