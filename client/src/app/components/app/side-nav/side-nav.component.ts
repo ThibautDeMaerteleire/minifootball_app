@@ -17,13 +17,12 @@ export class SideNavComponent implements OnInit {
     this.innerWidth = window.innerWidth;
   }
 
-  @HostListener('window:resize', ['$event'])onResize(ev: any) {
+  @HostListener('window:resize', ['$event'])onResize(ev: any): void {
     this.innerWidth = window.innerWidth;
-    console.log(this.innerWidth)
   }
 
   setIconTrigger(): string {
-    if(innerWidth > 768) {
+    if (innerWidth > 768) {
       return this.isCollapsed ? 'menu-unfold' : 'menu-fold';
     } else {
       return 'menu';

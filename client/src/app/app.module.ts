@@ -2,7 +2,7 @@ import { I18NextModule } from 'angular-i18next';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './routes/app-routing.module';
-import { App } from './app.component';
+import { AppComponent } from './app.component';
 import { ScullyLibModule } from '@scullyio/ng-lib';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -13,7 +13,7 @@ import { I18N_PROVIDERS } from './i18n.provider';
 
 @NgModule({
   declarations: [
-    App,
+    AppComponent,
   ],
   imports: [
     I18NextModule.forRoot(),
@@ -26,6 +26,6 @@ import { I18N_PROVIDERS } from './i18n.provider';
     IconsProviderModule
   ],
   providers: [I18N_PROVIDERS],
-  bootstrap: [App]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -7,7 +7,7 @@ export const appInit = (i18next: ITranslationService) => {
       debug: true,
       returnEmptyString: false,
       resources: {
-        'nl': {
+        nl: {
         }
       },
       ns: [
