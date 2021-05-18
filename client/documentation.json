@@ -439,7 +439,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<p>home works!</p>\r\n"
+            "templateData": "<p>home works!</p>\r\n<app-side-nav></app-side-nav>"
         },
         {
             "name": "InputCurrencyComponent",
@@ -729,7 +729,7 @@
         },
         {
             "name": "SideNavComponent",
-            "id": "component-SideNavComponent-50f9f607a12d07010347cade9417bd9b",
+            "id": "component-SideNavComponent-8ac20cc08911a6fc885640c7a911576b",
             "file": "src/app/components/app/side-nav/side-nav.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -749,9 +749,19 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
+                    "name": "innerWidth",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 12,
+                    "modifierKind": [
+                        114
+                    ]
+                },
+                {
                     "name": "isCollapsed",
                     "defaultValue": "false",
-                    "type": "boolean",
+                    "type": "",
                     "optional": false,
                     "description": "",
                     "line": 11,
@@ -767,19 +777,41 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 15
+                    "line": 16
+                },
+                {
+                    "name": "setIconTrigger",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "string",
+                    "typeParameters": [],
+                    "line": 25
                 }
             ],
             "hostBindings": [],
-            "hostListeners": [],
+            "hostListeners": [
+                {
+                    "name": "window:resize",
+                    "args": [
+                        {
+                            "name": "ev",
+                            "type": "any"
+                        }
+                    ],
+                    "argsDecorator": [
+                        "$event"
+                    ],
+                    "line": 20
+                }
+            ],
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n\n@Component({\n  selector: 'app-side-nav',\n  templateUrl: './side-nav.component.html',\n  styleUrls: ['./side-nav.component.scss']\n})\nexport class SideNavComponent implements OnInit {\n\n  public isCollapsed: boolean = false;\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "sourceCode": "import { Component, HostListener, OnInit } from '@angular/core';\n\n\n@Component({\n  selector: 'app-side-nav',\n  templateUrl: './side-nav.component.html',\n  styleUrls: ['./side-nav.component.scss']\n})\nexport class SideNavComponent implements OnInit {\n\n  public isCollapsed = false;\n  public innerWidth: any;\n\n  constructor() { }\n\n  ngOnInit(): void {\n    this.innerWidth = window.innerWidth;\n  }\n\n  @HostListener('window:resize', ['$event'])onResize(ev: any) {\n    this.innerWidth = window.innerWidth;\n    console.log(this.innerWidth)\n  }\n\n  setIconTrigger(): string {\n    if(innerWidth > 768) {\n      return this.isCollapsed ? 'menu-unfold' : 'menu-fold';\n    } else {\n      return 'menu';\n    }\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ":host {\r\n  display: flex;\r\n  text-rendering: optimizeLegibility;\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n}\r\n\r\n.app-layout {\r\n  height: 100vh;\r\n}\r\n\r\n.menu-sidebar {\r\n  position: relative;\r\n  z-index: 10;\r\n  min-height: 100vh;\r\n  box-shadow: 2px 0 6px rgba(0,21,41,.35);\r\n}\r\n\r\n.header-trigger {\r\n  height: 4rem;\r\n  padding: 1.25rem 1.5rem;\r\n  font-size: 1.25rem;\r\n  cursor: pointer;\r\n  transition: all .3s,padding 0s;\r\n}\r\n\r\n.trigger:hover {\r\n  color: #1890ff;\r\n}\r\n\r\n.sidebar-logo {\r\n  position: relative;\r\n  height: 4rem;\r\n  padding-left: 1.5rem;\r\n  overflow: hidden;\r\n  line-height: 4rem;\r\n  background: #001529;\r\n  transition: all .3s;\r\n}\r\n\r\n.sidebar-logo img {\r\n  display: inline-block;\r\n  height: 2rem;\r\n  width: 2rem;\r\n  vertical-align: middle;\r\n}\r\n\r\n.sidebar-logo h1 {\r\n  display: inline-block;\r\n  margin: 0 0 0 1.25rem;\r\n  color: #fff;\r\n  font-weight: 600;\r\n  font-size: 14px;\r\n  font-family: 'Avenir, Helvetica Neue, Arial,Helvetica, sans-serif';\r\n  vertical-align: middle;\r\n}\r\n\r\nnz-header {\r\n  padding: 0;\r\n  width: 100%;\r\n  z-index: 2;\r\n}\r\n\r\n.app-header {\r\n  position: relative;\r\n  height: 4rem;\r\n  padding: 0;\r\n  background: #fff;\r\n  box-shadow: 0 1px 4px rgba(0,21,41,.08);\r\n}\r\n\r\nnz-content {\r\n  margin: 1.5rem;\r\n}\r\n\r\n.inner-content {\r\n  padding: 1.5rem;\r\n  background: #fff;\r\n  height: 100%;\r\n}\r\n\r\n.ant-menu-item, .ant-menu-submenu-title {\r\n  display: flex !important;\r\n  align-items: center !important;\r\n}  ",
+                    "data": ":host {\r\n  display: flex;\r\n  text-rendering: optimizeLegibility;\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n}\r\n\r\n.menu-sidebar {\r\n  z-index: 10;\r\n  box-shadow: 2px 0 6px rgba(0,21,41,.35);\r\n}\r\n\r\n.header-trigger {\r\n  height: 4rem;\r\n  padding: 1.25rem 1.5rem;\r\n  font-size: 1.25rem;\r\n  cursor: pointer;\r\n  transition: all .3s,padding 0s;\r\n}\r\n\r\n.trigger:hover {\r\n  color: #1890ff;\r\n}\r\n\r\nnz-header {\r\n  z-index: 2;\r\n}\r\n\r\n.app-header {\r\n  position: relative;\r\n  display: flex;\r\n  align-items: center;\r\n  height: 4rem;\r\n  padding: 0;\r\n  background: #fff;\r\n  box-shadow: 0 1px 4px rgba(0,21,41,.08);\r\n}\r\n\r\nnz-content {\r\n  margin: 1.5rem;\r\n}\r\n\r\n.inner-content {\r\n  padding: 1.5rem;\r\n  background: #fff;\r\n  height: 100%;\r\n}",
                     "styleUrl": "./side-nav.component.scss"
                 }
             ],
@@ -788,12 +820,12 @@
                 "name": "constructor",
                 "description": "",
                 "args": [],
-                "line": 11
+                "line": 12
             },
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<nz-layout class=\"app-layout\">\n    <nz-sider\n        class=\"menu-sidebar\"\n        nzCollapsible\n        nzWidth=\"256px\"\n        nzBreakpoint=\"md\"\n        [(nzCollapsed)]=\"isCollapsed\"\n        [nzTrigger]=\"null\">\n    <div class=\"sidebar-logo\">\n        <a href=\"https://ng.ant.design/\" target=\"_blank\">\n        <img src=\"https://ng.ant.design/assets/img/logo.svg\" alt=\"logo\">\n        <h1>Ant Design Of Angular</h1>\n            <img\n                src=\"/assets/img/logo/logo_small.svg\"\n                alt=\"\"\n                class=\"text-green\"\n            />\n        </a>\n    </div>\n    <ul nz-menu nzTheme=\"dark\" nzMode=\"inline\" [nzInlineCollapsed]=\"isCollapsed\">\n        <!-- <li nz-submenu nzOpen nzTitle=\"Dashboard\" nzIcon=\"dashboard\" nzMenuClassName=\"\">\n            <ul>\n                <li nz-menu-item nzMatchRouter>\n                    <a routerLink=\"/welcome\">Welcome</a>\n                </li>\n                <li nz-menu-item nzMatchRouter>\n                    <a>Monitor</a>\n                </li>\n                <li nz-menu-item nzMatchRouter>\n                    <a>Workplace</a>\n                </li>\n            </ul>\n        </li>\n        <li nz-submenu nzOpen nzTitle=\"Form\" nzIcon=\"form\">\n            <ul>\n                <li nz-menu-item nzMatchRouter>\n                    <a>Basic Form</a>\n                </li>\n            </ul>\n        </li> -->\n        <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\" nzSelected>\n            <i nz-icon nzType=\"pie-chart\" nzTheme=\"outline\"></i>\n            <span>Dashboard</span>\n        </li>\n        <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\n            <i nz-icon nzType=\"team\" nzTheme=\"outline\"></i>\n            <span>Teams</span>\n        </li>\n        <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\n            <i nz-icon nzType=\"calendar\" nzTheme=\"outline\"></i>\n            <span>Matches</span>\n        </li>\n        <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\n            <i nz-icon nzType=\"message\" nzTheme=\"outline\"></i>\n            <span>Messages</span>\n        </li>\n        <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\n            <i nz-icon nzType=\"crown\" nzTheme=\"outline\"></i>\n            <span>Birthdays</span>\n        </li>\n        <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\n            <i nz-icon nzType=\"euro-circle\" nzTheme=\"outline\"></i>\n            <span>Administration</span>\n        </li>\n        <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\n            <i nz-icon nzType=\"mail\" nzTheme=\"outline\"></i>\n            <span>Email</span>\n        </li>\n        <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\n            <i nz-icon nzType=\"notification\" nzTheme=\"outline\"></i>\n            <span>Updates</span>\n        </li>\n        <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\n            <i nz-icon nzType=\"bulb\" nzTheme=\"outline\"></i>\n            <span>Tutorials</span>\n        </li>\n        <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\n            <i nz-icon nzType=\"setting\" nzTheme=\"outline\"></i>\n            <span>Settings</span>\n        </li>\n        <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\n            <i nz-icon nzType=\"poweroff\" nzTheme=\"outline\"></i>\n            <span>Logout</span>\n        </li>\n    </ul>\n    </nz-sider>\n    <nz-layout>\n        <nz-header>\n            <div class=\"app-header\">\n            <span \n                class=\"header-trigger\" \n                (click)=\"isCollapsed = !isCollapsed\"\n            >\n                <i \n                    class=\"trigger\"\n                    nz-icon\n                    [attr.nzType]=\"isCollapsed ? 'menu-unfold' : 'menu-fold'\"\n                ></i>\n            </span>\n            </div>\n        </nz-header>\n        <nz-content>\n            <div class=\"inner-content\">\n\n                <ng-content></ng-content>\n\n            </div>\n        </nz-content>\n    </nz-layout>\n</nz-layout>"
+            "templateData": "<nz-layout class=\"vh-100\">\n    <nz-sider\n        class=\"menu-sidebar min-vh-100 position-relative rounded-end\"\n        nzCollapsible\n        [nzWidth]=\"256\"\n        [nzCollapsedWidth]=\"innerWidth > 768 ? 80 : 0\"\n        nzBreakpoint=\"md\"\n        [(nzCollapsed)]=\"isCollapsed\"\n        [nzTrigger]=\"null\"\n    >\n        <div [class]=\"isCollapsed ? 'p-0 m-0 d-flex align-items-center justify-content-center align-middle' : 'px-4 m-2 d-flex align-items-center justify-content-center align-middle' \">\n            <h1 [class]=\"!isCollapsed ? 'mb-0' : ''\" >\n                <img\n                    src=\"/assets/img/logo/logo_white_big.png\"\n                    alt=\"logo footy\"\n                    class=\"logo mw-100 mh-100 h-auto w-auto\"\n                />\n            </h1>\n        </div>\n        <ul nz-menu nzTheme=\"dark\" nzMode=\"inline\" [nzInlineCollapsed]=\"isCollapsed\">\n            <!-- <li nz-submenu nzOpen nzTitle=\"Dashboard\" nzIcon=\"dashboard\" nzMenuClassName=\"\">\n                <ul>\n                    <li nz-menu-item nzMatchRouter>\n                        <a routerLink=\"/welcome\">Welcome</a>\n                    </li>\n                    <li nz-menu-item nzMatchRouter>\n                        <a>Monitor</a>\n                    </li>\n                    <li nz-menu-item nzMatchRouter>\n                        <a>Workplace</a>\n                    </li>\n                </ul>\n            </li>\n            <li nz-submenu nzOpen nzTitle=\"Form\" nzIcon=\"form\">\n                <ul>\n                    <li nz-menu-item nzMatchRouter>\n                        <a>Basic Form</a>\n                    </li>\n                </ul>\n            </li> -->\n            <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\" nzSelected>\n                <i nz-icon nzType=\"pie-chart\" nzTheme=\"outline\"></i>\n                <span>Dashboard</span>\n            </li>\n            <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\n                <i nz-icon nzType=\"team\" nzTheme=\"outline\"></i>\n                <span>Teams</span>\n            </li>\n            <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\n                <i nz-icon nzType=\"calendar\" nzTheme=\"outline\"></i>\n                <span>Matches</span>\n            </li>\n\n            <li nz-submenu nzOpen nzTitle=\"Communication\" nzIcon=\"comment\" nzMenuClassName=\"\">\n                <ul>\n                    <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\n                        <i nz-icon nzType=\"message\" nzTheme=\"outline\"></i>\n                        <span>Messages</span>\n                    </li>\n                    <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\n                        <i nz-icon nzType=\"mail\" nzTheme=\"outline\"></i>\n                        <span>Email</span>\n                    </li>\n                </ul>\n            </li>\n            \n            <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\n                <i nz-icon nzType=\"crown\" nzTheme=\"outline\"></i>\n                <span>Birthdays</span>\n            </li>\n\n            <li nz-submenu nzOpen nzTitle=\"Info\" nzIcon=\"info-circle\" nzMenuClassName=\"\">\n                <ul>\n                    <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\n                        <i nz-icon nzType=\"notification\" nzTheme=\"outline\"></i>\n                        <span>Updates</span>\n                    </li>\n                    <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\n                        <i nz-icon nzType=\"bulb\" nzTheme=\"outline\"></i>\n                        <span>Tutorials</span>\n                    </li>\n                </ul>\n            </li>  \n\n            <li nz-submenu nzOpen nzTitle=\"Account\" nzIcon=\"user\" nzMenuClassName=\"\">\n                <ul>\n                    <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\n                        <i nz-icon nzType=\"setting\" nzTheme=\"outline\"></i>\n                        <span>Settings</span>\n                    </li>\n                    <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\n                        <i nz-icon nzType=\"poweroff\" nzTheme=\"outline\"></i>\n                        <span>Logout</span>\n                    </li>\n                </ul>\n            </li>\n        </ul>\n    </nz-sider>\n    <nz-layout>\n        <nz-header class=\"w-100 p-0\">\n            <div class=\"app-header px-4\">\n                <i \n                    class=\"trigger h5\"\n                    (click)=\"isCollapsed = !isCollapsed\"\n                    role=\"button\"\n                    nz-icon\n                    [nzType]=\"this.setIconTrigger()\"\n                    nzTheme=\"outline\"\n                ></i>\n            </div>\n        </nz-header>\n        <nz-content>\n            <div class=\"inner-content\">\n\n                <ng-content></ng-content>\n\n            </div>\n        </nz-content>\n    </nz-layout>\n</nz-layout>\n"
         },
         {
             "name": "TeamsComponent",
@@ -1036,15 +1068,15 @@
                 },
                 {
                     "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
                     "elements": [
                         {
                             "name": "HomeComponent"
                         }
                     ]
-                },
-                {
-                    "type": "exports",
-                    "elements": []
                 },
                 {
                     "type": "bootstrap",
@@ -1212,7 +1244,7 @@
                 "subtype": "variable",
                 "file": "src/app/icons-provider.module.ts",
                 "type": "[]",
-                "defaultValue": "[\n  BulbOutline,\n  CrownOutline,\n  MenuFoldOutline,\n  MenuUnfoldOutline,\n  DashboardOutline,\n  FormOutline,\n  MailOutline,\n  ArrowDownOutline,\n  ArrowLeftOutline,\n  ArrowUpOutline,\n  ArrowRightOutline,\n  DeleteOutline,\n  PieChartOutline,\n  CalendarOutline,\n  EuroCircleOutline,\n  FireOutline,\n  HomeOutline,\n  HeartOutline,\n  MessageOutline,\n  NotificationOutline,\n  PoweroffOutline,\n  SaveOutline,\n  SearchOutline,\n  SendOutline,\n  SettingOutline,\n  SyncOutline,\n  TeamOutline,\n  UserAddOutline,\n  UsergroupAddOutline,\n  UserDeleteOutline,\n  UserOutline,\n]"
+                "defaultValue": "[\n  ArrowDownOutline,\n  ArrowLeftOutline,\n  ArrowUpOutline,\n  ArrowRightOutline,\n  BulbOutline,\n  CalendarOutline,\n  CommentOutline,\n  CrownOutline,\n  DashboardOutline,\n  DeleteOutline,\n  EuroCircleOutline,\n  FireOutline,\n  FormOutline,\n  HeartOutline,\n  HomeOutline,\n  InfoCircleOutline,\n  MailOutline,\n  MenuFoldOutline,\n  MenuOutline,\n  MenuUnfoldOutline,\n  MessageOutline,\n  NotificationOutline,\n  PieChartOutline,\n  PoweroffOutline,\n  SaveOutline,\n  SearchOutline,\n  SendOutline,\n  SettingOutline,\n  SyncOutline,\n  TeamOutline,\n  UserAddOutline,\n  UserDeleteOutline,\n  UsergroupAddOutline,\n  UserOutline,\n]"
             },
             {
                 "name": "Large",
@@ -1578,7 +1610,7 @@
                     "subtype": "variable",
                     "file": "src/app/icons-provider.module.ts",
                     "type": "[]",
-                    "defaultValue": "[\n  BulbOutline,\n  CrownOutline,\n  MenuFoldOutline,\n  MenuUnfoldOutline,\n  DashboardOutline,\n  FormOutline,\n  MailOutline,\n  ArrowDownOutline,\n  ArrowLeftOutline,\n  ArrowUpOutline,\n  ArrowRightOutline,\n  DeleteOutline,\n  PieChartOutline,\n  CalendarOutline,\n  EuroCircleOutline,\n  FireOutline,\n  HomeOutline,\n  HeartOutline,\n  MessageOutline,\n  NotificationOutline,\n  PoweroffOutline,\n  SaveOutline,\n  SearchOutline,\n  SendOutline,\n  SettingOutline,\n  SyncOutline,\n  TeamOutline,\n  UserAddOutline,\n  UsergroupAddOutline,\n  UserDeleteOutline,\n  UserOutline,\n]"
+                    "defaultValue": "[\n  ArrowDownOutline,\n  ArrowLeftOutline,\n  ArrowUpOutline,\n  ArrowRightOutline,\n  BulbOutline,\n  CalendarOutline,\n  CommentOutline,\n  CrownOutline,\n  DashboardOutline,\n  DeleteOutline,\n  EuroCircleOutline,\n  FireOutline,\n  FormOutline,\n  HeartOutline,\n  HomeOutline,\n  InfoCircleOutline,\n  MailOutline,\n  MenuFoldOutline,\n  MenuOutline,\n  MenuUnfoldOutline,\n  MessageOutline,\n  NotificationOutline,\n  PieChartOutline,\n  PoweroffOutline,\n  SaveOutline,\n  SearchOutline,\n  SendOutline,\n  SettingOutline,\n  SyncOutline,\n  TeamOutline,\n  UserAddOutline,\n  UserDeleteOutline,\n  UsergroupAddOutline,\n  UserOutline,\n]"
                 }
             ],
             "src/stories/Button.stories.ts": [
@@ -1975,7 +2007,7 @@
                 "linktype": "component",
                 "name": "SideNavComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/4",
+                "coverageCount": "0/7",
                 "status": "low"
             },
             {

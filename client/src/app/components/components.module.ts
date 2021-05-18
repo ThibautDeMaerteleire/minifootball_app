@@ -16,7 +16,7 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
     NzMenuModule
   ],
   exports: [
-    SideNavComponent,
+    // SideNavComponent,
   ]
 })
 export class ComponentsModule { }
