@@ -11,8 +11,6 @@ export class SideNavComponent implements OnInit {
   public isCollapsed = false;
   public innerWidth: any;
 
-  constructor() { }
-
   ngOnInit(): void {
     this.innerWidth = window.innerWidth;
   }
@@ -21,11 +19,8 @@ export class SideNavComponent implements OnInit {
     this.innerWidth = window.innerWidth;
   }
 
-  setIconTrigger(): string {
-    if (innerWidth > 768) {
-      return this.isCollapsed ? 'menu-unfold' : 'menu-fold';
-    } else {
-      return 'menu';
-    }
+  public toggleCollapse(): void {
+    this.isCollapsed = !this.isCollapsed;
   }
+
 }

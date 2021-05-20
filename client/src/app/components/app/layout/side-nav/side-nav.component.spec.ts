@@ -9,8 +9,7 @@ describe('CardBaseComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ SideNavComponent ]
-    })
-    .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {

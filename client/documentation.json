@@ -44,8 +44,8 @@
     "directives": [],
     "components": [
         {
-            "name": "App",
-            "id": "component-App-7e02a0188efa66473f379a810f3bbaf0",
+            "name": "AppComponent",
+            "id": "component-AppComponent-f2fd0aa0ecf7573450f8e920e77c7f6d",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -68,7 +68,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html'\n})\nexport class App { }\n",
+            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html'\n})\nexport class AppComponent { }\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -439,7 +439,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<p>home works!</p>\r\n<app-side-nav></app-side-nav>"
+            "templateData": "<p>home works!</p>\r\n<!-- <app-side-nav></app-side-nav> -->"
         },
         {
             "name": "InputCurrencyComponent",
@@ -729,7 +729,7 @@
         },
         {
             "name": "SideNavComponent",
-            "id": "component-SideNavComponent-8ac20cc08911a6fc885640c7a911576b",
+            "id": "component-SideNavComponent-5adec953d52fb2947ab3f3e738a16e67",
             "file": "src/app/components/app/side-nav/side-nav.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -785,7 +785,7 @@
                     "optional": false,
                     "returnType": "string",
                     "typeParameters": [],
-                    "line": 25
+                    "line": 24
                 }
             ],
             "hostBindings": [],
@@ -807,7 +807,7 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, HostListener, OnInit } from '@angular/core';\n\n\n@Component({\n  selector: 'app-side-nav',\n  templateUrl: './side-nav.component.html',\n  styleUrls: ['./side-nav.component.scss']\n})\nexport class SideNavComponent implements OnInit {\n\n  public isCollapsed = false;\n  public innerWidth: any;\n\n  constructor() { }\n\n  ngOnInit(): void {\n    this.innerWidth = window.innerWidth;\n  }\n\n  @HostListener('window:resize', ['$event'])onResize(ev: any) {\n    this.innerWidth = window.innerWidth;\n    console.log(this.innerWidth)\n  }\n\n  setIconTrigger(): string {\n    if(innerWidth > 768) {\n      return this.isCollapsed ? 'menu-unfold' : 'menu-fold';\n    } else {\n      return 'menu';\n    }\n  }\n}\n",
+            "sourceCode": "import { Component, HostListener, OnInit } from '@angular/core';\n\n\n@Component({\n  selector: 'app-side-nav',\n  templateUrl: './side-nav.component.html',\n  styleUrls: ['./side-nav.component.scss']\n})\nexport class SideNavComponent implements OnInit {\n\n  public isCollapsed = false;\n  public innerWidth: any;\n\n  constructor() { }\n\n  ngOnInit(): void {\n    this.innerWidth = window.innerWidth;\n  }\n\n  @HostListener('window:resize', ['$event'])onResize(ev: any): void {\n    this.innerWidth = window.innerWidth;\n  }\n\n  setIconTrigger(): string {\n    if (innerWidth > 768) {\n      return this.isCollapsed ? 'menu-unfold' : 'menu-fold';\n    } else {\n      return 'menu';\n    }\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -952,7 +952,7 @@
                     "type": "declarations",
                     "elements": [
                         {
-                            "name": "App"
+                            "name": "AppComponent"
                         }
                     ]
                 },
@@ -975,7 +975,7 @@
                     "type": "bootstrap",
                     "elements": [
                         {
-                            "name": "App"
+                            "name": "AppComponent"
                         }
                     ]
                 },
@@ -1035,11 +1035,7 @@
                 },
                 {
                     "type": "exports",
-                    "elements": [
-                        {
-                            "name": "SideNavComponent"
-                        }
-                    ]
+                    "elements": []
                 },
                 {
                     "type": "bootstrap",
@@ -1196,7 +1192,7 @@
                 "subtype": "variable",
                 "file": "src/app/i18n.provider.ts",
                 "type": "",
-                "defaultValue": "(i18next: ITranslationService) => {\r\n  return () => i18next.init({\r\n      whitelist: ['en', 'nl', 'fr', 'de'],\r\n      fallbackLng: 'en',\r\n      debug: true,\r\n      returnEmptyString: false,\r\n      resources: {\r\n        'nl': {\r\n        }\r\n      },\r\n      ns: [\r\n        'translation',\r\n        'validation',\r\n        'error'\r\n      ],\r\n    });\r\n}"
+                "defaultValue": "(i18next: ITranslationService) => {\r\n  return () => i18next.init({\r\n      whitelist: ['en', 'nl', 'fr', 'de'],\r\n      fallbackLng: 'en',\r\n      debug: true,\r\n      returnEmptyString: false,\r\n      resources: {\r\n        nl: {\r\n        }\r\n      },\r\n      ns: [\r\n        'translation',\r\n        'validation',\r\n        'error'\r\n      ],\r\n    });\r\n}"
             },
             {
                 "name": "config",
@@ -1218,17 +1214,17 @@
                 "name": "environment",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/environments/environment.ts",
+                "file": "src/environments/environment.prod.ts",
                 "type": "object",
-                "defaultValue": "{\r\n  production: false\r\n}"
+                "defaultValue": "{\r\n  production: true\r\n}"
             },
             {
                 "name": "environment",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/environments/environment.prod.ts",
+                "file": "src/environments/environment.ts",
                 "type": "object",
-                "defaultValue": "{\r\n  production: true\r\n}"
+                "defaultValue": "{\r\n  production: false\r\n}"
             },
             {
                 "name": "I18N_PROVIDERS",
@@ -1537,7 +1533,7 @@
                     "subtype": "variable",
                     "file": "src/app/i18n.provider.ts",
                     "type": "",
-                    "defaultValue": "(i18next: ITranslationService) => {\r\n  return () => i18next.init({\r\n      whitelist: ['en', 'nl', 'fr', 'de'],\r\n      fallbackLng: 'en',\r\n      debug: true,\r\n      returnEmptyString: false,\r\n      resources: {\r\n        'nl': {\r\n        }\r\n      },\r\n      ns: [\r\n        'translation',\r\n        'validation',\r\n        'error'\r\n      ],\r\n    });\r\n}"
+                    "defaultValue": "(i18next: ITranslationService) => {\r\n  return () => i18next.init({\r\n      whitelist: ['en', 'nl', 'fr', 'de'],\r\n      fallbackLng: 'en',\r\n      debug: true,\r\n      returnEmptyString: false,\r\n      resources: {\r\n        nl: {\r\n        }\r\n      },\r\n      ns: [\r\n        'translation',\r\n        'validation',\r\n        'error'\r\n      ],\r\n    });\r\n}"
                 },
                 {
                     "name": "I18N_PROVIDERS",
@@ -1583,16 +1579,6 @@
                     "type": "literal type"
                 }
             ],
-            "src/environments/environment.ts": [
-                {
-                    "name": "environment",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/environments/environment.ts",
-                    "type": "object",
-                    "defaultValue": "{\r\n  production: false\r\n}"
-                }
-            ],
             "src/environments/environment.prod.ts": [
                 {
                     "name": "environment",
@@ -1601,6 +1587,16 @@
                     "file": "src/environments/environment.prod.ts",
                     "type": "object",
                     "defaultValue": "{\r\n  production: true\r\n}"
+                }
+            ],
+            "src/environments/environment.ts": [
+                {
+                    "name": "environment",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/environments/environment.ts",
+                    "type": "object",
+                    "defaultValue": "{\r\n  production: false\r\n}"
                 }
             ],
             "src/app/icons-provider.module.ts": [
@@ -1996,7 +1992,7 @@
                 "filePath": "src/app/app.component.ts",
                 "type": "component",
                 "linktype": "component",
-                "name": "App",
+                "name": "AppComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
