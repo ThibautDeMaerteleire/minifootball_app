@@ -1,0 +1,19 @@
+@for $val from 1 to 10 {
+  .fw-#{$val} {
+    font-weight: $val*100;
+  }
+}
+
+@each $name, $value in $spacers {
+  .fs-#{$name} {
+    font-size: $value !important;
+  }
+
+  @each $br-name, $br-val in $grid-breakpoints {
+    @include media-breakpoint-up($br-name) { 
+      .fs-#{$br-name}-#{$name} {
+        font-size: $value !important;
+      }
+    }
+  }
+}

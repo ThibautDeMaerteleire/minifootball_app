@@ -1,0 +1,10 @@
+.ant-menu-item, .ant-menu-submenu-title {
+  display: flex !important;
+  align-items: center !important;
+}
+
+@include media-breakpoint-down(md) {
+  .ant-layout-sider-zero-width-trigger-left {
+    display: none;
+  }
+}

@@ -1,0 +1,5 @@
+@each $name, $value in $theme-colors {
+  .sh-#{$name} {
+    filter: drop-shadow(0rem 0.5rem 1rem rgba($value, 0.04));
+  }
+}

@@ -1,0 +1,41 @@
+// Creating gradients
+@each $name, $gradient in $theme-gradients {
+  .gr-#{$name} {
+    background: $gradient;
+  }
+}
+
+@each $start-name, $start-color in $theme-colors {
+  .gr-str-#{$start-name} {
+    background-image: linear-gradient(45deg, rgba($start-color, 0.15) 25%, transparent 25%, transparent 50%, rgba($start-color, 0.15) 50%, rgba($start-color, 0.15) 75%, transparent 75%, transparent);
+  }
+
+  @each $end-name, $end-color in $theme-colors {
+
+    .gr-x-#{$start-name}-#{$end-name} {
+      background-image: linear-gradient(to right, $start-color 0%, $end-color 100%);
+    }
+    
+    .gr-y-#{$start-name}-#{$end-name} {
+      background-image: linear-gradient(to bottom $start-color 0%, $end-color 100%);
+    }
+
+    .gr-45-#{$start-name}-#{$end-name} {
+      background-image: linear-gradient(45deg, $start-color, $end-color);
+    }
+    
+    .gr-rad-#{$start-name}-#{$end-name} {
+      background-image: linear-gradient(circle, $start-color, $end-color);
+    }
+
+    @each $third-name, $third-color in $theme-colors {
+      .gr-x-#{$start-name}-#{$end-name}-#{$third-name} {
+        background-image: linear-gradient(to right, $start-color, $end-color 50%, $third-color);
+      }
+      
+      .gr-y-#{$start-name}-#{$end-name}-#{$third-name} {
+        background-image: linear-gradient($start-color, $end-color 50%, $third-color);
+      }
+    }
+  }
+}

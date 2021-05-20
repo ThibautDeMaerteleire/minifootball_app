@@ -1,0 +1,22 @@
+// Border-radius
+// 
+
+@each $name, $value in $spacers {
+  .br-#{$name} {
+    border-radius: $value;
+  }
+
+  @each $br-name, $br-val in $grid-breakpoints {
+    @include media-breakpoint-up($br-name) { 
+      .br-#{$br-name}-#{$name} {
+        border-radius: $value;
+      }
+    }
+  }
+}
+
+.line {
+  height: 0.25rem;
+  background-color: $line;
+  border-radius: 0.25rem;
+}

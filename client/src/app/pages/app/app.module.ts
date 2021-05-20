@@ -7,7 +7,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TeamsComponent } from './teams/teams.component';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { } from 'ng-zorro-antd/ng-zorro-antd';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,8 @@ import { BrowserModule } from '@angular/platform-browser';
     CommonModule,
     ComponentsModule,
     BrowserModule,
-    RouterModule
+    RouterModule,
+
   ],
   bootstrap: [
     AppLayoutComponent

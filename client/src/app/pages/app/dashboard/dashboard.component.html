@@ -1,4 +1,23 @@
-<p>dashboard works!</p>
-<app-side-nav>
-    <app-header></app-header>
-</app-side-nav>
+<app-header class="app-header mb-3">
+    <h1 class="h5 m-0">Dashboard</h1>
+</app-header>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-md-6 mb-3 mb-md-0">
+            <app-base-card class="mb-3">
+                <p class="h2 mb-0"><span class="fs-4 fs-md-7 me-2 me-md-3">👋</span>Welcome <strong>Thibaut</strong></p>
+            </app-base-card>
+            <app-base-card>
+                <h2 class="fw-7 fs-4">Upcoming matches</h2>
+                <div class="line"></div>
+            </app-base-card>
+        </div>
+        <div class="col-12 col-md-6">
+            <app-base-card>
+                <h2 class="fw-7 fs-4">My Teams</h2>
+                <div class="line"></div>
+                <nz-skeleton-element [nzActive]="true" ></nz-skeleton-element>
+            </app-base-card>
+        </div>
+    </div>
+</div>

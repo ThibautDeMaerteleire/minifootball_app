@@ -9,6 +9,8 @@ import { IconsProviderModule } from '../icons-provider.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { navigationReducer } from '../states/app/navigation/navigation.reducer';
+import { BaseCardComponent } from './app/cards/base-card/base-card.component';
+import { AntdComponentsModule } from './antd-components.module';
 
 
 @NgModule({
@@ -16,6 +18,7 @@ import { navigationReducer } from '../states/app/navigation/navigation.reducer';
     SideNavComponent,
     BirthdayCardComponent,
     HeaderComponent,
+    BaseCardComponent,
   ],
   imports: [
     CommonModule,
@@ -23,12 +26,15 @@ import { navigationReducer } from '../states/app/navigation/navigation.reducer';
     NzMenuModule,
     IconsProviderModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({ navigationCollapse: navigationReducer })
+    StoreModule.forRoot({ navigationCollapse: navigationReducer }),
+    AntdComponentsModule,
   ],
   exports: [
     SideNavComponent,
     BirthdayCardComponent,
     HeaderComponent,
+    BaseCardComponent,
+    AntdComponentsModule
   ]
 })
 export class ComponentsModule { }
