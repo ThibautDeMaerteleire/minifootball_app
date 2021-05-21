@@ -9,14 +9,21 @@
             </app-base-card>
             <app-base-card>
                 <h2 class="fw-7 fs-4">Upcoming matches</h2>
-                <div class="line"></div>
+                <div class="line mb-2"></div>
             </app-base-card>
         </div>
         <div class="col-12 col-md-6">
             <app-base-card>
                 <h2 class="fw-7 fs-4">My Teams</h2>
-                <div class="line"></div>
-                <nz-skeleton-element [nzActive]="true" ></nz-skeleton-element>
+                <div class="line mb-2"></div>
+                <nz-skeleton
+                    class="my-3"
+                    [nzTitle]="false"
+                    [nzActive]="true"
+                    [nzParagraph]="{ rows: 1, width: '100%' }"
+                >
+                    Loading
+                </nz-skeleton>
             </app-base-card>
         </div>
     </div>

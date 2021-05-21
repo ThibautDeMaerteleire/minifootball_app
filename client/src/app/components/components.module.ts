@@ -11,6 +11,7 @@ import { StoreModule } from '@ngrx/store';
 import { navigationReducer } from '../states/app/navigation/navigation.reducer';
 import { BaseCardComponent } from './app/cards/base-card/base-card.component';
 import { AntdComponentsModule } from './antd-components.module';
+import { SkeletonComponent } from './app/skeleton/skeleton.component';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { AntdComponentsModule } from './antd-components.module';
     BirthdayCardComponent,
     HeaderComponent,
     BaseCardComponent,
+    SkeletonComponent,
   ],
   imports: [
     CommonModule,
@@ -34,7 +36,8 @@ import { AntdComponentsModule } from './antd-components.module';
     BirthdayCardComponent,
     HeaderComponent,
     BaseCardComponent,
-    AntdComponentsModule
+    AntdComponentsModule,
+    SkeletonComponent,
   ]
 })
 export class ComponentsModule { }
