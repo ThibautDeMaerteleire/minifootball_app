@@ -9,6 +9,5 @@ export class SkeletonComponent {
 
   @Input() class = '';
   @Input() rows = 1;
-  @Input() rowHeight = '3rem';
 
 }

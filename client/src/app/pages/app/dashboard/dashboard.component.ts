@@ -12,4 +12,8 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  createArray(i: number): Array<any> {
+    return new Array(i);
+  }
+
 }
