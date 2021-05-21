@@ -10,16 +10,8 @@
   box-shadow: 2px 0 6px rgba(0,21,41,.35);
 }
 
-.header-trigger {
-  height: 4rem;
-  padding: 1.25rem 1.5rem;
-  font-size: 1.25rem;
-  cursor: pointer;
-  transition: all .3s,padding 0s;
-}
-
-.trigger:hover {
-  color: #1890ff;
+.ant-menu-submenu:hover {
+  background-color: #1890ff;
 }
 
 nz-content {

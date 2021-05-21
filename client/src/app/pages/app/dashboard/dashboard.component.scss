@@ -1,0 +1,12 @@
+.welcome {
+  .close {
+    top: 1.5rem;
+    right: 1.5rem;
+
+    &:hover {
+      transition: all 0.3s;
+      color: black;
+      cursor: pointer;
+    }
+  }
+}

@@ -4,8 +4,20 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 col-md-6 mb-3 mb-md-0">
-            <app-base-card class="mb-3">
-                <p class="h2 mb-0"><span class="fs-4 fs-md-7 me-2 me-md-3">👋</span>Welcome <strong>Thibaut</strong></p>
+            <app-base-card
+                *ngIf="welcomeDisplay"
+                class="mb-3 welcome"
+            >
+                <p class="h2 mb-0">
+                    <span class="fs-4 fs-md-7 me-2 me-md-3">👋</span>Welcome <strong>{{name}}</strong>
+                </p>
+                <i
+                    class="position-absolute close"
+                    (click)="welcomeDisplay = !welcomeDisplay"
+                    nz-icon
+                    nzType="close"
+                    nzTheme="outline"
+                ></i>
             </app-base-card>
             <app-base-card>
                 <h2 class="fw-7 fs-4">Upcoming matches</h2>
