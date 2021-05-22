@@ -18,7 +18,7 @@ class CreatePlayersTable extends Migration
             $table->integer('user_id');
             $table->string('name');
             $table->text('surname');
-            $table->text('thumbnail_path');
+            $table->text('thumbnail_path')->nullable();
             $table->timestamps();
         });
     }
