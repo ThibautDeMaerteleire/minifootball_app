@@ -7,12 +7,14 @@ import { ErrorComponent } from './error/error.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AppPagesModule } from './app/app.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
     ComponentsModule,
     AppPagesModule,
+    RouterModule,
   ],
   declarations: [
     HomeComponent,

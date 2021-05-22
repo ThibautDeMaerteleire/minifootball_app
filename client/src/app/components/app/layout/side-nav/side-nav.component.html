@@ -45,11 +45,11 @@
                     </li>
                 </ul>
             </li> -->
-            <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''" nzSelected>
+            <li routerLink="/app/dashboard" nzMatchRouter="nzSelected" nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
                 <i nz-icon nzType="pie-chart" nzTheme="outline"></i>
                 <span>Dashboard</span>
             </li>
-            <li nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
+            <li routerLink="/app/teams" nzMatchRouter="nzSelected" nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
                 <i nz-icon nzType="team" nzTheme="outline"></i>
                 <span>Teams</span>
             </li>

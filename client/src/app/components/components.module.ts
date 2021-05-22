@@ -12,6 +12,7 @@ import { navigationReducer } from '../states/app/navigation/navigation.reducer';
 import { BaseCardComponent } from './app/cards/base-card/base-card.component';
 import { AntdComponentsModule } from './antd-components.module';
 import { SkeletonComponent } from './app/skeleton/skeleton.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -30,6 +31,7 @@ import { SkeletonComponent } from './app/skeleton/skeleton.component';
     BrowserAnimationsModule,
     StoreModule.forRoot({ navigationCollapse: navigationReducer }),
     AntdComponentsModule,
+    RouterModule,
   ],
   exports: [
     SideNavComponent,

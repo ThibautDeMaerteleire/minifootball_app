@@ -7,7 +7,7 @@ import { BaseRoutes } from './base-routes';
     RouterModule.forRoot(BaseRoutes, {
       enableTracing: true,
       scrollPositionRestoration: 'top',
-    })
+    }),
   ],
   exports: [RouterModule]
 })
