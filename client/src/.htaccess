@@ -16,6 +16,7 @@ RewriteRule ^ /index.html
 # AuthUserFile /opt/approot/.htpasswd
 # require valid-user
 
+
 <IfModule mod_headers.c>
 	Header set Cache-Control "no-cache, no-store, must-revalidate"
 	Header set Pragma "no-cache"
