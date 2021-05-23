@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Player;
+use App\Models\PracticeMatches;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class PlayerFactory extends Factory
+class PracticeMatchesFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Player::class;
+    protected $model = PracticeMatches::class;
 
     /**
      * Define the model's default state.
@@ -22,10 +22,10 @@ class PlayerFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->firstName(),
-            'user_id' => random_int(0, 10),
-            'surname' => $this->faker->lastName(),
-            'thumbnail_path' => $this->faker->imageUrl(),
-        ];          
+            'home_team' => random_int(0, 10),
+            'away_team' => random_int(0, 10),
+            'accepted' => null,
+            'request_by' => random_int(0, 10),
+        ];
     }
 }

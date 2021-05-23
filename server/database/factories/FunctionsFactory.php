@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Player;
+use App\Models\Functions;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class PlayerFactory extends Factory
+class FunctionsFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Player::class;
+    protected $model = Functions::class;
 
     /**
      * Define the model's default state.
@@ -22,10 +22,8 @@ class PlayerFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->firstName(),
-            'user_id' => random_int(0, 10),
-            'surname' => $this->faker->lastName(),
-            'thumbnail_path' => $this->faker->imageUrl(),
-        ];          
+            'name' => $this->faker->word(),
+            'description' => $this->faker->text(),
+        ];
     }
 }
