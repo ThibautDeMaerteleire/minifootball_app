@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +23,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->get('/users', function (Request $request) {
     return 'test';
 });
+
+Route::post('/register', [AuthController::class, 'register']);
+
+Route::post('/login', [AuthController::class, 'login']);
+
+// Route::middleware('auth:sanctum')->post('/reset-password', function (Request $request) {
+//   return 'test';
+// });
+
+// Route::middleware('auth:sanctum')->post('/change-email', function (Request $request) {
+//   return 'test';
+// });
+
+Route::get('/me', [UserController::class, 'me'])->middleware('auth:sanctum');
