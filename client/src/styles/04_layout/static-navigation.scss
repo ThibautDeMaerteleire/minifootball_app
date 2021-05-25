@@ -1,0 +1,8 @@
+static-navigation {
+
+  .logo {
+    @include media-breakpoint-down(md) {
+      margin-left: -1.55rem;
+    }
+  }
+}

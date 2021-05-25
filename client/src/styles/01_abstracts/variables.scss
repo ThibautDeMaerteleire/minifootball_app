@@ -139,22 +139,22 @@ $xsmall-font-size: 60%;
 $body-color: $body;
 
 // Navs
-$nav-link-padding-y: 0.25rem;
+$nav-link-padding-y: 0.5rem;
 
 // Navbar
-$navbar-nav-link-padding-x: 1rem;
+$navbar-nav-link-padding-x: 2rem;
 $navbar-light-toggler-icon-bg: url("data:image/svg+xml,<svg enable-background='new 0 0 24 24' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><g fill='#091938'><path d='m5.3 5.5h14c.6 0 1 .4 1 1 0 .6-.4 1-1 1h-14c-.6 0-1-.4-1-1 0-.5.4-1 1-1z'/><path d='m5.3 10.5h14c.6 0 1 .4 1 1 0 .6-.4 1-1 1h-14c-.6 0-1-.4-1-1 0-.5.4-1 1-1z'/><path d='m5.3 15.5h14c.6 0 1 .4 1 1 0 .6-.4 1-1 1h-14c-.6 0-1-.4-1-1 0-.5.4-1 1-1z'/></g></svg>");
 $navbar-light-toggler-border-color: transparent;
-$navbar-toggler-font-size: 1rem;
+$navbar-toggler-font-size: 1.5rem;
 
 $navbar-dark-color: $white;
-$navbar-light-color: $primary;
-$navbar-secondary-color: $secondary;
-$navbar-secondary-hover-color: rgba($secondary, 0.75);
-$navbar-secondary-active-color: $secondary;
-$navbar-secondary-disabled-color: rgba($secondary, 0.25);
+$navbar-light-color: $body;
+$navbar-secondary-color: $body;
+$navbar-secondary-hover-color: rgba($body, 0.75);
+$navbar-secondary-active-color: $body;
+$navbar-secondary-disabled-color: rgba($body, 0.25);
 
-$nav-pills-link-active-bg: rgba($secondary, 1);
+$nav-pills-link-active-bg: rgba($body, 1);
 
 // Forms
 $input-btn-font-family: $font-family-sans-serif;

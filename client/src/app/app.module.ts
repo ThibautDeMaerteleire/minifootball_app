@@ -1,5 +1,5 @@
 import { I18NextModule } from 'angular-i18next';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { StaticRoutingModule } from './routes/static-routing.module';
 import { AppComponent } from './app.component';
@@ -12,10 +12,9 @@ import { I18N_PROVIDERS } from './i18n.provider';
 import { CommonModule } from '@angular/common';
 import { ComponentsModule } from './components/components.module';
 import { PagesModule } from './pages/pages.module';
-import { StoreModule } from '@ngrx/store';
-
 
 @NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     AppComponent,
   ],
@@ -31,7 +30,6 @@ import { StoreModule } from '@ngrx/store';
     IconsProviderModule,
     ComponentsModule,
     PagesModule,
-    StoreModule.forRoot({}, {})
   ],
   providers: [I18N_PROVIDERS],
   bootstrap: [AppComponent]

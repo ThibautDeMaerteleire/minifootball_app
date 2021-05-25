@@ -20,7 +20,7 @@ import { RouterModule } from '@angular/router';
     HomeComponent,
     ErrorComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
 })
 export class PagesModule { }

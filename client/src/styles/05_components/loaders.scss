@@ -1,0 +1,8 @@
+.loader {
+  background: rgba($color: $line, $alpha: 0.7);
+
+  lottie-player {
+    background-color: $white;
+    height: fit-content;
+  }
+}

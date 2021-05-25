@@ -1,0 +1,13 @@
+@each $name, $value in $spacers {
+  .w-#{$name} {
+    width: $value !important;
+  }
+
+  @each $br-name, $br-val in $grid-breakpoints {
+    @include media-breakpoint-up($br-name) { 
+      .w-#{$br-name}-#{$name} {
+        width: $value !important;
+      }
+    }
+  }
+}
