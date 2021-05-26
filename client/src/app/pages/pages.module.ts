@@ -8,6 +8,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AppPagesModule } from './app/app.module';
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule, } from '@angular/forms';
+import { AntdComponentsModule } from '../components/antd-components.module';
 
 @NgModule({
   imports: [
@@ -15,6 +17,9 @@ import { RouterModule } from '@angular/router';
     ComponentsModule,
     AppPagesModule,
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AntdComponentsModule
   ],
   declarations: [
     HomeComponent,

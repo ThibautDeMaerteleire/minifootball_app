@@ -1,5 +1,6 @@
-<static-navigation *ngIf="displayStaticNav"></static-navigation>
+<static-navigation *ngIf="displayStatic"></static-navigation>
 <router-outlet></router-outlet>
+<static-footer *ngIf="displayStatic"></static-footer>
 <div *ngIf="loading" class="loader position-fixed top-0 left-0 vw-100 vh-100 d-flex justify-content-center align-items-center">
     <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_Yiahbq.json" class="w-12" background="rgba(255, 255, 255, 0)" speed="1" loop autoplay></lottie-player>
 </div>

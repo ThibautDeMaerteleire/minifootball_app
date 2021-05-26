@@ -42,8 +42,7 @@
               "src/styles/index.scss"
             ],
             "scripts": [
-              "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "node_modules/@lottiefiles/lottie-player/dist/lottie-player.js"
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           },
           "configurations": {

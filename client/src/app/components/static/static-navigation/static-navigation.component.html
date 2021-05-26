@@ -16,25 +16,26 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" nzMatchRouter="active" routerLink="/features">Features</a>
+                    <a class="nav-link" routerLinkActive="active fw-7" routerLink="/features">Features</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" nzMatchRouter="active" routerLink="/pricing">Pricing</a>
+                    <a class="nav-link" routerLinkActive="active fw-7" routerLink="/pricing">Pricing</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" nzMatchRouter="active" routerLink="/about">About</a>
+                    <a class="nav-link" routerLinkActive="active fw-7" routerLink="/about">About</a>
                 </li>
             </ul>
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    Dropdown button
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-            </div>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li>
+                    <a class="nav-link" routerLinkActive="active fw-7" routerLink="/login">Login</a>
+                </li>
+                <li>
+                    <a class="nav-link" routerLinkActive="active fw-7" routerLink="/register">Get started</a>
+                </li>
+                <li>
+                    <!-- <shared-language-selector></shared-language-selector> -->
+                </li>
+            </ul>
         </div>
     </div>
 </nav>

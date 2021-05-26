@@ -5,7 +5,7 @@ import { BaseRoutes } from './base-routes';
 @NgModule({
   imports: [
     RouterModule.forRoot(BaseRoutes, {
-      enableTracing: true,
+      enableTracing: false,
       scrollPositionRestoration: 'top',
     }),
   ],

@@ -9,7 +9,15 @@ $enable-caret: false;
 
 // Color system
 $purple: #5F2EEA;
+$purple-dark: #2A00A2;
+$purple-darkmode: #BCA4FF;
+$purple-light: #E4DAFF;
+$purple-bg: #F3EFFF;
 $blue: #1CC8EE;
+$blue-dark: #0096B7;
+$blue-darkmode: #82E9FF;
+$blue-light: #DEF9FF;
+$blue-bg: #F1FCFF;
 $green: #00BA88;
 $red: #ED2E7E;
 $yellow: #F4B740;
@@ -26,7 +34,7 @@ $lightpurple-gradient: linear-gradient(112.58deg, #FFA3FD 0%, #DED3FF 100%);
 $blue-gradient: linear-gradient(112.58deg, #624AF2 0%, #36DEF4 100%);
 $lightblue-gradient: linear-gradient(89.93deg, #2097ED 0.12%, #36DEF4 99.88%);
 $redyellow-gradient: linear-gradient(112.58deg, #EB0055 0%, #FFFA80 100%);
-
+$auth-gradient: linear-gradient(103.16deg, rgba(137, 247, 254, 0.54) 0.47%, #66A6FF 97.67%);
 
 $primary: $blue;
 $secondary: $purple;
@@ -34,6 +42,16 @@ $secondary: $purple;
 $theme-colors: (
     'primary': $primary,
     'secondary': $secondary,
+    'purple': $purple,
+    'purple-dark': $purple-dark,
+    'purple-darkmode': $purple-darkmode,
+    'purple-light': $purple-light,
+    'purple-bg': $purple-bg,
+    'blue': $blue,
+    'blue-dark': $blue-dark,
+    'blue-darkmode': $blue-darkmode,
+    'blue-light': $blue-light,
+    'blue-bg': $blue-bg,
     'green': $green,
     'red': $red,
     'yellow': $yellow,
@@ -52,6 +70,7 @@ $theme-gradients: (
     'blue': $blue-gradient,
     'light-blue': $lightblue-gradient,
     'red-yellow': $redyellow-gradient,
+    'auth-page': $auth-gradient
 );
 
 

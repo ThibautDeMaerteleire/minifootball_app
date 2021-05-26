@@ -1,0 +1,42 @@
+.custom-input {
+  border: 0.25rem solid var(--bs-placeholder);
+
+  &:active, &:focus {
+    transition: all 0.3s ease;
+    border: 0.25rem solid var(--bs-purple);
+
+    i:first-child {
+      transition: all 0.3s ease;
+      color: var(--bs-title);
+    }
+  }
+
+  i:first-child {
+    font-size: 2rem;
+    color: var(--bs-placeholder);
+  }
+  
+  &-subtitle {
+    font-size: 0.8rem;
+  }
+
+  input {
+    outline: 0;
+  }
+
+  .delete {
+    font-size: 2.5rem;
+    color: var(--bs-placeholder);
+  }
+
+}
+
+.custom-input:has(div div input.active) {
+  transition: all 0.3s ease;
+  border: 0.25rem solid var(--bs-purple) !important;
+
+  i:first-child {
+    transition: all 0.3s ease;
+    color: var(--bs-title) !important;
+  }
+}

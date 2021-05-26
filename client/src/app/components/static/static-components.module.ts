@@ -3,19 +3,25 @@ import { CommonModule } from '@angular/common';
 import { AntdComponentsModule } from '../antd-components.module';
 import { StaticNavigationComponent } from './static-navigation/static-navigation.component';
 import { RouterModule } from '@angular/router';
+import { AngularFlagpackModule } from 'angular-flagpack';
+import { SharedComponentsModule } from '../shared/shared-components.module';
+import { StaticFooterComponent } from './static-footer/static-footer.component';
 
 @NgModule({
   declarations: [
-    StaticNavigationComponent
+    StaticNavigationComponent,
+    StaticFooterComponent
   ],
   imports: [
     CommonModule,
     AntdComponentsModule,
     RouterModule,
+    AngularFlagpackModule,
+    SharedComponentsModule,
   ],
   exports: [
-    AntdComponentsModule,
     StaticNavigationComponent,
+    StaticFooterComponent
   ]
 })
 export class StaticComponentsModule { }

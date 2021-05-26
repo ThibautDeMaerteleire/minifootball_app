@@ -8,7 +8,7 @@ import { Event, NavigationEnd, NavigationError, NavigationStart, Router } from '
 export class AppComponent {
 
   loading = false;
-  displayStaticNav = true;
+  displayStatic = true;
 
   constructor(private router: Router) {
     this.router.events.subscribe((event: Event) => {
@@ -35,9 +35,9 @@ export class AppComponent {
 
   checkDisplayStatic(url: string): void {
     if (url.includes('/app')) {
-      this.displayStaticNav = false;
+      this.displayStatic = false;
     } else {
-      this.displayStaticNav = true;
+      this.displayStatic = true;
     }
   }
 }
