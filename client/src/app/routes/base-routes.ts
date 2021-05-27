@@ -11,28 +11,28 @@ export const BaseRoutes: Routes = [
   {
     path: baseRoutesEnum.home,
     redirectTo: baseRoutesEnum.landing
-  }, 
+  },
   {
     path: baseRoutesEnum.landing,
     component: HomeComponent
-  }, 
+  },
   {
     path: baseRoutesEnum.login,
     component: LoginComponent
-  }, 
+  },
   {
     path: baseRoutesEnum.register,
     component: RegisterComponent
-  }, 
+  },
   {
     path: baseRoutesEnum.app,
     component: AppLayoutComponent,
     children: AppRoutes
-  }, 
+  },
   {
     path: baseRoutesEnum.error,
     component: ErrorComponent,
-  }, 
+  },
   {
     path: '**',
     redirectTo: '/error/404'

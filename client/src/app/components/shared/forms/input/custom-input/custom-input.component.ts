@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'custom-input',
+  selector: 'app-custom-input',
   templateUrl: './custom-input.component.html',
   styleUrls: ['./custom-input.component.scss']
 })

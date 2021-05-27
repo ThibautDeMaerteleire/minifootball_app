@@ -2,7 +2,7 @@ import { Component, Input, } from '@angular/core';
 import { languages } from 'src/app/constants/languages.enum';
 
 @Component({
-  selector: 'shared-language-selector',
+  selector: 'app-shared-language-selector',
   templateUrl: './language-selector.component.html',
   styleUrls: ['./language-selector.component.scss']
 })
