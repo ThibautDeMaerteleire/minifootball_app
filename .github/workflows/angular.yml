@@ -31,8 +31,8 @@ jobs:
       - run: |
               sudo apt-get install google-chrome-stable
               npm ci
-              npm run lint
-              npm run test
+              # npm run lint
+              # npm run test
   e2e-tests:
     runs-on: ubuntu-latest
     strategy:
