@@ -8,14 +8,16 @@ import { FormControl } from '@angular/forms';
 })
 export class CustomInputComponent {
 
-  @Input()
-  icon = 'user';
-  subtitle = 'subtitle';
-  inputType = 'text';
-  name = '';
-  defaultInputValue = '';
+  @Input() icon = 'user';
+  @Input() subtitle = 'subtitle';
+  @Input() inputType = 'text';
+  @Input() name = '';
+  @Input() defaultInputValue = '';
+  @Input() placeholder = 'placeholder';
+  @Input() class = '';
 
   @Output() changeValueEvent = new EventEmitter<string>();
+  @Output() iconClickEvent = new EventEmitter<string>();
 
   input = new FormControl(this.defaultInputValue);
 
@@ -25,5 +27,9 @@ export class CustomInputComponent {
 
   checkIconType(): boolean {
     return this.icon.includes('bi ');
+  }
+
+  iconClick(): void {
+    this.iconClickEvent.emit();
   }
 }

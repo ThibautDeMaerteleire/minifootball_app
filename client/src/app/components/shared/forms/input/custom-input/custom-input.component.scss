@@ -1,13 +1,13 @@
 .custom-input {
   border: 0.25rem solid var(--bs-placeholder);
 
-  &:active, &:focus {
+  &:focus-within {
     transition: all 0.3s ease;
-    border: 0.25rem solid var(--bs-purple);
-
+    border: 0.25rem solid var(--bs-purple) !important;
+  
     i:first-child {
       transition: all 0.3s ease;
-      color: var(--bs-title);
+      color: var(--bs-title) !important;
     }
   }
 
@@ -29,14 +29,4 @@
     color: var(--bs-placeholder);
   }
 
-}
-
-.custom-input:has(div div input.active) {
-  transition: all 0.3s ease;
-  border: 0.25rem solid var(--bs-purple) !important;
-
-  i:first-child {
-    transition: all 0.3s ease;
-    color: var(--bs-title) !important;
-  }
 }

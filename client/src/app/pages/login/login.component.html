@@ -1,50 +1,72 @@
-<div class="container-fluid gr-auth-page row align-items-center justify-content-center">
-    <div class="col-12 col-md-4 my-8 py-4 px-6 bg-white br-5">
-        <form>
-            <h1>Login</h1>
-            <custom-input
-                (changeValueEvent)="email = $event"
-                placeholder="erhger"
-            ></custom-input>
-        </form>
-        <!-- <form
-            nz-form
-            [formGroup]="validateForm"
-            class="login-form"
-            (ngSubmit)="submitForm()"
-        >
-            <nz-form-item>
-                <nz-form-control nzErrorTip="Please input your username!">
-                    <nz-input-group nzPrefixIcon="user">
-                        <input type="text" nz-input formControlName="userName" placeholder="Username" />
-                    </nz-input-group>
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-control nzErrorTip="Please input your Password!">
-                    <nz-input-group nzPrefixIcon="lock">
-                        <input type="password" nz-input formControlName="password" placeholder="Password" />
-                    </nz-input-group>
-                </nz-form-control>
-            </nz-form-item>
-            <div nz-row class="login-form-margin">
-                <div nz-col [nzSpan]="12">
-                    <label nz-checkbox formControlName="remember">
-                        <span>Remember me</span>
-                    </label>
-                </div>
-                <div nz-col [nzSpan]="12">
-                    <a class="login-form-forgot">Forgot password</a>
-                </div>
-            </div>
-            <button
-                nz-button
-                class="login-form-button login-form-margin"
-                [nzType]="'primary'"
+<div class="container-fluid gr-auth-page">
+    <div class="row align-items-center justify-content-center">
+        <div class="col-12 col-md-4 my-8 py-5 px-6 bg-white br-5">
+            <form>
+                <h1 class="mb-4 fw-7">Login</h1>
+                <custom-input
+                    class="mb-3"
+                    (changeValueEvent)="email = $event"
+                    placeholder="username"
+                    subtitle="username"
+                    name="username"
+                ></custom-input>
+                <custom-input
+                    class="mb-4"
+                    (iconClickEvent)="passwordVisible = !passwordVisible"
+                    [icon]="passwordVisible ? 'eye-invisible' : 'eye'"
+                    [inputType]="passwordVisible ? 'text' : 'password'"
+                    (changeValueEvent)="password = $event"
+                    name="password"
+                    placeholder="password"
+                    subtitle="password"
+                ></custom-input>
+                <button
+                    class="btn bg-purple text-white py-3 w-100 br-3"
+                    role="button"
+                    (click)="submit()"
+                >
+                    Login
+                </button>
+            </form>
+            <!-- <form
+                nz-form
+                [formGroup]="validateForm"
+                class="login-form"
+                (ngSubmit)="submitForm()"
             >
-                Log in
-            </button>
-            Or <a> register now! </a>
-        </form> -->
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="Please input your username!">
+                        <nz-input-group nzPrefixIcon="user">
+                            <input type="text" nz-input formControlName="userName" placeholder="Username" />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-control nzErrorTip="Please input your Password!">
+                        <nz-input-group nzPrefixIcon="lock">
+                            <input type="password" nz-input formControlName="password" placeholder="Password" />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+                <div nz-row class="login-form-margin">
+                    <div nz-col [nzSpan]="12">
+                        <label nz-checkbox formControlName="remember">
+                            <span>Remember me</span>
+                        </label>
+                    </div>
+                    <div nz-col [nzSpan]="12">
+                        <a class="login-form-forgot">Forgot password</a>
+                    </div>
+                </div>
+                <button
+                    nz-button
+                    class="login-form-button login-form-margin"
+                    [nzType]="'primary'"
+                >
+                    Log in
+                </button>
+                Or <a> register now! </a>
+            </form> -->
+        </div>
     </div>
 </div>

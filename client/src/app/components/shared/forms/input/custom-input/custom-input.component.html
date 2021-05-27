@@ -1,14 +1,20 @@
-<div class="custom-input d-flex justify-content-between align-items-center p-3 br-4 w-100">
-    <div class="d-flex align-items-center">
+<div class="custom-input d-flex justify-content-between align-items-center p-3 br-4 w-100 {{ class }}">
+    <div
+        class="d-flex align-items-center"
+        role="button"
+    >
         <i
             *ngIf="!checkIconType()"
+            (click)="iconClick()"
             nz-icon
             class="m-2"
             [nzType]="icon"
             nzTheme="outline"
+            [attr.for]="name"
         ></i>
         <i
             *ngIf="checkIconType()"
+            (click)="iconClick()"
             class="m-2 {{icon}}"
         ></i>
         <div class="d-flex flex-column ms-2">
@@ -25,14 +31,14 @@
                 [formControl]="input"
                 #inputField
                 (ngModelChange)="returnInputValue(inputField.value)"
-                placeholder="placeholder"
+                [placeholder]="placeholder"
             />
         </div>
     </div>
     <i
         *ngIf="inputField.value.length > 0"
         role="button"
-        class="bi bi-x delete align-self-end"
+        class="bi bi-x delete"
         (click)="inputField.value = ''"
     ></i>
 </div>

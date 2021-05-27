@@ -10,6 +10,7 @@ import { AppPagesModule } from './app/app.module';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule, } from '@angular/forms';
 import { AntdComponentsModule } from '../components/antd-components.module';
+import { HttpClientModule, } from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { AntdComponentsModule } from '../components/antd-components.module';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    AntdComponentsModule
+    AntdComponentsModule,
+    HttpClientModule,
   ],
   declarations: [
     HomeComponent,

@@ -1,0 +1,42 @@
+.color-change-bg {
+  animation: color-change-2x 8s infinite;
+}
+
+@for $val from 0 to 11 {
+  .op-#{$val} {
+    transition: all 0.3s ease;
+    &:hover {
+      opacity: $val * 0.1;
+    }
+  }
+}
+
+@keyframes color-change-2x {
+  0% {
+    background: $blue;
+  }
+  50% {
+    background: $purple;
+  }
+  100% {
+    background: $blue;
+  }
+};
+
+@keyframes tracking-in-expand-fwd {
+  0% {
+    letter-spacing: -.5em;
+    -webkit-transform: translateZ(-700px);
+    transform: translateZ(-700px);
+    opacity: 0
+  }
+  40% {
+    opacity: .6;
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    opacity:1;
+  }
+};
+ 

@@ -1,30 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, } from '@angular/core';
+import { HttpClient, } from '@angular/common/http';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
+  error: string | null = null;
   email = '';
-  validateForm!: FormGroup;
+  password = '';
+  passwordVisible = false;
+  
+  constructor(private http: HttpClient) {}
 
-  submitForm(): void {
-    for (const i in this.validateForm.controls) {
-      this.validateForm.controls[i].markAsDirty();
-      this.validateForm.controls[i].updateValueAndValidity();
-    }
+  submit(): string {
+
+    return '';
   }
 
-  constructor(private fb: FormBuilder) {}
+  validation(): void {
+    if(!this.email.includes('@')) { // Check email
+      this.error = 'email is not valid';
+    }
 
-  ngOnInit(): void {
-    this.validateForm = this.fb.group({
-      userName: [null, [Validators.required]],
-      password: [null, [Validators.required]],
-      remember: [true]
-    });
+    if(this.password.length > 6) { // Check email
+      this.error = 'Password requires minimal 6 characters';
+    }
   }
 
 }
