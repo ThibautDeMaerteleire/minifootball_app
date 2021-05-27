@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { AppComponentsModule } from '../../app-components.module';
 
 import { SideNavComponent } from './side-nav.component';
 
@@ -8,6 +9,7 @@ describe('CardBaseComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [ AppComponentsModule ],
       declarations: [ SideNavComponent ]
     }).compileComponents();
   });
