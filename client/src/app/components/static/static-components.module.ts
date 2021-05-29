@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { AntdComponentsModule } from '../antd-components.module';
 import { StaticNavigationComponent } from './static-navigation/static-navigation.component';
 import { RouterModule } from '@angular/router';
-import { AngularFlagpackModule } from 'angular-flagpack';
 import { SharedComponentsModule } from '../shared/shared-components.module';
 import { StaticFooterComponent } from './static-footer/static-footer.component';
 
@@ -16,7 +15,6 @@ import { StaticFooterComponent } from './static-footer/static-footer.component';
     CommonModule,
     AntdComponentsModule,
     RouterModule,
-    AngularFlagpackModule,
     SharedComponentsModule,
   ],
   exports: [

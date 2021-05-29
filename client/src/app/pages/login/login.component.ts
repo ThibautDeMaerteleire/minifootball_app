@@ -1,6 +1,8 @@
 import { Component, } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { apiRoutes, API_BASE_URL } from 'src/app/constants/api.enum';
+import { Observable } from 'rxjs';
+
 
 export interface LoginData {
   email: string;
@@ -18,29 +20,51 @@ export class LoginComponent {
   email = '';
   password = '';
   passwordVisible = false;
-  response: any = '';
+  response: any;
 
   constructor(private http: HttpClient) {}
 
-  submit(): string {
+  submit(): string | null {
+    this.error = this.validation();
+
+    if(typeof this.error === 'string') {
+      return null;
+    }
+
     // const headers = new HttpHeaders().set('Authorization', 'auth-token');
     const data: LoginData = {
       email: this.email,
       password: this.password
     };
 
-    this.response = this.http.post(API_BASE_URL + apiRoutes.login, data);
+    // const promise = this.http.post(API_BASE_URL + apiRoutes['sanctum-crsf'], data).toPromise();
+    // promise.then((data) => {
+    //   console.log(data);
+    // }).catch((err) => console.error(err));
+    // console.log(this.response);
+
+    const promise = this.http.post(API_BASE_URL + apiRoutes.login, data).toPromise();
+    promise.then((data) => {
+      console.log(data);
+    }).catch((err) => console.error(err));
+    console.log(this.response);
     return '';
   }
 
-  validation(): void {
-    if (!this.email.includes('@')) { // Check email
-      this.error = 'email is not valid';
+  validation(): string | null {
+    if (!this.email.includes('@') || !this.email.includes('.')) { // Check email
+      return 'Email is not valid';
     }
 
-    if (this.password.length > 6) { // Check email
-      this.error = 'Password requires minimal 6 characters';
+    if (this.email.length <= 4) { // Check password
+      return 'Email requires minimal 6 characters';
     }
+
+    if (this.password.length <= 6) { // Check password
+      return 'Password requires minimal 6 characters';
+    }
+
+    return null;
   }
 
 }

@@ -7,7 +7,7 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./custom-input.component.scss']
 })
 export class CustomInputComponent {
-
+   
   @Input() icon = 'user';
   @Input() subtitle = 'subtitle';
   @Input() inputType = 'text';
@@ -25,7 +25,7 @@ export class CustomInputComponent {
     this.changeValueEvent.emit(value);
   }
 
-  checkIconType(): boolean {
+  public checkIconType(): boolean {
     return this.icon.includes('bi ');
   }
 

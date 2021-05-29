@@ -6,20 +6,21 @@ import { Story, Meta } from '@storybook/angular/types-6-0';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { IconsProviderModule } from 'src/app/icons-provider.module';
+import { HeaderComponent } from '../header/header.component';
 import { SideNavComponent } from './side-nav.component';
 
 export default {
-  title: 'app/components/Side Nav',
+  title: 'Components/Navigation/Side Nav',
   component: SideNavComponent,
   decorators: [
     moduleMetadata({
-      declarations: [],
+      declarations: [HeaderComponent],
       imports: [
         CommonModule,
         NzMenuModule,
         NzLayoutModule,
         BrowserAnimationsModule,
-        IconsProviderModule
+        IconsProviderModule,
       ],
     }),
   ],
@@ -27,6 +28,7 @@ export default {
 
 const Template: Story<SideNavComponent> = (args: SideNavComponent) => ({
   props: args,
+  template: `<app-side-nav>This is the content.</app-side-nav>`
 });
 
 

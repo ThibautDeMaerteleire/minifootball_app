@@ -1,6 +1,33 @@
 {
     "pipes": [],
-    "interfaces": [],
+    "interfaces": [
+        {
+            "name": "LoginData",
+            "id": "interface-LoginData-3398de5cf14eff7fd6f5194df2206025",
+            "file": "src/app/pages/login/login.component.ts",
+            "type": "interface",
+            "sourceCode": "import { Component, } from '@angular/core';\r\nimport { HttpClient, HttpHeaders } from '@angular/common/http';\r\nimport { apiRoutes, API_BASE_URL } from 'src/app/constants/api.enum';\r\nimport { Observable } from 'rxjs';\r\n\r\n\r\nexport interface LoginData {\r\n  email: string;\r\n  password: string;\r\n}\r\n\r\n@Component({\r\n  selector: 'app-login',\r\n  templateUrl: './login.component.html',\r\n  styleUrls: ['./login.component.scss']\r\n})\r\nexport class LoginComponent {\r\n\r\n  error: string | null = null;\r\n  email = '';\r\n  password = '';\r\n  passwordVisible = false;\r\n  response: any;\r\n\r\n  constructor(private http: HttpClient) {}\r\n\r\n  submit(): string | null {\r\n    this.error = this.validation();\r\n\r\n    if(typeof this.error === 'string') {\r\n      return null;\r\n    }\r\n\r\n    // const headers = new HttpHeaders().set('Authorization', 'auth-token');\r\n    const data: LoginData = {\r\n      email: this.email,\r\n      password: this.password\r\n    };\r\n\r\n    // const promise = this.http.post(API_BASE_URL + apiRoutes['sanctum-crsf'], data).toPromise();\r\n    // promise.then((data) => {\r\n    //   console.log(data);\r\n    // }).catch((err) => console.error(err));\r\n    // console.log(this.response);\r\n\r\n    const promise = this.http.post(API_BASE_URL + apiRoutes.login, data).toPromise();\r\n    promise.then((data) => {\r\n      console.log(data);\r\n    }).catch((err) => console.error(err));\r\n    console.log(this.response);\r\n    return '';\r\n  }\r\n\r\n  validation(): string | null {\r\n    if (!this.email.includes('@') || !this.email.includes('.')) { // Check email\r\n      return 'Email is not valid';\r\n    }\r\n\r\n    if (this.email.length <= 4) { // Check password\r\n      return 'Email requires minimal 6 characters';\r\n    }\r\n\r\n    if (this.password.length <= 6) { // Check password\r\n      return 'Password requires minimal 6 characters';\r\n    }\r\n\r\n    return null;\r\n  }\r\n\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "email",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 8
+                },
+                {
+                    "name": "password",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 9
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 150,
+            "methods": []
+        }
+    ],
     "injectables": [],
     "classes": [
         {
@@ -45,7 +72,7 @@
     "components": [
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-f2fd0aa0ecf7573450f8e920e77c7f6d",
+            "id": "component-AppComponent-0ae57f66be32f7b544889e0ee358c060",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -61,6 +88,161 @@
             "viewProviders": [],
             "inputsClass": [],
             "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "displayStatic",
+                    "defaultValue": "true",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 11
+                },
+                {
+                    "name": "loading",
+                    "defaultValue": "false",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 10
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "checkDisplayStatic",
+                    "args": [
+                        {
+                            "name": "url",
+                            "type": "string"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 36,
+                    "jsdoctags": [
+                        {
+                            "name": "url",
+                            "type": "string",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\nimport { Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  templateUrl: './app.component.html'\r\n})\r\nexport class AppComponent {\r\n\r\n  loading = false;\r\n  displayStatic = true;\r\n\r\n  constructor(private router: Router) {\r\n    this.router.events.subscribe((event: Event) => {\r\n      if (event instanceof NavigationStart) {\r\n        // Show loading indicator\r\n        this.loading = true;\r\n      }\r\n\r\n      if (event instanceof NavigationEnd) {\r\n        // Hide loading indicator\r\n        this.checkDisplayStatic(event.urlAfterRedirects);\r\n        this.loading = false;\r\n      }\r\n\r\n      if (event instanceof NavigationError) {\r\n        // Hide loading indicator\r\n        this.loading = false;\r\n        this.checkDisplayStatic(event.url);\r\n        // Present error to user\r\n        console.log(event.error);\r\n      }\r\n    });\r\n  }\r\n\r\n  checkDisplayStatic(url: string): void {\r\n    if (url.includes('/app')) {\r\n      this.displayStatic = false;\r\n    } else {\r\n      this.displayStatic = true;\r\n    }\r\n  }\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [
+                    {
+                        "name": "router",
+                        "type": "Router"
+                    }
+                ],
+                "line": 11,
+                "jsdoctags": [
+                    {
+                        "name": "router",
+                        "type": "Router",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "templateData": "<app-static-navigation *ngIf=\"displayStatic\"></app-static-navigation>\r\n<router-outlet></router-outlet>\r\n<app-static-footer *ngIf=\"displayStatic\"></app-static-footer>\r\n<div *ngIf=\"loading\" class=\"loader position-fixed top-0 left-0 vw-100 vh-100 d-flex justify-content-center align-items-center\">\r\n    <lottie-player src=\"https://assets4.lottiefiles.com/packages/lf20_Yiahbq.json\" class=\"w-12\" background=\"rgba(255, 255, 255, 0)\" speed=\"1\" loop autoplay></lottie-player>\r\n</div>\r\n"
+        },
+        {
+            "name": "AppLayoutComponent",
+            "id": "component-AppLayoutComponent-9fb229e4be5e1065fa3983b8f16c7a2c",
+            "file": "src/app/pages/app/layout/app-layout.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-layout",
+            "styleUrls": [
+                "./app-layout.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./app-layout.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-layout',\r\n  templateUrl: './app-layout.component.html',\r\n  styleUrls: ['./app-layout.component.scss']\r\n})\r\nexport class AppLayoutComponent implements OnInit {\r\n\r\n  constructor() { }\r\n\r\n  ngOnInit(): void {\r\n  }\r\n\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./app-layout.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 8
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<app-side-nav>\r\n    <div class=\"pb-4\">\r\n        <router-outlet></router-outlet>\r\n    </div>\r\n</app-side-nav>\r\n"
+        },
+        {
+            "name": "BaseCardComponent",
+            "id": "component-BaseCardComponent-2bc9fea33f39b99b22547d0fae823d54",
+            "file": "src/app/components/app/cards/base-card/base-card.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-base-card",
+            "styleUrls": [
+                "./base-card.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./base-card.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "class",
+                    "defaultValue": "''",
+                    "line": 10
+                }
+            ],
+            "outputsClass": [],
             "propertiesClass": [],
             "methodsClass": [],
             "hostBindings": [],
@@ -68,11 +250,72 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-root',\n  templateUrl: './app.component.html'\n})\nexport class AppComponent { }\n",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-base-card',\r\n  templateUrl: './base-card.component.html',\r\n  styleUrls: ['./base-card.component.scss']\r\n})\r\nexport class BaseCardComponent {\r\n\r\n  @Input() class = '';\r\n\r\n}\r\n",
             "assetsDirs": [],
-            "styleUrlsData": "",
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./base-card.component.scss"
+                }
+            ],
             "stylesData": "",
-            "templateData": "<router-outlet></router-outlet>\r\n"
+            "templateData": "<div [class]=\"'br-3 br-md-4 bg-white p-3 p-md-4 sh-title position-relative ' + class\">\r\n    <ng-content></ng-content>\r\n</div>"
+        },
+        {
+            "name": "BirthdayCardComponent",
+            "id": "component-BirthdayCardComponent-72ed9fa5772956b7d1f6f63a9f755d4a",
+            "file": "src/app/components/app/cards/birthday-card/birthday-card.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-birthday-card",
+            "styleUrls": [
+                "./birthday-card.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./birthday-card.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 12
+                }
+            ],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, OnInit } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-birthday-card',\r\n  templateUrl: './birthday-card.component.html',\r\n  styleUrls: ['./birthday-card.component.scss']\r\n})\r\nexport class BirthdayCardComponent implements OnInit {\r\n\r\n  constructor() { }\r\n\r\n  ngOnInit(): void {\r\n  }\r\n\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./birthday-card.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "args": [],
+                "line": 8
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<p>\r\n  birthday-card works!\r\n</p>\r\n"
         },
         {
             "name": "ButtonComponent",
@@ -156,34 +399,122 @@
             }
         },
         {
-            "name": "CardBaseComponent",
-            "id": "component-CardBaseComponent-6ca6793ee056a58976bf76c5936dea1c",
-            "file": "src/app/components/shared/card/card-base/card-base.component.ts",
+            "name": "CustomInputComponent",
+            "id": "component-CustomInputComponent-cac0c27aa0d1620e8cc1940c0b8f2da7",
+            "file": "src/app/components/shared/forms/input/custom-input/custom-input.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [],
-            "selector": "app-card-base",
+            "selector": "app-custom-input",
             "styleUrls": [
-                "./card-base.component.scss"
+                "./custom-input.component.scss"
             ],
             "styles": [],
             "templateUrl": [
-                "./card-base.component.html"
+                "./custom-input.component.html"
             ],
             "viewProviders": [],
-            "inputsClass": [],
-            "outputsClass": [],
-            "propertiesClass": [],
+            "inputsClass": [
+                {
+                    "name": "class",
+                    "defaultValue": "''",
+                    "line": 17
+                },
+                {
+                    "name": "defaultInputValue",
+                    "defaultValue": "''",
+                    "line": 15
+                },
+                {
+                    "name": "icon",
+                    "defaultValue": "'user'",
+                    "line": 11
+                },
+                {
+                    "name": "inputType",
+                    "defaultValue": "'text'",
+                    "line": 13
+                },
+                {
+                    "name": "name",
+                    "defaultValue": "''",
+                    "line": 14
+                },
+                {
+                    "name": "placeholder",
+                    "defaultValue": "'placeholder'",
+                    "line": 16
+                },
+                {
+                    "name": "subtitle",
+                    "defaultValue": "'subtitle'",
+                    "line": 12
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "changeValueEvent",
+                    "defaultValue": "new EventEmitter<string>()",
+                    "line": 19,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "iconClickEvent",
+                    "defaultValue": "new EventEmitter<string>()",
+                    "line": 20,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "input",
+                    "defaultValue": "new FormControl(this.defaultInputValue)",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 22
+                }
+            ],
             "methodsClass": [
                 {
-                    "name": "ngOnInit",
+                    "name": "checkIconType",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "boolean",
+                    "typeParameters": [],
+                    "line": 28
+                },
+                {
+                    "name": "iconClick",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 12
+                    "line": 32
+                },
+                {
+                    "name": "returnInputValue",
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": "string"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 24,
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "string",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
                 }
             ],
             "hostBindings": [],
@@ -191,29 +522,20 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-card-base',\n  templateUrl: './card-base.component.html',\n  styleUrls: ['./card-base.component.scss']\n})\nexport class CardBaseComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit(): void {\n  }\n\n}\n",
+            "sourceCode": "import { Component, Input, Output, EventEmitter, } from '@angular/core';\r\nimport { FormControl } from '@angular/forms';\r\n\r\n@Component({\r\n  selector: 'app-custom-input',\r\n  templateUrl: './custom-input.component.html',\r\n  styleUrls: ['./custom-input.component.scss']\r\n})\r\nexport class CustomInputComponent {\r\n\r\n  @Input() icon = 'user';\r\n  @Input() subtitle = 'subtitle';\r\n  @Input() inputType = 'text';\r\n  @Input() name = '';\r\n  @Input() defaultInputValue = '';\r\n  @Input() placeholder = 'placeholder';\r\n  @Input() class = '';\r\n\r\n  @Output() changeValueEvent = new EventEmitter<string>();\r\n  @Output() iconClickEvent = new EventEmitter<string>();\r\n\r\n  input = new FormControl(this.defaultInputValue);\r\n\r\n  returnInputValue(value: string): void {\r\n    this.changeValueEvent.emit(value);\r\n  }\r\n\r\n  checkIconType(): boolean {\r\n    return this.icon.includes('bi ');\r\n  }\r\n\r\n  iconClick(): void {\r\n    this.iconClickEvent.emit();\r\n  }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "",
-                    "styleUrl": "./card-base.component.scss"
+                    "data": ".custom-input {\r\n  border: 0.25rem solid var(--bs-placeholder);\r\n\r\n  &:focus-within {\r\n    transition: all 0.3s ease;\r\n    border: 0.25rem solid var(--bs-purple) !important;\r\n  \r\n    i:first-child {\r\n      transition: all 0.3s ease;\r\n      color: var(--bs-title) !important;\r\n    }\r\n  }\r\n\r\n  i:first-child {\r\n    font-size: 2rem;\r\n    color: var(--bs-placeholder);\r\n  }\r\n  \r\n  &-subtitle {\r\n    font-size: 0.8rem;\r\n  }\r\n\r\n  input {\r\n    outline: 0;\r\n  }\r\n\r\n  .delete {\r\n    transition: all 0.3s ease;\r\n    font-size: 2.5rem;\r\n    color: var(--bs-placeholder);\r\n\r\n    &:hover {\r\n      color: var(--bs-title);\r\n    }\r\n  }\r\n\r\n}\r\n",
+                    "styleUrl": "./custom-input.component.scss"
                 }
             ],
             "stylesData": "",
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "args": [],
-                "line": 8
-            },
-            "implements": [
-                "OnInit"
-            ],
-            "templateData": "<p>card-base works!</p>\n"
+            "templateData": "<div class=\"custom-input d-flex justify-content-between align-items-center p-3 br-4 w-100 {{ class }}\">\r\n    <div\r\n        class=\"d-flex align-items-center\"\r\n        role=\"button\"\r\n    >\r\n        <i\r\n            *ngIf=\"!checkIconType()\"\r\n            (click)=\"iconClick()\"\r\n            nz-icon\r\n            class=\"m-2\"\r\n            [nzType]=\"icon\"\r\n            nzTheme=\"outline\"\r\n            [attr.for]=\"name\"\r\n        ></i>\r\n        <i\r\n            *ngIf=\"checkIconType()\"\r\n            (click)=\"iconClick()\"\r\n            class=\"m-2 {{icon}}\"\r\n        ></i>\r\n        <div class=\"d-flex flex-column ms-2\">\r\n            <label\r\n                [for]=\"name\"\r\n                class=\"text-label custom-input-subtitle fw-6 text-uppercase {{inputField.value.length > 0 ? 'pr-2' : 'pr-5'}}\"\r\n            >\r\n                {{ subtitle }}\r\n            </label>\r\n            <input\r\n                [id]=\"name\"\r\n                class=\"border-0 shadow-none p-0 text-title\"\r\n                [type]=\"inputType\"\r\n                [formControl]=\"input\"\r\n                #inputField\r\n                (ngModelChange)=\"returnInputValue(inputField.value)\"\r\n                [placeholder]=\"placeholder\"\r\n            />\r\n        </div>\r\n    </div>\r\n    <i\r\n        *ngIf=\"inputField.value.length > 0\"\r\n        role=\"button\"\r\n        class=\"bi bi-x delete\"\r\n        (click)=\"inputField.value = ''\"\r\n    ></i>\r\n</div>"
         },
         {
             "name": "DashboardComponent",
-            "id": "component-DashboardComponent-12a4b92ff8e004468d861a45306e4f3d",
+            "id": "component-DashboardComponent-6b244d059789d16f25784cd9eee95fbd",
             "file": "src/app/pages/app/dashboard/dashboard.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -231,15 +553,46 @@
             "viewProviders": [],
             "inputsClass": [],
             "outputsClass": [],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "name",
+                    "defaultValue": "'Thibaut'",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 10
+                },
+                {
+                    "name": "welcomeDisplay",
+                    "defaultValue": "true",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 11
+                }
+            ],
             "methodsClass": [
                 {
-                    "name": "ngOnInit",
-                    "args": [],
+                    "name": "createArray",
+                    "args": [
+                        {
+                            "name": "i",
+                            "type": "number"
+                        }
+                    ],
                     "optional": false,
-                    "returnType": "void",
+                    "returnType": "Array<any>",
                     "typeParameters": [],
-                    "line": 12
+                    "line": 13,
+                    "jsdoctags": [
+                        {
+                            "name": "i",
+                            "type": "number",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
                 }
             ],
             "hostBindings": [],
@@ -247,25 +600,16 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-dashboard',\r\n  templateUrl: './dashboard.component.html',\r\n  styleUrls: ['./dashboard.component.scss']\r\n})\r\nexport class DashboardComponent implements OnInit {\r\n\r\n  constructor() { }\r\n\r\n  ngOnInit(): void {\r\n  }\r\n\r\n}\r\n",
+            "sourceCode": "import { Component, } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-dashboard',\r\n  templateUrl: './dashboard.component.html',\r\n  styleUrls: ['./dashboard.component.scss']\r\n})\r\nexport class DashboardComponent {\r\n\r\n  name = 'Thibaut';\r\n  welcomeDisplay = true;\r\n\r\n  createArray(i: number): Array<any> {\r\n    return new Array(i);\r\n  }\r\n\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "",
+                    "data": ".welcome {\r\n  .close {\r\n    top: 1.5rem;\r\n    right: 1.5rem;\r\n\r\n    &:hover {\r\n      transition: all 0.3s;\r\n      color: black;\r\n      cursor: pointer;\r\n    }\r\n  }\r\n}",
                     "styleUrl": "./dashboard.component.scss"
                 }
             ],
             "stylesData": "",
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "args": [],
-                "line": 8
-            },
-            "implements": [
-                "OnInit"
-            ],
-            "templateData": "<p>dashboard works!</p>\r\n"
+            "templateData": "<app-header class=\"app-header mb-3\">\r\n    <h1 class=\"h5 m-0\">Dashboard</h1>\r\n</app-header>\r\n<div class=\"container-fluid\">\r\n    <div class=\"row\">\r\n        <div class=\"col-12 col-md-6 mb-3 mb-md-0\">\r\n            <app-base-card\r\n                *ngIf=\"welcomeDisplay\"\r\n                class=\"mb-3 welcome\"\r\n            >\r\n                <p class=\"h2 mb-0\">\r\n                    <span class=\"fs-4 fs-md-7 me-2 me-md-3\">👋</span>Welcome <strong>{{name}}</strong>\r\n                </p>\r\n                <i\r\n                    class=\"position-absolute close\"\r\n                    (click)=\"welcomeDisplay = !welcomeDisplay\"\r\n                    nz-icon\r\n                    nzType=\"close\"\r\n                    nzTheme=\"outline\"\r\n                ></i>\r\n            </app-base-card>\r\n            <app-base-card>\r\n                <h2 class=\"fw-7 fs-4\">Upcoming matches</h2>\r\n                <div class=\"line mb-2 bg-secondary\"></div>\r\n                <div *ngFor=\"let a of createArray(5); let i = index\">\r\n                    <app-skeleton [class]=\"i < 4 ? 'my-3 sk-5' : 'mt-3 sk-5'\" ></app-skeleton>\r\n                    <div *ngIf=\"i < 4\" class=\"line\"></div>\r\n                </div>\r\n            </app-base-card>\r\n        </div>\r\n        <div class=\"col-12 col-md-6\">\r\n            <app-base-card>\r\n                <h2 class=\"fw-7 fs-4\">My Teams</h2>\r\n                <div class=\"line mb-2 bg-secondary\"></div>\r\n                <div *ngFor=\"let a of createArray(5); let i = index\">\r\n                    <app-skeleton [class]=\"i < 4 ? 'my-3 sk-5' : 'mt-3 sk-5'\" ></app-skeleton>\r\n                    <div *ngIf=\"i < 4\" class=\"line\"></div>\r\n                </div>\r\n            </app-base-card>\r\n        </div>\r\n    </div>\r\n</div>"
         },
         {
             "name": "ErrorComponent",
@@ -386,6 +730,47 @@
             "stylesData": ""
         },
         {
+            "name": "HeaderComponent",
+            "id": "component-HeaderComponent-73bf9ba216204565724a066a7d6d6219-1",
+            "file": "src/app/components/app/layout/header/header.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-header",
+            "styleUrls": [
+                "./header.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./header.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, } from '@angular/core';\r\n\r\n\r\n@Component({\r\n  selector: 'app-header',\r\n  templateUrl: './header.component.html',\r\n  styleUrls: ['./header.component.scss']\r\n})\r\nexport class HeaderComponent {\r\n\r\n\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ":host {\r\n  display: block;\r\n}\r\n\r\nnz-header {\r\n  z-index: 2;\r\n}\r\n\r\n.app-header {\r\n  position: relative;\r\n  display: flex;\r\n  align-items: center;\r\n  height: 4rem;\r\n  padding: 0;\r\n  background: #fff;\r\n  box-shadow: 0 1px 4px rgba(0,21,41,.08);\r\n}\r\n",
+                    "styleUrl": "./header.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "isDuplicate": true,
+            "duplicateId": 1,
+            "duplicateName": "HeaderComponent-1",
+            "templateData": "<nz-header class=\"w-100 p-0\">\r\n    <div class=\"app-header px-4\">\r\n       <ng-content></ng-content>\r\n    </div>\r\n</nz-header>"
+        },
+        {
             "name": "HomeComponent",
             "id": "component-HomeComponent-56fc62082e04324f0ca02348d9343623",
             "file": "src/app/pages/home/home.component.ts",
@@ -439,37 +824,66 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<p>home works!</p>\r\n<!-- <app-side-nav></app-side-nav> -->"
+            "templateData": "<p>Home</p>"
         },
         {
-            "name": "InputCurrencyComponent",
-            "id": "component-InputCurrencyComponent-d7b3ce3b570d8c910b81481eaa8a22df",
-            "file": "src/app/components/shared/form/input-currency/input-currency.component.ts",
+            "name": "LanguageSelectorComponent",
+            "id": "component-LanguageSelectorComponent-bd59893a28ec270f7863b6621a091b2d",
+            "file": "src/app/components/shared/forms/select/language-selector/language-selector.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [],
-            "selector": "app-input-currency",
+            "selector": "app-shared-language-selector",
             "styleUrls": [
-                "./input-currency.component.scss"
+                "./language-selector.component.scss"
             ],
             "styles": [],
             "templateUrl": [
-                "./input-currency.component.html"
+                "./language-selector.component.html"
             ],
             "viewProviders": [],
-            "inputsClass": [],
+            "inputsClass": [
+                {
+                    "name": "selectedLanguage",
+                    "defaultValue": "'GB-UKM'",
+                    "line": 10
+                }
+            ],
             "outputsClass": [],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "languages",
+                    "defaultValue": "languages",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                }
+            ],
             "methodsClass": [
                 {
-                    "name": "ngOnInit",
-                    "args": [],
+                    "name": "changeLanguage",
+                    "args": [
+                        {
+                            "name": "value",
+                            "type": "any"
+                        }
+                    ],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 12
+                    "line": 14,
+                    "jsdoctags": [
+                        {
+                            "name": "value",
+                            "type": "any",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
                 }
             ],
             "hostBindings": [],
@@ -477,29 +891,20 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-input-currency',\r\n  templateUrl: './input-currency.component.html',\r\n  styleUrls: ['./input-currency.component.scss']\r\n})\r\nexport class InputCurrencyComponent implements OnInit {\r\n\r\n  constructor() { }\r\n\r\n  ngOnInit(): void {\r\n  }\r\n\r\n}\r\n",
+            "sourceCode": "import { Component, Input, } from '@angular/core';\r\nimport { languages } from 'src/app/constants/languages.enum';\r\n\r\n@Component({\r\n  selector: 'app-shared-language-selector',\r\n  templateUrl: './language-selector.component.html',\r\n  styleUrls: ['./language-selector.component.scss']\r\n})\r\nexport class LanguageSelectorComponent {\r\n  @Input() selectedLanguage = 'GB-UKM';\r\n\r\n  languages = languages;\r\n\r\n  changeLanguage(value: any): void {\r\n    // console.log(value);\r\n    console.log('test');\r\n  }\r\n\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
                     "data": "",
-                    "styleUrl": "./input-currency.component.scss"
+                    "styleUrl": "./language-selector.component.scss"
                 }
             ],
             "stylesData": "",
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "args": [],
-                "line": 8
-            },
-            "implements": [
-                "OnInit"
-            ],
-            "templateData": "<p>input-currency works!</p>\r\n"
+            "templateData": "<div class=\"nav-link py-0\">\r\n    <nz-select\r\n        class=\"py-1 px-2\"\r\n        [nzBorderless]=\"true\"\r\n        (ngModel)=\"selectedLanguage\"\r\n        (ngModelChange)=\"changeLanguage($event)\"\r\n        [nzCustomTemplate]=\"languageTemplate\"\r\n        [nzNotFoundContent]=\"languageTemplate\"\r\n        [nzPlaceHolder]=\"languageTemplate\"\r\n        nzSize=\"large\"\r\n    >\r\n        <nz-option nzValue=\"GB-UKM\" [nzCustomContent]=\"true\" >\r\n            english\r\n            <!-- <lib-angular-flagpack\r\n                code=\"GB-UKM\"\r\n                size=\"m\"\r\n                gradient=\"top-down\"\r\n                [hasDropShadow]=\"true\"\r\n                [hasBorder]=\"false\"\r\n                [hasBorderRadius]=\"true\"\r\n            >\r\n            </lib-angular-flagpack> -->\r\n        </nz-option>\r\n        <nz-option nzValue=\"nl\" [nzCustomContent]=\"true\" >\r\n            dutch\r\n            <!-- <lib-angular-flagpack\r\n                code=\"nl\"\r\n                size=\"m\"\r\n                gradient=\"top-down\"\r\n                [hasDropShadow]=\"true\"\r\n                [hasBorder]=\"false\"\r\n                [hasBorderRadius]=\"true\"\r\n            >\r\n            </lib-angular-flagpack> -->\r\n        </nz-option>\r\n        <nz-option nzValue=\"fr\" [nzCustomContent]=\"true\" >\r\n            french\r\n            <!-- <lib-angular-flagpack\r\n                code=\"fr\"\r\n                size=\"m\"\r\n                gradient=\"top-down\"\r\n                [hasDropShadow]=\"true\"\r\n                [hasBorder]=\"false\"\r\n                [hasBorderRadius]=\"true\"\r\n            >\r\n            </lib-angular-flagpack> -->\r\n        </nz-option>\r\n        <nz-option nzValue=\"de\" [nzCustomContent]=\"true\" >\r\n            deutsch\r\n            <!-- <lib-angular-flagpack\r\n                code=\"de\"\r\n                size=\"m\"\r\n                gradient=\"top-down\"\r\n                [hasDropShadow]=\"true\"\r\n                [hasBorder]=\"false\"\r\n                [hasBorderRadius]=\"true\"\r\n            >\r\n            </lib-angular-flagpack> -->\r\n        </nz-option>\r\n    </nz-select>\r\n    <ng-template #languageTemplate let-selected>\r\n        lala\r\n        <!-- <lib-angular-flagpack\r\n            [code]=\"selectedLanguage\"\r\n            size=\"m\"\r\n            gradient=\"top-down\"\r\n            [hasDropShadow]=\"true\"\r\n            [hasBorder]=\"false\"\r\n            [hasBorderRadius]=\"true\"\r\n        >\r\n        </lib-angular-flagpack> -->\r\n    </ng-template>\r\n</div>"
         },
         {
             "name": "LoginComponent",
-            "id": "component-LoginComponent-ba91a32eff3bea4bc859febcd467db3f",
+            "id": "component-LoginComponent-3398de5cf14eff7fd6f5194df2206025",
             "file": "src/app/pages/login/login.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -517,15 +922,63 @@
             "viewProviders": [],
             "inputsClass": [],
             "outputsClass": [],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "email",
+                    "defaultValue": "''",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 20
+                },
+                {
+                    "name": "error",
+                    "defaultValue": "null",
+                    "type": "string | null",
+                    "optional": false,
+                    "description": "",
+                    "line": 19
+                },
+                {
+                    "name": "password",
+                    "defaultValue": "''",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 21
+                },
+                {
+                    "name": "passwordVisible",
+                    "defaultValue": "false",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 22
+                },
+                {
+                    "name": "response",
+                    "type": "any",
+                    "optional": false,
+                    "description": "",
+                    "line": 23
+                }
+            ],
             "methodsClass": [
                 {
-                    "name": "ngOnInit",
+                    "name": "submit",
                     "args": [],
                     "optional": false,
-                    "returnType": "void",
+                    "returnType": "string | null",
                     "typeParameters": [],
-                    "line": 12
+                    "line": 27
+                },
+                {
+                    "name": "validation",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "string | null",
+                    "typeParameters": [],
+                    "line": 54
                 }
             ],
             "hostBindings": [],
@@ -533,11 +986,11 @@
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-login',\r\n  templateUrl: './login.component.html',\r\n  styleUrls: ['./login.component.scss']\r\n})\r\nexport class LoginComponent implements OnInit {\r\n\r\n  constructor() { }\r\n\r\n  ngOnInit(): void {\r\n  }\r\n\r\n}\r\n",
+            "sourceCode": "import { Component, } from '@angular/core';\r\nimport { HttpClient, HttpHeaders } from '@angular/common/http';\r\nimport { apiRoutes, API_BASE_URL } from 'src/app/constants/api.enum';\r\nimport { Observable } from 'rxjs';\r\n\r\n\r\nexport interface LoginData {\r\n  email: string;\r\n  password: string;\r\n}\r\n\r\n@Component({\r\n  selector: 'app-login',\r\n  templateUrl: './login.component.html',\r\n  styleUrls: ['./login.component.scss']\r\n})\r\nexport class LoginComponent {\r\n\r\n  error: string | null = null;\r\n  email = '';\r\n  password = '';\r\n  passwordVisible = false;\r\n  response: any;\r\n\r\n  constructor(private http: HttpClient) {}\r\n\r\n  submit(): string | null {\r\n    this.error = this.validation();\r\n\r\n    if(typeof this.error === 'string') {\r\n      return null;\r\n    }\r\n\r\n    // const headers = new HttpHeaders().set('Authorization', 'auth-token');\r\n    const data: LoginData = {\r\n      email: this.email,\r\n      password: this.password\r\n    };\r\n\r\n    // const promise = this.http.post(API_BASE_URL + apiRoutes['sanctum-crsf'], data).toPromise();\r\n    // promise.then((data) => {\r\n    //   console.log(data);\r\n    // }).catch((err) => console.error(err));\r\n    // console.log(this.response);\r\n\r\n    const promise = this.http.post(API_BASE_URL + apiRoutes.login, data).toPromise();\r\n    promise.then((data) => {\r\n      console.log(data);\r\n    }).catch((err) => console.error(err));\r\n    console.log(this.response);\r\n    return '';\r\n  }\r\n\r\n  validation(): string | null {\r\n    if (!this.email.includes('@') || !this.email.includes('.')) { // Check email\r\n      return 'Email is not valid';\r\n    }\r\n\r\n    if (this.email.length <= 4) { // Check password\r\n      return 'Email requires minimal 6 characters';\r\n    }\r\n\r\n    if (this.password.length <= 6) { // Check password\r\n      return 'Password requires minimal 6 characters';\r\n    }\r\n\r\n    return null;\r\n  }\r\n\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "",
+                    "data": ".login-form {\r\n  max-width: 300px;\r\n}\r\n\r\n.login-form-margin {\r\n  margin-bottom: 16px;\r\n}\r\n\r\n.login-form-forgot {\r\n  float: right;\r\n}\r\n\r\n.login-form-button {\r\n  width: 100%;\r\n}",
                     "styleUrl": "./login.component.scss"
                 }
             ],
@@ -545,69 +998,24 @@
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
-                "args": [],
-                "line": 8
+                "args": [
+                    {
+                        "name": "http",
+                        "type": "HttpClient"
+                    }
+                ],
+                "line": 23,
+                "jsdoctags": [
+                    {
+                        "name": "http",
+                        "type": "HttpClient",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
             },
-            "implements": [
-                "OnInit"
-            ],
-            "templateData": "<p>login works!</p>\r\n"
-        },
-        {
-            "name": "LogoComponent",
-            "id": "component-LogoComponent-5cade1b0abff530829f2cf7364b616c2",
-            "file": "src/app/components/shared/images/logo/logo.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "app-logo",
-            "styleUrls": [
-                "./logo.component.scss"
-            ],
-            "styles": [],
-            "templateUrl": [
-                "./logo.component.html"
-            ],
-            "viewProviders": [],
-            "inputsClass": [],
-            "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [
-                {
-                    "name": "ngOnInit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 12
-                }
-            ],
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "",
-            "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-logo',\r\n  templateUrl: './logo.component.html',\r\n  styleUrls: ['./logo.component.scss']\r\n})\r\nexport class LogoComponent implements OnInit {\r\n\r\n  constructor() { }\r\n\r\n  ngOnInit(): void {\r\n  }\r\n\r\n}\r\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": "",
-                    "styleUrl": "./logo.component.scss"
-                }
-            ],
-            "stylesData": "",
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "args": [],
-                "line": 8
-            },
-            "implements": [
-                "OnInit"
-            ],
-            "templateData": "<p>logo works!</p>\r\n"
+            "templateData": "<div class=\"container-fluid gr-auth-page\">\r\n    <div class=\"row align-items-center justify-content-center\">\r\n        <div class=\"col-12 col-md-4 my-8 py-5 px-6 bg-white br-5\">\r\n            <form>\r\n                <h1 class=\"mb-4 fw-7\">Login</h1>\r\n                <app-custom-input\r\n                    class=\"mb-3\"\r\n                    (changeValueEvent)=\"email = $event\"\r\n                    icon=\"mail\"\r\n                    inputType=\"email\"\r\n                    placeholder=\"email\"\r\n                    subtitle=\"email\"\r\n                    name=\"email\"\r\n                ></app-custom-input>\r\n                <app-custom-input\r\n                    class=\"mb-3\"\r\n                    (iconClickEvent)=\"passwordVisible = !passwordVisible\"\r\n                    [icon]=\"passwordVisible ? 'eye-invisible' : 'eye'\"\r\n                    [inputType]=\"passwordVisible ? 'text' : 'password'\"\r\n                    (changeValueEvent)=\"password = $event\"\r\n                    name=\"password\"\r\n                    placeholder=\"password\"\r\n                    subtitle=\"password\"\r\n                ></app-custom-input>\r\n                <small class=\"text-red\">{{ error }}</small>\r\n                <button\r\n                    class=\"btn bg-purple text-white mt-3 py-3 w-100 br-3\"\r\n                    role=\"button\"\r\n                    (click)=\"submit()\"\r\n                >\r\n                    Login\r\n                </button>\r\n            </form>\r\n            <!-- <form\r\n                nz-form\r\n                [formGroup]=\"validateForm\"\r\n                class=\"login-form\"\r\n                (ngSubmit)=\"submitForm()\"\r\n            >\r\n                <nz-form-item>\r\n                    <nz-form-control nzErrorTip=\"Please input your username!\">\r\n                        <nz-input-group nzPrefixIcon=\"user\">\r\n                            <input type=\"text\" nz-input formControlName=\"userName\" placeholder=\"Username\" />\r\n                        </nz-input-group>\r\n                    </nz-form-control>\r\n                </nz-form-item>\r\n                <nz-form-item>\r\n                    <nz-form-control nzErrorTip=\"Please input your Password!\">\r\n                        <nz-input-group nzPrefixIcon=\"lock\">\r\n                            <input type=\"password\" nz-input formControlName=\"password\" placeholder=\"Password\" />\r\n                        </nz-input-group>\r\n                    </nz-form-control>\r\n                </nz-form-item>\r\n                <div nz-row class=\"login-form-margin\">\r\n                    <div nz-col [nzSpan]=\"12\">\r\n                        <label nz-checkbox formControlName=\"remember\">\r\n                            <span>Remember me</span>\r\n                        </label>\r\n                    </div>\r\n                    <div nz-col [nzSpan]=\"12\">\r\n                        <a class=\"login-form-forgot\">Forgot password</a>\r\n                    </div>\r\n                </div>\r\n                <button\r\n                    nz-button\r\n                    class=\"login-form-button login-form-margin\"\r\n                    [nzType]=\"'primary'\"\r\n                >\r\n                    Log in\r\n                </button>\r\n                Or <a> register now! </a>\r\n            </form> -->\r\n        </div>\r\n    </div>\r\n</div>"
         },
         {
             "name": "PageComponent",
@@ -729,8 +1137,8 @@
         },
         {
             "name": "SideNavComponent",
-            "id": "component-SideNavComponent-5adec953d52fb2947ab3f3e738a16e67",
-            "file": "src/app/components/app/side-nav/side-nav.component.ts",
+            "id": "component-SideNavComponent-e71bf40467d8e5d740e0263d41b7908f",
+            "file": "src/app/components/app/layout/side-nav/side-nav.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
@@ -777,15 +1185,18 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 16
+                    "line": 14
                 },
                 {
-                    "name": "setIconTrigger",
+                    "name": "toggleCollapse",
                     "args": [],
                     "optional": false,
-                    "returnType": "string",
+                    "returnType": "void",
                     "typeParameters": [],
-                    "line": 24
+                    "line": 22,
+                    "modifierKind": [
+                        114
+                    ]
                 }
             ],
             "hostBindings": [],
@@ -801,31 +1212,150 @@
                     "argsDecorator": [
                         "$event"
                     ],
-                    "line": 20
+                    "line": 18
                 }
             ],
             "description": "",
             "rawdescription": "",
             "type": "component",
-            "sourceCode": "import { Component, HostListener, OnInit } from '@angular/core';\n\n\n@Component({\n  selector: 'app-side-nav',\n  templateUrl: './side-nav.component.html',\n  styleUrls: ['./side-nav.component.scss']\n})\nexport class SideNavComponent implements OnInit {\n\n  public isCollapsed = false;\n  public innerWidth: any;\n\n  constructor() { }\n\n  ngOnInit(): void {\n    this.innerWidth = window.innerWidth;\n  }\n\n  @HostListener('window:resize', ['$event'])onResize(ev: any): void {\n    this.innerWidth = window.innerWidth;\n  }\n\n  setIconTrigger(): string {\n    if (innerWidth > 768) {\n      return this.isCollapsed ? 'menu-unfold' : 'menu-fold';\n    } else {\n      return 'menu';\n    }\n  }\n}\n",
+            "sourceCode": "import { Component, HostListener, OnInit } from '@angular/core';\r\n\r\n\r\n@Component({\r\n  selector: 'app-side-nav',\r\n  templateUrl: './side-nav.component.html',\r\n  styleUrls: ['./side-nav.component.scss']\r\n})\r\nexport class SideNavComponent implements OnInit {\r\n\r\n  public isCollapsed = false;\r\n  public innerWidth: any;\r\n\r\n  ngOnInit(): void {\r\n    this.innerWidth = window.innerWidth;\r\n  }\r\n\r\n  @HostListener('window:resize', ['$event'])onResize(ev: any): void {\r\n    this.innerWidth = window.innerWidth;\r\n  }\r\n\r\n  public toggleCollapse(): void {\r\n    this.isCollapsed = !this.isCollapsed;\r\n  }\r\n\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ":host {\r\n  display: flex;\r\n  text-rendering: optimizeLegibility;\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n}\r\n\r\n.menu-sidebar {\r\n  z-index: 10;\r\n  box-shadow: 2px 0 6px rgba(0,21,41,.35);\r\n}\r\n\r\n.header-trigger {\r\n  height: 4rem;\r\n  padding: 1.25rem 1.5rem;\r\n  font-size: 1.25rem;\r\n  cursor: pointer;\r\n  transition: all .3s,padding 0s;\r\n}\r\n\r\n.trigger:hover {\r\n  color: #1890ff;\r\n}\r\n\r\nnz-header {\r\n  z-index: 2;\r\n}\r\n\r\n.app-header {\r\n  position: relative;\r\n  display: flex;\r\n  align-items: center;\r\n  height: 4rem;\r\n  padding: 0;\r\n  background: #fff;\r\n  box-shadow: 0 1px 4px rgba(0,21,41,.08);\r\n}\r\n\r\nnz-content {\r\n  margin: 1.5rem;\r\n}\r\n\r\n.inner-content {\r\n  padding: 1.5rem;\r\n  background: #fff;\r\n  height: 100%;\r\n}",
+                    "data": ":host {\r\n  display: flex;\r\n  text-rendering: optimizeLegibility;\r\n  -webkit-font-smoothing: antialiased;\r\n  -moz-osx-font-smoothing: grayscale;\r\n}\r\n\r\n.menu-sidebar {\r\n  z-index: 10;\r\n  box-shadow: 2px 0 6px rgba(0,21,41,.35);\r\n}\r\n\r\n.ant-menu-submenu:hover {\r\n  background-color: #1890ff;\r\n}\r\n\r\nnz-content {\r\n  background: #fff;\r\n  height: 100%;\r\n}\r\n\r\n.logo {\r\n  &:hover {\r\n    transition: all 0.3s;\r\n    opacity: 0.8;\r\n  }\r\n\r\n  &-mobile {\r\n    transform: scale(1.5);\r\n  }\r\n}",
                     "styleUrl": "./side-nav.component.scss"
                 }
             ],
             "stylesData": "",
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "args": [],
-                "line": 12
-            },
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<nz-layout class=\"vh-100\">\n    <nz-sider\n        class=\"menu-sidebar min-vh-100 position-relative rounded-end\"\n        nzCollapsible\n        [nzWidth]=\"256\"\n        [nzCollapsedWidth]=\"innerWidth > 768 ? 80 : 0\"\n        nzBreakpoint=\"md\"\n        [(nzCollapsed)]=\"isCollapsed\"\n        [nzTrigger]=\"null\"\n    >\n        <div [class]=\"isCollapsed ? 'p-0 m-0 d-flex align-items-center justify-content-center align-middle' : 'px-4 m-2 d-flex align-items-center justify-content-center align-middle' \">\n            <h1 [class]=\"!isCollapsed ? 'mb-0' : ''\" >\n                <img\n                    src=\"/assets/img/logo/logo_white_big.png\"\n                    alt=\"logo footy\"\n                    class=\"logo mw-100 mh-100 h-auto w-auto\"\n                />\n            </h1>\n        </div>\n        <ul nz-menu nzTheme=\"dark\" nzMode=\"inline\" [nzInlineCollapsed]=\"isCollapsed\">\n            <!-- <li nz-submenu nzOpen nzTitle=\"Dashboard\" nzIcon=\"dashboard\" nzMenuClassName=\"\">\n                <ul>\n                    <li nz-menu-item nzMatchRouter>\n                        <a routerLink=\"/welcome\">Welcome</a>\n                    </li>\n                    <li nz-menu-item nzMatchRouter>\n                        <a>Monitor</a>\n                    </li>\n                    <li nz-menu-item nzMatchRouter>\n                        <a>Workplace</a>\n                    </li>\n                </ul>\n            </li>\n            <li nz-submenu nzOpen nzTitle=\"Form\" nzIcon=\"form\">\n                <ul>\n                    <li nz-menu-item nzMatchRouter>\n                        <a>Basic Form</a>\n                    </li>\n                </ul>\n            </li> -->\n            <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\" nzSelected>\n                <i nz-icon nzType=\"pie-chart\" nzTheme=\"outline\"></i>\n                <span>Dashboard</span>\n            </li>\n            <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\n                <i nz-icon nzType=\"team\" nzTheme=\"outline\"></i>\n                <span>Teams</span>\n            </li>\n            <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\n                <i nz-icon nzType=\"calendar\" nzTheme=\"outline\"></i>\n                <span>Matches</span>\n            </li>\n\n            <li nz-submenu nzOpen nzTitle=\"Communication\" nzIcon=\"comment\" nzMenuClassName=\"\">\n                <ul>\n                    <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\n                        <i nz-icon nzType=\"message\" nzTheme=\"outline\"></i>\n                        <span>Messages</span>\n                    </li>\n                    <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\n                        <i nz-icon nzType=\"mail\" nzTheme=\"outline\"></i>\n                        <span>Email</span>\n                    </li>\n                </ul>\n            </li>\n            \n            <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\n                <i nz-icon nzType=\"crown\" nzTheme=\"outline\"></i>\n                <span>Birthdays</span>\n            </li>\n\n            <li nz-submenu nzOpen nzTitle=\"Info\" nzIcon=\"info-circle\" nzMenuClassName=\"\">\n                <ul>\n                    <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\n                        <i nz-icon nzType=\"notification\" nzTheme=\"outline\"></i>\n                        <span>Updates</span>\n                    </li>\n                    <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\n                        <i nz-icon nzType=\"bulb\" nzTheme=\"outline\"></i>\n                        <span>Tutorials</span>\n                    </li>\n                </ul>\n            </li>  \n\n            <li nz-submenu nzOpen nzTitle=\"Account\" nzIcon=\"user\" nzMenuClassName=\"\">\n                <ul>\n                    <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\n                        <i nz-icon nzType=\"setting\" nzTheme=\"outline\"></i>\n                        <span>Settings</span>\n                    </li>\n                    <li nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\n                        <i nz-icon nzType=\"poweroff\" nzTheme=\"outline\"></i>\n                        <span>Logout</span>\n                    </li>\n                </ul>\n            </li>\n        </ul>\n    </nz-sider>\n    <nz-layout>\n        <nz-header class=\"w-100 p-0\">\n            <div class=\"app-header px-4\">\n                <i \n                    class=\"trigger h5\"\n                    (click)=\"isCollapsed = !isCollapsed\"\n                    role=\"button\"\n                    nz-icon\n                    [nzType]=\"this.setIconTrigger()\"\n                    nzTheme=\"outline\"\n                ></i>\n            </div>\n        </nz-header>\n        <nz-content>\n            <div class=\"inner-content\">\n\n                <ng-content></ng-content>\n\n            </div>\n        </nz-content>\n    </nz-layout>\n</nz-layout>\n"
+            "templateData": "<nz-layout class=\"vh-100\">\r\n    <nz-sider\r\n        class=\"menu-sidebar min-vh-100 position-relative rounded-end\"\r\n        nzCollapsible\r\n        [nzWidth]=\"256\"\r\n        [nzCollapsedWidth]=\"innerWidth > 768 ? 80 : 0\"\r\n        nzBreakpoint=\"md\"\r\n        [(nzCollapsed)]=\"isCollapsed\"\r\n    >\r\n        <div [class]=\"isCollapsed ? 'p-0 m-0 d-flex align-items-center justify-content-center align-middle' : 'px-4 m-2 d-flex align-items-center justify-content-center align-middle' \">\r\n            <h1 [class]=\"!isCollapsed ? 'mb-0' : ''\" >\r\n                <img\r\n                    routerLink=\"/app\"\r\n                    role=\"button\"\r\n                    src=\"/assets/img/logo/logo_white_big.png\"\r\n                    alt=\"logo\"\r\n                    class=\"logo mw-100 mh-100 h-auto w-auto\"\r\n                />\r\n            </h1>\r\n        </div>\r\n        <ul\r\n            class=\"h-100\"\r\n            nz-menu\r\n            nzTheme=\"dark\"\r\n            nzMode=\"inline\"\r\n            [nzInlineCollapsed]=\"isCollapsed\"\r\n        >\r\n            <!-- <li nz-submenu nzOpen nzTitle=\"Dashboard\" nzIcon=\"dashboard\" nzMenuClassName=\"\">\r\n                <ul>\r\n                    <li nz-menu-item nzMatchRouter>\r\n                        <a routerLink=\"/welcome\">Welcome</a>\r\n                    </li>\r\n                    <li nz-menu-item nzMatchRouter>\r\n                        <a>Monitor</a>\r\n                    </li>\r\n                    <li nz-menu-item nzMatchRouter>\r\n                        <a>Workplace</a>\r\n                    </li>\r\n                </ul>\r\n            </li>\r\n            <li nz-submenu nzOpen nzTitle=\"Form\" nzIcon=\"form\">\r\n                <ul>\r\n                    <li nz-menu-item nzMatchRouter>\r\n                        <a>Basic Form</a>\r\n                    </li>\r\n                </ul>\r\n            </li> -->\r\n            <li routerLink=\"/app/dashboard\" nzMatchRouter=\"nzSelected\" nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\r\n                <i nz-icon nzType=\"pie-chart\" nzTheme=\"outline\"></i>\r\n                <span>Dashboard</span>\r\n            </li>\r\n            <li routerLink=\"/app/teams\" nzMatchRouter=\"nzSelected\" nz-menu-item nz-tooltip nzTooltipPlacement=\"right\" [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\">\r\n                <i nz-icon nzType=\"team\" nzTheme=\"outline\"></i>\r\n                <span>Teams</span>\r\n            </li>\r\n            <li\r\n                routerLink=\"/app/matches\"\r\n                nzMatchRouter=\"nzSelected\"\r\n                nz-menu-item\r\n                nz-tooltip\r\n                nzTooltipPlacement=\"right\"\r\n                [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\"\r\n            >\r\n                <i nz-icon nzType=\"calendar\" nzTheme=\"outline\"></i>\r\n                <span>Matches</span>\r\n            </li>\r\n\r\n            <li\r\n                nz-submenu\r\n                nzTitle=\"Communication\"\r\n                nzIcon=\"comment\"\r\n                nzMenuClassName=\"\"\r\n            >\r\n                <ul>\r\n                    <li\r\n                        routerLink=\"/app/messages\"\r\n                        nzMatchRouter=\"nzSelected\"\r\n                        nz-menu-item nz-tooltip\r\n                        nzTooltipPlacement=\"right\"\r\n                        [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\"\r\n                    >\r\n                        <i nz-icon nzType=\"message\" nzTheme=\"outline\"></i>\r\n                        <span>Messages</span>\r\n                    </li>\r\n                    <li\r\n                        routerLink=\"/app/email\"\r\n                        nzMatchRouter=\"nzSelected\"\r\n                        nz-menu-item\r\n                        nz-tooltip\r\n                        nzTooltipPlacement=\"right\"\r\n                        [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\"\r\n                    >\r\n                        <i nz-icon nzType=\"mail\" nzTheme=\"outline\"></i>\r\n                        <span>Email</span>\r\n                    </li>\r\n                </ul>\r\n            </li>\r\n            \r\n            <li\r\n                routerLink=\"/app/birthdays\"\r\n                nzMatchRouter=\"nzSelected\"\r\n                nz-menu-item\r\n                nz-tooltip\r\n                nzTooltipPlacement=\"right\"\r\n                [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\"\r\n            >\r\n                <i nz-icon nzType=\"crown\" nzTheme=\"outline\"></i>\r\n                <span>Birthdays</span>\r\n            </li>\r\n\r\n            <li\r\n                nz-submenu\r\n                nzTitle=\"Info\"\r\n                nzIcon=\"info-circle\"\r\n                nzMenuClassName=\"\"\r\n            >\r\n                <ul>\r\n                    <li\r\n                        routerLink=\"/app/updates\"\r\n                        nzMatchRouter=\"nzSelected\"\r\n                        nz-menu-item\r\n                        nz-tooltip\r\n                        nzTooltipPlacement=\"right\"\r\n                        [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\"\r\n                    >\r\n                        <i nz-icon nzType=\"notification\" nzTheme=\"outline\"></i>\r\n                        <span>Updates</span>\r\n                    </li>\r\n                    <li\r\n                        routerLink=\"/app/tutorials\"\r\n                        nzMatchRouter=\"nzSelected\"\r\n                        nz-menu-item\r\n                        nz-tooltip\r\n                        nzTooltipPlacement=\"right\"\r\n                        [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\"\r\n                    >\r\n                        <i nz-icon nzType=\"bulb\" nzTheme=\"outline\"></i>\r\n                        <span>Tutorials</span>\r\n                    </li>\r\n                </ul>\r\n            </li>  \r\n\r\n            <li\r\n                nz-submenu\r\n                nzTitle=\"Account\"\r\n                nzIcon=\"user\"\r\n                nzMenuClassName=\"\"\r\n            >\r\n                <ul>\r\n                    <li\r\n                        routerLink=\"/app/settings\"\r\n                        nzMatchRouter=\"nzSelected\"\r\n                        nz-menu-item\r\n                        nz-tooltip\r\n                        nzTooltipPlacement=\"right\"\r\n                        [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\"\r\n                    >\r\n                        <i nz-icon nzType=\"setting\" nzTheme=\"outline\"></i>\r\n                        <span>Settings</span>\r\n                    </li>\r\n                    <li\r\n                        routerLink=\"/app/logout\"\r\n                        nzMatchRouter=\"nzSelected\"\r\n                        nz-menu-item\r\n                        nz-tooltip\r\n                        nzTooltipPlacement=\"right\"\r\n                        [attr.nzTooltipTitle]=\"isCollapsed ? 'Navigation One' : ''\"\r\n                    >\r\n                        <i nz-icon nzType=\"poweroff\" nzTheme=\"outline\"></i>\r\n                        <span>Logout</span>\r\n                    </li>\r\n                </ul>\r\n            </li>\r\n        </ul>\r\n    </nz-sider>\r\n    <nz-layout>\r\n        <app-header class=\"d-block d-md-none\">\r\n            <div class=\"row\">\r\n                <div class=\"col-4\">\r\n                    <i\r\n                        *ngIf=\"innerWidth <= 768\"\r\n                        class=\"trigger h5 mb-4\"\r\n                        (click)=\"toggleCollapse()\"\r\n                        role=\"button\"\r\n                        nz-icon\r\n                        nzType=\"menu\"\r\n                        nzTheme=\"outline\"\r\n                    ></i>\r\n                </div>\r\n                <h1 class=\"mb-0 col-4\" >\r\n                    <img\r\n                        routerLink=\"/app\"\r\n                        role=\"button\"\r\n                        src=\"/assets/img/logo/logo_light-purple_big.svg\"\r\n                        alt=\"logo\"\r\n                        class=\"logo logo-mobile w-100 h-100\"\r\n                    />\r\n                </h1>\r\n                <div class=\"col-4\"></div>\r\n            </div>\r\n        </app-header>\r\n        <nz-content>\r\n            <ng-content></ng-content>\r\n        </nz-content>\r\n    </nz-layout>\r\n</nz-layout>\r\n"
+        },
+        {
+            "name": "SkeletonComponent",
+            "id": "component-SkeletonComponent-cd203ac97812697ab6af7f209fc78a71",
+            "file": "src/app/components/app/skeleton/skeleton.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-skeleton",
+            "styleUrls": [
+                "./skeleton.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./skeleton.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "class",
+                    "defaultValue": "''",
+                    "line": 10
+                },
+                {
+                    "name": "rows",
+                    "defaultValue": "1",
+                    "line": 11
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-skeleton',\r\n  templateUrl: './skeleton.component.html',\r\n  styleUrls: ['./skeleton.component.scss']\r\n})\r\nexport class SkeletonComponent {\r\n\r\n  @Input() class = '';\r\n  @Input() rows = 1;\r\n\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./skeleton.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<nz-skeleton\r\n    [class]=\"class\"\r\n    [nzTitle]=\"false\"\r\n    [nzActive]=\"true\"\r\n    [nzParagraph]=\"{ rows: rows, width: '100%' }\"\r\n>\r\n    Loading\r\n</nz-skeleton>"
+        },
+        {
+            "name": "StaticFooterComponent",
+            "id": "component-StaticFooterComponent-ab5ea7b122c88aa6e0c80025a69ad9dd",
+            "file": "src/app/components/static/static-footer/static-footer.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-static-footer",
+            "styleUrls": [
+                "./static-footer.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./static-footer.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-static-footer',\r\n  templateUrl: './static-footer.component.html',\r\n  styleUrls: ['./static-footer.component.scss']\r\n})\r\nexport class StaticFooterComponent {\r\n\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./static-footer.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<footer class=\"text-white bg-title py-5\">\r\n    <div class=\"container\">\r\n\r\n        <section class=\"row mb-3\">\r\n            <div class=\"col-12 col-lg-6 mb-5 mb-lg-0\">\r\n                <h1 class=\"text-white h2 m-0 mt-1\">A modern and safe platform to manage and entertain your club.</h1>\r\n            </div>\r\n            <div class=\"col-12 col-lg-6\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-12 col-md-4 mb-3 mb-lg-0\">\r\n                        <h2 class=\"text-white\">App</h2>\r\n                        <ul class=\"\">\r\n                            <li class=\"op-8 mb-1\" role=\"button\" routerLink=\"/login\">Login</li>\r\n                            <li class=\"op-8 mb-1\" role=\"button\" routerLink=\"/register\">Get started</li>\r\n                            <li class=\"op-8 mb-1\" role=\"button\" routerLink=\"/features\">Features</li>\r\n                        </ul>\r\n                    </div>\r\n                    <div class=\"col-12 col-md-4 mb-3 mb-lg-0\">\r\n                        <h2 class=\"text-white\">About</h2>\r\n                        <ul class=\"\">\r\n                            <li class=\"op-8 mb-1\" role=\"button\" routerLink=\"/privacy-policy\">privacy-policy</li>\r\n                            <li class=\"op-8 mb-1\" role=\"button\" routerLink=\"/terms-of-service\">Terms of service</li>\r\n                        </ul>\r\n                    </div>\r\n                    <div class=\"col-12 col-md-4 mb-3 mb-lg-0\">\r\n                        <h2 class=\"text-white\">Help</h2>\r\n                        <ul class=\"\">\r\n                            <li class=\"op-8 mb-1\" role=\"button\" routerLink=\"/faq\">FAQ</li>\r\n                            <li class=\"op-8 mb-1\" role=\"button\" routerLink=\"/contact\">Contact</li>\r\n                        </ul>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </section>\r\n        <section class=\"row\">\r\n            <div class=\"col-12 col-lg-6 mb-3 mb-lg-0\">\r\n                <img routerLink=\"/\" role=\"button\" class=\"op-6\" src=\"/assets/img/logo/batch_2/logo_white_big.png\" alt=\"logo\" />\r\n            </div>\r\n            <p class=\"col-12 col-lg-6 py-2 d-flex align-items-center mb-0\">© 2020 Thibaut De Maerteleire. All rights reserved.</p>\r\n        </section>\r\n    </div>\r\n</footer>"
+        },
+        {
+            "name": "StaticNavigationComponent",
+            "id": "component-StaticNavigationComponent-fecf68ce9342a43ec9f9eb90ec27dc7a",
+            "file": "src/app/components/static/static-navigation/static-navigation.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-static-navigation",
+            "styleUrls": [
+                "./static-navigation.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./static-navigation.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "",
+            "type": "component",
+            "sourceCode": "import { Component, } from '@angular/core';\r\n\r\n@Component({\r\n  selector: 'app-static-navigation',\r\n  templateUrl: './static-navigation.component.html',\r\n  styleUrls: ['./static-navigation.component.scss']\r\n})\r\nexport class StaticNavigationComponent {\r\n\r\n}\r\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "",
+                    "styleUrl": "./static-navigation.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\r\n    <div class=\"container-fluid\">\r\n        <a class=\"navbar-brand\" routerLink=\"/\">\r\n            <h1 class=\"mb-0\" >\r\n                <img\r\n                    role=\"button\"\r\n                    src=\"/assets/img/logo/logo_big.png\"\r\n                    alt=\"logo\"\r\n                    class=\"logo w-12\"\r\n                />\r\n            </h1>\r\n        </a>\r\n        <button class=\"navbar-toggler\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#navbarTogglerDemo02\" aria-controls=\"navbarTogglerDemo02\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n            <span class=\"navbar-toggler-icon\"></span>\r\n        </button>\r\n        <div class=\"collapse navbar-collapse\" id=\"navbarTogglerDemo02\">\r\n            <ul class=\"navbar-nav me-auto mb-2 mb-lg-0\">\r\n                <li class=\"nav-item\">\r\n                    <a class=\"nav-link\" routerLinkActive=\"active fw-7\" routerLink=\"/features\">Features</a>\r\n                </li>\r\n                <li class=\"nav-item\">\r\n                    <a class=\"nav-link\" routerLinkActive=\"active fw-7\" routerLink=\"/pricing\">Pricing</a>\r\n                </li>\r\n                <li class=\"nav-item\">\r\n                    <a class=\"nav-link\" routerLinkActive=\"active fw-7\" routerLink=\"/about\">About</a>\r\n                </li>\r\n            </ul>\r\n            <ul class=\"navbar-nav mb-2 mb-lg-0\">\r\n                <li>\r\n                    <a class=\"nav-link\" routerLinkActive=\"active fw-7\" routerLink=\"/login\">Login</a>\r\n                </li>\r\n                <li>\r\n                    <a class=\"nav-link\" routerLinkActive=\"active fw-7\" routerLink=\"/register\">Get started</a>\r\n                </li>\r\n                <li>\r\n                    <!-- <app-shared-language-selector></app-shared-language-selector> -->\r\n                </li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n</nav>\r\n"
         },
         {
             "name": "TeamsComponent",
@@ -882,65 +1412,100 @@
                 "OnInit"
             ],
             "templateData": "<p>teams works!</p>\r\n"
-        },
-        {
-            "name": "WelcomeComponent",
-            "id": "component-WelcomeComponent-db4af437e527cdb40675967ecb64bcec",
-            "file": "src/app/pages/welcome/welcome.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "app-welcome",
-            "styleUrls": [
-                "./welcome.component.css"
-            ],
-            "styles": [],
-            "templateUrl": [
-                "./welcome.component.html"
-            ],
-            "viewProviders": [],
-            "inputsClass": [],
-            "outputsClass": [],
-            "propertiesClass": [],
-            "methodsClass": [
-                {
-                    "name": "ngOnInit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 12
-                }
-            ],
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "",
-            "type": "component",
-            "sourceCode": "import { Component, OnInit } from '@angular/core';\n\n@Component({\n  selector: 'app-welcome',\n  templateUrl: './welcome.component.html',\n  styleUrls: ['./welcome.component.css']\n})\nexport class WelcomeComponent implements OnInit {\n\n  constructor() { }\n\n  ngOnInit() {\n  }\n\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": "",
-                    "styleUrl": "./welcome.component.css"
-                }
-            ],
-            "stylesData": "",
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "args": [],
-                "line": 8
-            },
-            "implements": [
-                "OnInit"
-            ],
-            "templateData": ""
         }
     ],
     "modules": [
+        {
+            "name": "AntdComponentsModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": []
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "AppComponentsModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "BaseCardComponent"
+                        },
+                        {
+                            "name": "BirthdayCardComponent"
+                        },
+                        {
+                            "name": "HeaderComponent"
+                        },
+                        {
+                            "name": "SideNavComponent"
+                        },
+                        {
+                            "name": "SkeletonComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": [
+                        {
+                            "name": "IconsProviderModule"
+                        }
+                    ]
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "BaseCardComponent"
+                        },
+                        {
+                            "name": "BirthdayCardComponent"
+                        },
+                        {
+                            "name": "SideNavComponent"
+                        },
+                        {
+                            "name": "SkeletonComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
         {
             "name": "AppModule",
             "children": [
@@ -960,10 +1525,13 @@
                     "type": "imports",
                     "elements": [
                         {
-                            "name": "AppRoutingModule"
+                            "name": "IconsProviderModule"
                         },
                         {
-                            "name": "IconsProviderModule"
+                            "name": "PagesModule"
+                        },
+                        {
+                            "name": "StaticRoutingModule"
                         }
                     ]
                 },
@@ -986,7 +1554,7 @@
             ]
         },
         {
-            "name": "AppRoutingModule",
+            "name": "AppPagesModule",
             "children": [
                 {
                     "type": "providers",
@@ -994,7 +1562,17 @@
                 },
                 {
                     "type": "declarations",
-                    "elements": []
+                    "elements": [
+                        {
+                            "name": "AppLayoutComponent"
+                        },
+                        {
+                            "name": "DashboardComponent"
+                        },
+                        {
+                            "name": "TeamsComponent"
+                        }
+                    ]
                 },
                 {
                     "type": "imports",
@@ -1006,7 +1584,11 @@
                 },
                 {
                     "type": "bootstrap",
-                    "elements": []
+                    "elements": [
+                        {
+                            "name": "AppLayoutComponent"
+                        }
+                    ]
                 },
                 {
                     "type": "classes",
@@ -1023,11 +1605,7 @@
                 },
                 {
                     "type": "declarations",
-                    "elements": [
-                        {
-                            "name": "SideNavComponent"
-                        }
-                    ]
+                    "elements": []
                 },
                 {
                     "type": "imports",
@@ -1036,43 +1614,6 @@
                 {
                     "type": "exports",
                     "elements": []
-                },
-                {
-                    "type": "bootstrap",
-                    "elements": []
-                },
-                {
-                    "type": "classes",
-                    "elements": []
-                }
-            ]
-        },
-        {
-            "name": "HomeModule",
-            "children": [
-                {
-                    "type": "providers",
-                    "elements": []
-                },
-                {
-                    "type": "declarations",
-                    "elements": [
-                        {
-                            "name": "HomeComponent"
-                        }
-                    ]
-                },
-                {
-                    "type": "imports",
-                    "elements": []
-                },
-                {
-                    "type": "exports",
-                    "elements": [
-                        {
-                            "name": "HomeComponent"
-                        }
-                    ]
                 },
                 {
                     "type": "bootstrap",
@@ -1114,7 +1655,7 @@
             ]
         },
         {
-            "name": "WelcomeModule",
+            "name": "PagesModule",
             "children": [
                 {
                     "type": "providers",
@@ -1124,7 +1665,16 @@
                     "type": "declarations",
                     "elements": [
                         {
-                            "name": "WelcomeComponent"
+                            "name": "ErrorComponent"
+                        },
+                        {
+                            "name": "HomeComponent"
+                        },
+                        {
+                            "name": "LoginComponent"
+                        },
+                        {
+                            "name": "RegisterComponent"
                         }
                     ]
                 },
@@ -1132,15 +1682,54 @@
                     "type": "imports",
                     "elements": [
                         {
-                            "name": "WelcomeRoutingModule"
+                            "name": "AppPagesModule"
                         }
                     ]
                 },
                 {
                     "type": "exports",
+                    "elements": []
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "SharedComponentsModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
                     "elements": [
                         {
-                            "name": "WelcomeComponent"
+                            "name": "CustomInputComponent"
+                        },
+                        {
+                            "name": "LanguageSelectorComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "CustomInputComponent"
+                        },
+                        {
+                            "name": "LanguageSelectorComponent"
                         }
                     ]
                 },
@@ -1155,7 +1744,50 @@
             ]
         },
         {
-            "name": "WelcomeRoutingModule",
+            "name": "StaticComponentsModule",
+            "children": [
+                {
+                    "type": "providers",
+                    "elements": []
+                },
+                {
+                    "type": "declarations",
+                    "elements": [
+                        {
+                            "name": "StaticFooterComponent"
+                        },
+                        {
+                            "name": "StaticNavigationComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "imports",
+                    "elements": []
+                },
+                {
+                    "type": "exports",
+                    "elements": [
+                        {
+                            "name": "StaticFooterComponent"
+                        },
+                        {
+                            "name": "StaticNavigationComponent"
+                        }
+                    ]
+                },
+                {
+                    "type": "bootstrap",
+                    "elements": []
+                },
+                {
+                    "type": "classes",
+                    "elements": []
+                }
+            ]
+        },
+        {
+            "name": "StaticRoutingModule",
             "children": [
                 {
                     "type": "providers",
@@ -1187,12 +1819,36 @@
     "miscellaneous": {
         "variables": [
             {
+                "name": "_navigationReducer",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/states/app/navigation/navigation.reducer.ts",
+                "type": "",
+                "defaultValue": "createReducer(\r\n  initialState,\r\n  on(toggleCollapse, (state: boolean) => !state),\r\n)"
+            },
+            {
+                "name": "API_BASE_URL",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/constants/api.enum.ts",
+                "type": "string",
+                "defaultValue": "'http://api.footy.thibautdemaerteleire.be/api'"
+            },
+            {
                 "name": "appInit",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/i18n.provider.ts",
                 "type": "",
                 "defaultValue": "(i18next: ITranslationService) => {\r\n  return () => i18next.init({\r\n      whitelist: ['en', 'nl', 'fr', 'de'],\r\n      fallbackLng: 'en',\r\n      debug: true,\r\n      returnEmptyString: false,\r\n      resources: {\r\n        nl: {\r\n        }\r\n      },\r\n      ns: [\r\n        'translation',\r\n        'validation',\r\n        'error'\r\n      ],\r\n    });\r\n}"
+            },
+            {
+                "name": "BaseCard",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/app/cards/base-card/base-card.stories.ts",
+                "type": "",
+                "defaultValue": "Template.bind({})"
             },
             {
                 "name": "config",
@@ -1240,7 +1896,15 @@
                 "subtype": "variable",
                 "file": "src/app/icons-provider.module.ts",
                 "type": "[]",
-                "defaultValue": "[\n  ArrowDownOutline,\n  ArrowLeftOutline,\n  ArrowUpOutline,\n  ArrowRightOutline,\n  BulbOutline,\n  CalendarOutline,\n  CommentOutline,\n  CrownOutline,\n  DashboardOutline,\n  DeleteOutline,\n  EuroCircleOutline,\n  FireOutline,\n  FormOutline,\n  HeartOutline,\n  HomeOutline,\n  InfoCircleOutline,\n  MailOutline,\n  MenuFoldOutline,\n  MenuOutline,\n  MenuUnfoldOutline,\n  MessageOutline,\n  NotificationOutline,\n  PieChartOutline,\n  PoweroffOutline,\n  SaveOutline,\n  SearchOutline,\n  SendOutline,\n  SettingOutline,\n  SyncOutline,\n  TeamOutline,\n  UserAddOutline,\n  UserDeleteOutline,\n  UsergroupAddOutline,\n  UserOutline,\n]"
+                "defaultValue": "[\r\n  ArrowDownOutline,\r\n  ArrowLeftOutline,\r\n  ArrowUpOutline,\r\n  ArrowRightOutline,\r\n  BulbOutline,\r\n  CalendarOutline,\r\n  CloseOutline,\r\n  CommentOutline,\r\n  CrownOutline,\r\n  DashboardOutline,\r\n  DeleteOutline,\r\n  EuroCircleOutline,\r\n  FireOutline,\r\n  FormOutline,\r\n  HeartOutline,\r\n  HomeOutline,\r\n  InfoCircleOutline,\r\n  LeftOutline,\r\n  MailOutline,\r\n  MenuFoldOutline,\r\n  MenuOutline,\r\n  MenuUnfoldOutline,\r\n  MessageOutline,\r\n  NotificationOutline,\r\n  PieChartOutline,\r\n  PoweroffOutline,\r\n  RightOutline,\r\n  SaveOutline,\r\n  SearchOutline,\r\n  SendOutline,\r\n  SettingOutline,\r\n  SyncOutline,\r\n  TeamOutline,\r\n  UserAddOutline,\r\n  UserDeleteOutline,\r\n  UsergroupAddOutline,\r\n  UserOutline,\r\n]"
+            },
+            {
+                "name": "initialState",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/states/app/navigation/navigation.reducer.ts",
+                "type": "",
+                "defaultValue": "false"
             },
             {
                 "name": "Large",
@@ -1307,6 +1971,14 @@
                 "defaultValue": "'myPlugin'"
             },
             {
+                "name": "navigationReducer",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/states/app/navigation/navigation.reducer.ts",
+                "type": "",
+                "defaultValue": "(state: boolean, action: any): any => {\r\n  return _navigationReducer(state, action);\r\n}"
+            },
+            {
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -1333,7 +2005,7 @@
                 "name": "SideNav",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/components/app/side-nav/side-nav.stories.ts",
+                "file": "src/app/components/app/layout/side-nav/side-nav.stories.ts",
                 "type": "",
                 "defaultValue": "Template.bind({})"
             },
@@ -1373,9 +2045,25 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/components/app/side-nav/side-nav.stories.ts",
+                "file": "src/app/components/app/cards/base-card/base-card.stories.ts",
+                "type": "Story<BaseCardComponent>",
+                "defaultValue": "(args: BaseCardComponent) => ({\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/app/layout/side-nav/side-nav.stories.ts",
                 "type": "Story<SideNavComponent>",
                 "defaultValue": "(args: SideNavComponent) => ({\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "toggleCollapse",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/states/app/navigation/navigation.actions.ts",
+                "type": "",
+                "defaultValue": "createAction('toggle collapse')"
             },
             {
                 "name": "validator",
@@ -1389,6 +2077,31 @@
         "functions": [],
         "typealiases": [],
         "enumerations": [
+            {
+                "name": "apiRoutes",
+                "childs": [
+                    {
+                        "name": "login",
+                        "value": "/login"
+                    },
+                    {
+                        "name": "register",
+                        "value": "/forgot-password"
+                    },
+                    {
+                        "name": "change-password",
+                        "value": "/change-password"
+                    },
+                    {
+                        "name": "sanctum-crsf",
+                        "value": "/csrf-cookie"
+                    }
+                ],
+                "ctype": "miscellaneous",
+                "subtype": "enum",
+                "description": "",
+                "file": "src/app/constants/api.enum.ts"
+            },
             {
                 "name": "appRoutesEnum",
                 "childs": [
@@ -1504,7 +2217,7 @@
                 "childs": [
                     {
                         "name": "en",
-                        "value": "en"
+                        "value": "GB-UKM"
                     },
                     {
                         "name": "nl",
@@ -1526,6 +2239,42 @@
             }
         ],
         "groupedVariables": {
+            "src/app/states/app/navigation/navigation.reducer.ts": [
+                {
+                    "name": "_navigationReducer",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/states/app/navigation/navigation.reducer.ts",
+                    "type": "",
+                    "defaultValue": "createReducer(\r\n  initialState,\r\n  on(toggleCollapse, (state: boolean) => !state),\r\n)"
+                },
+                {
+                    "name": "initialState",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/states/app/navigation/navigation.reducer.ts",
+                    "type": "",
+                    "defaultValue": "false"
+                },
+                {
+                    "name": "navigationReducer",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/states/app/navigation/navigation.reducer.ts",
+                    "type": "",
+                    "defaultValue": "(state: boolean, action: any): any => {\r\n  return _navigationReducer(state, action);\r\n}"
+                }
+            ],
+            "src/app/constants/api.enum.ts": [
+                {
+                    "name": "API_BASE_URL",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/constants/api.enum.ts",
+                    "type": "string",
+                    "defaultValue": "'http://api.footy.thibautdemaerteleire.be/api'"
+                }
+            ],
             "src/app/i18n.provider.ts": [
                 {
                     "name": "appInit",
@@ -1550,6 +2299,24 @@
                     "file": "src/app/i18n.provider.ts",
                     "type": "",
                     "defaultValue": "(i18next: ITranslationService) => {\r\n  return i18next.language;\r\n}"
+                }
+            ],
+            "src/app/components/app/cards/base-card/base-card.stories.ts": [
+                {
+                    "name": "BaseCard",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/app/cards/base-card/base-card.stories.ts",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/app/cards/base-card/base-card.stories.ts",
+                    "type": "Story<BaseCardComponent>",
+                    "defaultValue": "(args: BaseCardComponent) => ({\r\n  props: args,\r\n})"
                 }
             ],
             "scully.client.config.ts": [
@@ -1606,7 +2373,7 @@
                     "subtype": "variable",
                     "file": "src/app/icons-provider.module.ts",
                     "type": "[]",
-                    "defaultValue": "[\n  ArrowDownOutline,\n  ArrowLeftOutline,\n  ArrowUpOutline,\n  ArrowRightOutline,\n  BulbOutline,\n  CalendarOutline,\n  CommentOutline,\n  CrownOutline,\n  DashboardOutline,\n  DeleteOutline,\n  EuroCircleOutline,\n  FireOutline,\n  FormOutline,\n  HeartOutline,\n  HomeOutline,\n  InfoCircleOutline,\n  MailOutline,\n  MenuFoldOutline,\n  MenuOutline,\n  MenuUnfoldOutline,\n  MessageOutline,\n  NotificationOutline,\n  PieChartOutline,\n  PoweroffOutline,\n  SaveOutline,\n  SearchOutline,\n  SendOutline,\n  SettingOutline,\n  SyncOutline,\n  TeamOutline,\n  UserAddOutline,\n  UserDeleteOutline,\n  UsergroupAddOutline,\n  UserOutline,\n]"
+                    "defaultValue": "[\r\n  ArrowDownOutline,\r\n  ArrowLeftOutline,\r\n  ArrowUpOutline,\r\n  ArrowRightOutline,\r\n  BulbOutline,\r\n  CalendarOutline,\r\n  CloseOutline,\r\n  CommentOutline,\r\n  CrownOutline,\r\n  DashboardOutline,\r\n  DeleteOutline,\r\n  EuroCircleOutline,\r\n  FireOutline,\r\n  FormOutline,\r\n  HeartOutline,\r\n  HomeOutline,\r\n  InfoCircleOutline,\r\n  LeftOutline,\r\n  MailOutline,\r\n  MenuFoldOutline,\r\n  MenuOutline,\r\n  MenuUnfoldOutline,\r\n  MessageOutline,\r\n  NotificationOutline,\r\n  PieChartOutline,\r\n  PoweroffOutline,\r\n  RightOutline,\r\n  SaveOutline,\r\n  SearchOutline,\r\n  SendOutline,\r\n  SettingOutline,\r\n  SyncOutline,\r\n  TeamOutline,\r\n  UserAddOutline,\r\n  UserDeleteOutline,\r\n  UsergroupAddOutline,\r\n  UserOutline,\r\n]"
                 }
             ],
             "src/stories/Button.stories.ts": [
@@ -1729,12 +2496,12 @@
                     "defaultValue": "async () => []"
                 }
             ],
-            "src/app/components/app/side-nav/side-nav.stories.ts": [
+            "src/app/components/app/layout/side-nav/side-nav.stories.ts": [
                 {
                     "name": "SideNav",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/components/app/side-nav/side-nav.stories.ts",
+                    "file": "src/app/components/app/layout/side-nav/side-nav.stories.ts",
                     "type": "",
                     "defaultValue": "Template.bind({})"
                 },
@@ -1742,14 +2509,51 @@
                     "name": "Template",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/components/app/side-nav/side-nav.stories.ts",
+                    "file": "src/app/components/app/layout/side-nav/side-nav.stories.ts",
                     "type": "Story<SideNavComponent>",
                     "defaultValue": "(args: SideNavComponent) => ({\r\n  props: args,\r\n})"
+                }
+            ],
+            "src/app/states/app/navigation/navigation.actions.ts": [
+                {
+                    "name": "toggleCollapse",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/states/app/navigation/navigation.actions.ts",
+                    "type": "",
+                    "defaultValue": "createAction('toggle collapse')"
                 }
             ]
         },
         "groupedFunctions": {},
         "groupedEnumerations": {
+            "src/app/constants/api.enum.ts": [
+                {
+                    "name": "apiRoutes",
+                    "childs": [
+                        {
+                            "name": "login",
+                            "value": "/login"
+                        },
+                        {
+                            "name": "register",
+                            "value": "/forgot-password"
+                        },
+                        {
+                            "name": "change-password",
+                            "value": "/change-password"
+                        },
+                        {
+                            "name": "sanctum-crsf",
+                            "value": "/csrf-cookie"
+                        }
+                    ],
+                    "ctype": "miscellaneous",
+                    "subtype": "enum",
+                    "description": "",
+                    "file": "src/app/constants/api.enum.ts"
+                }
+            ],
             "src/app/constants/routes.enum.ts": [
                 {
                     "name": "appRoutesEnum",
@@ -1868,7 +2672,7 @@
                     "childs": [
                         {
                             "name": "en",
-                            "value": "en"
+                            "value": "GB-UKM"
                         },
                         {
                             "name": "nl",
@@ -1900,7 +2704,7 @@
             {
                 "name": "BaseRoutes",
                 "filename": "src/app/routes/base-routes.ts",
-                "module": "AppRoutingModule",
+                "module": "StaticRoutingModule",
                 "children": [
                     {
                         "path": "home",
@@ -1920,6 +2724,7 @@
                     },
                     {
                         "path": "app",
+                        "component": "AppLayoutComponent",
                         "children": "AppRoutes"
                     },
                     {
@@ -1936,7 +2741,7 @@
         ]
     },
     "coverage": {
-        "count": 2,
+        "count": 1,
         "status": "low",
         "files": [
             {
@@ -1994,30 +2799,30 @@
                 "linktype": "component",
                 "name": "AppComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/1",
+                "coverageCount": "0/5",
                 "status": "low"
             },
             {
-                "filePath": "src/app/components/app/side-nav/side-nav.component.ts",
+                "filePath": "src/app/components/app/cards/base-card/base-card.component.ts",
                 "type": "component",
                 "linktype": "component",
-                "name": "SideNavComponent",
+                "name": "BaseCardComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/7",
+                "coverageCount": "0/2",
                 "status": "low"
             },
             {
-                "filePath": "src/app/components/app/side-nav/side-nav.stories.ts",
+                "filePath": "src/app/components/app/cards/base-card/base-card.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "SideNav",
+                "name": "BaseCard",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
             },
             {
-                "filePath": "src/app/components/app/side-nav/side-nav.stories.ts",
+                "filePath": "src/app/components/app/cards/base-card/base-card.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -2027,30 +2832,105 @@
                 "status": "low"
             },
             {
-                "filePath": "src/app/components/shared/card/card-base/card-base.component.ts",
+                "filePath": "src/app/components/app/cards/birthday-card/birthday-card.component.ts",
                 "type": "component",
                 "linktype": "component",
-                "name": "CardBaseComponent",
+                "name": "BirthdayCardComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/3",
                 "status": "low"
             },
             {
-                "filePath": "src/app/components/shared/form/input-currency/input-currency.component.ts",
+                "filePath": "src/app/components/app/layout/header/header.component.ts",
                 "type": "component",
                 "linktype": "component",
-                "name": "InputCurrencyComponent",
+                "name": "HeaderComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/app/layout/side-nav/side-nav.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "SideNavComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/app/layout/side-nav/side-nav.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "SideNav",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/app/layout/side-nav/side-nav.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/app/skeleton/skeleton.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "SkeletonComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/3",
                 "status": "low"
             },
             {
-                "filePath": "src/app/components/shared/images/logo/logo.component.ts",
+                "filePath": "src/app/components/shared/forms/input/custom-input/custom-input.component.ts",
                 "type": "component",
                 "linktype": "component",
-                "name": "LogoComponent",
+                "name": "CustomInputComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/3",
+                "coverageCount": "0/14",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/shared/forms/select/language-selector/language-selector.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "LanguageSelectorComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/static/static-footer/static-footer.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "StaticFooterComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/static/static-navigation/static-navigation.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "StaticNavigationComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/constants/api.enum.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "API_BASE_URL",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {
@@ -2099,6 +2979,15 @@
                 "linktype": "component",
                 "name": "DashboardComponent",
                 "coveragePercent": 0,
+                "coverageCount": "0/4",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/pages/app/layout/app-layout.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "AppLayoutComponent",
+                "coveragePercent": 0,
                 "coverageCount": "0/3",
                 "status": "low"
             },
@@ -2135,6 +3024,15 @@
                 "linktype": "component",
                 "name": "LoginComponent",
                 "coveragePercent": 0,
+                "coverageCount": "0/9",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/pages/login/login.component.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "LoginData",
+                "coveragePercent": 0,
                 "coverageCount": "0/3",
                 "status": "low"
             },
@@ -2148,12 +3046,43 @@
                 "status": "low"
             },
             {
-                "filePath": "src/app/pages/welcome/welcome.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "WelcomeComponent",
+                "filePath": "src/app/states/app/navigation/navigation.actions.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "toggleCollapse",
                 "coveragePercent": 0,
-                "coverageCount": "0/3",
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/states/app/navigation/navigation.reducer.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "_navigationReducer",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/states/app/navigation/navigation.reducer.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "initialState",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/states/app/navigation/navigation.reducer.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "navigationReducer",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
                 "status": "low"
             },
             {

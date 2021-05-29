@@ -25,11 +25,12 @@
                 {{ subtitle }}
             </label>
             <input
+                #inputField
+                [value]="defaultInputValue"
                 [id]="name"
                 class="border-0 shadow-none p-0 text-title"
                 [type]="inputType"
                 [formControl]="input"
-                #inputField
                 (ngModelChange)="returnInputValue(inputField.value)"
                 [placeholder]="placeholder"
             />
