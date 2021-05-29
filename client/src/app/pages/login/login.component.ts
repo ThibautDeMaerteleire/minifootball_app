@@ -1,7 +1,9 @@
-import { Component, } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component, OnInit, } from '@angular/core';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { apiRoutes, API_BASE_URL } from 'src/app/constants/api.enum';
-import { Observable } from 'rxjs';
+import { ApiAuth } from 'src/app/interfaces/api';
+import { Router } from '@angular/router';
+import { baseRoutesEnum } from 'src/app/constants/routes.enum';
 
 
 export interface LoginData {
@@ -14,41 +16,43 @@ export interface LoginData {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   error: string | null = null;
   email = '';
   password = '';
   passwordVisible = false;
-  response: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
-  submit(): string | null {
+  ngOnInit(): void {
+    if (window.sessionStorage.getItem('Authentication')) {
+      this.router.navigate([baseRoutesEnum.app]);
+    }
+  }
+
+  submit(): void {
     this.error = this.validation();
 
-    if(typeof this.error === 'string') {
-      return null;
+    if (typeof this.error === 'string') {
+      return;
     }
 
     // const headers = new HttpHeaders().set('Authorization', 'auth-token');
-    const data: LoginData = {
+    const body: LoginData = {
       email: this.email,
       password: this.password
     };
 
-    // const promise = this.http.post(API_BASE_URL + apiRoutes['sanctum-crsf'], data).toPromise();
-    // promise.then((data) => {
-    //   console.log(data);
-    // }).catch((err) => console.error(err));
-    // console.log(this.response);
+    const promise = this.http.post(API_BASE_URL + apiRoutes.login, body).toPromise();
+    promise.then((data: ApiAuth | any) => {
+      window.sessionStorage.setItem('Authentication', `${data.token_type} ${data.access_token}`);
+      this.router.navigate([baseRoutesEnum.app]);
+    }).catch((err: HttpErrorResponse) => {
+      this.error = err.error.message;
+    });
 
-    const promise = this.http.post(API_BASE_URL + apiRoutes.login, data).toPromise();
-    promise.then((data) => {
-      console.log(data);
-    }).catch((err) => console.error(err));
-    console.log(this.response);
-    return '';
+    return;
   }
 
   validation(): string | null {
@@ -56,8 +60,12 @@ export class LoginComponent {
       return 'Email is not valid';
     }
 
-    if (this.email.length <= 4) { // Check password
+    if (this.email.length <= 6) { // Check Email
       return 'Email requires minimal 6 characters';
+    }
+
+    if (this.email.length > 255) { // Check Email
+      return 'Email requires maximal 255 characters';
     }
 
     if (this.password.length <= 6) { // Check password

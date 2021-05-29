@@ -7,7 +7,7 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./custom-input.component.scss']
 })
 export class CustomInputComponent {
-   
+
   @Input() icon = 'user';
   @Input() subtitle = 'subtitle';
   @Input() inputType = 'text';

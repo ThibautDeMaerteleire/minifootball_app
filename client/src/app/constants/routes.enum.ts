@@ -12,7 +12,8 @@ export enum baseRoutesEnum {
   register = 'register',
   forgotPassword = 'forgot-password',
   app = 'app',
-  error = 'error/:id'
+  error = 'error/:id',
+  all_routes = '**'
 }
 
 export enum appRoutesEnum {

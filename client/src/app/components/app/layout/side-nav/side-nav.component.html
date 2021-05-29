@@ -25,26 +25,6 @@
             nzMode="inline"
             [nzInlineCollapsed]="isCollapsed"
         >
-            <!-- <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard" nzMenuClassName="">
-                <ul>
-                    <li nz-menu-item nzMatchRouter>
-                        <a routerLink="/welcome">Welcome</a>
-                    </li>
-                    <li nz-menu-item nzMatchRouter>
-                        <a>Monitor</a>
-                    </li>
-                    <li nz-menu-item nzMatchRouter>
-                        <a>Workplace</a>
-                    </li>
-                </ul>
-            </li>
-            <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
-                <ul>
-                    <li nz-menu-item nzMatchRouter>
-                        <a>Basic Form</a>
-                    </li>
-                </ul>
-            </li> -->
             <li routerLink="/app/dashboard" nzMatchRouter="nzSelected" nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
                 <i nz-icon nzType="pie-chart" nzTheme="outline"></i>
                 <span>Dashboard</span>
@@ -159,12 +139,12 @@
                         <span>Settings</span>
                     </li>
                     <li
-                        routerLink="/app/logout"
                         nzMatchRouter="nzSelected"
                         nz-menu-item
                         nz-tooltip
                         nzTooltipPlacement="right"
                         [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
+                        (click)="logout()"
                     >
                         <i nz-icon nzType="poweroff" nzTheme="outline"></i>
                         <span>Logout</span>

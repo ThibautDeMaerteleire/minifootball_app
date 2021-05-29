@@ -34,7 +34,7 @@ export const BaseRoutes: Routes = [
     component: ErrorComponent,
   },
   {
-    path: '**',
+    path: baseRoutesEnum.all_routes,
     redirectTo: '/error/404'
   }
 ];

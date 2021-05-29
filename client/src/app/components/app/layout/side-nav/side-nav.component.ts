@@ -1,4 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { baseRoutesEnum } from 'src/app/constants/routes.enum';
 
 
 @Component({
@@ -11,6 +13,8 @@ export class SideNavComponent implements OnInit {
   public isCollapsed = false;
   public innerWidth: any;
 
+  constructor(private router: Router) {}
+
   ngOnInit(): void {
     this.innerWidth = window.innerWidth;
   }
@@ -21,6 +25,11 @@ export class SideNavComponent implements OnInit {
 
   public toggleCollapse(): void {
     this.isCollapsed = !this.isCollapsed;
+  }
+
+  public logout(): void {
+    window.sessionStorage.removeItem('Authentication');
+    this.router.navigate([baseRoutesEnum.login]);
   }
 
 }
