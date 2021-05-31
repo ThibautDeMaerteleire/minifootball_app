@@ -7,4 +7,6 @@ export enum apiRoutes {
   'forgot-password' = '/forgot-password',
   'change-password' = '/change-password',
   'sanctum-crsf' = '/csrf-cookie',
+  'dashboard' = '/dashboard',
+  'me' = '/me',
 }

@@ -7,8 +7,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TeamsComponent } from './teams/teams.component';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
-import { } from 'ng-zorro-antd/ng-zorro-antd';
-
+import { SwiperModule } from 'swiper/angular';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppLayoutComponent,
@@ -20,7 +20,8 @@ import { } from 'ng-zorro-antd/ng-zorro-antd';
     ComponentsModule,
     BrowserModule,
     RouterModule,
-
+    SwiperModule,
+    HttpClientModule
   ],
   bootstrap: [
     AppLayoutComponent

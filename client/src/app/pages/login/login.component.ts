@@ -1,4 +1,4 @@
-import { Component, OnInit, } from '@angular/core';
+import { Component, } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { apiRoutes, API_BASE_URL } from 'src/app/constants/api.enum';
 import { ApiAuth } from 'src/app/interfaces/api';
@@ -16,7 +16,7 @@ export interface LoginData {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   error: string | null = null;
   email = '';
@@ -24,12 +24,6 @@ export class LoginComponent implements OnInit {
   passwordVisible = false;
 
   constructor(private http: HttpClient, private router: Router) {}
-
-  ngOnInit(): void {
-    if (window.sessionStorage.getItem('Authentication')) {
-      this.router.navigate([baseRoutesEnum.app]);
-    }
-  }
 
   submit(): void {
     this.error = this.validation();
@@ -47,7 +41,7 @@ export class LoginComponent implements OnInit {
     const promise = this.http.post(API_BASE_URL + apiRoutes.login, body).toPromise();
     promise.then((data: ApiAuth | any) => {
       window.sessionStorage.setItem('Authentication', `${data.token_type} ${data.access_token}`);
-      this.router.navigate([baseRoutesEnum.app]);
+      this.router.navigateByUrl(baseRoutesEnum.app);
     }).catch((err: HttpErrorResponse) => {
       this.error = err.error.message;
     });

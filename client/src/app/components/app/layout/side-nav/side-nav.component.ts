@@ -11,7 +11,7 @@ import { baseRoutesEnum } from 'src/app/constants/routes.enum';
 export class SideNavComponent implements OnInit {
 
   public isCollapsed = false;
-  public innerWidth: any;
+  public innerWidth: number | string = '';
 
   constructor(private router: Router) {}
 
@@ -19,7 +19,7 @@ export class SideNavComponent implements OnInit {
     this.innerWidth = window.innerWidth;
   }
 
-  @HostListener('window:resize', ['$event'])onResize(ev: any): void {
+  @HostListener('window:resize', ['$event'])onResize(): void {
     this.innerWidth = window.innerWidth;
   }
 

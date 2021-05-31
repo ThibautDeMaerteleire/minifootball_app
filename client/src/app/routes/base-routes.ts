@@ -5,6 +5,7 @@ import { ErrorComponent } from '../pages/error/error.component';
 import { HomeComponent } from '../pages/home/home.component';
 import { LoginComponent } from '../pages/login/login.component';
 import { RegisterComponent } from '../pages/register/register.component';
+import { AuthGuardService } from '../services/auth-guard/auth-guard.service';
 import { AppRoutes } from './app/app-routes';
 
 export const BaseRoutes: Routes = [
@@ -18,16 +19,19 @@ export const BaseRoutes: Routes = [
   },
   {
     path: baseRoutesEnum.login,
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: baseRoutesEnum.register,
-    component: RegisterComponent
+    component: RegisterComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: baseRoutesEnum.app,
     component: AppLayoutComponent,
-    children: AppRoutes
+    children: AppRoutes,
+    canActivate: [AuthGuardService]
   },
   {
     path: baseRoutesEnum.error,

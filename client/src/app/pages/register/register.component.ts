@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, } from '@angular/core';
 import { Router } from '@angular/router';
 import { apiRoutes, API_BASE_URL } from 'src/app/constants/api.enum';
 import { baseRoutesEnum } from 'src/app/constants/routes.enum';
@@ -17,7 +17,7 @@ export interface RegisterData {
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
 
   error: string | null = null;
   email = '';
@@ -27,12 +27,6 @@ export class RegisterComponent implements OnInit {
   passwordVisible = false;
 
   constructor(private http: HttpClient, private router: Router) {}
-
-  ngOnInit(): void {
-    if (window.sessionStorage.getItem('Authentication')) {
-      this.router.navigate([baseRoutesEnum.app]);
-    }
-  }
 
   submit(): void {
     this.error = this.validation();
@@ -51,7 +45,7 @@ export class RegisterComponent implements OnInit {
     const promise = this.http.post(API_BASE_URL + apiRoutes.register, body).toPromise();
     promise.then((data: ApiAuth | any) => {
       window.sessionStorage.setItem('Authentication', `${data.token_type} ${data.access_token}`);
-      this.router.navigate([baseRoutesEnum.app]);
+      this.router.navigateByUrl(baseRoutesEnum.app);
     }).catch((err: HttpErrorResponse) => {
       this.error = err.error.message;
     });
