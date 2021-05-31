@@ -1,0 +1,29 @@
+<div>
+    <p class="mb-0"><small class="text-uppercase fw-5">{{ createDate() | date:"EEEE d MMMM" }}</small></p>
+    <p class="mb-0 text-center w-100 text-uppercase fw-7 text-body">{{ createDate() | date:"hh:mm" }} uur</p>
+    <div class="row">
+        <div class="col-5 d-flex align-items-center">
+            <nz-avatar
+                nzIcon="user"
+                [nzSize]="64"
+                [nzSrc]="homeImg"
+                [nzAlt]="homeName"    
+            >
+            </nz-avatar>
+            <span class="h5 mb-0 ms-3 text-uppercase">{{ homeName }}</span>
+        </div>
+        <div class="col-2 d-flex align-items-center justify-content-center">
+            <span class="text-uppercase fw-4 text-placeholder">vs</span>
+        </div>
+        <div class="col-5 d-flex align-items-center justify-content-end">
+            <span class="h5 mb-0 me-3 text-uppercase text-end">{{awayName}}</span>
+            <nz-avatar
+                nzIcon="user"
+                [nzSize]="64"
+                [nzSrc]="awayImg"
+                [nzAlt]="awayName"
+            >
+            </nz-avatar>
+        </div>
+    </div>
+</div>

@@ -3,13 +3,13 @@
 </app-header>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 col-md-6 mb-3 mb-md-0">
+        <div class="col-12 col-lg-6 mb-3 mb-lg-0">
             <app-base-card
                 *ngIf="welcomeDisplay"
                 class="mb-3 welcome"
             >
                 <p class="h2 mb-0">
-                    <span class="fs-4 fs-md-7 me-2 me-md-3">👋</span>Welcome <strong>{{user.name}}</strong>
+                    <span class="fs-4 fs-lg-7 me-2 me-lg-3">👋</span>Welcome <strong>{{displayName()}}</strong>
                 </p>
                 <i
                     class="position-absolute close"
@@ -22,21 +22,69 @@
             <app-base-card>
                 <h2 class="fw-7 fs-4">Upcoming matches</h2>
                 <div class="line mb-2 bg-secondary"></div>
-                <div *ngFor="let a of createArray(5); let i = index">
-                    <app-skeleton [class]="i < 4 ? 'my-3 sk-5' : 'mt-3 sk-5'" ></app-skeleton>
-                    <div *ngIf="i < 4" class="line"></div>
-                </div>
+                <ng-template [ngIf]="data" [ngIfElse]="loading">
+                    <ng-template [ngIf]="data.upcomingMatches.length > 0" [ngIfElse]="empty" >
+                        <div *ngFor="let match of data.upcomingMatches">
+                            <app-match-list-item
+                                date="match.data.upcomingMatch.startDate"
+                                homeName="match.data.homeTeam.name"
+                                homeImg="match.data.homeTeam.logo"
+                                awayName="match.data.awayTeam.name"
+                                awayImg="match.data.awayTeam.logo"
+                            ></app-match-list-item>
+                            <div class="line"></div>
+                        </div>
+                    </ng-template>
+                </ng-template>
             </app-base-card>
         </div>
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-lg-6">
             <app-base-card>
                 <h2 class="fw-7 fs-4">My Teams</h2>
                 <div class="line mb-2 bg-secondary"></div>
-                <div *ngFor="let a of createArray(5); let i = index">
-                    <app-skeleton [class]="i < 4 ? 'my-3 sk-5' : 'mt-3 sk-5'" ></app-skeleton>
-                    <div *ngIf="i < 4" class="line"></div>
-                </div>
+                <ng-template [ngIf]="data" [ngIfElse]="loading">
+                    <ng-template [ngIf]="data.teams.length > 0" [ngIfElse]="empty" >
+                        <div *ngFor="let team of data.teams">
+                            <div class="d-flex align-items-center">
+                                <nz-avatar
+                                    nzIcon="user"
+                                    [nzSize]="64"
+                                    [nzSrc]="team.thumbnail"
+                                    [nzAlt]="team.name"
+                                >
+                                </nz-avatar>
+                                <span class="h5 mb-0 ms-3 text-uppercase">{{team.name}}</span>
+                            </div>
+                            <div class="line"></div>
+                        </div>
+                    </ng-template>
+                </ng-template>
             </app-base-card>
         </div>
     </div>
 </div>
+
+<ng-template #loading>
+    <div *ngFor="let a of createArray(5); let i = index">
+        <app-skeleton [class]="i < 4 ? 'my-3 sk-5' : 'mt-3 sk-5'" ></app-skeleton>
+        <div *ngIf="i < 4" class="line"></div>
+    </div>
+</ng-template>
+
+<ng-template #empty>
+    <nz-empty
+        class="my-5"
+        nzNotFoundContent="Empty"
+        [nzNotFoundFooter]="emptyFooter"
+    >
+        <ng-template #emptyFooter>
+            <button
+                class="btn bg-purple text-white mt-3 py-3 px-5 br-3"
+                role="button"
+                routerLink="/app/teams"
+            >
+                Add a team
+            </button>
+        </ng-template>
+    </nz-empty>
+</ng-template>

@@ -6,11 +6,24 @@
     border-radius: $value;
   }
 
+  .line-#{$name} {
+    height: $value;
+    background-color: $line;
+    border-radius: $value;
+  }
+
   @each $br-name, $br-val in $grid-breakpoints {
     @include media-breakpoint-up($br-name) { 
       .br-#{$br-name}-#{$name} {
         border-radius: $value;
       }
+
+      .line-#{$name}-#{$name} {
+        height: $value;
+        background-color: $line;
+        border-radius: $value;
+      }
+    
     }
   }
 }

@@ -11,7 +11,7 @@ import { apiRoutes, API_BASE_URL } from 'src/app/constants/api.enum';
 export class DashboardComponent implements OnInit {
 
   welcomeDisplay = true;
-  user: any = false;
+  data: any = false;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -20,8 +20,8 @@ export class DashboardComponent implements OnInit {
     const headers = new HttpHeaders().set('Authorization', authkey);
 
     const promise = this.http.get(API_BASE_URL + apiRoutes.dashboard, { headers: headers }).toPromise();
-    promise.then((data: any) => {
-      this.user = data;
+    promise.then((d: any) => {
+      this.data = d;
     }).catch((err: HttpErrorResponse) => {
       console.error(err);
     });
@@ -29,6 +29,14 @@ export class DashboardComponent implements OnInit {
 
   createArray(i: number): Array<any> {
     return new Array(i);
+  }
+
+  displayName(): string {
+    if(this.data) {
+      return 'name' in this.data.player ? this.data.player.name : this.data.username;
+    }
+
+    return '';
   }
 
 }

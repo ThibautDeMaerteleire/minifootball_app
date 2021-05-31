@@ -54,7 +54,7 @@ export class LoginComponent {
       return 'Email is not valid';
     }
 
-    if (this.email.length <= 6) { // Check Email
+    if (this.email.length < 6) { // Check Email
       return 'Email requires minimal 6 characters';
     }
 
@@ -62,7 +62,7 @@ export class LoginComponent {
       return 'Email requires maximal 255 characters';
     }
 
-    if (this.password.length <= 6) { // Check password
+    if (this.password.length < 6) { // Check password
       return 'Password requires minimal 6 characters';
     }
 

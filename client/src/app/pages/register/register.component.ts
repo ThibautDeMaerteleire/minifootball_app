@@ -58,7 +58,7 @@ export class RegisterComponent {
       return 'Email is not valid';
     }
 
-    if (this.email.length <= 6) { // Check Email
+    if (this.email.length < 6) { // Check Email
       return 'Email requires minimal 6 characters';
     }
 
@@ -66,7 +66,7 @@ export class RegisterComponent {
       return 'Email requires maximal 255 characters';
     }
 
-    if (this.username.length <= 6) { // Check username
+    if (this.username.length < 6) { // Check username
       return 'Username requires minimal 6 characters';
     }
 
@@ -74,7 +74,7 @@ export class RegisterComponent {
       return 'Username requires maximal 30 characters';
     }
 
-    if (this.password.length <= 6) { // Check password
+    if (this.password.length < 6) { // Check password
       return 'Password requires minimal 6 characters';
     }
 

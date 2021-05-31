@@ -11,6 +11,7 @@ import { BaseCardComponent } from './cards/base-card/base-card.component';
 import { AntdComponentsModule } from '../antd-components.module';
 import { SkeletonComponent } from './skeleton/skeleton.component';
 import { RouterModule } from '@angular/router';
+import { MatchListItemComponent } from './match-list-item/match-list-item.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { RouterModule } from '@angular/router';
     HeaderComponent,
     BaseCardComponent,
     SkeletonComponent,
+    MatchListItemComponent,
   ],
   imports: [
     CommonModule,
@@ -36,6 +38,7 @@ import { RouterModule } from '@angular/router';
     HeaderComponent,
     BaseCardComponent,
     SkeletonComponent,
+    MatchListItemComponent,
   ]
 })
 export class AppComponentsModule { }

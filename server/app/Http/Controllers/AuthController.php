@@ -11,13 +11,13 @@ class AuthController extends Controller {
 
   public function register(Request $request) {
     
-    if(User::find(['email' => $request->input('email')])) {
+    if(count(User::find(['email' => $request->input('email')])) > 0) {
       return response()->json([
-        'message' => 'Email already exists'
+        'message' => 'Email already exists' . $request->input('email')
       ], 406);
     }
 
-    if(User::find(['username' => $request->input('username')])) {
+    if(count(User::find(['username' => $request->input('username')])) > 0) {
       return response()->json([
         'message' => 'Username already exists'
       ], 406);
@@ -25,7 +25,7 @@ class AuthController extends Controller {
     
     $validatedData = $request->validate([
       'email' => 'required|string|email|max:255|unique:users',
-      'username' => 'required|string|min:6|max:30|unique:users',
+      'username' => 'required|string|min:5|max:30|unique:users',
       'password' => 'required|string|min:6',
     ]);
         
@@ -33,6 +33,7 @@ class AuthController extends Controller {
       'email' => $validatedData['email'],
       'email_verified_at' => null,
       'username' => $validatedData['username'],
+      'language' => 'nl',
       'password' => Hash::make($validatedData['password']),
     ]);
     

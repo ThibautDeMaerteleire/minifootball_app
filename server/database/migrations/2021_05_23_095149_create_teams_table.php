@@ -17,6 +17,7 @@ class CreateTeamsTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
+            $table->text('thumbnail');
             $table->string('slogan');
             $table->string('rbfa_id');
             $table->timestamps();
