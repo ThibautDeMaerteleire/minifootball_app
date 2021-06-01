@@ -9,10 +9,10 @@ use Illuminate\Support\Str;
 class AssetsController extends Controller {
   public function upload(Object $img) {
     $uuid = Str::random(20);
-    $path = "/public/images/{$img->name}-{$uuid}.{$img->ext}";
-    Storage::disk('local')->put($path, $img->content);
+    $path = "{$img->name}-{$uuid}.{$img->ext}";
+    Storage::disk('public')->put($path, file_get_contents($img->content));
 
-    return $path;
+    return [$path];
   }
   
   public function uploadImage(Request $request) {

@@ -16,4 +16,9 @@ class PagesController extends Controller {
     
     return $data;
   }
+
+  public function createPlayer(Request $request) {
+    $playerController = new PlayerController();
+    return $playerController->createPlayer($request);
+  }
 }

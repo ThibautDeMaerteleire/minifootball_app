@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class TeamsController extends Controller {
+  
   public function getTeams(Request $request) {
     $teams = DB::table('teammembers')
       ->leftJoin('teams', 'teammembers.team_id', '=', 'teams.id')
