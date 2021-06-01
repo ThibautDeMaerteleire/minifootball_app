@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\AssetsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\TeamsController;
 use App\Http\Controllers\UserController;
 
@@ -36,6 +38,10 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/dashboard', [PagesController::class, 'dashboard'])->middleware('auth:sanctum');
 
+Route::post('/dashboard', [PagesController::class, 'createPlayer'])->middleware('auth:sanctum');
+
 Route::get('/teams', [TeamsController::class, 'teams'])->middleware('auth:sanctum');
 
 Route::get('/me', [UserController::class, 'me'])->middleware('auth:sanctum');
+
+Route::post('/upload/image', [AssetsController::class, 'uploadImage'])->middleware('auth:sanctum');
