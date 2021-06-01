@@ -20,7 +20,7 @@
         <div class="d-flex flex-column ms-2">
             <label
                 [for]="name"
-                class="text-label custom-input-subtitle fw-6 text-uppercase {{inputField.value.length > 0 ? 'pr-2' : 'pr-5'}}"
+                class="text-label custom-input-subtitle fw-6 text-uppercase text-start {{inputField.value.length > 0 ? 'pr-2' : 'pr-5'}}"
             >
                 {{ subtitle }}
             </label>
@@ -28,7 +28,7 @@
                 #inputField
                 [value]="defaultInputValue"
                 [id]="name"
-                class="border-0 shadow-none p-0 text-title"
+                class="border-0 shadow-none p-0 text-title text-start"
                 [type]="inputType"
                 [formControl]="input"
                 (ngModelChange)="returnInputValue(inputField.value)"

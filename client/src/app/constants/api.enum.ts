@@ -1,4 +1,6 @@
-export const API_BASE_URL = 'http://localhost:8000/api';
+export const BASE_URL = 'http://localhost:8000';
+export const ASSETS_BASE_URL = BASE_URL + '/storage/';
+export const API_BASE_URL = BASE_URL + '/api';
 // export const API_BASE_URL = 'http://api.footy.thibautdemaerteleire.be/api';
 
 export enum apiRoutes {
@@ -9,4 +11,5 @@ export enum apiRoutes {
   'sanctum-crsf' = '/csrf-cookie',
   'dashboard' = '/dashboard',
   'me' = '/me',
+  'upload-image' = '/upload/image',
 }
