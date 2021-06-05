@@ -1,7 +1,7 @@
 .custom-input {
   border: 0.25rem solid var(--bs-placeholder);
 
-  &:focus-within {
+  &:focus-within, &:focus {
     transition: all 0.3s ease;
     border: 0.25rem solid var(--bs-purple) !important;
   

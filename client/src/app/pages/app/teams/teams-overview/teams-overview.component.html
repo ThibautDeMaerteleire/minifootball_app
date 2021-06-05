@@ -1,0 +1,54 @@
+<app-header class="app-header mb-3">
+    <h1 class="h5 m-0">Teams</h1>
+</app-header>
+<div class="container-fluid">
+    <div class="row">
+        <ng-template [ngIf]="teams" [ngIfElse]="loading">
+            <ng-template [ngIf]="teams.length > 0" [ngIfElse]="empty" >
+                <div
+                    *ngFor="let team of teams"
+                    class="col-12 col-md-4"
+                >
+                    <app-base-card
+                        className="d-flex flex-column align-items-center w-50 op-8"
+                        role="button"
+                        routerLink="/app/teams/{{team.id}}"
+                    >
+                        <nz-avatar
+                            nzIcon="user"
+                            [nzSize]="64"
+                            [nzSrc]="team.thumbnail"
+                            [nzAlt]="'logo' + team.name"
+                        >
+                        </nz-avatar>
+                        <h5 class="text-center mt-3 mb-0">{{team.name}}</h5>
+                    </app-base-card>
+                </div>
+            </ng-template>
+        </ng-template>
+    </div>
+</div>
+
+<ng-template #loading>
+    <div class="col-12 d-flex justify-content-center my-5">
+        <app-loader></app-loader>
+    </div>
+</ng-template>
+
+<ng-template #empty>
+    <div class="col-12">
+        <app-base-card className="d-flex flex-column align-items-center">
+            <nz-empty
+                class="mb-3 mt-7"
+                [nzNotFoundContent]="null"
+                nzNotFoundFooter="No teams found"
+            ></nz-empty>
+            <button
+                routerLink="/app/teams/create"
+                class="btn border br-4 op-7 mb-7"
+            >
+                Add team
+            </button>
+        </app-base-card>
+    </div>
+</ng-template>

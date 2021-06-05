@@ -4,7 +4,7 @@
             <form>
                 <h1 class="mb-4 fw-7">Sign up</h1>
                 <app-custom-input
-                    class="mb-3"
+                    className="mb-3"
                     (changeValueEvent)="email = $event"
                     icon="mail"
                     inputType="email"
@@ -13,7 +13,7 @@
                     name="email"
                 ></app-custom-input>
                 <app-custom-input
-                    class="mb-3"
+                    className="mb-3"
                     (changeValueEvent)="username = $event"
                     icon="user"
                     inputType="text"
@@ -22,7 +22,7 @@
                     name="username"
                 ></app-custom-input>
                 <app-custom-input
-                    class="mb-3"
+                    className="mb-3"
                     (iconClickEvent)="passwordVisible = !passwordVisible"
                     [icon]="passwordVisible ? 'eye-invisible' : 'eye'"
                     [inputType]="passwordVisible ? 'text' : 'password'"
@@ -32,7 +32,7 @@
                     subtitle="password"
                 ></app-custom-input>
                 <app-custom-input
-                    class="mb-3"
+                    className="mb-3"
                     (iconClickEvent)="passwordVisible = !passwordVisible"
                     [icon]="passwordVisible ? 'eye-invisible' : 'eye'"
                     [inputType]="passwordVisible ? 'text' : 'password'"

@@ -19,11 +19,19 @@ export enum baseRoutesEnum {
 export enum appRoutesEnum {
   dashboard = 'dashboard',
   teams = 'teams',
-  team_info = 'teams/:id/info',
-  team_specific = 'team/:id/overview',
   matches = 'matches',
   messages = 'messages',
   birthdays = 'birthdays',
   updates = 'updates',
   tutorials = 'tutorials'
+}
+
+export enum teamRoutesEnum {
+  overview = 'overview',
+  create = 'create',
+  specific = ':id/overview',
+  info = ':id/info',
+  players = ':id/players',
+  matches = ':id/matches',
+  searchTeam = 'search',
 }

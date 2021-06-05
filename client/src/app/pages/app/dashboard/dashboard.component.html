@@ -16,7 +16,7 @@
                     <div class="col-12 col-md-8">
 
                         <app-custom-input
-                            class="mb-3"
+                            className="mb-3"
                             (changeValueEvent)="firstname = $event"
                             inputType="text"
                             placeholder="name"
@@ -24,7 +24,7 @@
                             name="name"
                         ></app-custom-input>
                         <app-custom-input
-                            class="mb-3"
+                            className="mb-3"
                             (changeValueEvent)="surname = $event"
                             inputType="text"
                             placeholder="surname"
@@ -32,9 +32,18 @@
                             name="surname"
                         ></app-custom-input>
                     </div>
-                    <div class="col-12 col-md-4 d-flex align-items-center justify-content-center">
+                    <div class="col-12 col-md-4 d-flex align-items-center flex-column justify-content-center">
+                        <label class="w-100 text-start small fw-5 mb-1 ms-3">Birthday</label>
+                        <nz-date-picker
+                            class="mb-3"
+                            (ngModel)="birthday"
+                            (ngModelChange)="updateBirthday($event)"
+                        >
+                        </nz-date-picker>
                         <app-image-upload
+                            class="mb-2 mt-1"
                             (responseEvent)="thumbnailUrl = $event"
+                            placeholder="thumbnail"
                         >
                         </app-image-upload>
                     </div>
@@ -132,7 +141,7 @@
             <button
                 class="btn bg-purple text-white mt-3 py-3 px-5 br-3"
                 role="button"
-                routerLink="/app/teams"
+                routerLink="/app/teams/create"
             >
                 Add a team
             </button>

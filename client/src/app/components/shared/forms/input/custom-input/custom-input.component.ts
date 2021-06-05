@@ -14,7 +14,7 @@ export class CustomInputComponent {
   @Input() name = '';
   @Input() defaultInputValue = '';
   @Input() placeholder = 'placeholder';
-  @Input() class = '';
+  @Input() className = '';
 
   @Output() changeValueEvent = new EventEmitter<string>();
   @Output() iconClickEvent = new EventEmitter<string>();

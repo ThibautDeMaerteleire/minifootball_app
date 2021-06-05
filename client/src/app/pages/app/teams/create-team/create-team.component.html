@@ -1,0 +1,71 @@
+<app-header class="app-header mb-3">
+    <h1 class="h5 m-0">Create team</h1>
+</app-header>
+<div class="container-fluid row">
+    <div class="col-12 mt-2 mb-4">
+        <nz-steps>
+            <nz-step nzTitle="Info" [nzStatus]="getStatus(0)" nzIcon="solution"></nz-step>
+            <nz-step nzTitle="Find club" [nzStatus]="getStatus(1)" nzIcon="flag"></nz-step>
+            <nz-step nzTitle="Select team" [nzStatus]="getStatus(2)" nzIcon="team"></nz-step>
+            <nz-step nzTitle="Add players" [nzStatus]="getStatus(3)" nzIcon="usergroup-add"></nz-step>
+            <nz-step nzTitle="Done" [nzStatus]="getStatus(4)" nzIcon="check-circle"></nz-step>
+        </nz-steps>
+    </div>
+    <app-carousel-pagination
+        class="mb-3"
+        [widthPercentage]="carouselWidth()"
+    >
+    </app-carousel-pagination>
+    <div class="col-12">
+        <nz-carousel
+            #swiper
+            class="mt-2"
+            [nzDots]="false"
+            [nzEnableSwipe]="false"
+        >
+            <div nz-carousel-content class="mw-100">
+                <app-info-create-team
+                    [startData]="body"
+                    (nameEvent)="body.name = $event"
+                    (sloganEvent)="body.slogan = $event"
+                    (descriptionEvent)="body.description = $event"
+                    (thumbnailEvent)="body.thumbnail = $event"
+                >
+                </app-info-create-team>
+            </div>
+            <div nz-carousel-content class="mw-100">
+                <app-find-club-widget>
+                </app-find-club-widget>
+            </div>
+            <div nz-carousel-content class="mw-100">
+                <app-select-team-widget>
+                </app-select-team-widget>
+            </div>
+            <div nz-carousel-content class="mw-100">
+                <app-add-players-widget>
+                </app-add-players-widget>
+            </div>
+            <div nz-carousel-content class="mw-100">
+                <app-done-create-team>
+                </app-done-create-team>
+            </div>
+        </nz-carousel>
+    </div>
+    <p *ngIf="!!error" class="col-12 text-center text-red">{{error}}</p>
+    <div class="col-12 d-flex justify-content-between align-items-center pb-3">
+        <button
+            class="btn border op-7"
+            [disabled]="step === 0 "
+            (click)="prev(this.swiper.pre())"
+        >
+            Previous
+        </button>
+        <button
+            class="btn border op-7 {{step === maxStep || this.slideValidation().length > 0 ? '' : 'bg-antd-blue text-white'}}"
+            [disabled]="step === maxStep || this.slideValidation().length > 0"
+            (click)="next(this.swiper.next())"
+        >
+            Next
+        </button>
+    </div>
+</div>

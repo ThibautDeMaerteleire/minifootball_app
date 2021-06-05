@@ -10,6 +10,7 @@ export enum apiRoutes {
   'change-password' = '/change-password',
   'sanctum-crsf' = '/csrf-cookie',
   'dashboard' = '/dashboard',
+  'teams' = '/teams',
   'me' = '/me',
   'upload-image' = '/upload/image',
 }

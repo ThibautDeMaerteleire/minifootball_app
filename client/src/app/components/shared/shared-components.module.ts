@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AntdComponentsModule } from '../antd-components.module';
 import { RouterModule } from '@angular/router';
@@ -6,12 +6,19 @@ import { LanguageSelectorComponent } from './forms/select/language-selector/lang
 import { ReactiveFormsModule } from '@angular/forms';
 import { CustomInputComponent } from './forms/input/custom-input/custom-input.component';
 import { ImageUploadComponent } from './forms/upload/image-upload/image-upload.component';
+import { LoaderComponent } from './loader/loader.component';
+import { CarouselPaginationComponent } from './carousel-pagination/carousel-pagination.component';
+import { SmallCustomInputComponent } from './forms/input/small-custom-input/small-custom-input.component';
 
 @NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     LanguageSelectorComponent,
     CustomInputComponent,
     ImageUploadComponent,
+    LoaderComponent,
+    CarouselPaginationComponent,
+    SmallCustomInputComponent,
   ],
   imports: [
     CommonModule,
@@ -23,6 +30,9 @@ import { ImageUploadComponent } from './forms/upload/image-upload/image-upload.c
     LanguageSelectorComponent,
     CustomInputComponent,
     ImageUploadComponent,
+    LoaderComponent,
+    CarouselPaginationComponent,
+    SmallCustomInputComponent,
   ]
 })
 export class SharedComponentsModule { }

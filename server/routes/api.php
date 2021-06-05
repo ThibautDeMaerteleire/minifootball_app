@@ -40,7 +40,7 @@ Route::get('/dashboard', [PagesController::class, 'dashboard'])->middleware('aut
 
 Route::post('/dashboard', [PagesController::class, 'createPlayer'])->middleware('auth:sanctum');
 
-Route::get('/teams', [TeamsController::class, 'teams'])->middleware('auth:sanctum');
+Route::get('/teams', [TeamsController::class, 'getTeams'])->middleware('auth:sanctum');
 
 Route::get('/me', [UserController::class, 'me'])->middleware('auth:sanctum');
 

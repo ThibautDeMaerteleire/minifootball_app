@@ -9,21 +9,16 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller {
   
-  public function user(Request $request) {
-    // $user = DB::table('users')
-    //   ->leftJoin('players', 'users.id', '=', 'players.user_id')
-    //   ->where('users.id', $id)
-    //   ->limit(1)
-    //   ->get(['*', 'users.id as id', 'players.id as player_id']);
-    
-    $user = User::find($request->user()->id);
-    $user->player = Player::where('user_id', $request->user()->id)->get()[0];
+  public function user($id) {    
+    $user = User::find($id);
+    $playerData = Player::where('user_id', $id)->get();
+    $user->player = count($playerData) > 0 ? $playerData[0] : (object) [];
     
     return $user;
   }
   
   public function me(Request $request) {
-    $me = $this->user($request);
+    $me = $this->user($request->user()->id);
     return $me;
   }
 

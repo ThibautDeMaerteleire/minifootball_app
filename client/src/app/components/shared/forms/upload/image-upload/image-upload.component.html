@@ -1,5 +1,5 @@
 <nz-upload
-    class="avatar-uploader"
+    class="avatar-uploader {{className}}"
     [nzAction]="uploadUrl"
     nzName="avatar"
     [nzHeaders]="headers()"
@@ -10,7 +10,7 @@
 >
     <ng-container *ngIf="!avatarUrl">
         <i class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus'"></i>
-        <div class="ant-upload-text">Upload</div>
+        <div class="ant-upload-text ms-1">{{placeholder}}</div>
     </ng-container>
-    <img *ngIf="avatarUrl" [src]="avatarUrl" style="width: 100%" />
+    <img *ngIf="avatarUrl" class="mh-100" alt="uploaded avatar" [src]="avatarUrl" style="width: 100%" />
 </nz-upload>

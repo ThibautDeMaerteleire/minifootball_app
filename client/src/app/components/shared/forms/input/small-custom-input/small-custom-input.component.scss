@@ -1,0 +1,27 @@
+.small-custom-input {
+  transition: all 0.3s ease ease-in-out;
+  border: 0.2rem solid var(--bs-placeholder);
+
+  &:focus-within, &:focus {
+    border: 0.2rem solid var(--bs-purple) !important;
+  }
+  
+  .iconContainer {
+    transition: all 0.3s ease-in-out;
+    background-color: var(--bs-placeholder) !important;
+    
+    &.active {
+      transition: all 0.3s ease-in-out;
+      background-color: var(--bs-secondary) !important;
+    }
+  }
+
+  .icon {
+    font-size: 1.5rem;
+    color: var(--bs-white);
+  }
+
+  input {
+    outline: 0;
+  }
+}

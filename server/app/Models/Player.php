@@ -16,6 +16,7 @@ class Player extends Model {
     protected $fillable = [
       'name',
       'surname',
+      'birthday',
       'thumbnail_path',
       'user_id',
     ];

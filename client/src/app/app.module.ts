@@ -12,6 +12,7 @@ import { I18N_PROVIDERS } from './i18n.provider';
 import { CommonModule } from '@angular/common';
 import { ComponentsModule } from './components/components.module';
 import { PagesModule } from './pages/pages.module';
+import { WidgetsModule } from './widgets/widgets.module';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -30,6 +31,7 @@ import { PagesModule } from './pages/pages.module';
     IconsProviderModule,
     ComponentsModule,
     PagesModule,
+    WidgetsModule,
   ],
   providers: [I18N_PROVIDERS],
   bootstrap: [AppComponent]

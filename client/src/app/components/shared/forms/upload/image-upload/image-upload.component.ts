@@ -1,5 +1,5 @@
 import { HttpHeaders } from '@angular/common/http';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
@@ -19,6 +19,9 @@ export class ImageUploadComponent {
   avatarUrl?: string;
   uploadUrl = `${API_BASE_URL}${apiRoutes['upload-image']}`;
   imgBaseUrl = ASSETS_BASE_URL;
+
+  @Input() placeholder = 'upload';
+  @Input() className = '';
 
   @Output() responseEvent = new EventEmitter<string>();
 

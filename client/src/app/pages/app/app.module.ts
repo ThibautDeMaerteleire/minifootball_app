@@ -4,24 +4,34 @@ import { ComponentsModule } from 'src/app/components/components.module';
 
 import { AppLayoutComponent } from './layout/app-layout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { TeamsComponent } from './teams/teams.component';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
-import { SwiperModule } from 'swiper/angular';
 import { HttpClientModule } from '@angular/common/http';
+import { InfoCreateTeamComponent } from './teams/create-team/slides/info-create-team/info-create-team.component';
+import { DoneCreateTeamComponent } from './teams/create-team/slides/done-create-team/done-create-team.component';
+import { WidgetsModule } from 'src/app/widgets/widgets.module';
+import { TeamsOverviewComponent } from './teams/teams-overview/teams-overview.component';
+import { CreateTeamComponent } from './teams/create-team/create-team.component';
+import { SearchTeamComponent } from './teams/search-team/search-team.component';
+
+
 @NgModule({
   declarations: [
     AppLayoutComponent,
     DashboardComponent,
-    TeamsComponent,
+    InfoCreateTeamComponent,
+    DoneCreateTeamComponent,
+    TeamsOverviewComponent,
+    CreateTeamComponent,
+    SearchTeamComponent,
   ],
   imports: [
     CommonModule,
     ComponentsModule,
     BrowserModule,
     RouterModule,
-    SwiperModule,
-    HttpClientModule
+    HttpClientModule,
+    WidgetsModule,
   ],
   bootstrap: [
     AppLayoutComponent

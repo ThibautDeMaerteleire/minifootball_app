@@ -1,1 +1,18 @@
 @import '~ng-zorro-antd/ng-zorro-antd.min.css';
+
+.ant-steps {
+  &-item-title {
+    line-height: 1.55;
+  }
+
+  &-item-container {
+    display: flex;
+    align-items: flex-end;
+  }
+}
+
+nz-carousel {
+  div[nz-carousel-content], .slick-track, .slick-list {
+    height: fit-content !important;
+  }
+}

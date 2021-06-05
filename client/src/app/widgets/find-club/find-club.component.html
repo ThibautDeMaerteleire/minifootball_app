@@ -1,0 +1,65 @@
+<div class="row">
+    <app-small-custom-input
+        class="=col-12 col-md-6"
+        icon="search"
+        placeholder="search"
+        (changeValueEvent)="search = $event"
+    >
+    </app-small-custom-input>
+    <div class="col-12">
+        <ng-template [ngIf]="teams" [ngIfElse]="loading">
+            <div
+                *ngFor="let team of teams"
+                class="team row py-2 {{selectedItem === team.id ? 'bg-purple-bg' : ''}}"
+                routerLink="{{select ? '' : '/app/team/' + team.id}}"
+                target="_blank"
+                rel="noreferrer noopener"
+                (click)="selectedItem = team.id"
+            >
+                <div class="col-4">
+                    <img
+                        class=""
+                        [src]="team.thumbnail"
+                        alt="logo {{team.thumbnail}}"
+                    />
+                    <h2>{{team.name}}</h2>
+                </div>
+                <img
+                    [attr.href]="team.url"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    role="button"
+                    class="greyscale op-8"
+                    src="/assets/icons/rbfa_logo.png"
+                    alt="rbfa logo"
+                />
+                <i
+                    *ngIf="select"
+                    class="fs-4 {{team.id === selectedItem ? 'text-green' : ''}}"
+                    nz-icon
+                    [nzType]="team.id === selectedItem ? 'check-circle' : 'plus-circle'"
+                    nzTheme="outline"
+                ></i>
+            </div>
+        </ng-template>
+    </div>
+    <div>
+
+    </div>
+</div>
+
+
+<ng-template #empty>
+    <nz-empty
+        class="my-7"
+        [nzNotFoundContent]="null"
+        nzNotFoundFooter="No teams found"
+    >
+    </nz-empty>
+</ng-template>
+
+<ng-template #loading>
+    <div class="w-100 d-flex justify-content-center my-5">
+        <app-loader></app-loader>
+    </div>
+</ng-template>

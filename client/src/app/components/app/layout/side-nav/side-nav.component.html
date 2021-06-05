@@ -29,9 +29,47 @@
                 <i nz-icon nzType="pie-chart" nzTheme="outline"></i>
                 <span>Dashboard</span>
             </li>
-            <li routerLink="/app/teams" nzMatchRouter="nzSelected" nz-menu-item nz-tooltip nzTooltipPlacement="right" [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''">
-                <i nz-icon nzType="team" nzTheme="outline"></i>
-                <span>Teams</span>
+            <li
+                nz-submenu
+                nzTitle="Teams"
+                nzIcon="team"
+                nzMenuClassName=""
+            >
+                <ul>
+                    <li
+                        routerLink="/app/teams/overview"
+                        nzMatchRouter="nzSelected"
+                        nz-menu-item
+                        nz-tooltip
+                        nzTooltipPlacement="right"
+                        [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
+                    >
+                        <i nz-icon nzType="appstore" nzTheme="outline"></i>
+                        <span>My teams</span>
+                    </li>
+                    <li
+                        routerLink="/app/teams/create"
+                        nzMatchRouter="nzSelected"
+                        nz-menu-item
+                        nz-tooltip
+                        nzTooltipPlacement="right"
+                        [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
+                    >
+                        <i nz-icon nzType="plus" nzTheme="outline"></i>
+                        <span>Add team</span>
+                    </li>
+                    <li
+                        routerLink="/app/teams/search"
+                        nzMatchRouter="nzSelected"
+                        nz-menu-item
+                        nz-tooltip
+                        nzTooltipPlacement="right"
+                        [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
+                    >
+                        <i nz-icon nzType="search" nzTheme="outline"></i>
+                        <span>Search team</span>
+                    </li>
+                </ul>
             </li>
             <li
                 routerLink="/app/matches"

@@ -13,6 +13,7 @@ class PlayerController extends Controller {
       'name' => $request->name,
       'surname' => $request->surname,
       'thumbnail_path' => $request->thumbnail_path,
+      'birthday' => $request->birthday,
     ]);
     
     return $data;
@@ -24,6 +25,7 @@ class PlayerController extends Controller {
         'name' => $request->name,
         'surname' => $request->surname,
         'thumbnail_path' => $request->thumbnail,
+        'birthday' => $request->birthday,
       ]);
     
     return $data;

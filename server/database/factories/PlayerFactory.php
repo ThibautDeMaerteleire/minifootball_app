@@ -22,10 +22,11 @@ class PlayerFactory extends Factory
     public function definition()
     {
         return [
+            'birthday' => $this->faker->date(),
             'name' => $this->faker->firstName(),
-            'user_id' => random_int(0, 10),
             'surname' => $this->faker->lastName(),
             'thumbnail_path' => $this->faker->imageUrl(),
+            'user_id' => random_int(0, 10),
         ];          
     }
 }

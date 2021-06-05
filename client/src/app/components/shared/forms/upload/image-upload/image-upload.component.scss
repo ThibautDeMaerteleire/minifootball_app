@@ -1,4 +1,36 @@
-:host ::ng-deep .avatar-uploader > .ant-upload {
-  width: 128px;
-  height: 128px;
+:host ::ng-deep .avatar-uploader {
+  &.upload-xs > .ant-upload {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  &.upload-sm > .ant-upload {
+    width: 6rem;
+    height: 6rem;
+  }
+
+  &.upload-md > .ant-upload {
+    width: 8rem;
+    height: 8rem;
+  }
+
+  &.upload-lg > .ant-upload {
+    width: 10rem;
+    height: 10rem;
+  }
+
+  &.upload-xl > .ant-upload {
+    width: 10rem;
+    height: 10rem;
+  }
+
+  &.upload-full > .ant-upload {
+    width: 100%;
+    height: 13rem;
+  }
+
+  > .ant-upload {
+    width: 8rem;
+    height: 8rem;
+  }
 }
