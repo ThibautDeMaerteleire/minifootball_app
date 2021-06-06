@@ -5,6 +5,7 @@ import { SelectTeamComponent } from './select-team/select-team.component';
 import { AddPlayersComponent } from './add-players/add-players.component';
 import { ComponentsModule } from '../components/components.module';
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -18,6 +19,8 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     ComponentsModule,
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     FindClubComponent,

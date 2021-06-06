@@ -8,7 +8,7 @@ import { en_US, NzI18nService, } from 'ng-zorro-antd/i18n';
 export interface IPlayerData {
   name: string;
   surname: string;
-  thumbnail_path: string;
+  thumbnail: string;
   birthday: Date | number | null;
 }
 
@@ -68,7 +68,7 @@ export class DashboardComponent implements OnInit {
     const body: IPlayerData = {
       name: this.firstname,
       surname: this.surname,
-      thumbnail_path: this.thumbnailUrl,
+      thumbnail: this.thumbnailUrl,
       birthday: this.birthday,
     };
 

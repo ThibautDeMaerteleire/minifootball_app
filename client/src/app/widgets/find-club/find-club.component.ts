@@ -35,6 +35,7 @@ export class FindClubComponent implements OnInit {
 
   ngOnInit(): void {
     this.select ? this.getRBFAClubs() : this.getFootyTeams();
+    return;
   }
 
   getFootyTeams(searchValue = this.search): void {

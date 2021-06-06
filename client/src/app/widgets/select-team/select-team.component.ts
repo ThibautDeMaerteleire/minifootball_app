@@ -25,6 +25,7 @@ export class SelectTeamComponent {
 
   ngOnChanges(): void {
     if (this.clubId.toString().length > 0) this.getClubTeams();
+    return;
   }
 
   getClubTeams(): void {

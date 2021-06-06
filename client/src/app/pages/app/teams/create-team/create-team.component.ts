@@ -74,7 +74,7 @@ export class CreateTeamComponent {
     if (this.step === 2 && this.body.rbfa_team_id.length < 1) return 'You didn\'t select a team.';
     
     // Security for sliding too fast
-    if (this.lastSlideTime + 3000 > new Date().getTime()) return 'You want to slide too fast.';
+    if (this.lastSlideTime + 1000 > new Date().getTime()) return 'You want to slide too fast.';
     return '';
   }
 }

@@ -1,1 +1,145 @@
-<p>add-players works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-md-6 mt-3 ps-0">
+            <app-small-custom-input
+                class="mb-2"
+                icon="search"
+                placeholder="search"
+                name="searchPlayers"
+                (changeValueEvent)="search = $event"
+                (submitEvent)="getPlayers()"
+            >
+            </app-small-custom-input>
+            <p
+                *ngIf="error.length > 0"
+                class="text-red mt-3"
+            >
+                {{error}}
+            </p>
+        </div>
+        <div
+            class="col-12 col-md-6 mt-3 pe-0 d-flex flex-wrap"
+        >
+            <button
+                *ngFor="let player of getSelectedPlayers()"
+                class="btn bg-purple player-delete-btn text-white br-3 d-flex align-items-center me-2 mb-2"
+            >
+                {{player.username}}
+                <i
+                    class="fs-3 op-7 bi bi-x-lg ms-2"
+                    title="remove {{player.username}}"
+                    (click)="removePlayer(player.id)"
+                >
+                </i>
+            </button>
+        </div>
+        <div class="col-12 player-container border-top border-bottom">
+            <ng-template [ngIf]="!loading " [ngIfElse]="loadingTemplate" >
+                <ng-template [ngIf]="players.length > 0" [ngIfElse]="empty">
+                    <div
+                        *ngFor="let player of players"
+                        role="button"
+                        class="player row border-bottom {{checkSelected(player.id) ? 'bg-purple-bg' : ''}}"
+                    >
+                        <div
+                            class="col-5 justify-content-start"
+                            (click)="clickPlayer(player.id)"
+                        >
+                            <nz-avatar
+                                class="player-thumbnail"
+                                nzIcon="user"
+                                [nzSrc]="player.thumbnail"
+                                nzAlt="logo {{player.name}}"
+                                [nzSize]="64"
+                            >
+                            </nz-avatar>
+                            <div class="d-flex flex-column">
+                                <h2 class="h4 mb-0 shorten-text">{{player.name}} {{player.surname || ''}}</h2>
+                                <p class="h6 text-placeholder mb-0 shorten-text">{{player.username || ''}}</p>
+                            </div>
+                        </div>
+                        <div
+                            class="d-none col-1"
+                            (click)="clickPlayer(player.id)"
+                        >
+                            <h3 class="h6 text-placeholder mb-0 shorten-text">{{player.username || ''}}</h3>
+                        </div>
+                        <div
+                            class="col-2"
+                            (click)="clickPlayer(player.id)"
+                        >
+                            <h3 class="h6 text-placeholder mb-0 shorten-text">{{player.birthday | date:'d MMM y'}}</h3>
+                        </div>
+                        <div class="col-3">
+                            <nz-select
+                                class="w-100"
+                                nzPlaceHolder="Choose function"
+                                [nzBorderless]="false"
+                                [(ngModel)]="player.function"
+                                (ngModelChange)="onChangeSelectData($event)"
+                            >
+                                <nz-option
+                                    *ngFor="let function of functions"
+                                    [nzValue]="function.id"
+                                    [nzLabel]="function.name"
+                                    [attr.title]="function.description"
+                                >
+                                </nz-option>
+                            </nz-select>
+                        </div>
+                        <a
+                            class="col-1"
+                            [attr.href]="'/app/player/' + player.id"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            role="button"
+                            (click)="clickPlayer(player.id)"
+                        >
+                            <i
+                                class="fs-4 op-7"
+                                nz-icon
+                                nzType="profile"
+                                nzTheme="outline"
+                                title="go to {{player.name}}'s profile"
+                            >
+                            </i>
+                        </a>
+                        <div
+                            class="col-1"
+                            (click)="clickPlayer(player.id)"
+                        >
+                            <i
+                                class="fs-4 op-7 {{checkSelected(player.id) ? 'text-green' : ''}}"
+                                nz-icon
+                                [nzType]="checkSelected(player.id) ? 'check-circle' : 'plus-circle'"
+                                nzTheme="outline"
+                                role="button"
+                                title="add player"
+                            >
+                            </i>
+                        </div>
+                    </div>
+                </ng-template>
+            </ng-template>
+        </div>
+        <div>
+    
+        </div>
+    </div>
+</div>
+
+
+<ng-template #empty>
+    <nz-empty
+        class="my-7"
+        [nzNotFoundContent]="null"
+        nzNotFoundFooter="No players found"
+    >
+    </nz-empty>
+</ng-template>
+
+<ng-template #loadingTemplate>
+    <div class="w-100 d-flex justify-content-center my-5">
+        <app-loader></app-loader>
+    </div>
+</ng-template>

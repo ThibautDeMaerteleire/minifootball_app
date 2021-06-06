@@ -3,6 +3,7 @@
         <app-small-custom-input
             class="col-12 col-md-6 mt-3 ps-0"
             icon="search"
+            name="searchClubs"
             placeholder="search"
             (changeValueEvent)="search = $event"
             (submitEvent)="select ? getRBFAClubs() : getFootyTeams()"
