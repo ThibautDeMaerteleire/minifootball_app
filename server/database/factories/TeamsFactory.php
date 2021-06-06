@@ -26,7 +26,8 @@ class TeamsFactory extends Factory
             'description'=> $this->faker->text(),
             'thumbnail' => $this->faker->imageUrl(),
             'slogan' => $this->faker->text(50),
-            'rbfa_id' => $this->faker->text(10),
+            'rbfa_club_id' => $this->faker->numberBetween(100, 999),
+            'rbfa_team_id' => $this->faker->numberBetween(100, 999),
         ];
     }
 }

@@ -19,7 +19,8 @@ class CreateTeamsTable extends Migration
             $table->text('description');
             $table->text('thumbnail');
             $table->string('slogan');
-            $table->string('rbfa_id');
+            $table->string('rbfa_club_id');
+            $table->string('rbfa_team_id');
             $table->timestamps();
         });
     }

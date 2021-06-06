@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Teams::factory(10)->create();
         \App\Models\PracticeMatches::factory(10)->create();
         \App\Models\Teammembers::factory(10)->create();
-        \App\Models\Functions::factory(10)->create();
+        \App\Models\Functions::factory(1)->create();
         \App\Models\Tutorials::factory(10)->create();
         \App\Models\Updates::factory(10)->create();
     }

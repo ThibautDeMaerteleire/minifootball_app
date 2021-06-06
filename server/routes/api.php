@@ -42,6 +42,10 @@ Route::post('/dashboard', [PagesController::class, 'createPlayer'])->middleware(
 
 Route::get('/teams', [TeamsController::class, 'getTeams'])->middleware('auth:sanctum');
 
+Route::post('/search-teams', [TeamsController::class, 'searchTeams'])->middleware('auth:sanctum');
+
+Route::post('/get-players', [PlayerController::class, 'getPlayers'])->middleware('auth:sanctum');
+
 Route::get('/me', [UserController::class, 'me'])->middleware('auth:sanctum');
 
 Route::post('/upload/image', [AssetsController::class, 'uploadImage'])->middleware('auth:sanctum');

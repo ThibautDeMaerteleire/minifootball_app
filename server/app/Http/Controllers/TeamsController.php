@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Teams;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,6 +14,11 @@ class TeamsController extends Controller {
       ->where('teammembers.player_id', $request->user()->id)
       ->get();
     
+    return $teams;
+  }
+
+  public function searchTeams(Request $request) {
+    $teams = Teams::where('name', 'like', "%{$request->search}%")->get();
     return $teams;
   }
 }
