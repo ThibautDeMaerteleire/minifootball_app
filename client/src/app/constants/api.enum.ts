@@ -13,4 +13,5 @@ export enum apiRoutes {
   'teams' = '/teams',
   'me' = '/me',
   'upload-image' = '/upload/image',
+  'search-teams' = '/search-teams',
 }

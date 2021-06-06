@@ -1,0 +1,15 @@
+.team {
+  > * {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-logo {
+    margin-right: 1.5rem;
+  }
+  
+  .rbfa-logo {
+    width: 1.75rem;
+  }
+}

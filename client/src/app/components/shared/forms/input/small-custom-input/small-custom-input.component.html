@@ -1,4 +1,6 @@
-<div class="small-custom-input d-flex justify-content-between align-items-center p-1 br-2 w-100 {{ className }}">
+<div
+    class="small-custom-input d-flex justify-content-between align-items-center p-1 br-2 w-100 {{ className }}"
+>
     <input
         #inputField
         [value]="defaultInputValue"
@@ -8,18 +10,19 @@
         [formControl]="input"
         (ngModelChange)="changeValueEvent.emit(inputField.value)"
         [placeholder]="placeholder"
+        (keyup.enter)="submitEvent.emit(inputField.value)"
     />
     <div
         *ngIf="!!icon"
         class="iconContainer {{inputField.value.length > 0 ? 'active' : ''}} p-2 d-flex align-items-center justify-content-center br-2"
         role="button"
+        (click)="submitEvent.emit(inputField.value)"
     >
         <i
             nz-icon
             class="icon text-white"
             [nzType]="icon"
             nzTheme="outline"
-            (click)="submitEvent.emit(inputField.value)"
         >
         </i>
     </div>

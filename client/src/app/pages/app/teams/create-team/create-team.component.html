@@ -16,6 +16,23 @@
         [widthPercentage]="carouselWidth()"
     >
     </app-carousel-pagination>
+    <div class="col-12 d-flex justify-content-between align-items-center pb-3">
+        <button
+            class="btn border op-7"
+            [disabled]="step === 0 "
+            (click)="prev(this.swiper.pre())"
+        >
+            Previous
+        </button>
+        <button
+            class="btn border op-7 {{step === maxStep || this.slideValidation().length > 0 ? '' : 'bg-antd-blue text-white'}}"
+            [disabled]="step === maxStep || this.slideValidation().length > 0"
+            (click)="next(this.swiper.next())"
+        >
+            Next
+        </button>
+    </div>
+    <p *ngIf="!!error" class="col-12 text-center text-red">{{error}}</p>
     <div class="col-12">
         <nz-carousel
             #swiper
@@ -34,11 +51,17 @@
                 </app-info-create-team>
             </div>
             <div nz-carousel-content class="mw-100">
-                <app-find-club-widget>
+                <app-find-club-widget
+                    [select]="true"
+                    (selectedTeamId)="this.body.rbfa_club_id = $event.toString()"
+                >
                 </app-find-club-widget>
             </div>
             <div nz-carousel-content class="mw-100">
-                <app-select-team-widget>
+                <app-select-team-widget
+                    [clubId]="this.body.rbfa_club_id"
+                    (submitSelected)="this.body.rbfa_team_id = $event.toString()"
+                >
                 </app-select-team-widget>
             </div>
             <div nz-carousel-content class="mw-100">
@@ -50,22 +73,5 @@
                 </app-done-create-team>
             </div>
         </nz-carousel>
-    </div>
-    <p *ngIf="!!error" class="col-12 text-center text-red">{{error}}</p>
-    <div class="col-12 d-flex justify-content-between align-items-center pb-3">
-        <button
-            class="btn border op-7"
-            [disabled]="step === 0 "
-            (click)="prev(this.swiper.pre())"
-        >
-            Previous
-        </button>
-        <button
-            class="btn border op-7 {{step === maxStep || this.slideValidation().length > 0 ? '' : 'bg-antd-blue text-white'}}"
-            [disabled]="step === maxStep || this.slideValidation().length > 0"
-            (click)="next(this.swiper.next())"
-        >
-            Next
-        </button>
     </div>
 </div>

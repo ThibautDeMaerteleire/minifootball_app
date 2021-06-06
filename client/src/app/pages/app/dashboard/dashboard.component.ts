@@ -9,7 +9,7 @@ export interface IPlayerData {
   name: string;
   surname: string;
   thumbnail_path: string;
-  birthday: Date | null;
+  birthday: Date | number | null;
 }
 
 @Component({
@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
   firstname = '';
   surname = '';
   thumbnailUrl = '';
-  birthday: Date | null = null;
+  birthday = null;
   authkey: string = window.sessionStorage.getItem('Authentication') || '';
   playerErrMsg = '';
   
@@ -69,14 +69,13 @@ export class DashboardComponent implements OnInit {
       name: this.firstname,
       surname: this.surname,
       thumbnail_path: this.thumbnailUrl,
-      birthday: this.birthday
+      birthday: this.birthday,
     };
 
     console.log(body);
-
+    
     const promise = this.http.post(API_BASE_URL + apiRoutes.dashboard, body, { headers: this.headers() }).toPromise();
     promise.then((d: any) => {
-      console.log(d);
       this.getDashboardData();
     }).catch((err: HttpErrorResponse) => {
       console.error(err);
@@ -89,7 +88,7 @@ export class DashboardComponent implements OnInit {
     if (this.firstname.length < 2) return 'Firstname is to short';
     if (this.surname.length < 2) return 'Surname is to short';
     if (this.thumbnailUrl.length < 5) return 'No thumbnail selected';
-    if (!this.birthday) return 'No birthday was given';
+    if (this.birthday === null) return 'No birthday was given';
     return '';
   }
 
@@ -97,10 +96,5 @@ export class DashboardComponent implements OnInit {
     if(this.data.player) return 'name' in this.data.player;
 
     return true;
-  }
-
-  updateBirthday(date: Event): void {
-    console.log(date);
-    // this.birthday = date;
   }
 }

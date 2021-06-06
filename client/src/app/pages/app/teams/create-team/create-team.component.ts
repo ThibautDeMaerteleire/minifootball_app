@@ -6,7 +6,8 @@ export interface ICreateTeamBody {
   slogan: string;
   description: string;
   thumbnail: string;
-  rbfa_id: string;
+  rbfa_club_id: string;
+  rbfa_team_id: string;
 }
 
 @Component({
@@ -18,7 +19,6 @@ export class CreateTeamComponent {
 
   step = 0;
   maxStep = 4;
-  clubId = '';
   error = '';
   lastSlideTime = 0;
 
@@ -27,7 +27,8 @@ export class CreateTeamComponent {
     slogan: '',
     description: '',
     thumbnail: '',
-    rbfa_id: '',
+    rbfa_club_id: '',
+    rbfa_team_id: '',
   };
 
   constructor(private router: Router) {}
@@ -69,8 +70,8 @@ export class CreateTeamComponent {
       if (this.body.thumbnail.length < 5) return 'You forgot to select a thumbnail.';
     }
 
-    if (this.step === 1 && this.clubId.length < 1) return 'You didn\'t select a club.';
-    if (this.step === 2 && this.body.rbfa_id.length < 1) return 'You didn\'t select a team.';
+    if (this.step === 1 && this.body.rbfa_club_id.length < 1) return 'You didn\'t select a club.';
+    if (this.step === 2 && this.body.rbfa_team_id.length < 1) return 'You didn\'t select a team.';
     
     // Security for sliding too fast
     if (this.lastSlideTime + 3000 > new Date().getTime()) return 'You want to slide too fast.';

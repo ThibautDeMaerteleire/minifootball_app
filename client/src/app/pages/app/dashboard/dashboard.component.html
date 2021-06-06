@@ -5,16 +5,52 @@
     <div class="row">
         <div class="col-12 col-lg-6 mb-3 mb-lg-0">
             <app-base-card
+                *ngIf="welcomeDisplay"
+                className="mb-3"
+                class="welcome"
+            >
+                <p class="h2 mb-0 shorten-text">
+                    <span class="fs-4 fs-lg-7 me-2 me-lg-3">👋</span>Welcome <strong>{{displayName()}}</strong>
+                </p>
+                <i
+                    class="position-absolute close"
+                    (click)="welcomeDisplay = !welcomeDisplay"
+                    nz-icon
+                    nzType="close"
+                    nzTheme="outline"
+                ></i>
+            </app-base-card>
+            <app-base-card
+                className="mb-3"
+            >
+                <h2 class="fw-7 fs-4">Upcoming matches</h2>
+                <div class="line mb-2 bg-secondary"></div>
+                <ng-template [ngIf]="data" [ngIfElse]="loading">
+                    <ng-template [ngIf]="data.upcomingMatches.length > 0" [ngIfElse]="empty" >
+                        <div *ngFor="let match of data.upcomingMatches">
+                            <app-match-list-item
+                                date="match.data.upcomingMatch.startDate"
+                                homeName="match.data.homeTeam.name"
+                                homeImg="match.data.homeTeam.logo"
+                                awayName="match.data.awayTeam.name"
+                                awayImg="match.data.awayTeam.logo"
+                            >
+                            </app-match-list-item>
+                            <div class="line"></div>
+                        </div>
+                    </ng-template>
+                </ng-template>
+            </app-base-card>
+        </div>
+        <div class="col-12 col-lg-6">
+            <app-base-card
                 *ngIf="!checkForPlayerData()"
-                class="mb-3"
+                className="mb-3"
             >
                 <h2 class="fw-7 fs-4">Add player data</h2>
                 <div class="line mb-2 bg-secondary"></div>
-                <div
-                    class="my-3 text-center row"
-                >
+                <div class="my-3 text-center row">
                     <div class="col-12 col-md-8">
-
                         <app-custom-input
                             className="mb-3"
                             (changeValueEvent)="firstname = $event"
@@ -22,7 +58,8 @@
                             placeholder="name"
                             subtitle="name"
                             name="name"
-                        ></app-custom-input>
+                        >
+                        </app-custom-input>
                         <app-custom-input
                             className="mb-3"
                             (changeValueEvent)="surname = $event"
@@ -30,14 +67,14 @@
                             placeholder="surname"
                             subtitle="surname"
                             name="surname"
-                        ></app-custom-input>
+                        >
+                        </app-custom-input>
                     </div>
                     <div class="col-12 col-md-4 d-flex align-items-center flex-column justify-content-center">
                         <label class="w-100 text-start small fw-5 mb-1 ms-3">Birthday</label>
                         <nz-date-picker
                             class="mb-3"
-                            (ngModel)="birthday"
-                            (ngModelChange)="updateBirthday($event)"
+                            [(ngModel)]="birthday"
                         >
                         </nz-date-picker>
                         <app-image-upload
@@ -65,41 +102,8 @@
                 </div>
             </app-base-card>
             <app-base-card
-                *ngIf="welcomeDisplay"
-                class="mb-3 welcome"
+                className="mb-3"
             >
-                <p class="h2 mb-0">
-                    <span class="fs-4 fs-lg-7 me-2 me-lg-3">👋</span>Welcome <strong>{{displayName()}}</strong>
-                </p>
-                <i
-                    class="position-absolute close"
-                    (click)="welcomeDisplay = !welcomeDisplay"
-                    nz-icon
-                    nzType="close"
-                    nzTheme="outline"
-                ></i>
-            </app-base-card>
-            <app-base-card>
-                <h2 class="fw-7 fs-4">Upcoming matches</h2>
-                <div class="line mb-2 bg-secondary"></div>
-                <ng-template [ngIf]="data" [ngIfElse]="loading">
-                    <ng-template [ngIf]="data.upcomingMatches.length > 0" [ngIfElse]="empty" >
-                        <div *ngFor="let match of data.upcomingMatches">
-                            <app-match-list-item
-                                date="match.data.upcomingMatch.startDate"
-                                homeName="match.data.homeTeam.name"
-                                homeImg="match.data.homeTeam.logo"
-                                awayName="match.data.awayTeam.name"
-                                awayImg="match.data.awayTeam.logo"
-                            ></app-match-list-item>
-                            <div class="line"></div>
-                        </div>
-                    </ng-template>
-                </ng-template>
-            </app-base-card>
-        </div>
-        <div class="col-12 col-lg-6">
-            <app-base-card>
                 <h2 class="fw-7 fs-4">My Teams</h2>
                 <div class="line mb-2 bg-secondary"></div>
                 <ng-template [ngIf]="data" [ngIfElse]="loading">

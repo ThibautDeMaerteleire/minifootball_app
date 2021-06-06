@@ -1,1 +1,17 @@
-<p>select-team works!</p>
+<div class="container-fluid">
+    <div
+        class="row"
+    >
+        <p class="col-12 intro-text mb-4">
+            Select your team here and click on next if your team is selected.
+        </p>
+        <p
+            *ngFor="let option of options; let i = index"
+            role="button"
+            class="col-12 col-md-6 border-bottom {{i < 2 ? 'border-top' : ''}} {{i % 2 ? 'border-start' : ''}} h2 m-0 p-3 shorten-text {{selectedId == option.id ? 'bg-purple-bg' : ''}}"
+            (click)="setSelected(option.id)"
+        >
+            {{ option.name }}
+        </p>
+    </div>
+</div>

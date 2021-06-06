@@ -16,3 +16,10 @@ nz-carousel {
     height: fit-content !important;
   }
 }
+
+nz-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.5 !important;
+}

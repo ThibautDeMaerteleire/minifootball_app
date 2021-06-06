@@ -13,6 +13,7 @@ import { WidgetsModule } from 'src/app/widgets/widgets.module';
 import { TeamsOverviewComponent } from './teams/teams-overview/teams-overview.component';
 import { CreateTeamComponent } from './teams/create-team/create-team.component';
 import { SearchTeamComponent } from './teams/search-team/search-team.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { SearchTeamComponent } from './teams/search-team/search-team.component';
     RouterModule,
     HttpClientModule,
     WidgetsModule,
+    FormsModule,
   ],
   bootstrap: [
     AppLayoutComponent

@@ -1,50 +1,68 @@
-<div class="row">
-    <app-small-custom-input
-        class="=col-12 col-md-6"
-        icon="search"
-        placeholder="search"
-        (changeValueEvent)="search = $event"
-    >
-    </app-small-custom-input>
-    <div class="col-12">
-        <ng-template [ngIf]="teams" [ngIfElse]="loading">
-            <div
-                *ngFor="let team of teams"
-                class="team row py-2 {{selectedItem === team.id ? 'bg-purple-bg' : ''}}"
-                routerLink="{{select ? '' : '/app/team/' + team.id}}"
-                target="_blank"
-                rel="noreferrer noopener"
-                (click)="selectedItem = team.id"
-            >
-                <div class="col-4">
-                    <img
-                        class=""
-                        [src]="team.thumbnail"
-                        alt="logo {{team.thumbnail}}"
-                    />
-                    <h2>{{team.name}}</h2>
-                </div>
-                <img
-                    [attr.href]="team.url"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    role="button"
-                    class="greyscale op-8"
-                    src="/assets/icons/rbfa_logo.png"
-                    alt="rbfa logo"
-                />
-                <i
-                    *ngIf="select"
-                    class="fs-4 {{team.id === selectedItem ? 'text-green' : ''}}"
-                    nz-icon
-                    [nzType]="team.id === selectedItem ? 'check-circle' : 'plus-circle'"
-                    nzTheme="outline"
-                ></i>
-            </div>
-        </ng-template>
-    </div>
-    <div>
-
+<div class="container-fluid">
+    <div class="row">
+        <app-small-custom-input
+            class="col-12 col-md-6 mt-3 ps-0"
+            icon="search"
+            placeholder="search"
+            (changeValueEvent)="search = $event"
+            (submitEvent)="select ? getRBFAClubs() : getFootyTeams()"
+        >
+        </app-small-custom-input>
+        <div class="col-12 my-4 border-top border-bottom">
+            <ng-template [ngIf]="!loading " [ngIfElse]="loadingTemplate" >
+                <ng-template [ngIf]="teams.length > 0" [ngIfElse]="empty">
+                    <div
+                        *ngFor="let team of teams"
+                        role="button"
+                        class="team row py-3 border-bottom {{selectedItem === team.id ? 'bg-purple-bg' : ''}}"
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        (click)="clickItem(team.id)"
+                    >
+                        <div class="col-8 justify-content-start">
+                            <nz-avatar
+                                class="team-logo"
+                                nzIcon="team"
+                                [nzSrc]="team.thumbnail"
+                                nzAlt="logo {{team.name}}"
+                                [nzSize]="64"
+                            >
+                            </nz-avatar>
+                            <h3 class="mb-0 shorten-text">{{team.name}}</h3>
+                        </div>
+                        <a
+                            class="col-{{select ? '2' : '4 justify-content-end'}}"
+                            [attr.href]="team.url"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            role="button"
+                        >
+                            <img
+                                class="rbfa-logo greyscale op-8 {{select ? '' : 'me-3'}}"
+                                src="/assets/icons/rbfa_logo.png"
+                                alt="rbfa logo"
+                            />
+                        </a>
+                        <div
+                            *ngIf="select"
+                            class="col-2"
+                        >
+                            <i
+                                *ngIf="select"
+                                class="fs-4 {{team.id === selectedItem ? 'text-green' : ''}}"
+                                nz-icon
+                                [nzType]="team.id === selectedItem ? 'check-circle' : 'plus-circle'"
+                                nzTheme="outline"
+                            >
+                            </i>
+                        </div>
+                    </div>
+                </ng-template>
+            </ng-template>
+        </div>
+        <div>
+    
+        </div>
     </div>
 </div>
 
@@ -58,7 +76,7 @@
     </nz-empty>
 </ng-template>
 
-<ng-template #loading>
+<ng-template #loadingTemplate>
     <div class="w-100 d-flex justify-content-center my-5">
         <app-loader></app-loader>
     </div>
