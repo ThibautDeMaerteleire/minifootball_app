@@ -19,7 +19,7 @@ class CreatePlayersTable extends Migration
             $table->string('name');
             $table->text('surname');
             $table->date('birthday');
-            $table->text('thumbnail_path')->nullable();
+            $table->text('thumbnail');
             $table->timestamps();
         });
     }

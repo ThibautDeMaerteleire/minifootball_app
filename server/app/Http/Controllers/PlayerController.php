@@ -16,7 +16,7 @@ class PlayerController extends Controller {
       'user_id' => $request->user()->id,
       'name' => $request->name,
       'surname' => $request->surname,
-      'thumbnail_path' => $request->thumbnail_path,
+      'thumbnail' => $request->thumbnail,
       'birthday' =>  date('Y-m-d H:i:s', strtotime($request->birthday)),
     ]);
     
@@ -28,7 +28,7 @@ class PlayerController extends Controller {
       ->update([
         'name' => $request->name,
         'surname' => $request->surname,
-        'thumbnail_path' => $request->thumbnail,
+        'thumbnail' => $request->thumbnail,
         'birthday' => $request->birthday,
       ]);
     
@@ -46,20 +46,29 @@ class PlayerController extends Controller {
   }
 
   public function searchPlayers(Request $request) {
-    $teammembers = Teammembers::where('team_id', '!=', $request->teamId)->get('id');
-
-    $players = DB::table('players')
-      ->leftJoin('users', 'players.user_id', '=', 'users.id')
+    $GLOBALS['search'] = $request->search;
+    $teammembers = Teammembers::where('team_id', '=', $request->teamId)->get('id');
+    
+    $players = DB::table('users')
+      ->leftJoin('players', 'users.id', '=', 'players.user_id')
       ->where('players.user_id', '!=', $request->user()->id)
       ->whereNotIn('players.user_id', $teammembers)
-      ->where(function($query, $request) {
-        $query->orWhere('users.email', 'like', "%{$request->search}%")
-              ->orWhere('users.username', 'like', "%{$request->search}%")
-              ->orWhere('players.name', 'like', "%{$request->search}%")
-              ->orWhere('players.surname', 'like', "%{$request->search}%");
+      ->where(function($query) {
+        $query->where('users.email', 'like', "%{$GLOBALS['search']}%")
+              ->orWhere('users.username', 'like', "%{$GLOBALS['search']}%")
+              ->orWhere('players.name', 'like', "%{$GLOBALS['search']}%")
+              ->orWhere('players.surname', 'like', "%{$GLOBALS['search']}%");
       })
-      ->first(10)
-      ->get();
+      ->limit(10)
+      ->get([
+        'users.id',
+        'username',
+        'surname',
+        'name',
+        'email',
+        'birthday',
+        'thumbnail'
+      ]);
 
     return $players;
   }

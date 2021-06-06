@@ -25,8 +25,8 @@ class PlayerFactory extends Factory
             'birthday' => $this->faker->date(),
             'name' => $this->faker->firstName(),
             'surname' => $this->faker->lastName(),
-            'thumbnail_path' => $this->faker->imageUrl(),
-            'user_id' => random_int(0, 10),
+            'thumbnail' => '/default/default-thumbnail.jpg',
+            'user_id' => random_int(1, 11),
         ];          
     }
 }

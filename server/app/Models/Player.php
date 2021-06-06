@@ -17,7 +17,7 @@ class Player extends Model {
       'name',
       'surname',
       'birthday',
-      'thumbnail_path',
+      'thumbnail',
       'user_id',
     ];
 

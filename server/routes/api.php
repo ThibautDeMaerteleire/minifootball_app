@@ -4,6 +4,7 @@ use App\Http\Controllers\AssetsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FunctionsController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\TeamsController;
@@ -44,7 +45,9 @@ Route::get('/teams', [TeamsController::class, 'getTeams'])->middleware('auth:san
 
 Route::post('/search-teams', [TeamsController::class, 'searchTeams'])->middleware('auth:sanctum');
 
-Route::post('/get-players', [PlayerController::class, 'getPlayers'])->middleware('auth:sanctum');
+Route::post('/search-players', [PlayerController::class, 'searchPlayers'])->middleware('auth:sanctum');
+
+Route::get('/all-functions', [FunctionsController::class, 'getAll'])->middleware('auth:sanctum');
 
 Route::get('/me', [UserController::class, 'me'])->middleware('auth:sanctum');
 
