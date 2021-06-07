@@ -48,7 +48,7 @@ class PlayerController extends Controller {
   public function searchPlayers(Request $request) {
     $GLOBALS['search'] = $request->search;
     $teammembers = Teammembers::where('team_id', '=', $request->teamId)->get('id');
-    
+          
     $players = DB::table('users')
       ->leftJoin('players', 'users.id', '=', 'players.user_id')
       ->where('players.user_id', '!=', $request->user()->id)

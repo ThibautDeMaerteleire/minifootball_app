@@ -10,7 +10,7 @@
                 class="welcome"
             >
                 <p class="h2 mb-0 shorten-text">
-                    <span class="fs-4 fs-lg-7 me-2 me-lg-3">👋</span>Welcome <strong>{{displayName()}}</strong>
+                    <span class="fs-4 fs-lg-7 me-2 me-lg-3">👋</span>Welcome <strong>{{this.data.name || this.data.username}}</strong>
                 </p>
                 <i
                     class="position-absolute close"
@@ -44,7 +44,7 @@
         </div>
         <div class="col-12 col-lg-6">
             <app-base-card
-                *ngIf="!checkForPlayerData()"
+                *ngIf="!this.data.name"
                 className="mb-3"
             >
                 <h2 class="fw-7 fs-4">Add player data</h2>

@@ -7,17 +7,46 @@ use Illuminate\Database\Eloquent\Model;
 
 class Teammembers extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    public function player_id() {
-      return $this->hasOne('App\Models\Player');
-    }
+  /**
+   * The attributes that are mass assignable.
+   *
+   * @var array
+   */
+  protected $fillable = [
+    'player_id',
+    'function_id',
+    'team_id',
+  ];
 
-    public function function_id() {
-      return $this->hasOne('App\Models\Functions');
-    }
+  /**
+   * The attributes that should be hidden for arrays.
+   *
+   * @var array
+   */
+  protected $hidden = [
+  ];
 
-    public function team_id() {
-      return $this->hasOne('App\Models\Teams');
-    }
+  /**
+   * The attributes that should be cast to native types.
+   *
+   * @var array
+   */
+  protected $casts = [
+  ];
+  
+  public function user() {
+    return $this->hasOne(User::class, 'id', 'player_id');
+  }
+
+  public function func() {
+    return $this->hasOne(Functions::class, 'id', 'function_id');
+  }
+
+  public function team() {
+    return $this->hasOne(Teams::class, 'id', 'team_id');
+  }
+
+  public $timestamps = true;
 }

@@ -2,30 +2,33 @@
     <h1 class="h5 m-0">Teams</h1>
 </app-header>
 <div class="container-fluid">
-    <div class="row">
-        <ng-template [ngIf]="teams" [ngIfElse]="loading">
-            <ng-template [ngIf]="teams.length > 0" [ngIfElse]="empty" >
-                <div
-                    *ngFor="let team of teams"
-                    class="col-12 col-md-4"
-                >
-                    <app-base-card
-                        className="d-flex flex-column align-items-center w-50 op-8"
-                        role="button"
-                        routerLink="/app/teams/{{team.id}}"
+    <div class="container-fluid">
+
+        <div class="row">
+            <ng-template [ngIf]="teams" [ngIfElse]="loading">
+                <ng-template [ngIf]="teams.length > 0" [ngIfElse]="empty" >
+                    <div
+                        *ngFor="let team of teams; let i = index"
+                        class="col-12 col-md-4"
                     >
-                        <nz-avatar
-                            nzIcon="user"
-                            [nzSize]="64"
-                            [nzSrc]="team.thumbnail"
-                            [nzAlt]="'logo' + team.name"
+                        <app-base-card
+                            className="d-flex flex-column align-items-center op-8"
+                            role="button"
+                            routerLink="/app/teams/{{team.id}}"
                         >
-                        </nz-avatar>
-                        <h5 class="text-center mt-3 mb-0">{{team.name}}</h5>
-                    </app-base-card>
-                </div>
+                            <nz-avatar
+                                nzIcon="user"
+                                [nzSize]="64"
+                                [nzSrc]="assetsUrl + team.thumbnail"
+                                [nzAlt]="'logo' + team.name"
+                            >
+                            </nz-avatar>
+                            <h4 class="text-center mt-3 mb-0 shorten-text">{{team.name}}</h4>
+                        </app-base-card>
+                    </div>
+                </ng-template>
             </ng-template>
-        </ng-template>
+        </div>
     </div>
 </div>
 

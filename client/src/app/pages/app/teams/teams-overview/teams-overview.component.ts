@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { apiRoutes, API_BASE_URL } from 'src/app/constants/api.enum';
+import { apiRoutes, API_BASE_URL, ASSETS_BASE_URL } from 'src/app/constants/api.enum';
 
 @Component({
   selector: 'app-teams-overview',
@@ -10,6 +10,7 @@ import { apiRoutes, API_BASE_URL } from 'src/app/constants/api.enum';
 })
 export class TeamsOverviewComponent implements OnInit {
 
+  assetsUrl = ASSETS_BASE_URL;
   teams: Array<any> | false = false;
   authkey: string = window.sessionStorage.getItem('Authentication') || '';
 

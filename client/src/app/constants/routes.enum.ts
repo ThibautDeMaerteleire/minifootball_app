@@ -28,10 +28,14 @@ export enum appRoutesEnum {
 
 export enum teamRoutesEnum {
   overview = 'overview',
+  specific = ':id',
   create = 'create',
-  specific = ':id/overview',
-  info = ':id/info',
-  players = ':id/players',
-  matches = ':id/matches',
   searchTeam = 'search',
+}
+
+export enum teamSpecificRouterEnum {
+  specific = 'overview',
+  info = 'info',
+  players = 'players',
+  matches = 'matches',
 }

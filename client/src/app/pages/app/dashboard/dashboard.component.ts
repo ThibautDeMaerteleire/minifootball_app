@@ -25,8 +25,8 @@ export class DashboardComponent implements OnInit {
   surname = '';
   thumbnailUrl = '';
   birthday = null;
-  authkey: string = window.sessionStorage.getItem('Authentication') || '';
   playerErrMsg = '';
+  authkey: string = window.sessionStorage.getItem('Authentication') || '';
   
   constructor(private http: HttpClient, private router: Router, private i18n: NzI18nService) {}
   
@@ -51,14 +51,6 @@ export class DashboardComponent implements OnInit {
 
   createArray(i: number): Array<any> {
     return new Array(i);
-  }
-
-  displayName(): string {
-    if(this.data) {
-      return 'name' in this.data.player ? this.data.player.name : this.data.username;
-    }
-
-    return '';
   }
 
   addPlayerData(): void {
@@ -90,11 +82,5 @@ export class DashboardComponent implements OnInit {
     if (this.thumbnailUrl.length < 5) return 'No thumbnail selected';
     if (this.birthday === null) return 'No birthday was given';
     return '';
-  }
-
-  checkForPlayerData(): boolean {
-    if(this.data.player) return 'name' in this.data.player;
-
-    return true;
   }
 }

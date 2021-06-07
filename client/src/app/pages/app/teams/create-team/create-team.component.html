@@ -16,24 +16,26 @@
         [widthPercentage]="carouselWidth()"
     >
     </app-carousel-pagination>
-    <div class="col-12 d-flex justify-content-between align-items-center pb-3">
+    <div class="col-3 d-flex align-items-center">
         <button
             class="btn border op-7"
             [disabled]="step === 0 "
-            (click)="prev(this.swiper.pre())"
+            (click)="slide(this.swiper.pre(), step - 1)"
         >
             Previous
         </button>
+    </div>
+    <p class="col-6 text-center align-items-center text-red">{{error}}</p>
+    <div class="col-3 d-flex align-items-center justify-content-end">
         <button
             class="btn border op-7 {{step === maxStep || this.slideValidation().length > 0 ? '' : 'bg-antd-blue text-white'}}"
             [disabled]="step === maxStep || this.slideValidation().length > 0"
-            (click)="next(this.swiper.next())"
+            (click)="slide(this.swiper.next(), step + 1)"
         >
             Next
         </button>
     </div>
-    <p *ngIf="!!error" class="col-12 text-center text-red">{{error}}</p>
-    <div class="col-12">
+    <div class="col-12 mt-3">
         <nz-carousel
             #swiper
             class="mt-2"
@@ -65,13 +67,57 @@
                 </app-select-team-widget>
             </div>
             <div nz-carousel-content class="mw-100">
-                <app-add-players-widget>
+                <app-add-players-widget
+                    (submitPlayers)="this.body.players = $event"
+                >
                 </app-add-players-widget>
             </div>
             <div nz-carousel-content class="mw-100">
-                <app-done-create-team>
-                </app-done-create-team>
+                <div class="container-fluid py-5 d-flex {{!submittedTeamId ? 'flex-column' : ''}} align-items-center justify-content-center">
+                    <ng-template [ngIf]="!loading" [ngIfElse]="loadingTemplate">
+                        <ng-template [ngIf]="!submittedTeamId" [ngIfElse]="isSubmitted" >
+                            <lottie-player
+                                src="/assets/icons/upload-cloud.json"
+                                background="transparent"  speed="1"  style="width: 200px; height: 200px;"
+                                loop
+                                autoplay
+                            >
+                            </lottie-player>
+                            <p>Click on submit and save your team in the cloud.</p>
+                            <button
+                                class="btn bg-purple text-white br-3 mt-1"
+                                role="button"
+                                (click)="submit()"
+                            >
+                                Submit
+                            </button>
+                        </ng-template>
+                    </ng-template>
+                </div>
             </div>
         </nz-carousel>
     </div>
 </div>
+
+<ng-template #isSubmitted>
+    <button
+        class="btn bg-purple text-white br-3 me-2"
+        role="button"
+        routerLink="/app/teams/{{submittedTeamId}}"
+    >
+        check team
+    </button>
+    <button
+        class="btn bg-purple text-white br-3"
+        role="button"
+        (click)="addOtherTeam(this.swiper.goTo(0))"
+    >
+        Add another team
+    </button>
+</ng-template>
+
+<ng-template #loadingTemplate>
+    <div class="w-100 d-flex justify-content-center">
+        <app-loader></app-loader>
+    </div>
+</ng-template>

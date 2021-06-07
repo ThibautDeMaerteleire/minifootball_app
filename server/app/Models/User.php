@@ -45,6 +45,12 @@ class User extends Authenticatable {
     ];
 
     public function player() {
-      return $this->hasOne('App\Models\Player');
+      return $this->hasOne(Player::class, 'user_id');
     }
+
+    public function teammembers() {
+      return $this->belongsToMany(Teammembers::class, 'player_id');
+    }
+    
+    public $timestamps = true;
 }

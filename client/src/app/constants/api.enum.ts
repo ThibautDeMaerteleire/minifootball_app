@@ -13,6 +13,7 @@ export enum apiRoutes {
   'teams' = '/teams',
   'me' = '/me',
   'upload-image' = '/upload/image',
+  'create-team' = '/create-team',
   'search-teams' = '/search-teams',
   'search-players' = '/search-players',
   'all-functions' = '/all-functions',

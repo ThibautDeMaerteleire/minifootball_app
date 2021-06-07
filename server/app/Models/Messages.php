@@ -7,13 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Messages extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    public function sender() {
-      return $this->hasOne('App\Models\Player');
-    }
+  public function sender() {
+    return $this->hasOne('App\Models\Player');
+  }
 
-    public function receiver() {
-      return $this->hasOne('App\Models\Player');
-    }
+  public function receiver() {
+    return $this->hasOne('App\Models\Player');
+  }
+
+  public $timestamps = true;
 }

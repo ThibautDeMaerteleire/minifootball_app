@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Updates extends Model
 {
   use HasFactory;
+
+  public $timestamps = true;
 }

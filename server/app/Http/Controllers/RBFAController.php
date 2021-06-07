@@ -72,8 +72,9 @@ class RBFAController extends Controller {
 
     return Http::get($url);
   }
-
-  public function getUpcomingMatchesTeams(Request $request, $teams) { // Get upcoming matches from multiple teams
+  
+  // Get upcoming matches from multiple teams
+  public function getUpcomingMatchesTeams(Request $request, $teams) {
     $data = [];
     
     foreach ($teams as $team) {
