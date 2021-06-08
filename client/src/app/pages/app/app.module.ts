@@ -15,6 +15,7 @@ import { SearchTeamComponent } from './teams/search-team/search-team.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TutorialsComponent } from './tutorials/tutorials.component';
 import { BirthdaysComponent } from './birthdays/birthdays.component';
+import { UpdatesComponent } from './updates/updates.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -27,6 +28,7 @@ import { BirthdaysComponent } from './birthdays/birthdays.component';
     SearchTeamComponent,
     TutorialsComponent,
     BirthdaysComponent,
+    UpdatesComponent,
   ],
   imports: [
     CommonModule,

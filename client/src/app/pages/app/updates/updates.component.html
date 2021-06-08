@@ -1,0 +1,75 @@
+<app-header class="app-header mb-3">
+    <h1 class="h5 m-0">Updates</h1>
+</app-header>
+<div class="container-fluid tutorials">
+    <div class="container-fluid my-3">
+        <div class="row justify-content-center">
+            <ng-template [ngIf]="!loading" [ngIfElse]="loadingTemplate">
+                <ng-template [ngIf]="updates.length > 0" [ngIfElse]="empty">
+                    <div class="col-12 col-md-8 col-lg-6">
+                        <div class="accordion" id="accordionExample">
+                            <div
+                                *ngFor="let update of updates; let i = index"
+                                class="accordion-item"
+                            >
+                                <h2
+                                    class="accordion-header"
+                                    id="heading{{i}}"
+                                >
+                                    <button
+                                        class="accordion-button {{i === 0 ? '' : 'collapsed'}}"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        [attr.data-bs-target]="'#collapse' + i"
+                                        aria-expanded="true"
+                                        [attr.aria-controls]="'collapse' + i"
+                                    >
+                                        V{{update.version | uppercase}} {{update.title}}
+                                    </button>
+                                </h2>
+                                <div
+                                    id="collapse{{i}}"
+                                    class="accordion-collapse collapse {{i === 0 ? 'show' : ''}}"
+                                    [attr.aria-labelledby]="'heading' + i"
+                                    data-bs-parent="#accordionExample"
+                                >
+                                    <div class="accordion-body">
+                                        <p>
+                                            {{update.content}}
+                                        </p>
+                                        <h4 class="mb-2">Features:</h4>
+                                        <ul class="ms-4">
+                                            <li
+                                                *ngFor="let feature of JSONFeatures(update.features)"
+                                            >
+                                                {{feature}}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </ng-template>
+        </div>
+    </div>
+</div>
+
+
+<ng-template #loadingTemplate>
+    <div class="col-12 d-flex justify-content-center my-5">
+        <app-loader></app-loader>
+    </div>
+</ng-template>
+
+<ng-template #empty>
+    <div class="col-12">
+        <app-base-card className="d-flex flex-column align-items-center">
+            <nz-empty
+                class="mb-3 mt-7"
+                nzNotFoundContent="No tutorials found"
+            ></nz-empty>
+        </app-base-card>
+    </div>
+</ng-template>

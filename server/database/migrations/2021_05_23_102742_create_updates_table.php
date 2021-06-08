@@ -15,7 +15,7 @@ class CreateUpdatesTable extends Migration
     {
         Schema::create('updates', function (Blueprint $table) {
             $table->id();
-            $table->string('version');
+            $table->decimal('version');
             $table->string('title');
             $table->text('content');
             $table->json('features')->comment('An array with all of the features listed as strings');

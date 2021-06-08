@@ -19,4 +19,5 @@ export enum apiRoutes {
   'all-functions' = '/all-functions',
   'search-tutorials' = '/search-tutorials',
   'birthdays' = '/birthdays',
+  'updates' = '/updates',
 }

@@ -10,6 +10,7 @@
                     (changeValueEvent)="search = $event.toString()"
                     (submitEvent)="loadTutorials()"
                     icon="search"
+                    placeholder="Search"
                 >
                 </app-small-custom-input>
             </div>
@@ -17,7 +18,7 @@
                 <ng-template [ngIf]="tutorials.length > 0" [ngIfElse]="empty">
                     <div
                         *ngFor="let tutorial of tutorials"
-                        class="col-12 col-md-4 mb-4 tutorial-item"
+                        class="col-12 col-md-4 mb-4 op-7"
                         (click)="openedVideo = tutorial.youtube_url"
                     >
                         <app-base-card
@@ -26,7 +27,7 @@
                             className=""
                             role="button"
                         >
-                            <p class="h3 m-0 text-center shorten-text" >{{tutorial.title}}</p>
+                            <p class="h4 my-5 text-center shorten-text" >{{tutorial.title}}</p>
                         </app-base-card>
                     </div>
                 </ng-template>

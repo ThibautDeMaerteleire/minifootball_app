@@ -284,3 +284,7 @@ $close-color:           inherit;
 // Pagination
 $pagination-bg: 'transparent';
 $pagination-border-color: 'transparent';
+
+
+// Accordion
+$accordion-border-radius: map-get($spacers, 3);
