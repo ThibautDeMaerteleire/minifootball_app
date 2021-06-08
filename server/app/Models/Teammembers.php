@@ -40,7 +40,11 @@ class Teammembers extends Model
     return $this->hasOne(User::class, 'id', 'player_id');
   }
 
-  public function func() {
+  public function player() {
+    return $this->hasOne(Player::class, 'user_id', 'player_id');
+  }
+
+  public function function() {
     return $this->hasOne(Functions::class, 'id', 'function_id');
   }
 

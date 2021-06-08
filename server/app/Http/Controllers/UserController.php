@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 class UserController extends Controller {
   
   public function user($id) {    
-    $user = User::find($id)->player;    
-    return $user;
+    $user = User::with(['player'])->where('id', $id)->get();    
+    return $user[0];
   }
   
   public function me(Request $request) {

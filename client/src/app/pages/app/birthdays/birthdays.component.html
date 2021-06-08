@@ -1,0 +1,104 @@
+<app-header
+    class="app-header mb-3"
+    className="d-flex justify-content-between align-items-center"
+>
+    <h1 class="h5 m-0">Birthdays</h1>
+    <div
+        class="p-2 rounded-circle bg-purple text-white d-flex justify-content-between align-items-center"
+        role="button"
+        (click)="table = !table"
+    >
+        <i
+            nz-icon
+            [nzType]="table ? 'appstore' : 'bars'"
+            class=""
+        >
+        </i>
+    </div>
+</app-header>
+<div class="container-fluid">
+    <div class="container-fluid">
+        <div class="row">
+            <ng-template [ngIf]="!loading" [ngIfElse]="loadingTemplate">
+                <ng-template [ngIf]="players.length > 0" [ngIfElse]="empty">
+                    <ng-container *ngFor="let player of sortBirthdays()" >
+                        <div
+                            *ngIf="!table"
+                            class="col-12 col-md-4 mb-4"
+                        >
+                            <app-birthday-card
+                                [username]="player.user.username"
+                                [name]="player.player.name"
+                                [surname]="player.player.surname"
+                                [userId]="player.player_id"
+                                [birthday]="createDate(player.player.birthday)"
+                            >
+                            </app-birthday-card>
+                        </div>
+                        <div
+                            *ngIf="table"
+                            class="col-12 row border-bottom op-7 player"
+                        >
+                            <div
+                                class="col-6 justify-content-start"
+                            >
+                                <nz-avatar
+                                    class="player-thumbnail"
+                                    nzIcon="user"
+                                    [nzSrc]="player.player.thumbnail"
+                                    nzAlt="logo {{player.player.name}}"
+                                    [nzSize]="64"
+                                >
+                                </nz-avatar>
+                                <div class="d-flex flex-column">
+                                    <h2 class="h4 mb-0 shorten-text">{{player.player.name}} {{player.player.surname || ''}}</h2>
+                                    <p class="h6 text-placeholder mb-0 shorten-text">{{player.user.username || ''}}</p>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <h3 class="h6 text-placeholder mb-0 shorten-text">{{player.user.username || ''}}</h3>
+                            </div>
+                            <div
+                                class="col-3"
+                                routerLink="/app/player/{{player.player_id}}"
+                            >
+                                <h3 class="h6 text-placeholder mb-0 shorten-text">{{player.player.birthday | date:'d MMM y'}}</h3>
+                            </div>
+                            <a
+                                class="col-1"
+                                routerLink="/app/player/{{player.id}}"
+                            >
+                                <i
+                                    class="fs-4 op-7"
+                                    nz-icon
+                                    nzType="profile"
+                                    nzTheme="outline"
+                                    title="go to {{player.player.name}}'s profile"
+                                    role="button"
+                                >
+                                </i>
+                            </a>
+                        </div>
+                    </ng-container>
+                </ng-template>
+            </ng-template>
+        </div>
+    </div>
+</div>
+
+<ng-template #loadingTemplate>
+    <div class="col-12 d-flex justify-content-center my-5">
+        <app-loader></app-loader>
+    </div>
+</ng-template>
+
+<ng-template #empty>
+    <div class="col-12">
+        <app-base-card className="d-flex flex-column align-items-center">
+            <nz-empty
+                class="mb-3 mt-7"
+                nzNotFoundContent="No teammembers found"
+            ></nz-empty>
+        </app-base-card>
+    </div>
+</ng-template>

@@ -35,4 +35,15 @@ class TeammembersController extends Controller {
     $teammembers = Teammembers::insert($checkEmpty ? $me : $players);
     return $teammembers;
   }
+
+  public function getBirthDays(Request $request) {
+    $allTeams = Teammembers::where('player_id', $request->user()->id)->get('team_id');
+    $teamsArr = collect($allTeams)->map(function ($team) {
+      return $team['team_id'];
+    });
+    
+    return Teammembers::with(['user', 'player'])
+      ->whereIn('team_id', $teamsArr->toArray())
+      ->get();
+  }
 }

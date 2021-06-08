@@ -9,6 +9,7 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\TeammembersController;
 use App\Http\Controllers\TeamsController;
+use App\Http\Controllers\TutorialsController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -56,4 +57,8 @@ Route::get('/all-functions', [FunctionsController::class, 'getAll'])->middleware
 
 Route::get('/me', [UserController::class, 'me'])->middleware('auth:sanctum');
 
+Route::get('/birthdays', [TeammembersController::class, 'getBirthdays'])->middleware('auth:sanctum');
+
 Route::post('/upload/image', [AssetsController::class, 'uploadImage'])->middleware('auth:sanctum');
+
+Route::post('/search-tutorials', [TutorialsController::class, 'searchTutorials'])->middleware('auth:sanctum');

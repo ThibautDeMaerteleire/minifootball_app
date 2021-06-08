@@ -49,7 +49,7 @@ class User extends Authenticatable {
     }
 
     public function teammembers() {
-      return $this->belongsToMany(Teammembers::class, 'player_id');
+      return $this->belongsTo(Teammembers::class, 'player_id');
     }
     
     public $timestamps = true;

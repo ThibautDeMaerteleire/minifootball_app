@@ -19,7 +19,7 @@ class RBFAController extends Controller {
     return Http::get($url);
   }
 
-  public function getClubMatches(Request $request, $clubId, $startDate = '2000/09/25', $endDate= '2020/10/01' ) {
+  public function getClubMatches(Request $request, $clubId, $startDate = '2000/09/25', $endDate= '2020/10/01') {
     $url = "https://datalake-prod2018.rbfa.be/graphql?operationName=clubMatchesAssignations&variables={'clubId':'{$clubId}','language':'{$request->user()->language}','startDate':'{$startDate}','endDate':'{$endDate}','hasLocation':false}&extensions={'persistedQuery':{'version':1,'sha256Hash':'dce94fb92144a8ad9585674cd5ebc07953abbfb024f24ee50fe2ba9237e29542'}}";
 
     return Http::get($url);
@@ -27,7 +27,7 @@ class RBFAController extends Controller {
 
   public function getClub(Request $request, $clubId) {
     $url = "https://datalake-prod2018.rbfa.be/graphql?operationName=getClub&variables={'clubId':'{$clubId}','language':'{$request->user()->language}'}&extensions={'persistedQuery':{'version':1,'sha256Hash':'06c0247013693e2d50cc348462b47640d0c1b61e12e6c0c618534c2d404e4779'}}";
-    
+
     return Http::get($url);
   }
 
@@ -78,7 +78,7 @@ class RBFAController extends Controller {
     $data = [];
     
     foreach ($teams as $team) {
-      array_push($data, $this->getUpcomingMatches($request, $team->rbfa_id));
+      array_push($data, $this->getUpcomingMatches($request, $team['team']['rbfa_team_id']));
     }
     
     return $data;

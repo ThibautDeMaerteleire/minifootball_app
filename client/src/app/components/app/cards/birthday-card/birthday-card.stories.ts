@@ -5,7 +5,7 @@ import { Story, Meta } from '@storybook/angular/types-6-0';
 import { BirthdayCardComponent } from './birthday-card.component';
 
 export default {
-  title: 'Components/Cards',
+  title: 'Components/Cards/Birthday Card',
   component: BirthdayCardComponent,
   decorators: [
     moduleMetadata({
@@ -19,11 +19,13 @@ export default {
 
 const Template: Story<BirthdayCardComponent> = (args: BirthdayCardComponent) => ({
   props: args,
-  template: `<app-birthday-card>This is the content.</app-birthday-card>`
+  template: `<app-birthday-card ${args}></app-birthday-card>`
 });
-
-
 
 export const BirthdayCard = Template.bind({});
 BirthdayCard.args = {
+  name: 'King',
+  surname: 'Leopold',
+  username: 'kingleo2',
+  birthday: new Date(),
 };

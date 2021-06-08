@@ -1,3 +1,27 @@
-<p>
-  birthday-card works!
-</p>
+<app-base-card
+    role="button"
+    className="w-100 birthday-card text-center mt-5 op-8"
+    routerLink="/app/player/{{playerId}}"
+>
+    <nz-avatar
+        class="birthday-card-thumbnail"
+        nzIcon="user"
+        [nzSrc]="assetsUrl + thumbnail"
+        nzAlt="logo {{name}} {{surname}}"
+        [nzSize]="96"
+    >
+    </nz-avatar>
+    <p class="mb-2 mt-1 text-placeholder">{{username}}</p>
+    <p class="h3">{{name}} {{surname}}</p>
+    <p
+        title=" {{name}} {{surname}}'s birthday will be one {{birthday | date:'d LLLL'}}"
+    >
+        {{birthday | date:'d LLLL'}}
+    </p>
+    <p
+        class="m-0 h6"
+        title="will become {{getAge()}} year old"
+    >
+        {{getAge()}} year
+    </p>
+</app-base-card>

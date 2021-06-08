@@ -1,60 +1,59 @@
 <app-header class="app-header mb-3">
     <h1 class="h5 m-0">Tutorials</h1>
 </app-header>
-<div class="container-fluid">
+<div class="container-fluid tutorials">
     <div class="container-fluid my-3">
-        <div class="col-12 mb-3">
-            <app-small-custom-input
-                className=""
-                (changeValueEvent)="search = $event.toString()"
-                (submitEvent)="loadTutorials()"
-                icon="search"
-            >
-            </app-small-custom-input>
-        </div>
-        <ng-template [ngIf]="tutorials" [ngIfElse]="loadingTemplate">
-            <ng-template [ngIf]="tutorials.length > 0" [ngIfElse]="empty">
-                <div
-                    *ngIf="let tutorial of tutorials"
-                    class="col-3"
+        <div class="row">
+            <div class="col-12 mb-3">
+                <app-small-custom-input
+                    className=""
+                    (changeValueEvent)="search = $event.toString()"
+                    (submitEvent)="loadTutorials()"
+                    icon="search"
                 >
-                data-bs-toggle="modal"
-                data-bs-target="#videoModal"
-                    <app-base-card
-                        className=""
+                </app-small-custom-input>
+            </div>
+            <ng-template [ngIf]="tutorials" [ngIfElse]="loadingTemplate">
+                <ng-template [ngIf]="tutorials.length > 0" [ngIfElse]="empty">
+                    <div
+                        *ngFor="let tutorial of tutorials"
+                        class="col-12 col-md-4 mb-4 tutorial-item"
+                        (click)="openedVideo = tutorial.youtube_url"
+                    >
+                        <app-base-card
+                            data-bs-toggle="modal"
+                            data-bs-target="#videoModal"
+                            className=""
+                            role="button"
                         >
-                        <!-- (click)="openedVideo = tutorial.youtube_url" -->
-                        <!-- <h3>{{tutorial.title}}</h3> -->
-                    </app-base-card>
-                </div>
+                            <p class="h3 m-0 text-center shorten-text" >{{tutorial.title}}</p>
+                        </app-base-card>
+                    </div>
+                </ng-template>
             </ng-template>
-        </ng-template>
+        </div>
     </div>
 </div>
 
 <div
     class="modal fade"
     id="videoModal"
-    data-bs-backdrop="static"
     data-bs-keyboard="false"
     tabindex="-1"
     aria-labelledby="videoModalLabel"
     aria-hidden="true"
 >
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                >
-                </button>
-            </div>
-            <div class="modal-body">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content br-3">
+            <div class="modal-body p-0">
                 <div class="ratio ratio-16x9">
-                    <iframe [src]="openedVideo" allow="autoplay;" allowfullscreen></iframe>
+                    <iframe
+                        class="br-3"
+                        [src]="getUrl(openedVideo)"
+                        allow="autoplay;"
+                        allowfullscreen
+                    >
+                    </iframe>
                 </div>
             </div>
         </div>
@@ -72,7 +71,7 @@
         <app-base-card className="d-flex flex-column align-items-center">
             <nz-empty
                 class="mb-3 mt-7"
-                nzNotFoundFooter="No tutorials found"
+                nzNotFoundContent="No tutorials found"
             ></nz-empty>
         </app-base-card>
     </div>

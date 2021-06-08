@@ -4,20 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Teammembers;
 use App\Models\Teams;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class TeamsController extends Controller {
   
   public function getTeams(Request $request) {
-    $allTeams = Teammembers::where('player_id', strval($request->user()->id));
-    $teams = $allTeams->func;
-    // $teams = Teammembers::find()->where('player_id', strval($request->user()->id))->user;
-    // $teams = DB::table('teammembers')
-    //   ->leftJoin('teams', 'teammembers.team_id', '=', 'teams.id')
-    //   ->where('teammembers.player_id', $request->user()->id)
-    //   ->get();
-    
+    $teams = Teammembers::with(['team'])
+      ->where('player_id', strval($request->user()->id))
+      ->get();
+
     return $teams;
   }
 
