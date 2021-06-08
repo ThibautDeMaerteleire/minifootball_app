@@ -1,5 +1,5 @@
 import { HttpClient, HttpErrorResponse, } from '@angular/common/http';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { RbfaApiService } from 'src/app/services/rbfa-api/rbfa-api.service';
 
 export interface ITeamClubItem {
@@ -12,7 +12,7 @@ export interface ITeamClubItem {
   templateUrl: './select-team.component.html',
   styleUrls: ['./select-team.component.scss']
 })
-export class SelectTeamComponent {
+export class SelectTeamComponent implements OnChanges {
 
   options: ITeamClubItem[] | [] = [];
   loading = false;
@@ -24,12 +24,14 @@ export class SelectTeamComponent {
   constructor(private http: HttpClient, private rbfaApi: RbfaApiService) { }
 
   ngOnChanges(): void {
-    if (this.clubId.toString().length > 0) this.getClubTeams();
+    if (this.clubId.toString().length > 0) {
+      return this.getClubTeams();
+    }
     return;
   }
 
   getClubTeams(): void {
-    this.loading = true; 
+    this.loading = true;
     const promise = this.http.get(this.rbfaApi.searchClubTeams(this.clubId)).toPromise();
 
     promise.then((d: any) => {
@@ -39,7 +41,7 @@ export class SelectTeamComponent {
       console.error(err);
       this.loading = false;
     });
-    
+
     return;
   }
 

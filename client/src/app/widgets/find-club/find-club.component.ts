@@ -26,9 +26,9 @@ export class FindClubComponent implements OnInit {
   search = '';
   teams: ITeam[] | [] = [];
   authkey: string = window.sessionStorage.getItem('Authentication') || '';
-  
+
   @Input() select = false;
-  
+
   @Output() selectedTeamId = new EventEmitter<string | number>();
 
   constructor(private http: HttpClient, private router: Router, private rbfaApi: RbfaApiService) {}
@@ -59,7 +59,7 @@ export class FindClubComponent implements OnInit {
   }
 
   getRBFAClubs(searchValue = this.search.length > 0 ? this.search : '*'): void {
-    this.loading = true; 
+    this.loading = true;
     const promise = this.http.get(this.rbfaApi.searchClubs(searchValue)).toPromise();
 
     promise.then((d: any) => {
@@ -69,7 +69,7 @@ export class FindClubComponent implements OnInit {
       console.error(err);
       this.loading = false;
     });
-    
+
     return;
   }
 
@@ -106,6 +106,9 @@ export class FindClubComponent implements OnInit {
   clickItem(id: string | number): void {
     this.selectedItem = id;
     this.selectedTeamId.emit(this.teams.find((e) => e.id == id)?.rbfa_club_id);
-    if (!this.select) this.router.navigateByUrl('/app/team/' + id);
+    if (!this.select) {
+      this.router.navigateByUrl('/app/team/' + id);
+      return;
+    }
   }
 }

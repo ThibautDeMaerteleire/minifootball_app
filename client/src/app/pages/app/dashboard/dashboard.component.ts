@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit, } from '@angular/core';
 import { Router } from '@angular/router';
-import { apiRoutes, API_BASE_URL } from 'src/app/constants/api.enum';
+import { apiRoutes, API_BASE_URL, ASSETS_BASE_URL } from 'src/app/constants/api.enum';
 import { en_US, NzI18nService, } from 'ng-zorro-antd/i18n';
 
 
@@ -19,6 +19,7 @@ export interface IPlayerData {
 })
 export class DashboardComponent implements OnInit {
 
+  assetsUrl = ASSETS_BASE_URL;
   welcomeDisplay = true;
   data: any = false;
   firstname = '';
@@ -27,9 +28,9 @@ export class DashboardComponent implements OnInit {
   birthday = null;
   playerErrMsg = '';
   authkey: string = window.sessionStorage.getItem('Authentication') || '';
-  
+
   constructor(private http: HttpClient, private router: Router, private i18n: NzI18nService) {}
-  
+
   ngOnInit(): void {
     this.i18n.setLocale(en_US);
     this.getDashboardData();
@@ -38,7 +39,7 @@ export class DashboardComponent implements OnInit {
   headers(): HttpHeaders {
     return new HttpHeaders().set('Authorization', this.authkey);
   }
-  
+
   getDashboardData(): void {
     const promise = this.http.get(API_BASE_URL + apiRoutes.dashboard, { headers: this.headers() }).toPromise();
     promise.then((d: any) => {
@@ -55,7 +56,9 @@ export class DashboardComponent implements OnInit {
 
   addPlayerData(): void {
     this.playerErrMsg = this.addPlayerValidation();
-    if (this.playerErrMsg.length > 0) return;
+    if (this.playerErrMsg.length > 0) {
+      return;
+    }
 
     const body: IPlayerData = {
       name: this.firstname,
@@ -65,7 +68,7 @@ export class DashboardComponent implements OnInit {
     };
 
     console.log(body);
-    
+
     const promise = this.http.post(API_BASE_URL + apiRoutes.dashboard, body, { headers: this.headers() }).toPromise();
     promise.then((d: any) => {
       this.getDashboardData();
@@ -77,10 +80,22 @@ export class DashboardComponent implements OnInit {
   }
 
   addPlayerValidation(): string {
-    if (this.firstname.length < 2) return 'Firstname is to short';
-    if (this.surname.length < 2) return 'Surname is to short';
-    if (this.thumbnailUrl.length < 5) return 'No thumbnail selected';
-    if (this.birthday === null) return 'No birthday was given';
+    if (this.firstname.length < 2) {
+      return 'Firstname is to short';
+    }
+
+    if (this.surname.length < 2) {
+      return 'Surname is to short';
+    }
+
+    if (this.thumbnailUrl.length < 5) {
+      return 'No thumbnail selected';
+    }
+
+    if (this.birthday === null) {
+      return 'No birthday was given';
+    }
+
     return '';
   }
 }

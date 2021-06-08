@@ -47,7 +47,7 @@ export class ImageUploadComponent {
       observer.next(isJpgOrPng && isLt2M);
       observer.complete();
     });
-  };
+  }
 
   private getBase64(img: File, callback: (img: string) => void): void {
     const reader = new FileReader();
@@ -56,7 +56,7 @@ export class ImageUploadComponent {
   }
 
   handleChange(info: { file: NzUploadFile }): void {
-    switch (info.file.status) {  
+    switch (info.file.status) {
     case 'uploading':
       this.loading = true;
       break;
@@ -77,8 +77,8 @@ export class ImageUploadComponent {
 
   headers(): HttpHeaders | any {
     const authKey = window.sessionStorage.getItem('Authentication');
-    
-    if(authKey) {
+
+    if (authKey) {
       return { Authorization: authKey };
     }
 

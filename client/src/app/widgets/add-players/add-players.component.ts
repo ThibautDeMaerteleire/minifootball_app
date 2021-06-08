@@ -33,7 +33,7 @@ export class AddPlayersComponent implements OnInit {
   functions: IFunction[] | [] = [];
   selectedPlayers: Array<string | number> | [] = [];
   error = '';
-  
+
   @Input() search = '';
   @Input() teamId: string | number = '';
 
@@ -121,7 +121,7 @@ export class AddPlayersComponent implements OnInit {
   }
 
   getSelectedPlayers(): IPlayer[] | [] {
-    return this.players.filter((player: IPlayer) => 
+    return this.players.filter((player: IPlayer) =>
       !!this.selectedPlayers.find((id: string | number) => id == player.id));
   }
 
@@ -136,7 +136,9 @@ export class AddPlayersComponent implements OnInit {
 
   submit(): void {
     this.error = this.validation();
-    if (this.error.length > 0) return;
+    if (this.error.length > 0) {
+      return;
+    }
     this.submitPlayers.emit(this.getSelectedPlayers());
     return;
   }

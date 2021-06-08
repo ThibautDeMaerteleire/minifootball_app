@@ -13,6 +13,7 @@ import { TeamsOverviewComponent } from './teams/teams-overview/teams-overview.co
 import { CreateTeamComponent } from './teams/create-team/create-team.component';
 import { SearchTeamComponent } from './teams/search-team/search-team.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TutorialsComponent } from './tutorials/tutorials.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TeamsOverviewComponent,
     CreateTeamComponent,
     SearchTeamComponent,
+    TutorialsComponent,
   ],
   imports: [
     CommonModule,

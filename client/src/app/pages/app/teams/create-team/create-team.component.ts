@@ -48,7 +48,9 @@ export class CreateTeamComponent {
   submit(): void {
     // Validating the data
     this.error = this.slideValidation();
-    if (this.error.length > 0) return;
+    if (this.error.length > 0) {
+      return;
+    }
 
     this.loading = true;
 
@@ -89,15 +91,21 @@ export class CreateTeamComponent {
   }
 
   getStatus(n: number): string {
-    if (n === this.step) return 'progress';
-    if (n > this.step) return 'wait';
-    return 'finish';
+    if (n === this.step) {
+      return 'progress';
+    } else if (n > this.step) {
+      return 'wait';
+    } else {
+      return 'finish';
+    }
   }
 
   slide(func: void, newStep: number): void {
     // Validating the data
     this.error = this.slideValidation();
-    if (newStep >= this.step && this.error.length > 0) return;
+    if (newStep >= this.step && this.error.length > 0) {
+      return;
+    }
 
     // Setting new timestamp sliding
     this.lastSlideTime = new Date().getTime();
@@ -109,24 +117,40 @@ export class CreateTeamComponent {
   }
 
   carouselWidth(): number {
-    return (this.step)/(this.maxStep)*100;
+    return (this.step) / (this.maxStep) * 100;
   }
 
   slideValidation(): string {
     if (this.step === 0) {
-      if (this.body.name.length < 5) return 'Name requires minimal 5 characters.';
-      if (this.body.description.length < 5) return 'The description requires minimal 20 characters.';
-      if (this.body.thumbnail.length < 5) return 'You forgot to select a thumbnail.';
+      if (this.body.name.length < 5) {
+        return 'Name requires minimal 5 characters.';
+      }
+
+      if (this.body.description.length < 5) {
+        return 'The description requires minimal 20 characters.';
+      }
+      if (this.body.thumbnail.length < 5) {
+        return 'You forgot to select a thumbnail.';
+      }
     }
 
-    if (this.step === 1 && this.body.rbfa_club_id.length < 1) return 'You didn\'t select a club.';
-    if (this.step === 2 && this.body.rbfa_team_id.length < 1) return 'You didn\'t select a team.';
+    if (this.step === 1 && this.body.rbfa_club_id.length < 1) {
+      return 'You didn\'t select a club.';
+    }
+    if (this.step === 2 && this.body.rbfa_team_id.length < 1) {
+      return 'You didn\'t select a team.';
+    }
 
     const checkPlayers: IPlayer | undefined = this.body.players?.find((e: IPlayer) => !e.function);
-    if (this.step === 3 && checkPlayers) return `You didn't select a function for ${checkPlayers.name} ${checkPlayers.surname}.`;
+    if (this.step === 3 && checkPlayers) {
+      return `You didn't select a function for ${checkPlayers.name} ${checkPlayers.surname}.`;
+    }
 
     // Security for sliding too fast
-    if (this.lastSlideTime + 1000 > new Date().getTime()) return 'You want to slide too fast.';
+    if (this.lastSlideTime + 1000 > new Date().getTime()) {
+      return 'You want to slide too fast.';
+    }
+
     return '';
   }
 }

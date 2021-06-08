@@ -10,7 +10,7 @@
                 class="welcome"
             >
                 <p class="h2 mb-0 shorten-text">
-                    <span class="fs-4 fs-lg-7 me-2 me-lg-3">👋</span>Welcome <strong>{{this.data.name || this.data.username}}</strong>
+                    <span class="fs-4 fs-lg-7 me-2 me-lg-3">👋</span>Welcome <strong>{{data.player.name || data.username}}</strong>
                 </p>
                 <i
                     class="position-absolute close"
@@ -24,19 +24,19 @@
                 className="mb-3"
             >
                 <h2 class="fw-7 fs-4">Upcoming matches</h2>
-                <div class="line mb-2 bg-secondary"></div>
+                <div class="line bg-secondary"></div>
                 <ng-template [ngIf]="data" [ngIfElse]="loading">
                     <ng-template [ngIf]="data.upcomingMatches.length > 0" [ngIfElse]="empty" >
                         <div *ngFor="let match of data.upcomingMatches">
-                            <app-match-list-item
-                                date="match.data.upcomingMatch.startDate"
-                                homeName="match.data.homeTeam.name"
-                                homeImg="match.data.homeTeam.logo"
-                                awayName="match.data.awayTeam.name"
-                                awayImg="match.data.awayTeam.logo"
+                            <!-- <app-match-list-item
+                                [date]="match.data.upcomingMatch.startDate"
+                                [homeName]="match.data.homeTeam.name"
+                                [homeImg]="match.data.homeTeam.logo"
+                                [awayName]="match.data.awayTeam.name"
+                                [awayImg]="match.data.awayTeam.logo"
                             >
                             </app-match-list-item>
-                            <div class="line"></div>
+                            <div class="line"></div> -->
                         </div>
                     </ng-template>
                 </ng-template>
@@ -44,7 +44,7 @@
         </div>
         <div class="col-12 col-lg-6">
             <app-base-card
-                *ngIf="!this.data.name"
+                *ngIf="!this.data.player.name"
                 className="mb-3"
             >
                 <h2 class="fw-7 fs-4">Add player data</h2>
@@ -53,7 +53,7 @@
                     <div class="col-12 col-md-8">
                         <app-custom-input
                             className="mb-3"
-                            (changeValueEvent)="firstname = $event"
+                            (changeValueEvent)="firstname = $event.toString()"
                             inputType="text"
                             placeholder="name"
                             subtitle="name"
@@ -62,7 +62,7 @@
                         </app-custom-input>
                         <app-custom-input
                             className="mb-3"
-                            (changeValueEvent)="surname = $event"
+                            (changeValueEvent)="surname = $event.toString()"
                             inputType="text"
                             placeholder="surname"
                             subtitle="surname"
@@ -105,19 +105,23 @@
                 className="mb-3"
             >
                 <h2 class="fw-7 fs-4">My Teams</h2>
-                <div class="line mb-2 bg-secondary"></div>
+                <div class="line bg-secondary"></div>
                 <ng-template [ngIf]="data" [ngIfElse]="loading">
                     <ng-template [ngIf]="data.teams.length > 0" [ngIfElse]="empty" >
                         <div *ngFor="let team of data.teams">
-                            <div class="d-flex align-items-center">
+                            <div
+                                routerLink="/app/teams/{{team.team_id}}"
+                                class="d-flex align-items-center p-3 op-7"
+                                role="button"
+                            >
                                 <nz-avatar
                                     nzIcon="user"
                                     [nzSize]="64"
-                                    [nzSrc]="team.thumbnail"
-                                    [nzAlt]="team.name"
+                                    [nzSrc]="assetsUrl + team.team.thumbnail"
+                                    [nzAlt]="team.team.name"
                                 >
                                 </nz-avatar>
-                                <span class="h5 mb-0 ms-3 text-uppercase">{{team.name}}</span>
+                                <span class="h3 mb-0 ms-3 text-uppercase shorten-text">{{team.team.name}}</span>
                             </div>
                             <div class="line"></div>
                         </div>

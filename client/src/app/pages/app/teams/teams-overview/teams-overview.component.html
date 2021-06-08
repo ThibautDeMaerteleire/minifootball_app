@@ -3,27 +3,26 @@
 </app-header>
 <div class="container-fluid">
     <div class="container-fluid">
-
         <div class="row">
             <ng-template [ngIf]="teams" [ngIfElse]="loading">
                 <ng-template [ngIf]="teams.length > 0" [ngIfElse]="empty" >
                     <div
-                        *ngFor="let team of teams; let i = index"
+                        *ngFor="let team of teams"
                         class="col-12 col-md-4"
                     >
                         <app-base-card
                             className="d-flex flex-column align-items-center op-8"
                             role="button"
-                            routerLink="/app/teams/{{team.id}}"
+                            routerLink="/app/teams/{{team.team_id}}"
                         >
                             <nz-avatar
                                 nzIcon="user"
                                 [nzSize]="64"
-                                [nzSrc]="assetsUrl + team.thumbnail"
-                                [nzAlt]="'logo' + team.name"
+                                [nzSrc]="assetsUrl + team.team.thumbnail"
+                                [nzAlt]="'logo' + team.team.name"
                             >
                             </nz-avatar>
-                            <h4 class="text-center mt-3 mb-0 shorten-text">{{team.name}}</h4>
+                            <h4 class="text-center mt-3 mb-0 shorten-text">{{team.team.name}}</h4>
                         </app-base-card>
                     </div>
                 </ng-template>
