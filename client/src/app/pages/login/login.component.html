@@ -2,35 +2,115 @@
     <div class="row align-items-center justify-content-center">
         <div class="col-12 col-md-4 my-8 py-5 px-6 bg-white br-5">
             <form>
-                <h1 class="mb-4 fw-7">Login</h1>
-                <app-custom-input
-                    className="mb-3"
-                    (changeValueEvent)="email = $event"
-                    icon="mail"
-                    inputType="email"
-                    placeholder="email"
-                    subtitle="email"
-                    name="email"
-                ></app-custom-input>
-                <app-custom-input
-                    className="mb-3"
-                    (iconClickEvent)="passwordVisible = !passwordVisible"
-                    [icon]="passwordVisible ? 'eye-invisible' : 'eye'"
-                    [inputType]="passwordVisible ? 'text' : 'password'"
-                    (changeValueEvent)="password = $event"
-                    name="password"
-                    placeholder="password"
-                    subtitle="password"
-                ></app-custom-input>
-                <small class="text-red">{{ error }}</small>
-                <button
-                    class="btn bg-purple text-white mt-3 py-3 w-100 br-3"
-                    role="button"
-                    (click)="submit()"
-                >
-                    Login
-                </button>
+                <ng-template [ngIf]="!loading" [ngIfElse]="loadingTemplate">
+                    <h1 class="mb-4 fw-7">Login</h1>
+                    <app-custom-input
+                        className="mb-3"
+                        (changeValueEvent)="email = $event"
+                        icon="mail"
+                        inputType="email"
+                        placeholder="email"
+                        subtitle="email"
+                        name="email"
+                    ></app-custom-input>
+                    <app-custom-input
+                        className="mb-3"
+                        (iconClickEvent)="passwordVisible = !passwordVisible"
+                        [icon]="passwordVisible ? 'eye-invisible' : 'eye'"
+                        [inputType]="passwordVisible ? 'text' : 'password'"
+                        (changeValueEvent)="password = $event"
+                        name="password"
+                        placeholder="password"
+                        subtitle="password"
+                    ></app-custom-input>
+                    <a
+                        class="text-antd-blue"
+                        data-bs-toggle="modal"
+                        data-bs-target="#forgotPasswordModal"
+                    >
+                        Forgot password?
+                    </a>
+                    <p class="mb-0"><small class="text-red">{{ error }}</small></p>
+                    <button
+                        class="btn bg-purple text-white mt-3 py-3 w-100 br-3"
+                        role="button"
+                        (click)="submit()"
+                    >
+                        Login
+                    </button>
+                </ng-template>
             </form>
         </div>
     </div>
 </div>
+
+<div
+    class="modal fade"
+    id="forgotPasswordModal"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="forgotPasswordModalLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content br-3">
+            <button
+                type="button"
+                class="btn-close position-absolute"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                role="button"
+                data-bs-target="#forgotPasswordModal"
+            >
+            </button>
+            <div class="modal-body py-6 px-5">
+                <ng-template [ngIf]="!forgotPassword.loading" [ngIfElse]="loadingTemplate">
+                    <ng-template [ngIf]="!forgotPassword.success" [ngIfElse]="forgotPasswordSuccessful">
+                        <h1 class="mb-4 fw-7">Forgot password</h1>
+                        <p>
+                            Fill in your email and click on submit to get an email with your credentials.
+                        </p>
+                        <app-custom-input
+                            className="mb-3"
+                            (changeValueEvent)="forgotPassword.email = $event"
+                            icon="mail"
+                            inputType="email"
+                            placeholder="email"
+                            subtitle="email"
+                            name="email"
+                        >
+                        </app-custom-input>
+                        <p class="mb-0"><small class="text-red">{{ forgotPassword.error }}</small></p>
+                        <button
+                            class="btn bg-purple text-white mt-3 py-3 w-100 br-3"
+                            role="button"
+                            (click)="submitForgotPassword()"
+                        >
+                            Submit
+                        </button>
+                    </ng-template>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #loadingTemplate>
+    <div class="w-100 d-flex justify-content-center my-3">
+        <app-loader></app-loader>
+    </div>
+</ng-template>
+
+<ng-template #forgotPasswordSuccessful>
+    <div class="w-100 d-flex flex-column align-items-center justify-content-center">
+        <lottie-player
+            src="https://assets5.lottiefiles.com/packages/lf20_ya4ycrti.json"
+            background="transparent"
+            speed="1"
+            style="width: 300px; height: 300px;"
+            autoplay
+        >
+        </lottie-player>
+        <h1 class="mt-3 fw-7 text-center">Email was sent succesfully</h1>
+    </div>
+</ng-template>

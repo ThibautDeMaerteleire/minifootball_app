@@ -31,8 +31,10 @@ export class AddPlayersComponent implements OnInit {
   authkey: string = window.sessionStorage.getItem('Authentication') || '';
   players: IPlayer[] | [] = [];
   functions: IFunction[] | [] = [];
-  selectedPlayers: Array<string | number> | [] = [];
+  selectedPlayers: IPlayer[] | [] = [];
   error = '';
+  page = 1;
+  totalItems = 1;
 
   @Input() search = '';
   @Input() teamId: string | number = '';
@@ -58,17 +60,24 @@ export class AddPlayersComponent implements OnInit {
   }
 
   addPlayer(id: string | number): void {
-    this.selectedPlayers = [...this.selectedPlayers, id];
+    const newPlayer = this.players.find((e) => e.id == id);
+    if (newPlayer) {
+      this.selectedPlayers = [
+        ...this.selectedPlayers,
+        newPlayer
+      ];
+    }
+
     return;
   }
 
   removePlayer(id: string | number): void {
-    this.selectedPlayers = this.selectedPlayers.filter((e: string | number) => e != id);
+    this.selectedPlayers = this.selectedPlayers.filter((e: IPlayer) => e.id != id);
     return;
   }
 
   checkSelected(id: string | number): boolean {
-    return !!this.selectedPlayers.find((a: string | number) => a == id);
+    return !!this.selectedPlayers.find((a: IPlayer) => a.id == id);
   }
 
   getPlayers(): void {
@@ -76,7 +85,7 @@ export class AddPlayersComponent implements OnInit {
 
     const promise = this.http.post(
       API_BASE_URL + apiRoutes['search-players'],
-      { search: this.search },
+      { search: this.search, page: this.page },
       { headers: this.headers() }
     ).toPromise();
 
@@ -112,7 +121,8 @@ export class AddPlayersComponent implements OnInit {
   }
 
   mapper(data: any): IPlayer[] {
-    return data.map((e: any) => {
+    this.totalItems = data.totalItems;
+    return data.data.map((e: any) => {
       return {
         ...e,
         thumbnail: ASSETS_BASE_URL + e.thumbnail,
@@ -120,13 +130,8 @@ export class AddPlayersComponent implements OnInit {
     });
   }
 
-  getSelectedPlayers(): IPlayer[] | [] {
-    return this.players.filter((player: IPlayer) =>
-      !!this.selectedPlayers.find((id: string | number) => id == player.id));
-  }
-
   validation(): string {
-    const playerWithoutFunction = this.getSelectedPlayers().find((e: IPlayer) => e.function === undefined);
+    const playerWithoutFunction = this.selectedPlayers.find((e: IPlayer) => e.function === undefined);
     if (playerWithoutFunction) {
       return `You didn't select a function for ${playerWithoutFunction.name} ${playerWithoutFunction.surname}.`;
     }
@@ -139,12 +144,18 @@ export class AddPlayersComponent implements OnInit {
     if (this.error.length > 0) {
       return;
     }
-    this.submitPlayers.emit(this.getSelectedPlayers());
+    this.submitPlayers.emit(this.selectedPlayers);
     return;
   }
 
   onChangeSelectData(ev: Event): void {
     this.submit();
+    return;
+  }
+
+  changePage(e: number): void {
+    this.page = e;
+    this.getPlayers();
     return;
   }
 }

@@ -4,7 +4,11 @@ import { TutorialsComponent } from 'src/app/pages/app/tutorials/tutorials.compon
 import { UpdatesComponent } from 'src/app/pages/app/updates/updates.component';
 import { DashboardComponent } from '../../pages/app/dashboard/dashboard.component';
 import { appRoutesEnum, baseRoutesEnum } from '../../constants/routes.enum';
+import { MeComponent } from 'src/app/pages/app/me/me.component';
+import { PlayerComponent } from 'src/app/pages/app/player/player.component';
 import { TeamRoutes } from './team-routes';
+import { TeamComponent } from 'src/app/pages/app/team/team.component';
+import { DetailTeamRoutes } from './detail-team-routes';
 
 export const AppRoutes: Routes = [{
   path: appRoutesEnum.dashboard,
@@ -21,6 +25,16 @@ export const AppRoutes: Routes = [{
 }, {
   path: appRoutesEnum.updates,
   component: UpdatesComponent
+}, {
+  path: appRoutesEnum.me,
+  component: MeComponent
+}, {
+  path: appRoutesEnum.player,
+  component: PlayerComponent
+}, {
+  path: appRoutesEnum.team,
+  component: TeamComponent,
+  children: DetailTeamRoutes
 }, {
   path: baseRoutesEnum.all_routes,
   redirectTo: appRoutesEnum.dashboard

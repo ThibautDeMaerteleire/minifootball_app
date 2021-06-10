@@ -26,6 +26,8 @@ export class FindClubComponent implements OnInit {
   search = '';
   teams: ITeam[] | [] = [];
   authkey: string = window.sessionStorage.getItem('Authentication') || '';
+  page = 1;
+  totalItems = 1;
 
   @Input() select = false;
 
@@ -43,7 +45,7 @@ export class FindClubComponent implements OnInit {
 
     const promise = this.http.post(
       API_BASE_URL + apiRoutes['search-teams'],
-      { search: searchValue },
+      { search: searchValue, page: this.page },
       { headers: this.headers() }
     ).toPromise();
 
@@ -78,7 +80,7 @@ export class FindClubComponent implements OnInit {
   }
 
   rbfaMapper(data: any): ITeam[] {
-    return data.data.search.results.map((club: any): ITeam => {
+    return data.search.results.map((club: any): ITeam => {
       return {
         id: club.id,
         name: club.clubName,
@@ -91,7 +93,8 @@ export class FindClubComponent implements OnInit {
   }
 
   footyTeamsMapper(data: any): ITeam[] {
-    return data.map((team: any): ITeam => {
+    this.totalItems = data.totalItems;
+    return data.data.map((team: any): ITeam => {
       return {
         id: team.id,
         name: team.name,
@@ -110,5 +113,11 @@ export class FindClubComponent implements OnInit {
       this.router.navigateByUrl('/app/team/' + id);
       return;
     }
+  }
+
+  changePage(e: number): void {
+    this.page = e;
+    this.getFootyTeams();
+    return;
   }
 }

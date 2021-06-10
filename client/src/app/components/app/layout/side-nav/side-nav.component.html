@@ -166,6 +166,17 @@
             >
                 <ul>
                     <li
+                        routerLink="/app/me"
+                        nzMatchRouter="nzSelected"
+                        nz-menu-item
+                        nz-tooltip
+                        nzTooltipPlacement="right"
+                        [attr.nzTooltipTitle]="isCollapsed ? 'Navigation One' : ''"
+                    >
+                        <i nz-icon nzType="user" nzTheme="outline"></i>
+                        <span>My account</span>
+                    </li>
+                    <li
                         routerLink="/app/settings"
                         nzMatchRouter="nzSelected"
                         nz-menu-item

@@ -44,7 +44,7 @@
         </div>
         <div class="col-12 col-lg-6">
             <app-base-card
-                *ngIf="!this.data.player"
+                *ngIf="this.data && !this.data.player"
                 className="mb-3"
             >
                 <h2 class="fw-7 fs-4">Add player data</h2>
@@ -110,7 +110,7 @@
                     <ng-template [ngIf]="data.teams.length > 0" [ngIfElse]="empty" >
                         <div *ngFor="let team of data.teams">
                             <div
-                                routerLink="/app/teams/{{team.team_id}}"
+                                routerLink="/app/team/{{team.team_id}}"
                                 class="d-flex align-items-center p-3 op-7"
                                 role="button"
                             >

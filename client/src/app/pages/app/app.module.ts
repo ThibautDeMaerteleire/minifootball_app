@@ -16,6 +16,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TutorialsComponent } from './tutorials/tutorials.component';
 import { BirthdaysComponent } from './birthdays/birthdays.component';
 import { UpdatesComponent } from './updates/updates.component';
+import { PlayerComponent } from './player/player.component';
+import { MeComponent } from './me/me.component';
+import { OverviewTeamComponent } from './team/overview-team/overview-team.component';
+import { TeamComponent } from './team/team.component';
+import { RankingTeamComponent } from './team/ranking-team/ranking-team.component';
+import { MatchesTeamComponent } from './team/matches-team/matches-team.component';
+import { PracticeMatchesTeamComponent } from './team/practice-matches-team/practice-matches-team.component';
+import { PlayersTeamComponent } from './team/players-team/players-team.component';
+import { AddPlayersTeamComponent } from './team/add-players-team/add-players-team.component';
+import { LineUpsTeamComponent } from './team/line-ups-team/line-ups-team.component';
+import { SettingsTeamComponent } from './team/settings-team/settings-team.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -29,6 +40,17 @@ import { UpdatesComponent } from './updates/updates.component';
     TutorialsComponent,
     BirthdaysComponent,
     UpdatesComponent,
+    PlayerComponent,
+    MeComponent,
+    OverviewTeamComponent,
+    TeamComponent,
+    RankingTeamComponent,
+    MatchesTeamComponent,
+    PracticeMatchesTeamComponent,
+    PlayersTeamComponent,
+    AddPlayersTeamComponent,
+    LineUpsTeamComponent,
+    SettingsTeamComponent,
   ],
   imports: [
     CommonModule,

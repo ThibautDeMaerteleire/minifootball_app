@@ -1,0 +1,153 @@
+<app-header class="app-header mb-3">
+    <h1
+        role="button"
+        class="h4 m-0 d-flex align-items-center op-7"
+        (click)="location.back()"
+    >
+        <i class="bi bi-arrow-left-short fs-5 me-2"></i>
+        {{data ? data.player.name + ' ' + data.player.surname : 'Go back'}}
+        <i
+            *ngIf="data && data.email_verified_at"
+            nz-icon class="h3 ms-2 mb-2 text-antd-blue"
+            nzType="check-circle"
+            nzTheme="outline"
+            title="player is verified"
+        ></i>
+    </h1>
+</app-header>
+
+<div class="container-fluid">
+    <div class="container-fluid profile">
+        <div class="row">
+            <ng-template [ngIf]="!loading" [ngIfElse]="loadingTemplate">
+                <ng-template [ngIf]="data" [ngIfElse]="empty">
+                    <div class="col-12 col-lg-6">
+                        <app-base-card>
+                            <div class="d-flex align-items-center mb-4">
+                                <nz-avatar
+                                    class="img-thumbnail me-2 me-md-4"
+                                    nzIcon="user"
+                                    [nzSrc]="assetsUrl + data.player.thumbnail"
+                                    nzAlt="thumbnail {{data.player.name}} {{data.player.surname}}"
+                                    [nzSize]="128"
+                                >
+                                </nz-avatar>
+                                <h1 class="d-flex align-items-center mb-0 text-shorten">
+                                    {{data.player.name ? data.player.name + ' \n' + data.player.surname : data.username}}
+                                </h1>
+                            </div>  
+                            <div class="row">
+                                <p
+                                    *ngIf="data.username"
+                                    class="col-12 col-lg-6 h2 my-2 d-inline-flex align-items-center shorten-text"
+                                >
+                                    <i
+                                        nz-icon
+                                        class="h2 me-3 mb-2 text-purple"
+                                        nzType="idcard"
+                                        nzTheme="outline"
+                                    >
+                                </i>
+                                    {{data.username}}
+                                </p>
+                                <p
+                                    *ngIf="data.player.name"
+                                    class="col-12 col-lg-6 h2 my-2 d-inline-flex align-items-center shorten-text"
+                                >
+                                    <i
+                                        nz-icon
+                                        class="h2 me-3 mb-2 text-purple"
+                                        nzType="user"
+                                        nzTheme="outline"
+                                    >
+                                    </i>
+                                    {{data.player.name}}
+                                </p>
+                                <p
+                                    *ngIf="data.player.surname"
+                                    class="col-12 col-lg-6 h2 my-2 d-inline-flex align-items-center shorten-text"
+                                >
+                                    <i
+                                        nz-icon
+                                        class="h2 me-3 mb-2 text-purple"
+                                        nzType="user"
+                                        nzTheme="outline"
+                                    >
+                                    </i>
+                                    {{data.player.surname}}
+                                </p>
+                                <p
+                                    *ngIf="data.player.birthday"
+                                    class="col-12 col-lg-6 h2 my-2 d-inline-flex align-items-center shorten-text"
+                                >
+                                    <i
+                                        nz-icon
+                                        class="h2 me-3 mb-2 text-purple"
+                                        nzType="crown"
+                                        nzTheme="outline"
+                                    >
+                                    </i>
+                                    {{data.player.birthday | date:"d MMMM YYY"}}
+                                </p>
+                                <p class="col-12 col-lg-6 h2 my-2 d-inline-flex align-items-center shorten-text">
+                                    <i
+                                        nz-icon
+                                        class="h2 me-3 mb-2 text-purple"
+                                        nzType="safety-certificate"
+                                        nzTheme="outline"
+                                    >
+                                    </i>
+                                    #{{data.id}}
+                                </p>
+                            </div>
+                        </app-base-card>
+                    </div>
+                    <div class="col-12 col-lg-6">
+                        <app-base-card
+                            className="mb-3"
+                        >
+                            <h2 class="fw-7 fs-4">{{data.player.name}}'s Teams</h2>
+                            <div class="line bg-secondary"></div>
+                            <ng-template [ngIf]="data.teams.length > 0" [ngIfElse]="empty" >
+                                <div *ngFor="let team of data.teams">
+                                    <div
+                                        routerLink="/app/team/{{team.team_id}}"
+                                        class="d-flex align-items-center p-3 op-7"
+                                        role="button"
+                                    >
+                                        <nz-avatar
+                                            nzIcon="user"
+                                            [nzSize]="64"
+                                            [nzSrc]="assetsUrl + team.team.thumbnail"
+                                            [nzAlt]="team.team.name"
+                                        >
+                                        </nz-avatar>
+                                        <span class="h3 mb-0 ms-3 text-uppercase shorten-text">{{team.team.name}}</span>
+                                    </div>
+                                    <div class="line"></div>
+                                </div>
+                            </ng-template>
+                        </app-base-card>
+                    </div>
+                </ng-template>
+            </ng-template>
+        </div>
+    </div>
+</div>
+
+<ng-template #loadingTemplate>
+    <div class="col-12 d-flex justify-content-center my-5">
+        <app-loader></app-loader>
+    </div>
+</ng-template>
+
+<ng-template #empty>
+    <div class="col-12">
+        <app-base-card className="d-flex flex-column align-items-center">
+            <nz-empty
+                class="mb-3 mt-7"
+                nzNotFoundContent="This player doesn't exist"
+            ></nz-empty>
+        </app-base-card>
+    </div>
+</ng-template>

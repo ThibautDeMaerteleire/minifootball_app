@@ -1,0 +1,13 @@
+.scroll {
+    overflow-y: hidden;
+    overflow-x: scroll;
+    white-space: nowrap;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.nav-link + .nav-link {
+  margin-left: 1rem;
+}

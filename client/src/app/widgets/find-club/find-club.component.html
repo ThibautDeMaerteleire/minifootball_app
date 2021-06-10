@@ -61,8 +61,16 @@
                 </ng-template>
             </ng-template>
         </div>
-        <div>
-    
+        <div
+            *ngIf="!select"
+            class="col-12 text-center"
+        >
+            <nz-pagination
+                [nzPageIndex]="page"
+                [nzTotal]="totalItems"
+                (nzPageIndexChange)="changePage($event)"
+            >
+            </nz-pagination>
         </div>
     </div>
 </div>

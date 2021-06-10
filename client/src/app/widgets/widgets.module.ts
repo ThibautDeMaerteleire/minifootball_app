@@ -6,6 +6,7 @@ import { AddPlayersComponent } from './add-players/add-players.component';
 import { ComponentsModule } from '../components/components.module';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PlayerComponent } from './player/player.component';
 
 
 
@@ -13,7 +14,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   declarations: [
     FindClubComponent,
     SelectTeamComponent,
-    AddPlayersComponent
+    AddPlayersComponent,
+    PlayerComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +27,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   exports: [
     FindClubComponent,
     SelectTeamComponent,
-    AddPlayersComponent
+    AddPlayersComponent,
+    PlayerComponent
   ]
 })
 export class WidgetsModule { }

@@ -2,54 +2,62 @@
     <div class="row align-items-center justify-content-center">
         <div class="col-12 col-md-4 my-8 py-5 px-6 bg-white br-5">
             <form>
-                <h1 class="mb-4 fw-7">Sign up</h1>
-                <app-custom-input
-                    className="mb-3"
-                    (changeValueEvent)="email = $event"
-                    icon="mail"
-                    inputType="email"
-                    placeholder="email"
-                    subtitle="email"
-                    name="email"
-                ></app-custom-input>
-                <app-custom-input
-                    className="mb-3"
-                    (changeValueEvent)="username = $event"
-                    icon="user"
-                    inputType="text"
-                    placeholder="username"
-                    subtitle="username"
-                    name="username"
-                ></app-custom-input>
-                <app-custom-input
-                    className="mb-3"
-                    (iconClickEvent)="passwordVisible = !passwordVisible"
-                    [icon]="passwordVisible ? 'eye-invisible' : 'eye'"
-                    [inputType]="passwordVisible ? 'text' : 'password'"
-                    (changeValueEvent)="password = $event"
-                    name="password"
-                    placeholder="password"
-                    subtitle="password"
-                ></app-custom-input>
-                <app-custom-input
-                    className="mb-3"
-                    (iconClickEvent)="passwordVisible = !passwordVisible"
-                    [icon]="passwordVisible ? 'eye-invisible' : 'eye'"
-                    [inputType]="passwordVisible ? 'text' : 'password'"
-                    (changeValueEvent)="confirmPassword = $event"
-                    name="confirm_password"
-                    placeholder="password"
-                    subtitle="Confirm password"
-                ></app-custom-input>
-                <small class="text-red">{{ error }}</small>
-                <button
-                    class="btn bg-purple text-white mt-3 py-3 w-100 br-3"
-                    role="button"
-                    (click)="submit()"
-                >
-                    Sign up
-                </button>
+                <ng-template [ngIf]="!loading" [ngIfElse]="loadingTemplate">
+                    <h1 class="mb-4 fw-7">Sign up</h1>
+                    <app-custom-input
+                        className="mb-3"
+                        (changeValueEvent)="email = $event"
+                        icon="mail"
+                        inputType="email"
+                        placeholder="email"
+                        subtitle="email"
+                        name="email"
+                    ></app-custom-input>
+                    <app-custom-input
+                        className="mb-3"
+                        (changeValueEvent)="username = $event"
+                        icon="user"
+                        inputType="text"
+                        placeholder="username"
+                        subtitle="username"
+                        name="username"
+                    ></app-custom-input>
+                    <app-custom-input
+                        className="mb-3"
+                        (iconClickEvent)="passwordVisible = !passwordVisible"
+                        [icon]="passwordVisible ? 'eye-invisible' : 'eye'"
+                        [inputType]="passwordVisible ? 'text' : 'password'"
+                        (changeValueEvent)="password = $event"
+                        name="password"
+                        placeholder="password"
+                        subtitle="password"
+                    ></app-custom-input>
+                    <app-custom-input
+                        className="mb-3"
+                        (iconClickEvent)="passwordVisible = !passwordVisible"
+                        [icon]="passwordVisible ? 'eye-invisible' : 'eye'"
+                        [inputType]="passwordVisible ? 'text' : 'password'"
+                        (changeValueEvent)="confirmPassword = $event"
+                        name="confirm_password"
+                        placeholder="password"
+                        subtitle="Confirm password"
+                    ></app-custom-input>
+                    <small class="text-red">{{ error }}</small>
+                    <button
+                        class="btn bg-purple text-white mt-3 py-3 w-100 br-3"
+                        role="button"
+                        (click)="submit()"
+                    >
+                        Sign up
+                    </button>
+                </ng-template>
             </form>
         </div>
     </div>
 </div>
+
+<ng-template #loadingTemplate>
+    <div class="w-100 d-flex justify-content-center my-3">
+        <app-loader></app-loader>
+    </div>
+</ng-template>

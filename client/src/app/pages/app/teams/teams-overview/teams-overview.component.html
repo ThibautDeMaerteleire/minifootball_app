@@ -8,12 +8,12 @@
                 <ng-template [ngIf]="teams.length > 0" [ngIfElse]="empty" >
                     <div
                         *ngFor="let team of teams"
-                        class="col-12 col-md-4"
+                        class="col-12 col-md-4 my-3"
                     >
                         <app-base-card
-                            className="d-flex flex-column align-items-center op-8"
+                            className="d-flex flex-column align-items-center py-5 py-md-5 op-8"
                             role="button"
-                            routerLink="/app/teams/{{team.team_id}}"
+                            routerLink="/app/team/{{team.team_id}}"
                         >
                             <nz-avatar
                                 nzIcon="user"

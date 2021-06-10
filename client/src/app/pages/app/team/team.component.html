@@ -1,0 +1,49 @@
+<app-header
+    class="app-header mb-3"
+    className="d-flex justify-content-between align-items-center"
+>
+    <h1
+        role="button"
+        class="h4 m-0 d-flex align-items-center op-7"
+        (click)="location.back()"
+    >
+        <i class="bi bi-arrow-left-short fs-5 me-2"></i>
+        {{data ? data.team.name : 'Go back'}}
+    </h1>
+    <h4
+        *ngIf="data && data.hasOwnProperty('function')"
+        class="mb-0"
+        [title]="data.function.description"
+    >
+        {{data.function.name}}
+    </h4>
+</app-header>
+<nav>
+    <div class="nav nav-tabs" role="tablist">
+        <div class="container-fluid" >
+            <div class="container-fluid d-flex align-items-center w-100 scroll" >
+                <ng-container *ngFor="let item of navItems">
+                    <button
+                        *ngIf="checkFunction(item.function)"
+                        class="nav-link text-antd-blue op-7"
+                        routerLink="/app/team/{{id}}/{{item.url}}"
+                        [state]="data"
+                        routerLinkActive="active"
+                        id="nav-home-tab"
+                        type="button"
+                        role="tab"
+                    >
+                        {{ item.text }}
+                    </button>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="container-fluid my-3">
+        <router-outlet>
+        </router-outlet>
+    </div>
+</div>

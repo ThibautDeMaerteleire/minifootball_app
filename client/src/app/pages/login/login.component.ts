@@ -6,9 +6,16 @@ import { Router } from '@angular/router';
 import { baseRoutesEnum } from 'src/app/constants/routes.enum';
 
 
-export interface LoginData {
+export interface ILoginData {
   email: string;
   password: string;
+}
+
+export interface IForgotPassword {
+  loading: boolean;
+  email: string;
+  error: string;
+  success: boolean;
 }
 
 @Component({
@@ -22,6 +29,13 @@ export class LoginComponent {
   email = '';
   password = '';
   passwordVisible = false;
+  loading = false;
+  forgotPassword: IForgotPassword = {
+    loading: false,
+    email: '',
+    error: '',
+    success: false,
+  };
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -32,17 +46,21 @@ export class LoginComponent {
       return;
     }
 
-    // const headers = new HttpHeaders().set('Authorization', 'auth-token');
-    const body: LoginData = {
+    this.loading = true;
+
+    const body: ILoginData = {
       email: this.email,
       password: this.password
     };
 
     const promise = this.http.post(API_BASE_URL + apiRoutes.login, body).toPromise();
+
     promise.then((data: ApiAuth | any) => {
       window.sessionStorage.setItem('Authentication', `${data.token_type} ${data.access_token}`);
+      this.loading = false;
       this.router.navigateByUrl(baseRoutesEnum.app);
     }).catch((err: HttpErrorResponse) => {
+      this.loading = false;
       this.error = err.error.message;
     });
 
@@ -67,6 +85,30 @@ export class LoginComponent {
     }
 
     return null;
+  }
+
+  submitForgotPassword(): void {
+    if (this.forgotPassword.email.length < 6) { // Check Email
+      this.forgotPassword.error = 'Email requires minimal 6 characters';
+      return;
+    }
+
+    this.forgotPassword.loading = true;
+
+    const promise = this.http.post(
+      API_BASE_URL + apiRoutes['forgot-password'],
+      { email: this.forgotPassword.email }
+    ).toPromise();
+
+    promise.then((d: any) => {
+      this.forgotPassword.loading = false;
+      this.forgotPassword.success = true;
+    }).catch((err: HttpErrorResponse) => {
+      this.forgotPassword.loading = false;
+      this.forgotPassword.error = err.error.message;
+    });
+
+    return;
   }
 
 }

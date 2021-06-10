@@ -25,6 +25,7 @@ export class RegisterComponent {
   password = '';
   confirmPassword = '';
   passwordVisible = false;
+  loading = false;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -35,7 +36,8 @@ export class RegisterComponent {
       return;
     }
 
-    // const headers = new HttpHeaders().set('Authorization', 'auth-token');
+    this.loading = true;
+
     const body: RegisterData = {
       email: this.email,
       username: this.username,
@@ -45,8 +47,10 @@ export class RegisterComponent {
     const promise = this.http.post(API_BASE_URL + apiRoutes.register, body).toPromise();
     promise.then((data: ApiAuth | any) => {
       window.sessionStorage.setItem('Authentication', `${data.token_type} ${data.access_token}`);
+      this.loading = true;
       this.router.navigateByUrl(baseRoutesEnum.app);
     }).catch((err: HttpErrorResponse) => {
+      this.loading = true;
       this.error = err.error.message;
     });
 

@@ -14,7 +14,7 @@ export class BirthdayCardComponent {
   @Input() name = '';
   @Input() surname = '';
   @Input() username = '';
-  @Input() playerId = '';
+  @Input() userId: number | string = '';
 
   getAge(): number {
     const now = new Date();

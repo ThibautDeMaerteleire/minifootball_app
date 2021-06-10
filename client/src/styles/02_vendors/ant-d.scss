@@ -23,3 +23,15 @@ nz-avatar {
   justify-content: center;
   line-height: 1.5 !important;
 }
+
+nz-pagination {
+  a {
+    text-decoration: none;
+  }
+
+  .ant-pagination-item-link {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+}

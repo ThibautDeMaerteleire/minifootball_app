@@ -23,19 +23,25 @@ export enum appRoutesEnum {
   messages = 'messages',
   birthdays = 'birthdays',
   updates = 'updates',
-  tutorials = 'tutorials'
+  player = 'player/:id',
+  me = 'me',
+  tutorials = 'tutorials',
+  team = 'team/:id',
 }
 
 export enum teamRoutesEnum {
   overview = 'overview',
-  specific = ':id',
   create = 'create',
   searchTeam = 'search',
 }
 
-export enum teamSpecificRouterEnum {
-  specific = 'overview',
-  info = 'info',
-  players = 'players',
+export enum detailTeamRoutesEnum {
+  overview = 'overview',
+  ranking = 'ranking',
   matches = 'matches',
+  practice_matches = 'practice-matches',
+  'line-ups' = 'line-ups',
+  players = 'players',
+  add_players = 'add-players',
+  settings = 'settings',
 }

@@ -21,7 +21,7 @@
             class="col-12 col-md-6 mt-3 pe-0 d-flex flex-wrap"
         >
             <button
-                *ngFor="let player of getSelectedPlayers()"
+                *ngFor="let player of selectedPlayers"
                 class="btn bg-purple player-delete-btn text-white br-3 d-flex align-items-center me-2 mb-2"
             >
                 {{player.username}}
@@ -33,7 +33,7 @@
                 </i>
             </button>
         </div>
-        <div class="col-12 player-container border-top border-bottom">
+        <div class="col-12 player-container border-top border-bottom {{error ? '' : 'mt-3'}} ">
             <ng-template [ngIf]="!loading " [ngIfElse]="loadingTemplate" >
                 <ng-template [ngIf]="players.length > 0" [ngIfElse]="empty">
                     <div
@@ -42,7 +42,7 @@
                         class="player row border-bottom {{checkSelected(player.id) ? 'bg-purple-bg' : ''}}"
                     >
                         <div
-                            class="col-5 justify-content-start"
+                            class="col-8 col-md-5 justify-content-start"
                             (click)="clickPlayer(player.id)"
                         >
                             <nz-avatar
@@ -122,8 +122,15 @@
                 </ng-template>
             </ng-template>
         </div>
-        <div>
-    
+        <div
+            class="col-12 text-center"
+        >
+            <nz-pagination
+                [nzPageIndex]="page"
+                [nzTotal]="totalItems"
+                (nzPageIndexChange)="changePage($event)"
+            >
+            </nz-pagination>
         </div>
     </div>
 </div>
