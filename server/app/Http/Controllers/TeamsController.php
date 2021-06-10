@@ -19,7 +19,13 @@ class TeamsController extends Controller {
   }
 
   public function searchTeams(Request $request) {
-    $teams = Teams::where('name', 'like', "%{$request->search}%")->get();
+    $teams = ['page' => $request->page];
+    $teams['data'] = Teams::where('name', 'like', "%{$request->search}%")
+      ->limit(10)
+      ->offset(($request->page-1)*10)
+      ->get();
+
+    $teams['totalItems'] = Teams::where('name', 'like', "%{$request->search}%")->count();
     return $teams;
   }
 

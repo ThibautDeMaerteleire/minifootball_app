@@ -48,8 +48,22 @@ class PlayerController extends Controller {
   public function searchPlayers(Request $request) {
     $GLOBALS['search'] = $request->search;
     $teammembers = Teammembers::where('team_id', '=', $request->teamId)->get('id');
-          
-    $players = DB::table('users')
+
+    $players = ['page' => $request->page];
+    
+    $players['totalItems'] =  DB::table('users')
+    ->leftJoin('players', 'users.id', '=', 'players.user_id')
+    ->where('players.user_id', '!=', $request->user()->id)
+    ->whereNotIn('players.user_id', $teammembers)
+    ->where(function($query) {
+      $query->where('users.email', 'like', "%{$GLOBALS['search']}%")
+            ->orWhere('users.username', 'like', "%{$GLOBALS['search']}%")
+            ->orWhere('players.name', 'like', "%{$GLOBALS['search']}%")
+            ->orWhere('players.surname', 'like', "%{$GLOBALS['search']}%");
+    })
+    ->count();
+    
+    $players['data'] = DB::table('users')
       ->leftJoin('players', 'users.id', '=', 'players.user_id')
       ->where('players.user_id', '!=', $request->user()->id)
       ->whereNotIn('players.user_id', $teammembers)
@@ -59,6 +73,7 @@ class PlayerController extends Controller {
               ->orWhere('players.name', 'like', "%{$GLOBALS['search']}%")
               ->orWhere('players.surname', 'like', "%{$GLOBALS['search']}%");
       })
+      ->offset(($request->page-1)*10)
       ->limit(10)
       ->get([
         'users.id',

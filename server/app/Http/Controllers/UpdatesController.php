@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class UpdatesController extends Controller {
   public function getAllUpdates(Request $request) {
-    $updates = Updates::orderBy('version')->get();
+    $updates = Updates::orderByDesc('version')->get();
     return $updates;
   }
 }

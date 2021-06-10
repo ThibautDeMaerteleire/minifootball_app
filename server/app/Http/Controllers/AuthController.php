@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ForgotPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Error;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Throwable;
 
 class AuthController extends Controller {
 
@@ -60,5 +65,17 @@ class AuthController extends Controller {
       'access_token' => $token,
       'token_type' => 'Bearer',
     ]);
+  }
+
+  public function forgotPassword(Request $request) {
+    $user = DB::table('users')->where('email', $request->email)->limit(1)->get();
+    
+    if (count($user) > 0) {
+      $user = $user[0];
+      Mail::to($user->email)->send(new ForgotPassword($user));
+      return ['message' => "We've sent you an email. <br/> Check your inbox."];
+    } else {
+      return abort(404, "The emailaddress doesn't exists.");
+    }
   }
 }

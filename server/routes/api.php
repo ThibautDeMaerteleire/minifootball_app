@@ -32,11 +32,9 @@ Route::post('/register', [AuthController::class, 'register']);
 
 Route::post('/login', [AuthController::class, 'login']);
 
-// Route::middleware('auth:sanctum')->post('/reset-password', function (Request $request) {
-//   return 'test';
-// });
+Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
 
-// Route::middleware('auth:sanctum')->post('/change-email', function (Request $request) {
+// Route::middleware('auth:sanctum')->post('/reset-password', function (Request $request) {
 //   return 'test';
 // });
 
@@ -56,6 +54,8 @@ Route::post('/add-teammembers', [TeammembersController::class, 'addTeammembers']
 
 Route::get('/all-functions', [FunctionsController::class, 'getAll'])->middleware('auth:sanctum');
 
+Route::get('/player/{id}', [UserController::class, 'getUser'])->middleware('auth:sanctum');
+
 Route::get('/me', [UserController::class, 'me'])->middleware('auth:sanctum');
 
 Route::get('/birthdays', [TeammembersController::class, 'getBirthdays'])->middleware('auth:sanctum');
@@ -65,3 +65,5 @@ Route::post('/upload/image', [AssetsController::class, 'uploadImage'])->middlewa
 Route::post('/search-tutorials', [TutorialsController::class, 'searchTutorials'])->middleware('auth:sanctum');
 
 Route::get('/updates', [UpdatesController::class, 'getAllUpdates'])->middleware('auth:sanctum');
+
+Route::get('/team/{id}', [TeammembersController::class, 'getTeamWithFunction'])->middleware('auth:sanctum');
