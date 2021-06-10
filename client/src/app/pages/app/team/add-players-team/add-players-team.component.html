@@ -1,7 +1,18 @@
-<p>
-    Here you can add all of your players to your team.
-</p>
+<div class="row">
+    <p class="col-12 col-md-6">
+        Here you can add all of your players to your team.
+    </p>
+    <div class="col-12 col-md-6">
+        <button
+            class="btn bg-purple text-white py-3 w-100 br-3"
+            role="button"
+            (click)="submit()"
+        >
+            Add players
+        </button>
+    </div>
+</div>
 <app-add-players-widget
-
+    (submitPlayers)="players = $event"
 >
 </app-add-players-widget>
