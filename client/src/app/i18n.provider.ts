@@ -2,20 +2,20 @@ import { ITranslationService } from 'angular-i18next';
 
 export const appInit = (i18next: ITranslationService) => {
   return () => i18next.init({
-      whitelist: ['en', 'nl', 'fr', 'de'],
-      fallbackLng: 'en',
-      debug: true,
-      returnEmptyString: false,
-      resources: {
-        nl: {
-        }
-      },
-      ns: [
-        'translation',
-        'validation',
-        'error'
-      ],
-    });
+    whitelist: ['en', 'nl', 'fr', 'de'],
+    fallbackLng: 'en',
+    debug: true,
+    returnEmptyString: false,
+    resources: {
+      nl: {
+      }
+    },
+    ns: [
+      'translation',
+      'validation',
+      'error'
+    ],
+  });
 };
 
 export const localeIdFactory = (i18next: ITranslationService) => {
