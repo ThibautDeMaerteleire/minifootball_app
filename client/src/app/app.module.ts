@@ -13,6 +13,7 @@ import { CommonModule } from '@angular/common';
 import { ComponentsModule } from './components/components.module';
 import { PagesModule } from './pages/pages.module';
 import { WidgetsModule } from './widgets/widgets.module';
+import { ConnectionServiceModule } from 'ng-connection-service';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -32,6 +33,7 @@ import { WidgetsModule } from './widgets/widgets.module';
     ComponentsModule,
     PagesModule,
     WidgetsModule,
+    ConnectionServiceModule
   ],
   providers: [I18N_PROVIDERS],
   bootstrap: [AppComponent]

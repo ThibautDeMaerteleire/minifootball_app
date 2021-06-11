@@ -52,6 +52,8 @@ Route::post('/search-players', [PlayerController::class, 'searchPlayers'])->midd
 
 Route::post('/add-teammembers', [TeammembersController::class, 'addTeammembers'])->middleware('auth:sanctum');
 
+Route::get('/teammembers/{id}', [TeammembersController::class, 'getTeammembers'])->middleware('auth:sanctum');
+
 Route::get('/all-functions', [FunctionsController::class, 'getAll'])->middleware('auth:sanctum');
 
 Route::get('/player/{id}', [UserController::class, 'getUser'])->middleware('auth:sanctum');

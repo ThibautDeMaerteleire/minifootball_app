@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class TeammembersController extends Controller {
 
+  public function getTeamMembers(Request $request, $id) {
+    $teammembers = Teammembers::where('team_id', $id)
+      ->with(['function', 'player.user'])
+      ->orderBy('function_id', 'desc')
+      ->get();
+    return $teammembers;
+  }
+
   public function addTeammembers(Request $request) {
     $GLOBALS['teamId'] = $request->teamId;
     $players = [];

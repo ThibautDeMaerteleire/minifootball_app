@@ -1,6 +1,33 @@
-<app-static-navigation *ngIf="displayStatic"></app-static-navigation>
-<router-outlet></router-outlet>
-<app-static-footer *ngIf="displayStatic"></app-static-footer>
-<div *ngIf="loading" class="loader position-fixed top-0 left-0 vw-100 vh-100 d-flex justify-content-center align-items-center">
-    <lottie-player src="https://assets4.lottiefiles.com/packages/lf20_Yiahbq.json" class="w-12" background="rgba(255, 255, 255, 0)" speed="1" loop autoplay></lottie-player>
-</div>
+<ng-template [ngIf]="isConnected" [ngIfElse]="noInternet" >
+    <app-static-navigation *ngIf="displayStatic"></app-static-navigation>
+    <router-outlet></router-outlet>
+    <app-static-footer *ngIf="displayStatic"></app-static-footer>
+    <div
+        *ngIf="loading"
+        class="loader position-fixed top-0 left-0 vw-100 vh-100 d-flex justify-content-center align-items-center"
+    >
+        <lottie-player
+            src="https://assets4.lottiefiles.com/packages/lf20_Yiahbq.json"
+            class="w-12"
+            background="rgba(255, 255, 255, 0)"
+            speed="1"
+            loop
+            autoplay
+        >
+        </lottie-player>
+    </div>
+
+</ng-template>
+
+<ng-template #noInternet>
+    <div class="vw-100 vh-100 d-flex justify-content-center align-items-center">
+        <lottie-player
+            src="/assets/icons/no-internet.json"
+            class=""
+            background="transparent"
+            speed="1"
+            autoplay
+        >
+        </lottie-player>
+    </div>
+</ng-template>

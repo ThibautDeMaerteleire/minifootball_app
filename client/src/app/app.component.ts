@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
+import { ConnectionService } from 'ng-connection-service';  
 
 @Component({
   selector: 'app-root',
@@ -7,10 +8,14 @@ import { Event, NavigationEnd, NavigationError, NavigationStart, Router } from '
 })
 export class AppComponent {
 
+  isConnected = true;  
   loading = false;
   displayStatic = true;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private connectionService: ConnectionService
+  ) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
         // Show loading indicator
@@ -31,6 +36,11 @@ export class AppComponent {
         console.log(event.error);
       }
     });
+
+    // Check for internet connection
+    this.connectionService.monitor().subscribe(isConnected => {  
+      this.isConnected = isConnected;
+    });
   }
 
   checkDisplayStatic(url: string): void {
@@ -40,4 +50,5 @@ export class AppComponent {
       this.displayStatic = true;
     }
   }
+  
 }

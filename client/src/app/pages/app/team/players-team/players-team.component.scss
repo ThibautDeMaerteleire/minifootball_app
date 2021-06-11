@@ -1,0 +1,23 @@
+.player {
+  > * {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  &-container {
+    margin-bottom: 1.5rem;
+  }
+
+  &-thumbnail {
+    margin-right: 1.5rem;
+  }
+  
+  @media only screen and (max-width: 768px) {
+    &-thumbnail {
+      margin-right: 1rem;
+    }
+  }
+}

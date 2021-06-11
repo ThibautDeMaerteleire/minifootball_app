@@ -46,12 +46,16 @@ export class SelectTeamComponent implements OnChanges {
   }
 
   mapper(data: any): ITeamClubItem[] {
-    return data.data.clubTeams.map((team: any): ITeamClubItem => {
-      return {
-        id: team.id,
-        name: team.name,
-      };
-    });
+    if (data.data.clubTeams) {
+      return data.data.clubTeams.map((team: any): ITeamClubItem => {
+        return {
+          id: team.id,
+          name: team.name,
+        };
+      });
+    } else {
+      return [];
+    }
   }
 
   setSelected(id: number | string): void {

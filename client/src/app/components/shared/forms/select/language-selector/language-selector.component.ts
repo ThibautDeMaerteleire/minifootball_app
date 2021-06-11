@@ -1,5 +1,6 @@
 import { Component, Input, } from '@angular/core';
 import { languages } from 'src/app/constants/languages.enum';
+import { CountryFlagService } from 'src/app/services/country-flag/country-flag.service';
 
 @Component({
   selector: 'app-shared-language-selector',
@@ -7,13 +8,10 @@ import { languages } from 'src/app/constants/languages.enum';
   styleUrls: ['./language-selector.component.scss']
 })
 export class LanguageSelectorComponent {
-  @Input() selectedLanguage = 'GB-UKM';
+  @Input() selectedLanguage: languages = languages.nl;
 
-  languages = languages;
+  languageEnum = languages;
 
-  changeLanguage(value: any): void {
-    // console.log(value);
-    console.log('test');
-  }
+  constructor(public countryFlag: CountryFlagService) {}
 
 }

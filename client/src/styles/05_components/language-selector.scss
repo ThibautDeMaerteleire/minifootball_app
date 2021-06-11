@@ -4,3 +4,10 @@ shared-language-selector {
     margin-top: -0.55rem;
   }
 }
+
+.language-selector {
+  .ant-select-item-option-content {
+    display: flex;
+    justify-content: center;
+  }
+}

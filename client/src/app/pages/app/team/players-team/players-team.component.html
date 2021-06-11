@@ -1,1 +1,86 @@
-<p>players-team works!</p>
+<div class="container-fluid">
+    <div class="container-fluid">
+        <div class="row">
+            <ng-template [ngIf]="!loading " [ngIfElse]="loadingTemplate" >
+                <ng-template [ngIf]="players.length > 0" [ngIfElse]="empty">
+                    <div
+                        *ngFor="let player of players"
+                        class="player row border-bottom"
+                    >
+                        <div
+                            class="col-8 col-lg-5 justify-content-start"
+                        >
+                            <nz-avatar
+                                class="player-thumbnail"
+                                nzIcon="user"
+                                [nzSrc]="assetsUrl + player.player.thumbnail"
+                                nzAlt="logo {{player.player.name}}"
+                                [nzSize]="64"
+                            >
+                            </nz-avatar>
+                            <div class="d-flex flex-column">
+                                <h2 class="h4 mb-0 shorten-text">
+                                    {{player.player.name}} {{player.player.surname || ''}}
+                                </h2>
+                                <p class="h6 text-placeholder mb-0 shorten-text">
+                                    {{player.player.user.username || ''}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-4 col-lg-2">
+                            <h3 class="h6 text-placeholder mb-0 shorten-text">
+                                {{player.player.birthday | date:'d MMM y'}}
+                            </h3>
+                        </div>
+                        <div class="col-8 col-lg-3">
+                            <h3
+                                [title]="player.function.description"
+                                class="h6 text-placeholder mb-0 shorten-text"
+                            >
+                                {{player.function.name}}
+                            </h3>
+                        </div>
+                        <div class="col-2 col-lg-1">
+                            <span 
+                                [class]="countryFlag.getClassName(player.player.user.language)"
+                                [title]="player.player.user.language"
+                            >
+                            </span>
+                        </div>
+                        <a
+                            class="col-2 col-lg-1"
+                            [attr.href]="'/app/player/' + player.player.user.id"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            role="button"
+                        >
+                            <i
+                                class="fs-4 op-7"
+                                nz-icon
+                                nzType="profile"
+                                nzTheme="outline"
+                                title="go to {{player.player.name}}'s profile"
+                            >
+                            </i>
+                        </a>
+                    </div>
+                </ng-template>
+            </ng-template>
+        </div>
+    </div>
+</div>
+
+<ng-template #empty>
+    <nz-empty
+        class="my-7"
+        [nzNotFoundContent]="null"
+        nzNotFoundFooter="No players found"
+    >
+    </nz-empty>
+</ng-template>
+
+<ng-template #loadingTemplate>
+    <div class="w-100 d-flex justify-content-center my-5">
+        <app-loader></app-loader>
+    </div>
+</ng-template>

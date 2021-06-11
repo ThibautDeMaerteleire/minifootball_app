@@ -2,72 +2,25 @@
     <nz-select
         class="py-1 px-2"
         [nzBorderless]="true"
-        (ngModel)="selectedLanguage"
-        (ngModelChange)="changeLanguage($event)"
+        [(ngModel)]="selectedLanguage"
         [nzCustomTemplate]="languageTemplate"
-        [nzNotFoundContent]="languageTemplate"
         [nzPlaceHolder]="languageTemplate"
+        nzDropdownClassName="language-selector"
         nzSize="large"
     >
-        <nz-option nzValue="GB-UKM" [nzCustomContent]="true" >
-            english
-            <!-- <lib-angular-flagpack
-                code="GB-UKM"
-                size="m"
-                gradient="top-down"
-                [hasDropShadow]="true"
-                [hasBorder]="false"
-                [hasBorderRadius]="true"
+        <nz-option
+            *ngFor="let language of languageEnum | keyvalue"
+            [nzValue]="language.key"
+            nzCustomContent
+            [nzLabel]="language.key"
+        >
+            <span
+                [class]="countryFlag.getClassName(language.key)"
             >
-            </lib-angular-flagpack> -->
-        </nz-option>
-        <nz-option nzValue="nl" [nzCustomContent]="true" >
-            dutch
-            <!-- <lib-angular-flagpack
-                code="nl"
-                size="m"
-                gradient="top-down"
-                [hasDropShadow]="true"
-                [hasBorder]="false"
-                [hasBorderRadius]="true"
-            >
-            </lib-angular-flagpack> -->
-        </nz-option>
-        <nz-option nzValue="fr" [nzCustomContent]="true" >
-            french
-            <!-- <lib-angular-flagpack
-                code="fr"
-                size="m"
-                gradient="top-down"
-                [hasDropShadow]="true"
-                [hasBorder]="false"
-                [hasBorderRadius]="true"
-            >
-            </lib-angular-flagpack> -->
-        </nz-option>
-        <nz-option nzValue="de" [nzCustomContent]="true" >
-            deutsch
-            <!-- <lib-angular-flagpack
-                code="de"
-                size="m"
-                gradient="top-down"
-                [hasDropShadow]="true"
-                [hasBorder]="false"
-                [hasBorderRadius]="true"
-            >
-            </lib-angular-flagpack> -->
+            </span>
         </nz-option>
     </nz-select>
     <ng-template #languageTemplate let-selected>
-        lala
-        <!-- <lib-angular-flagpack
-            [code]="selectedLanguage"
-            size="m"
-            gradient="top-down"
-            [hasDropShadow]="true"
-            [hasBorder]="false"
-            [hasBorderRadius]="true"
-        >
-        </lib-angular-flagpack> -->
+        <span [class]="countryFlag.getClassName(selectedLanguage)"></span>       
     </ng-template>
 </div>

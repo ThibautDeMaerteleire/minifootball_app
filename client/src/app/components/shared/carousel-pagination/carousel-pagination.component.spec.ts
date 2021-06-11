@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CarousselPaginationComponent } from './carousel-pagination.component';
+import { CarouselPaginationComponent } from './carousel-pagination.component';
 
 describe('CarousselPaginationComponent', () => {
-  let component: CarousselPaginationComponent;
-  let fixture: ComponentFixture<CarousselPaginationComponent>;
+  let component: CarouselPaginationComponent;
+  let fixture: ComponentFixture<CarouselPaginationComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CarousselPaginationComponent ]
+      declarations: [ CarouselPaginationComponent ]
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CarousselPaginationComponent);
+    fixture = TestBed.createComponent(CarouselPaginationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

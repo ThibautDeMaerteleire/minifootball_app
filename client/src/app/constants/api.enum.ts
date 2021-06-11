@@ -18,6 +18,7 @@ export enum apiRoutes {
   'create-team' = '/create-team',
   'search-teams' = '/search-teams',
   'add-teammembers' = '/add-teammembers',
+  'teammembers' = '/teammembers/',
   'search-players' = '/search-players',
   'all-functions' = '/all-functions',
   'search-tutorials' = '/search-tutorials',

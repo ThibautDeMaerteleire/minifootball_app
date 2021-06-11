@@ -5,13 +5,26 @@
         <p class="col-12 intro-text mb-4">
             Select your team here and click on next if your team is selected.
         </p>
-        <p
-            *ngFor="let option of options; let i = index"
-            role="button"
-            class="col-12 col-md-6 border-bottom {{i < 2 ? 'border-top' : ''}} {{i % 2 ? 'border-start' : ''}} h2 m-0 p-3 shorten-text {{selectedId == option.id ? 'bg-purple-bg' : ''}}"
-            (click)="setSelected(option.id)"
-        >
-            {{ option.name }}
-        </p>
+        <ng-template [ngIf]="options.length > 0" [ngIfElse]="empty" >
+            <p
+                *ngFor="let option of options; let i = index"
+                role="button"
+                class="col-12 col-md-6 border-bottom {{i < 2 ? 'border-top' : ''}} {{i % 2 ? 'border-start' : ''}} h2 m-0 p-3 shorten-text {{selectedId == option.id ? 'bg-purple-bg' : ''}}"
+                (click)="setSelected(option.id)"
+            >
+                {{ option.name }}
+            </p>
+        </ng-template>
     </div>
 </div>
+
+<ng-template #empty>
+    <div class="col-12 d-flex flex-column align-items-center">
+        <nz-empty
+            class="mb-3 mt-7"
+            [nzNotFoundContent]="null"
+            nzNotFoundFooter="No teams found"
+        >
+        </nz-empty>
+    </div>
+</ng-template>
