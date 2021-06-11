@@ -62,7 +62,7 @@ export class AddPlayersTeamComponent {
   }
 
   findFunction(id: number | undefined): string {
-    return this.functions.find((f: IFunction) => f.id == id)?.name || '';
+    return this.functions.find((f: IFunction) => f.id.toString() === id?.toString())?.name || '';
   }
 
   refresh(): void {

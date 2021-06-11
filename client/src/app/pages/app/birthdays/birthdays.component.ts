@@ -52,7 +52,7 @@ export class BirthdaysComponent implements OnInit {
 
       if (date1 < date2) {
         return -1;
-      } else if(date1 > date2) {
+      } else if (date1 > date2) {
         return 1;
       } else {
         return 0;
@@ -62,12 +62,14 @@ export class BirthdaysComponent implements OnInit {
     return players;
   }
 
-  toDate(str: string, today: Date) {
+  toDate(str: string, today: Date): Date {
     const date = this.createDate(str);
     const day = date.getDate();
     const month = date.getMonth();
     const newDate = new Date(today.getFullYear(), month, +day);
-    if (newDate < today) newDate.setFullYear(newDate.getFullYear() + 1);
+    if (newDate < today) {
+      newDate.setFullYear(newDate.getFullYear() + 1);
+    }
     return newDate;
   }
 }

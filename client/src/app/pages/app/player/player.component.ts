@@ -28,7 +28,7 @@ export class PlayerComponent implements OnInit {
   getUser(): void {
     const routeParams = this.route.snapshot.paramMap;
     this.loading = true;
-    
+
     const promise = this.http.get(
       API_BASE_URL + apiRoutes.player + routeParams.get('id'),
       { headers: this.headers() }

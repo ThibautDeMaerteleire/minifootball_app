@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./overview-team.component.scss']
 })
 export class OverviewTeamComponent implements OnInit {
-  
+
   data: any = null;
   loading = false;
   id = this.route.snapshot.paramMap.get('id');

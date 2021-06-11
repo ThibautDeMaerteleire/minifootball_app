@@ -61,7 +61,7 @@ export class AddPlayersComponent implements OnInit {
   }
 
   addPlayer(id: string | number): void {
-    const newPlayer = this.players.find((e) => e.id == id);
+    const newPlayer = this.players.find((e) => e.id.toString() === id.toString());
     if (newPlayer) {
       this.selectedPlayers = [
         ...this.selectedPlayers,
@@ -73,12 +73,12 @@ export class AddPlayersComponent implements OnInit {
   }
 
   removePlayer(id: string | number): void {
-    this.selectedPlayers = this.selectedPlayers.filter((e: IPlayer) => e.id != id);
+    this.selectedPlayers = this.selectedPlayers.filter((e: IPlayer) => e.id.toString() !== id.toString());
     return;
   }
 
   checkSelected(id: string | number): boolean {
-    return !!this.selectedPlayers.find((a: IPlayer) => a.id == id);
+    return !!this.selectedPlayers.find((a: IPlayer) => a.id.toString() === id.toString());
   }
 
   getPlayers(): void {

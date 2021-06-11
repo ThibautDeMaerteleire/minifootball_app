@@ -74,7 +74,7 @@ export class TeamComponent implements OnInit {
 
   getTeam(): void {
     this.loading = true;
-    
+
     const promise = this.http.get(
       API_BASE_URL + apiRoutes.team + this.id,
       { headers: this.headers() }
@@ -90,11 +90,11 @@ export class TeamComponent implements OnInit {
     });
   }
 
-  checkFunction(func_id: number): boolean {
+  checkFunction(functionId: number): boolean {
     if (this.data && 'function_id' in this.data) {
-      return this.data.function_id >= func_id;
+      return this.data.function_id >= functionId;
     }
-    return func_id < 2;
+    return functionId < 2;
   }
 
 }

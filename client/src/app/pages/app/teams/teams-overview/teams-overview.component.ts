@@ -29,7 +29,7 @@ export class TeamsOverviewComponent implements OnInit {
     this.loading = true;
 
     const promise = this.http.get(API_BASE_URL + apiRoutes.teams, { headers: this.headers() }).toPromise();
-    
+
     promise.then((d: any) => {
       this.teams = d;
       this.loading = false;

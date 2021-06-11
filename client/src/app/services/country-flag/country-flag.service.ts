@@ -5,8 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class CountryFlagService {
 
-  getClassName(code: string) {
+  getClassName(code: string): string {
     return `flag-icon flag-icon-${code}`;
   }
-  
+
 }

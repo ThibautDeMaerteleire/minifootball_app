@@ -109,7 +109,7 @@ export class FindClubComponent implements OnInit {
 
   clickItem(id: string | number): void {
     this.selectedItem = id;
-    this.selectedTeamId.emit(this.teams.find((e) => e.id == id)?.rbfa_club_id);
+    this.selectedTeamId.emit(this.teams.find((e) => e.id.toString() === id.toString())?.rbfa_club_id);
     if (!this.select) {
       this.router.navigateByUrl('/app/team/' + id);
       return;

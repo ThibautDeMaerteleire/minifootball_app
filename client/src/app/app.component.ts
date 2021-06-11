@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Event, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
-import { ConnectionService } from 'ng-connection-service';  
+import { ConnectionService } from 'ng-connection-service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +8,7 @@ import { ConnectionService } from 'ng-connection-service';
 })
 export class AppComponent {
 
-  isConnected = true;  
+  isConnected = true;
   loading = false;
   displayStatic = true;
 
@@ -38,7 +38,7 @@ export class AppComponent {
     });
 
     // Check for internet connection
-    this.connectionService.monitor().subscribe(isConnected => {  
+    this.connectionService.monitor().subscribe(isConnected => {
       this.isConnected = isConnected;
     });
   }
@@ -50,5 +50,5 @@ export class AppComponent {
       this.displayStatic = true;
     }
   }
-  
+
 }
