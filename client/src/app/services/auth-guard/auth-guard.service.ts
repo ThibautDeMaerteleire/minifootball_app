@@ -10,7 +10,7 @@ export class AuthGuardService {
   constructor(private router: Router) { }
 
   canActivate(next: ActivatedRouteSnapshot): boolean {
-    if (window.sessionStorage.getItem('Authentication')) {
+    if (window.localStorage.getItem('Authentication')) {
       if (next.url[0].path === baseRoutesEnum.app) {
         return true;
       } else {

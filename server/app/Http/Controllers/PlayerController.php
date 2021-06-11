@@ -47,14 +47,19 @@ class PlayerController extends Controller {
 
   public function searchPlayers(Request $request) {
     $GLOBALS['search'] = $request->search;
-    $teammembers = Teammembers::where('team_id', '=', $request->teamId)->get('id');
+    $teammembers = Teammembers::where('team_id', $request->teamId)->get('player_id');
+    $teammemberIds = [];
+    foreach ($teammembers as $item) {
+      array_push($teammemberIds, $item->player_id);
+    }
 
+    // return $teammemberIds;
     $players = ['page' => $request->page];
     
     $players['totalItems'] =  DB::table('users')
     ->leftJoin('players', 'users.id', '=', 'players.user_id')
     ->where('players.user_id', '!=', $request->user()->id)
-    ->whereNotIn('players.user_id', $teammembers)
+    ->whereNotIn('users.id', $teammemberIds)
     ->where(function($query) {
       $query->where('users.email', 'like', "%{$GLOBALS['search']}%")
             ->orWhere('users.username', 'like', "%{$GLOBALS['search']}%")
@@ -66,7 +71,7 @@ class PlayerController extends Controller {
     $players['data'] = DB::table('users')
       ->leftJoin('players', 'users.id', '=', 'players.user_id')
       ->where('players.user_id', '!=', $request->user()->id)
-      ->whereNotIn('players.user_id', $teammembers)
+      ->whereNotIn('users.id', $teammemberIds)
       ->where(function($query) {
         $query->where('users.email', 'like', "%{$GLOBALS['search']}%")
               ->orWhere('users.username', 'like', "%{$GLOBALS['search']}%")

@@ -11,7 +11,7 @@ export class MeComponent implements OnInit {
 
   data: any = null;
   loading = false;
-  authkey: string = window.sessionStorage.getItem('Authentication') || '';
+  authkey: string = window.localStorage.getItem('Authentication') || '';
 
   constructor(private http: HttpClient) { }
 

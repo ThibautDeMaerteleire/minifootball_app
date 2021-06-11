@@ -6,13 +6,98 @@
         <button
             class="btn bg-purple text-white py-3 w-100 br-3"
             role="button"
-            (click)="submit()"
+            data-bs-toggle="modal"
+            data-bs-target="#submitModal"
         >
             Add players
         </button>
     </div>
 </div>
 <app-add-players-widget
+    [teamId]="id || 0"
     (submitPlayers)="players = $event"
+    (submitFunctions)="functions = $event"
 >
 </app-add-players-widget>
+
+<div
+    class="modal fade"
+    id="submitModal"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="submitModalLabel"
+    aria-hidden="true"
+    (click)="submit.success && refresh()"
+>
+    <div class="modal-dialog modal-dialog-centered modal-md">
+        <div class="modal-content br-3">
+            <button
+                type="button"
+                class="btn-close position-absolute"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+                role="button"
+                data-bs-target="#submitModal"
+            >
+            </button>
+            <div class="modal-body py-6 px-5">
+                <ng-template [ngIf]="!submit.loading" [ngIfElse]="loadingTemplate">
+                    <ng-template [ngIf]="!submit.success" [ngIfElse]="submitSuccessful">
+                        <h1 class="mb-4 fw-7">Add players</h1>
+                        <p>
+                            {{players.length > 0 ? 'Are you sure you want to add these players with these functions:' : 'You didn\'t add any players.'}}
+                        </p>
+                        <ul *ngIf="players.length > 0">
+                            <li 
+                                *ngFor="let player of players; let i = index"
+                                class="d-flex align-items-center justify-content-between py-2 {{i > 0 && 'border-top'}}"
+                            >
+                                <span>{{player.name}} {{player.surname}}</span>
+                                <span>{{findFunction(player.function)}}</span>
+                            </li>
+                        </ul>
+                        <p class="mb-0 mt-2"><small class="text-red">{{ submit.error }}</small></p>
+                        <div class="d-flex align-items-center mt-3">
+                            <button
+                                class="btn border bc-purple text-purple py-3 br-3 me-2 w-100"
+                                role="button"
+                                data-bs-dismiss="modal"
+                                data-bs-target="#submitModal"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                *ngIf="players.length > 0"
+                                class="btn bg-purple text-white py-3 br-3 w-100"
+                                role="button"
+                                (click)="postPlayers()"
+                            >
+                                Submit
+                            </button>
+                        </div>
+                    </ng-template>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #loadingTemplate>
+    <div class="w-100 d-flex justify-content-center my-3">
+        <app-loader></app-loader>
+    </div>
+</ng-template>
+
+<ng-template #submitSuccessful>
+    <div class="w-100 d-flex flex-column align-items-center justify-content-center">
+        <lottie-player
+            src="https://assets5.lottiefiles.com/packages/lf20_ya4ycrti.json"
+            background="transparent"
+            speed="1"
+            style="width: 300px; height: 300px;"
+            autoplay
+        >
+        </lottie-player>
+        <h1 class="mt-3 fw-7 text-center">Players were added succesfully</h1>
+    </div>
+</ng-template>

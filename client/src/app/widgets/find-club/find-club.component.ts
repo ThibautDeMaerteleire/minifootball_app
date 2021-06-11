@@ -25,7 +25,7 @@ export class FindClubComponent implements OnInit {
   selectedItem: string | number = -1;
   search = '';
   teams: ITeam[] | [] = [];
-  authkey: string = window.sessionStorage.getItem('Authentication') || '';
+  authkey: string = window.localStorage.getItem('Authentication') || '';
   page = 1;
   totalItems = 1;
 
@@ -66,6 +66,7 @@ export class FindClubComponent implements OnInit {
 
     promise.then((d: any) => {
       this.teams = this.rbfaMapper(d);
+      console.log(this.teams);
       this.loading = false;
     }).catch((err: HttpErrorResponse) => {
       console.error(err);
@@ -80,7 +81,7 @@ export class FindClubComponent implements OnInit {
   }
 
   rbfaMapper(data: any): ITeam[] {
-    return data.search.results.map((club: any): ITeam => {
+    return data.data.search.results.map((club: any): ITeam => {
       return {
         id: club.id,
         name: club.clubName,

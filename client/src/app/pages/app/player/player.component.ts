@@ -12,7 +12,7 @@ export class PlayerComponent implements OnInit {
 
   data: any = null;
   loading = false;
-  authkey: string = window.sessionStorage.getItem('Authentication') || '';
+  authkey: string = window.localStorage.getItem('Authentication') || '';
 
   constructor(private http: HttpClient, private route: ActivatedRoute) { }
 

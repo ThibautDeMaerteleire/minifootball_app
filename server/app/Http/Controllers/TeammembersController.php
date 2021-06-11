@@ -13,27 +13,33 @@ class TeammembersController extends Controller {
     $players = [];
     $checkEmpty = count($request->players) === 0;
     
-    $me = [
-      'player_id' => $request->user()->id,
-      'function_id' => 10,
-      'team_id' => $GLOBALS['teamId'],
-    ];
-    
-    // Mapper
-    if (!$checkEmpty) {
-      $players = collect($request->players)->map(function ($player) {
-        return [
-          'player_id' => $player['id'],
-          'function_id' => $player['function'],
-          'team_id' => $GLOBALS['teamId'],
-        ];
-      });
 
-      $players = $players->toArray();
+    // Mapper
+    $players = collect($request->players)->map(function ($player) {
+      return [
+        'player_id' => $player['id'],
+        'function_id' => $player['function'],
+        'team_id' => $GLOBALS['teamId'],
+      ];
+    });
+    $players = $players->toArray();
+    
+    if (!$request->addMyselfAsAdmin) {
+      if (!$checkEmpty) {
+        $teammembers = Teammembers::insert($players);
+      } else {
+        return abort(418, 'You need to give some players at least.');
+      }
+    } else {
+      $me = [
+        'player_id' => $request->user()->id,
+        'function_id' => 10,
+        'team_id' => $GLOBALS['teamId'],
+      ];
       array_push($players, $me);
+      $teammembers = Teammembers::insert($checkEmpty ? $me : $players);
     }
     
-    $teammembers = Teammembers::insert($checkEmpty ? $me : $players);
     return $teammembers;
   }
 

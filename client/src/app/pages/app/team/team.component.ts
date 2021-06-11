@@ -21,7 +21,7 @@ export class TeamComponent implements OnInit {
   data: any = null;
   loading = false;
   id = this.route.snapshot.paramMap.get('id');
-  authkey: string = window.sessionStorage.getItem('Authentication') || '';
+  authkey: string = window.localStorage.getItem('Authentication') || '';
 
   navItems: INavItem[] = [{
     url: detailTeamRoutesEnum.overview,

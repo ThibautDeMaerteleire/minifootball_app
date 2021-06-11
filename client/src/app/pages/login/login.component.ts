@@ -56,7 +56,7 @@ export class LoginComponent {
     const promise = this.http.post(API_BASE_URL + apiRoutes.login, body).toPromise();
 
     promise.then((data: ApiAuth | any) => {
-      window.sessionStorage.setItem('Authentication', `${data.token_type} ${data.access_token}`);
+      window.localStorage.setItem('Authentication', `${data.token_type} ${data.access_token}`);
       this.loading = false;
       this.router.navigateByUrl(baseRoutesEnum.app);
     }).catch((err: HttpErrorResponse) => {

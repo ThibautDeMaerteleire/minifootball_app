@@ -11,7 +11,7 @@ export class UpdatesComponent implements OnInit {
 
   loading = false;
   updates: any[] = [];
-  authkey: string = window.sessionStorage.getItem('Authentication') || '';
+  authkey: string = window.localStorage.getItem('Authentication') || '';
 
   constructor(private http: HttpClient) { }
 

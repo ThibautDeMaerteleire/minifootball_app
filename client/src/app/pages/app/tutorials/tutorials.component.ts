@@ -19,7 +19,7 @@ export class TutorialsComponent implements OnInit {
   openedVideo = '';
   search = '';
   loading = false;
-  authkey: string = window.sessionStorage.getItem('Authentication') || '';
+  authkey: string = window.localStorage.getItem('Authentication') || '';
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) { }
 

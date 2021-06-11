@@ -27,7 +27,7 @@ export class DashboardComponent implements OnInit {
   thumbnailUrl = '';
   birthday = null;
   playerErrMsg = '';
-  authkey: string = window.sessionStorage.getItem('Authentication') || '';
+  authkey: string = window.localStorage.getItem('Authentication') || '';
 
   constructor(private http: HttpClient, private router: Router, private i18n: NzI18nService) {}
 

@@ -28,7 +28,7 @@ export interface IFunction {
 export class AddPlayersComponent implements OnInit {
 
   loading = false;
-  authkey: string = window.sessionStorage.getItem('Authentication') || '';
+  authkey: string = window.localStorage.getItem('Authentication') || '';
   players: IPlayer[] | [] = [];
   functions: IFunction[] | [] = [];
   selectedPlayers: IPlayer[] | [] = [];
@@ -40,6 +40,7 @@ export class AddPlayersComponent implements OnInit {
   @Input() teamId: string | number = '';
 
   @Output() submitPlayers = new EventEmitter<IPlayer[] | []>();
+  @Output() submitFunctions = new EventEmitter<IFunction[] | []>();
 
   constructor(private http: HttpClient) { }
 
@@ -85,7 +86,7 @@ export class AddPlayersComponent implements OnInit {
 
     const promise = this.http.post(
       API_BASE_URL + apiRoutes['search-players'],
-      { search: this.search, page: this.page },
+      { search: this.search, page: this.page, teamId: this.teamId },
       { headers: this.headers() }
     ).toPromise();
 
@@ -112,6 +113,7 @@ export class AddPlayersComponent implements OnInit {
     promise.then((d: IFunction[] | any) => {
       this.functions = d;
       this.loading = false;
+      this.submitFunctions.emit(d);
     }).catch((err: HttpErrorResponse) => {
       console.error(err);
       this.loading = false;

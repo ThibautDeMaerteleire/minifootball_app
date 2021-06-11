@@ -28,6 +28,12 @@
   }
 }
 
+@each $name, $color in $theme-colors {
+  .bc-#{$name} {
+    border-color: $color !important;
+  }
+}
+
 .line {
   height: 0.25rem;
   background-color: $line;

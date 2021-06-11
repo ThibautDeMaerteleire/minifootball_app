@@ -76,7 +76,7 @@ export class ImageUploadComponent {
   }
 
   headers(): HttpHeaders | any {
-    const authKey = window.sessionStorage.getItem('Authentication');
+    const authKey = window.localStorage.getItem('Authentication');
 
     if (authKey) {
       return { Authorization: authKey };

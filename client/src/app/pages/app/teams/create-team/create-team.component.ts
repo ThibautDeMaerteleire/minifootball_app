@@ -12,6 +12,7 @@ interface ICreateTeamBody {
   rbfa_club_id: string;
   rbfa_team_id: string;
   players: IPlayer[] | [];
+  addMyselfAsAdmin: boolean;
 }
 
 @Component({
@@ -27,7 +28,7 @@ export class CreateTeamComponent {
   lastSlideTime = 0;
   submittedTeamId: number | null = null;
   loading = false;
-  authkey: string = window.sessionStorage.getItem('Authentication') || '';
+  authkey: string = window.localStorage.getItem('Authentication') || '';
 
   body: ICreateTeamBody = {
     name: '',
@@ -37,6 +38,7 @@ export class CreateTeamComponent {
     rbfa_club_id: '',
     rbfa_team_id: '',
     players: [],
+    addMyselfAsAdmin: true
   };
 
   constructor(private router: Router, private http: HttpClient) {}
@@ -82,6 +84,7 @@ export class CreateTeamComponent {
       rbfa_club_id: '',
       rbfa_team_id: '',
       players: [],
+      addMyselfAsAdmin: true,
     };
 
     this.submittedTeamId = null;

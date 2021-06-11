@@ -12,7 +12,7 @@ export class BirthdaysComponent implements OnInit {
   table = false;
   players: any = [];
   loading = false;
-  authkey: string = window.sessionStorage.getItem('Authentication') || '';
+  authkey: string = window.localStorage.getItem('Authentication') || '';
 
   constructor(private http: HttpClient) { }
 
