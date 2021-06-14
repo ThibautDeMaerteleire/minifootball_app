@@ -1,7 +1,8 @@
-import { HttpClient, HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
 import { Component, } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { apiRoutes, API_BASE_URL } from 'src/app/constants/api.enum';
+import { AuthGuardService } from 'src/app/services/auth-guard/auth-guard.service';
 import { IFunction, IPlayer } from 'src/app/widgets/add-players/add-players.component';
 
 @Component({
@@ -13,7 +14,6 @@ export class AddPlayersTeamComponent {
 
   players: IPlayer[] = [];
   functions: IFunction[] = [];
-  authkey: string = window.localStorage.getItem('Authentication') || '';
   id = this.route.snapshot.paramMap.get('id');
   submit = {
     error: '',
@@ -24,11 +24,8 @@ export class AddPlayersTeamComponent {
   constructor(
     private http: HttpClient,
     public route: ActivatedRoute,
+    private auth: AuthGuardService,
   ) { }
-
-  headers(): HttpHeaders {
-    return new HttpHeaders().set('Authorization', this.authkey);
-  }
 
   postPlayers(): void {
     const checkPlayers: IPlayer | undefined = this.players?.find((e: IPlayer) => !e.function);
@@ -47,13 +44,13 @@ export class AddPlayersTeamComponent {
         teamId: this.id,
         addMyselfAsAdmin: false,
       },
-      { headers: this.headers() }
+      { headers: this.auth.getAuthHeaders() }
     ).toPromise();
 
     promise.then((d: any) => {
       this.submit.loading = false;
       this.submit.success = true;
-    }).catch((err: HttpHeaderResponse) => {
+    }).catch((err: HttpErrorResponse) => {
       console.error(err);
       this.submit.loading = false;
     });

@@ -47,10 +47,10 @@ export class RegisterComponent {
     const promise = this.http.post(API_BASE_URL + apiRoutes.register, body).toPromise();
     promise.then((data: ApiAuth | any) => {
       window.localStorage.setItem('Authentication', `${data.token_type} ${data.access_token}`);
-      this.loading = true;
+      this.loading = false;
       this.router.navigateByUrl(baseRoutesEnum.app);
     }).catch((err: HttpErrorResponse) => {
-      this.loading = true;
+      this.loading = false;
       this.error = err.error.message;
     });
 

@@ -51,6 +51,7 @@ class TeammembersController extends Controller {
     return $teammembers;
   }
 
+
   public function getBirthDays(Request $request) {
     $allTeams = Teammembers::where('player_id', $request->user()->id)->get('team_id');
     $teamsArr = collect($allTeams)->map(function ($team) {
@@ -61,6 +62,7 @@ class TeammembersController extends Controller {
       ->whereIn('team_id', $teamsArr->toArray())
       ->get();
   }
+
 
   public function getTeamWithFunction(Request $request, $id) {
     $me = Teammembers::where('team_id', $id)

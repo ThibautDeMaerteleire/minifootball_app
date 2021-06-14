@@ -1,7 +1,8 @@
-import { HttpClient, HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaderResponse, } from '@angular/common/http';
 import { Component, OnInit, } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { apiRoutes, API_BASE_URL } from 'src/app/constants/api.enum';
+import { AuthGuardService } from 'src/app/services/auth-guard/auth-guard.service';
 
 interface ITutorial {
   title: string;
@@ -19,9 +20,12 @@ export class TutorialsComponent implements OnInit {
   openedVideo = '';
   search = '';
   loading = false;
-  authkey: string = window.localStorage.getItem('Authentication') || '';
 
-  constructor(private http: HttpClient, private sanitizer: DomSanitizer) { }
+  constructor(
+    private http: HttpClient,
+    private sanitizer: DomSanitizer,
+    private auth: AuthGuardService,
+  ) { }
 
   getUrl(url: string): any {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
@@ -31,22 +35,18 @@ export class TutorialsComponent implements OnInit {
     this.loadTutorials();
   }
 
-  headers(): HttpHeaders {
-    return new HttpHeaders().set('Authorization', this.authkey);
-  }
-
   loadTutorials(): void {
     this.loading = true;
     const promise = this.http.post(
       API_BASE_URL + apiRoutes['search-tutorials'],
       { search: this.search },
-      { headers: this.headers() }
+      { headers: this.auth.getAuthHeaders() }
     ).toPromise();
 
     promise.then((d: any) => {
       this.tutorials = d;
       this.loading = false;
-    }).catch((err: HttpHeaderResponse) => {
+    }).catch((err: HttpErrorResponse) => {
       console.error(err);
       this.loading = false;
     });

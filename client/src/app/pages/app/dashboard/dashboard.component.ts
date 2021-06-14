@@ -1,8 +1,9 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, } from '@angular/common/http';
 import { Component, OnInit, } from '@angular/core';
 import { Router } from '@angular/router';
 import { apiRoutes, API_BASE_URL, ASSETS_BASE_URL } from 'src/app/constants/api.enum';
 import { en_US, NzI18nService, } from 'ng-zorro-antd/i18n';
+import { AuthGuardService } from 'src/app/services/auth-guard/auth-guard.service';
 
 
 export interface IPlayerData {
@@ -27,21 +28,25 @@ export class DashboardComponent implements OnInit {
   thumbnailUrl = '';
   birthday = null;
   playerErrMsg = '';
-  authkey: string = window.localStorage.getItem('Authentication') || '';
 
-  constructor(private http: HttpClient, private router: Router, private i18n: NzI18nService) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private i18n: NzI18nService,
+    private auth: AuthGuardService
+  ) {}
 
   ngOnInit(): void {
     this.i18n.setLocale(en_US);
     this.getDashboardData();
   }
 
-  headers(): HttpHeaders {
-    return new HttpHeaders().set('Authorization', this.authkey);
-  }
-
   getDashboardData(): void {
-    const promise = this.http.get(API_BASE_URL + apiRoutes.dashboard, { headers: this.headers() }).toPromise();
+    const promise = this.http.get(
+      API_BASE_URL + apiRoutes.dashboard,
+      { headers: this.auth.getAuthHeaders() }
+    ).toPromise();
+
     promise.then((d: any) => {
       this.data = d;
     }).catch((err: HttpErrorResponse) => {
@@ -67,9 +72,12 @@ export class DashboardComponent implements OnInit {
       birthday: this.birthday,
     };
 
-    console.log(body);
+    const promise = this.http.post(
+      API_BASE_URL + apiRoutes.dashboard,
+      body,
+      { headers: this.auth.getAuthHeaders() }
+    ).toPromise();
 
-    const promise = this.http.post(API_BASE_URL + apiRoutes.dashboard, body, { headers: this.headers() }).toPromise();
     promise.then((d: any) => {
       this.getDashboardData();
     }).catch((err: HttpErrorResponse) => {

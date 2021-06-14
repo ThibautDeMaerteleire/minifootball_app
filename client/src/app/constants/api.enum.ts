@@ -1,8 +1,8 @@
-export const BASE_URL = 'https://api.footy.thibautdemaerteleire.be';
-// export const BASE_URL = 'http://localhost:8000';
+// export const BASE_URL = 'https://api.footy.thibautdemaerteleire.be';
+export const BASE_URL = 'http://localhost:8000';
 export const ASSETS_BASE_URL = BASE_URL + '/storage/';
 export const API_BASE_URL = BASE_URL + '/api';
-// export const API_BASE_URL = 'http://api.footy.thibautdemaerteleire.be/api';
+
 
 export enum apiRoutes {
   'login' = '/login',

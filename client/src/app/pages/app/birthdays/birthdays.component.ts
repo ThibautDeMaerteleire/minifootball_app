@@ -1,6 +1,7 @@
-import { HttpClient, HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { apiRoutes, API_BASE_URL } from 'src/app/constants/api.enum';
+import { AuthGuardService } from 'src/app/services/auth-guard/auth-guard.service';
 
 @Component({
   selector: 'app-birthdays',
@@ -12,29 +13,27 @@ export class BirthdaysComponent implements OnInit {
   table = false;
   players: any = [];
   loading = false;
-  authkey: string = window.localStorage.getItem('Authentication') || '';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private auth: AuthGuardService,
+  ) { }
 
   ngOnInit(): void {
     this.getBirthdays();
-  }
-
-  headers(): HttpHeaders {
-    return new HttpHeaders().set('Authorization', this.authkey);
   }
 
   getBirthdays(): void {
     this.loading = true;
     const promise = this.http.get(
       API_BASE_URL + apiRoutes.birthdays,
-      { headers: this.headers() }
+      { headers: this.auth.getAuthHeaders() }
     ).toPromise();
 
     promise.then((d: any) => {
       this.players = d;
       this.loading = false;
-    }).catch((err: HttpHeaderResponse) => {
+    }).catch((err: HttpErrorResponse) => {
       console.error(err);
       this.loading = false;
     });

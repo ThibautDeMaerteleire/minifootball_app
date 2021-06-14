@@ -1,1 +1,148 @@
-<p>overview-team works!</p>
+<div class="row">
+    <ng-template [ngIf]="rbfaClubInfo && rbfaCalendar && teamData" [ngIfElse]="loadingTemplate" >
+        <ng-template [ngIf]="rbfaClubInfo && teamData" [ngIfElse]="empty" >
+            <div class="col-12 col-md-7 mb-3">
+                <app-base-card>
+                    <div class="d-flex align-items-center mb-3">
+                        <nz-avatar
+                            class="img-thumbnail me-2 me-md-4"
+                            nzIcon="user"
+                            [nzSrc]="assetsUrl + teamData.thumbnail"
+                            nzAlt="thumbnail {{teamData.name}}"
+                            [nzSize]="128"
+                        >
+                        </nz-avatar>
+                        <h1 class="d-flex align-items-center mb-0 text-shorten">
+                            {{teamData.name}}
+                        </h1>
+                    </div>
+                    <p class="fw-600">{{teamData.slogan}}</p>
+                    <p>{{teamData.description}}</p>
+                    <div class="row">
+                        <p
+                            *ngIf="rbfaClubInfo.officialLanguage"
+                            class="col-12 col-lg-6 h2 my-2 d-inline-flex align-items-center shorten-text"
+                        >
+                            <i
+                                nz-icon
+                                class="h2 me-3 mb-2 text-purple"
+                                nzType="flag"
+                                nzTheme="outline"
+                            >
+                            </i>
+                            {{rbfaClubInfo.officialLanguage}}
+                        </p>
+                        <p
+                            *ngIf="rbfaClubInfo.venue"
+                            class="col-12 col-lg-6 h2 my-2 d-inline-flex align-items-center shorten-text"
+                            [title]="'Address: ' + rbfaClubInfo.venue.postalCode + ' ' + rbfaClubInfo.venue.localityName + ', ' + rbfaClubInfo.venue.streetName"
+                        >
+                            <i
+                                nz-icon
+                                class="h2 me-3 mb-2 text-purple"
+                                nzType="shop"
+                                nzTheme="outline"
+                            >
+                            </i>
+                            {{rbfaClubInfo.venue.name}}
+                        </p>
+                        <div
+                            *ngIf="rbfaClubInfo.contacts"
+                            class="col-12 col-md-6 my-2 d-inline-flex"
+                        >
+                            <i
+                                nz-icon
+                                class="h2 me-3 mb-2 text-purple"
+                                nzType="user"
+                                nzTheme="outline"
+                            >
+                            </i>
+                            <p class="h2 mb-0 mt-1 shorten-text d-flex flex-column">
+                                <a
+                                    class="text-decoration-none"
+                                    *ngFor="let contact of rbfaClubInfo.contacts; let i = index"
+                                    [title]="contact.functionName"
+                                    href="mailto:{{contact.mail}}"
+                                >
+                                    {{contact.firstName}} {{contact.lastName}} {{i !== rbfaClubInfo.contacts.length - 1 ? ', ' : ''}}
+                                </a>
+                            </p>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <p
+                                *ngIf="rbfaClubInfo.officialLanguage"
+                                class="col-12 h2 my-2 d-inline-flex align-items-center shorten-text"
+                            >
+                                <i
+                                    nz-icon
+                                    class="h2 me-3 mb-2 text-purple"
+                                    nzType="star"
+                                    nzTheme="outline"
+                                >
+                                </i>
+                                <ng-container *ngFor="let lvl of rbfaClubInfo.sportLevel.level; let i = index">
+                                    {{i !== rbfaClubInfo.sportLevel.level.length - 1 ? lvl + ', ' : lvl }}
+                                </ng-container>
+                            </p>
+                        </div>
+                        <div
+                            *ngIf="rbfaClubInfo.address"
+                            class="col-12 my-2 d-inline-flex"
+                        >
+                            <i
+                                nz-icon
+                                class="h2 me-3 mb-2 text-purple"
+                                nzType="compass"
+                                nzTheme="outline"
+                            >
+                            </i>
+                            <p class="h2 shorten-text">
+                                {{rbfaClubInfo.address.streetName}} <br/>
+                                {{rbfaClubInfo.address.postalCode}} {{rbfaClubInfo.address.localityName}}
+                            </p>
+                        </div>
+                    </div>
+                </app-base-card>
+            </div>
+            <div class="col-12 col-md-5">
+                <app-base-card className="mb-3" >
+                    <h2 class="fw-7 fs-4">Calendar</h2>
+                    <div class="line bg-secondary"></div>
+                    <ng-template [ngIf]="rbfaCalendar.length > 0" [ngIfElse]="empty" >
+                        <div *ngFor="let match of rbfaCalendar" class="row">
+                            <div class="col-4 d-flex align-items-center p-3 op-7" >
+                                <nz-avatar
+                                    nzIcon="team"
+                                    [nzSize]="64"
+                                    [nzSrc]="assetsUrl + team.team.thumbnail"
+                                    [nzAlt]="team.team.name"
+                                >
+                                </nz-avatar>
+                                <span class="h3 mb-0 ms-3 text-uppercase shorten-text">{{team.team.name}}</span>
+                            </div>
+                            <div class="col-12 line"></div>
+                        </div>
+                    </ng-template>
+                </app-base-card>
+            </div>
+        </ng-template>
+    </ng-template>
+</div>
+
+
+<ng-template #loadingTemplate>
+    <div class="col-12 d-flex justify-content-center my-5">
+        <app-loader></app-loader>
+    </div>
+</ng-template>
+
+<ng-template #empty>
+    <div class="col-12">
+        <app-base-card className="d-flex flex-column align-items-center">
+            <nz-empty
+                class="mb-3 mt-7"
+                nzNotFoundContent="This club/team doesn't exist"
+            ></nz-empty>
+        </app-base-card>
+    </div>
+</ng-template>

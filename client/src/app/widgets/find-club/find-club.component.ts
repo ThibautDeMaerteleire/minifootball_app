@@ -1,7 +1,8 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, } from '@angular/core';
 import { Router } from '@angular/router';
 import { apiRoutes, API_BASE_URL, ASSETS_BASE_URL } from 'src/app/constants/api.enum';
+import { AuthGuardService } from 'src/app/services/auth-guard/auth-guard.service';
 import { RbfaApiService } from 'src/app/services/rbfa-api/rbfa-api.service';
 
 interface ITeam {
@@ -25,7 +26,6 @@ export class FindClubComponent implements OnInit {
   selectedItem: string | number = -1;
   search = '';
   teams: ITeam[] | [] = [];
-  authkey: string = window.localStorage.getItem('Authentication') || '';
   page = 1;
   totalItems = 1;
 
@@ -33,7 +33,12 @@ export class FindClubComponent implements OnInit {
 
   @Output() selectedTeamId = new EventEmitter<string | number>();
 
-  constructor(private http: HttpClient, private router: Router, private rbfaApi: RbfaApiService) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private rbfaApi: RbfaApiService,
+    private auth: AuthGuardService,
+  ) {}
 
   ngOnInit(): void {
     this.select ? this.getRBFAClubs() : this.getFootyTeams();
@@ -46,7 +51,7 @@ export class FindClubComponent implements OnInit {
     const promise = this.http.post(
       API_BASE_URL + apiRoutes['search-teams'],
       { search: searchValue, page: this.page },
-      { headers: this.headers() }
+      { headers: this.auth.getAuthHeaders() }
     ).toPromise();
 
     promise.then((d: ITeam[] |any) => {
@@ -66,7 +71,6 @@ export class FindClubComponent implements OnInit {
 
     promise.then((d: any) => {
       this.teams = this.rbfaMapper(d);
-      console.log(this.teams);
       this.loading = false;
     }).catch((err: HttpErrorResponse) => {
       console.error(err);
@@ -74,10 +78,6 @@ export class FindClubComponent implements OnInit {
     });
 
     return;
-  }
-
-  headers(): HttpHeaders {
-    return new HttpHeaders().set('Authorization', this.authkey);
   }
 
   rbfaMapper(data: any): ITeam[] {

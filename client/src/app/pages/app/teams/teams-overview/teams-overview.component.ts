@@ -1,7 +1,8 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { apiRoutes, API_BASE_URL, ASSETS_BASE_URL } from 'src/app/constants/api.enum';
+import { AuthGuardService } from 'src/app/services/auth-guard/auth-guard.service';
 
 @Component({
   selector: 'app-teams-overview',
@@ -12,23 +13,22 @@ export class TeamsOverviewComponent implements OnInit {
 
   assetsUrl = ASSETS_BASE_URL;
   teams: Array<any> = [];
-  authkey: string = window.localStorage.getItem('Authentication') || '';
   loading = false;
 
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private auth: AuthGuardService,
+  ) { }
 
   ngOnInit(): void {
     this.loadTeams();
   }
 
-  headers(): HttpHeaders {
-    return new HttpHeaders().set('Authorization', this.authkey);
-  }
-
   loadTeams(): void {
     this.loading = true;
 
-    const promise = this.http.get(API_BASE_URL + apiRoutes.teams, { headers: this.headers() }).toPromise();
+    const promise = this.http.get(API_BASE_URL + apiRoutes.teams, { headers: this.auth.getAuthHeaders() }).toPromise();
 
     promise.then((d: any) => {
       this.teams = d;

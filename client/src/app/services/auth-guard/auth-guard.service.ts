@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot } from '@angular/router';
 import { baseRoutesEnum } from '../../constants/routes.enum';
@@ -25,6 +26,10 @@ export class AuthGuardService {
         return true;
       }
     }
+  }
 
+  public getAuthHeaders(): HttpHeaders {
+    const authkey: string = window.localStorage.getItem('Authentication') || '';
+    return new HttpHeaders().set('Authorization', authkey);
   }
 }

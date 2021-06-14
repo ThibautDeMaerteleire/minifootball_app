@@ -1,7 +1,8 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { apiRoutes, API_BASE_URL } from 'src/app/constants/api.enum';
+import { AuthGuardService } from 'src/app/services/auth-guard/auth-guard.service';
 import { IPlayer } from 'src/app/widgets/add-players/add-players.component';
 
 interface ICreateTeamBody {
@@ -28,7 +29,6 @@ export class CreateTeamComponent {
   lastSlideTime = 0;
   submittedTeamId: number | null = null;
   loading = false;
-  authkey: string = window.localStorage.getItem('Authentication') || '';
 
   body: ICreateTeamBody = {
     name: '',
@@ -41,11 +41,11 @@ export class CreateTeamComponent {
     addMyselfAsAdmin: true
   };
 
-  constructor(private router: Router, private http: HttpClient) {}
-
-  headers(): HttpHeaders {
-    return new HttpHeaders().set('Authorization', this.authkey);
-  }
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private auth: AuthGuardService,
+  ) {}
 
   submit(): void {
     // Validating the data
@@ -59,11 +59,10 @@ export class CreateTeamComponent {
     const promise = this.http.post(
       API_BASE_URL + apiRoutes['create-team'],
       this.body,
-      { headers: this.headers() }
+      { headers: this.auth.getAuthHeaders() }
     ).toPromise();
 
     promise.then((d: any) => {
-      console.log(d);
       this.submittedTeamId = d.id;
       this.loading = false;
     }).catch((err: HttpErrorResponse) => {
@@ -113,7 +112,6 @@ export class CreateTeamComponent {
     // Setting new timestamp sliding
     this.lastSlideTime = new Date().getTime();
 
-    console.log(newStep);
     func;
 
     this.step = newStep;

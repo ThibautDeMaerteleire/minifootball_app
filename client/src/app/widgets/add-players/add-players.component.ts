@@ -1,6 +1,7 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { apiRoutes, API_BASE_URL, ASSETS_BASE_URL } from 'src/app/constants/api.enum';
+import { AuthGuardService } from 'src/app/services/auth-guard/auth-guard.service';
 
 
 export interface IPlayer {
@@ -28,7 +29,6 @@ export interface IFunction {
 export class AddPlayersComponent implements OnInit {
 
   loading = false;
-  authkey: string = window.localStorage.getItem('Authentication') || '';
   players: IPlayer[] | [] = [];
   functions: IFunction[] | [] = [];
   selectedPlayers: IPlayer[] | [] = [];
@@ -42,16 +42,15 @@ export class AddPlayersComponent implements OnInit {
   @Output() submitPlayers = new EventEmitter<IPlayer[] | []>();
   @Output() submitFunctions = new EventEmitter<IFunction[] | []>();
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private auth: AuthGuardService,
+  ) { }
 
   ngOnInit(): void {
     this.getFunctions();
     this.getPlayers();
     return;
-  }
-
-  headers(): HttpHeaders {
-    return new HttpHeaders().set('Authorization', this.authkey);
   }
 
   clickPlayer(id: string | number): void {
@@ -87,11 +86,10 @@ export class AddPlayersComponent implements OnInit {
     const promise = this.http.post(
       API_BASE_URL + apiRoutes['search-players'],
       { search: this.search, page: this.page, teamId: this.teamId },
-      { headers: this.headers() }
+      { headers: this.auth.getAuthHeaders() }
     ).toPromise();
 
     promise.then((d: IPlayer[] |any) => {
-      console.log(d);
       this.players = this.mapper(d);
       this.loading = false;
     }).catch((err: HttpErrorResponse) => {
@@ -107,7 +105,7 @@ export class AddPlayersComponent implements OnInit {
 
     const promise = this.http.get(
       API_BASE_URL + apiRoutes['all-functions'],
-      { headers: this.headers() }
+      { headers: this.auth.getAuthHeaders() }
     ).toPromise();
 
     promise.then((d: IFunction[] | any) => {

@@ -1,7 +1,8 @@
-import { HttpClient, HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaderResponse, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { apiRoutes, API_BASE_URL } from 'src/app/constants/api.enum';
+import { AuthGuardService } from 'src/app/services/auth-guard/auth-guard.service';
 
 @Component({
   selector: 'app-player',
@@ -12,17 +13,16 @@ export class PlayerComponent implements OnInit {
 
   data: any = null;
   loading = false;
-  authkey: string = window.localStorage.getItem('Authentication') || '';
 
-  constructor(private http: HttpClient, private route: ActivatedRoute) { }
+  constructor(
+    private http: HttpClient,
+    private route: ActivatedRoute,
+    private auth: AuthGuardService,
+  ) { }
 
   ngOnInit(): void {
     this.getUser();
     return;
-  }
-
-  headers(): HttpHeaders {
-    return new HttpHeaders().set('Authorization', this.authkey);
   }
 
   getUser(): void {
@@ -31,14 +31,13 @@ export class PlayerComponent implements OnInit {
 
     const promise = this.http.get(
       API_BASE_URL + apiRoutes.player + routeParams.get('id'),
-      { headers: this.headers() }
+      { headers: this.auth.getAuthHeaders() }
     ).toPromise();
 
     promise.then((d: any) => {
       this.data = d;
       this.loading = false;
-      console.log(d);
-    }).catch((err: HttpHeaderResponse) => {
+    }).catch((err: HttpErrorResponse) => {
       console.error(err);
       this.loading = false;
     });
