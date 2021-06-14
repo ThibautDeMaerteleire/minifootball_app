@@ -1,7 +1,7 @@
 <div class="row">
     <ng-template [ngIf]="rbfaClubInfo && rbfaCalendar && teamData" [ngIfElse]="loadingTemplate" >
         <ng-template [ngIf]="rbfaClubInfo && teamData" [ngIfElse]="empty" >
-            <div class="col-12 col-md-7 mb-3">
+            <div class="col-12 col-lg-7 mb-3">
                 <app-base-card>
                     <div class="d-flex align-items-center mb-3">
                         <nz-avatar
@@ -104,23 +104,51 @@
                     </div>
                 </app-base-card>
             </div>
-            <div class="col-12 col-md-5">
+            <div class="col-12 col-lg-5">
                 <app-base-card className="mb-3" >
-                    <h2 class="fw-7 fs-4">Calendar</h2>
-                    <div class="line bg-secondary"></div>
+                    <div class="row px-2">
+                        <h2 class="fw-7 fs-4">Calendar</h2>
+                        <div class="line bg-secondary"></div>
+                    </div>
                     <ng-template [ngIf]="rbfaCalendar.length > 0" [ngIfElse]="empty" >
-                        <div *ngFor="let match of rbfaCalendar" class="row">
-                            <div class="col-4 d-flex align-items-center p-3 op-7" >
+                        <div *ngFor="let match of rbfaCalendar" class="row op-7 pt-3 px-2">
+                            <div
+                                class="col-5 d-flex align-items-center"
+                                [title]="match.homeTeam.name"
+                            >
                                 <nz-avatar
                                     nzIcon="team"
-                                    [nzSize]="64"
-                                    [nzSrc]="assetsUrl + team.team.thumbnail"
-                                    [nzAlt]="team.team.name"
+                                    [nzSize]="48"
+                                    nzShape="circle"
+                                    [nzSrc]="match.homeTeam.logo"
+                                    [nzAlt]="'logo' + match.homeTeam.name"
                                 >
                                 </nz-avatar>
-                                <span class="h3 mb-0 ms-3 text-uppercase shorten-text">{{team.team.name}}</span>
+                                <span class="h6 mb-0 ms-3 text-uppercase shorten-text">{{match.homeTeam.name}}</span>
                             </div>
-                            <div class="col-12 line"></div>
+                            <div class="col-2 d-flex flex-column align-items-center justify-content-center text-center" >
+                                <span *ngIf="match.outcome.status === 'finished'">
+                                    {{match.outcome.homeTeamGoals}} - {{match.outcome.awayTeamGoals}}
+                                </span>
+                                <span *ngIf="match.outcome.status !== 'finished'">
+                                    {{match.startDate | date:"HH:mm"}}
+                                </span>
+                            </div>
+                            <div
+                                class="col-5 d-flex align-items-center justify-content-end"
+                                [title]="match.awayTeam.name"
+                            >
+                                <span class="h6 mb-0 me-3 text-uppercase shorten-text text-align-end">{{match.awayTeam.name}}</span>
+                                <nz-avatar
+                                    nzIcon="team"
+                                    [nzSize]="48"
+                                    nzShape="circle"
+                                    [nzSrc]="match.awayTeam.logo"
+                                    [nzAlt]="'logo' + match.awayTeam.name"
+                                >
+                                </nz-avatar>
+                            </div>
+                            <div class="col-12 line mt-3"></div>
                         </div>
                     </ng-template>
                 </app-base-card>

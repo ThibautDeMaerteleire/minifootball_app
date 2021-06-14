@@ -1,1 +1,66 @@
-<p>ranking-team works!</p>
+<div class="row">
+    <ng-template [ngIf]="!loading" [ngIfElse]="loadingTemplate" >
+        <ng-template [ngIf]="rankings" [ngIfElse]="empty" >
+            <section
+                *ngFor="let ranking of rankings"
+                class="col-12 mb-4 mt-2"
+            >
+                <h5>{{ranking.name}}</h5>
+                <nz-table
+                    [nzData]="ranking.rankings[0].teams"
+                    [nzFrontPagination]="false"
+                    [nzShowPagination]="false"
+                >
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Ploeg</th>
+                            <th>M</th>
+                            <th>W</th>
+                            <th>V</th>
+                            <th>G</th>
+                            <th>+</th>
+                            <th>-</th>
+                            <th>+/-</th>
+                            <th>PTN</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let team of ranking.rankings[0].teams; let i = index"
+                            class="{{team.teamId == teamData.rbfa_team_id ? 'bg-purple-bg' : ''}}"
+                        >
+                            <td>{{i + 1}}</td>
+                            <td>{{team.name}}</td>
+                            <td>{{team.matchesPlayed}}</td>
+                            <td>{{team.matchesWon}}</td>
+                            <td>{{team.matchesLost}}</td>
+                            <td>{{team.matchesDrawn}}</td>
+                            <td>{{team.goalsFor}}</td>
+                            <td>{{team.goalsAgainst}}</td>
+                            <td>{{team.goalDifference}}</td>
+                            <td>{{team.points}}</td>
+                        </tr>
+                    </tbody>
+                </nz-table>
+            </section>
+        </ng-template>
+    </ng-template>
+</div>
+
+<ng-template #loadingTemplate>
+    <div class="col-12 d-flex justify-content-center my-5">
+        <app-loader></app-loader>
+    </div>
+</ng-template>
+
+<ng-template #empty>
+    <div class="col-12">
+        <app-base-card className="d-flex flex-column align-items-center">
+            <nz-empty
+                class="mb-3 mt-7"
+                nzNotFoundContent="Didn't found any rankings"
+            ></nz-empty>
+        </app-base-card>
+    </div>
+</ng-template>

@@ -31,5 +31,4 @@ export class SideNavComponent implements OnInit {
     window.localStorage.removeItem('Authentication');
     this.router.navigate([baseRoutesEnum.login]);
   }
-
 }

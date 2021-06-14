@@ -25,3 +25,14 @@ nz-content {
     opacity: 0.8;
   }
 }
+
+nz-sider {
+  overflow: auto;
+  height: 100%;
+  position: fixed;
+  left: 0;
+
+  &::-webkit-scrollbar {
+    width: 0.25rem;
+  }
+}

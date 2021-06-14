@@ -18,14 +18,18 @@ export class RbfaApiService {
   }
 
   public upcomingMatches(teamId: string | number, language = 'nl'): string {
-    return `https://datalake-prod2018.rbfa.be/graphql?operationName=GetUpcomingMatch&variables={'teamId':'${teamId}','language':'${language}'}&extensions={'persistedQuery':{'version':1,'sha256Hash':'f14c473111a1051bdc6d08827231c18d2446044cdcb1202b2ccb5f890113d74d'}}`;
+    return `https://datalake-prod2018.rbfa.be/graphql?operationName=GetUpcomingMatch&variables={"teamId":"${teamId}","language":"${language}"}&extensions={"persistedQuery":{"version":1,"sha256Hash":"f14c473111a1051bdc6d08827231c18d2446044cdcb1202b2ccb5f890113d74d"}}`;
   }
 
   public lastPlayedMatches(teamId: string | number, language = 'nl'): string {
-    return `https://datalake-prod2018.rbfa.be/graphql?operationName=GetLastPlayedMatch&variables={'teamId':'${teamId}','language':'${language}'}&extensions={'persistedQuery':{'version':1,'sha256Hash':'3b7dc3ed88f5e40fbdb4fd8fab14dcb735bc4d9ade38c6525bd3b5717a1c5092'}}`;
+    return `https://datalake-prod2018.rbfa.be/graphql?operationName=GetLastPlayedMatch&variables={"teamId":"${teamId}","language":"${language}"}&extensions={"persistedQuery":{"version":1,"sha256Hash":"3b7dc3ed88f5e40fbdb4fd8fab14dcb735bc4d9ade38c6525bd3b5717a1c5092"}}`;
   }
 
-  public teamCalendar(teamId: string | number, language = 'nl'): string {
-    return `https://datalake-prod2018.rbfa.be/graphql?operationName=GetTeamCalendar&variables={'teamId':'${teamId}','language':'${language}', 'sortByDate': 'asc'}&extensions={'persistedQuery':{'version':1,'sha256Hash':'3b7dc3ed88f5e40fbdb4fd8fab14dcb735bc4d9ade38c6525bd3b5717a1c5092'}}`;
+  public teamCalendar(teamId: string | number, language = 'nl', sortBy = 'asc'): string {
+    return `https://datalake-prod2018.rbfa.be/graphql?operationName=GetTeamCalendar&variables={"teamId":"${teamId}","language":"${language}","sortByDate":"${sortBy}"}&extensions={"persistedQuery":{"version":1,"sha256Hash":"bf4be0c185dee11a27079e529a04d41dc692389ada678dac1f2280e056de7b7d"}}`;
+  }
+
+  public teamRanking(teamId: string | number, language = 'nl',): string {
+    return `https://datalake-prod2018.rbfa.be/graphql?operationName=getSeriesAndRankingsQuery&variables={"teamId":"${teamId}","language":"${language}"}&extensions={"persistedQuery":{"version":1,"sha256Hash":"ac1d225e713827feea3013deb89bff2740c3c623079807f36374212eb92ea285"}}`;
   }
 }
