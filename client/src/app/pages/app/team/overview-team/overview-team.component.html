@@ -1,5 +1,5 @@
 <div class="row">
-    <ng-template [ngIf]="rbfaClubInfo && rbfaCalendar && teamData" [ngIfElse]="loadingTemplate" >
+    <ng-template [ngIf]="!loading" [ngIfElse]="loadingTemplate" >
         <ng-template [ngIf]="rbfaClubInfo && teamData" [ngIfElse]="empty" >
             <div class="col-12 col-lg-7 mb-3">
                 <app-base-card>

@@ -19,13 +19,13 @@ class PracticeMatchesFactory extends Factory
      *
      * @return array
      */
-    public function definition()
-    {
+    public function definition() {
         return [
             'home_team' => random_int(0, 10),
             'away_team' => random_int(0, 10),
-            'accepted' => null,
+            'accepted' => $this->faker->boolean(),
             'request_by' => random_int(0, 10),
+            'date' => $this->faker->date(),
         ];
     }
 }

@@ -13,6 +13,7 @@ import { RbfaApiService } from 'src/app/services/rbfa-api/rbfa-api.service';
 })
 export class OverviewTeamComponent implements OnInit {
 
+  loading = true;
   assetsUrl = ASSETS_BASE_URL;
   teamData: any = null;
   rbfaClubInfo: any = null;
@@ -32,6 +33,8 @@ export class OverviewTeamComponent implements OnInit {
   }
 
   getTeam(): void {
+    this.loading = true;
+
     const promise = this.http.get(
       API_BASE_URL + apiRoutes.team + this.id,
       { headers: this.auth.getAuthHeaders() }
@@ -41,7 +44,6 @@ export class OverviewTeamComponent implements OnInit {
       this.route.data = d.team;
       this.teamData = d.team;
       this.getRBFAClubInfo();
-      this.getRBFACalendar();
     }).catch((err: HttpErrorResponse) => {
       console.error(err);
     });
@@ -54,8 +56,10 @@ export class OverviewTeamComponent implements OnInit {
 
     promise.then((d: any) => {
       this.rbfaClubInfo = d.data.clubInfo;
+      this.getRBFACalendar();
     }).catch((err: HttpErrorResponse) => {
       console.error(err);
+      this.getRBFACalendar();
     });
 
     return;
@@ -66,8 +70,10 @@ export class OverviewTeamComponent implements OnInit {
 
     promise.then((d: any) => {
       this.rbfaCalendar = d.data.teamCalendar;
+      this.loading = false;
     }).catch((err: HttpErrorResponse) => {
       console.error(err);
+      this.loading = false;
     });
 
     return;

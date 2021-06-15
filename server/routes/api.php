@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FunctionsController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PlayerController;
+use App\Http\Controllers\PracticeMatchesController;
 use App\Http\Controllers\TeammembersController;
 use App\Http\Controllers\TeamsController;
 use App\Http\Controllers\TutorialsController;
@@ -69,3 +70,9 @@ Route::post('/search-tutorials', [TutorialsController::class, 'searchTutorials']
 Route::get('/updates', [UpdatesController::class, 'getAllUpdates'])->middleware('auth:sanctum');
 
 Route::get('/team/{id}', [TeammembersController::class, 'getTeamWithFunction'])->middleware('auth:sanctum');
+
+Route::get('/practice-matches/{id}', [PracticeMatchesController::class, 'Overview'])->middleware('auth:sanctum');
+
+Route::put('/practice-match/accept-request', [PracticeMatchesController::class, 'AcceptRequest'])->middleware('auth:sanctum');
+
+Route::post('/create-practice-match', [PracticeMatchesController::class, 'Create'])->middleware('auth:sanctum');

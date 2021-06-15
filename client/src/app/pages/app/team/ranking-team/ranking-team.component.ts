@@ -56,10 +56,11 @@ export class RankingTeamComponent implements OnInit {
       this.loading = false;
     }).catch((err: HttpErrorResponse) => {
       console.error(err);
+      this.loading = false;
     });
 
     return;
   }
 
-  
+
 }

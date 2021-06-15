@@ -1,4 +1,8 @@
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { apiRoutes, API_BASE_URL } from 'src/app/constants/api.enum';
+import { AuthGuardService } from 'src/app/services/auth-guard/auth-guard.service';
 
 @Component({
   selector: 'app-line-ups-team',
@@ -7,9 +11,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LineUpsTeamComponent implements OnInit {
 
-  constructor() { }
-
   ngOnInit(): void {
+    return;
   }
 
 }

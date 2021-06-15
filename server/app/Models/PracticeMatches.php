@@ -18,6 +18,7 @@ class PracticeMatches extends Model {
     'away_team',
     'accepted',
     'request_by',
+    'date',
   ];
 
   /**
@@ -40,16 +41,16 @@ class PracticeMatches extends Model {
     return $this->belongsToMany(Teammembers::class, 'team_id');
   }
   
-  public function home_team() {
-    return $this->hasOne(Teams::class);
+  public function homeTeam() {
+    return $this->hasOne(Teams::class, 'id', 'home_team');
   }
   
-  public function away_team() {
-    return $this->hasOne(Teams::class);
+  public function awayTeam() {
+    return $this->hasOne(Teams::class, 'id', 'away_team');
   }
 
-  public function request_by() {
-    return $this->hasOne(User::class);
+  public function requestBy() {
+    return $this->hasOne(User::class, 'id', 'request_by');
   }
   
   public $timestamps = true;

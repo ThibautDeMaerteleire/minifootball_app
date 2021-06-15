@@ -35,3 +35,7 @@ nz-pagination {
     justify-content: center;
   }
 }
+
+.cdk-overlay-container {
+  z-index: 9999;
+}

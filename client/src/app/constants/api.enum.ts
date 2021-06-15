@@ -25,4 +25,7 @@ export enum apiRoutes {
   'search-tutorials' = '/search-tutorials',
   'birthdays' = '/birthdays',
   'updates' = '/updates',
+  'practice-matches' = '/practice-matches/',
+  'accept-practice-match-request' = '/practice-match/accept-request',
+  'create-practice-match' = '/create-practice-match',
 }

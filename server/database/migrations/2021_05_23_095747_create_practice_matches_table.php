@@ -19,6 +19,7 @@ class CreatePracticeMatchesTable extends Migration
             $table->integer('away_team');
             $table->boolean('accepted')->nullable();
             $table->integer('request_by')->comment('User ID from player who requested exercise match');
+            $table->date('date');
             $table->timestamps();
         });
     }

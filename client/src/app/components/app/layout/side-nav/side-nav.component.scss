@@ -33,6 +33,10 @@ nz-sider {
   left: 0;
 
   &::-webkit-scrollbar {
+    width: 0rem;
+  }
+
+  &:hover::-webkit-scrollbar {
     width: 0.25rem;
   }
 }
