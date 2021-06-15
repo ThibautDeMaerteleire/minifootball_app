@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FunctionsController;
+use App\Http\Controllers\LineupsController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PlayerController;
 use App\Http\Controllers\PracticeMatchesController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\TeamsController;
 use App\Http\Controllers\TutorialsController;
 use App\Http\Controllers\UpdatesController;
 use App\Http\Controllers\UserController;
+use App\Models\Lineups;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,3 +78,9 @@ Route::get('/practice-matches/{id}', [PracticeMatchesController::class, 'Overvie
 Route::put('/practice-match/accept-request', [PracticeMatchesController::class, 'AcceptRequest'])->middleware('auth:sanctum');
 
 Route::post('/create-practice-match', [PracticeMatchesController::class, 'Create'])->middleware('auth:sanctum');
+
+Route::get('/line-ups/{teamId}', [LineupsController::class, 'getLineups'])->middleware('auth:sanctum');
+
+Route::post('/line-up', [LineupsController::class, 'createLineup'])->middleware('auth:sanctum');
+
+Route::get('/line-up/{id}', [LineupsController::class, 'getLineup'])->middleware('auth:sanctum');
