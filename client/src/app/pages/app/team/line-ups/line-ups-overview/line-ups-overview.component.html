@@ -1,0 +1,53 @@
+<button
+    class="btn op-7 bg-purple text-white br-3 mb-3"
+    routerLink="/app/team/{{id}}/line-ups/create"
+    role="button"
+>
+    Create lineup
+</button>
+
+<div class="row">
+    <ng-template [ngIf]="!loading" [ngIfElse]="loadingTemplate" >
+        <ng-template [ngIf]="lineups.length > 0" [ngIfElse]="empty" >
+            <nz-table [nzData]="lineups">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Defenders</th>
+                        <th>Attackers</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let lineup of lineups; let i = index"
+                            routerLink="/app/team/{{id}}/line-ups/detail/{{lineup.id}}"
+                            role="button"
+                        >
+                            <td>{{i + 1}}</td>
+                            <td>{{lineup.name}}</td>
+                            <td>{{lineup.defenders}}</td>
+                            <td>{{lineup.attackers}}</td>
+                        </tr>
+                    </tbody>
+            </nz-table>
+        </ng-template>
+    </ng-template>
+</div>
+
+<ng-template #loadingTemplate>
+    <div class="col-12 d-flex justify-content-center my-5">
+        <app-loader></app-loader>
+    </div>
+</ng-template>
+
+<ng-template #empty>
+    <div class="col-12">
+        <app-base-card className="d-flex flex-column align-items-center">
+            <nz-empty
+                class="mb-3 mt-7"
+                nzNotFoundContent="No lineups found"
+            ></nz-empty>
+        </app-base-card>
+    </div>
+</ng-template>

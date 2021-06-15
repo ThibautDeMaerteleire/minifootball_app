@@ -28,4 +28,6 @@ export enum apiRoutes {
   'practice-matches' = '/practice-matches/',
   'accept-practice-match-request' = '/practice-match/accept-request',
   'create-practice-match' = '/create-practice-match',
+  'get-lineups' = '/line-ups/',
+  'lineup' = '/line-up',
 }

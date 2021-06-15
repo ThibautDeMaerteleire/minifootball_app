@@ -1,13 +1,13 @@
 import { Routes } from '@angular/router';
 import { baseRoutesEnum, detailTeamRoutesEnum, } from 'src/app/constants/routes.enum';
 import { AddPlayersTeamComponent } from 'src/app/pages/app/team/add-players-team/add-players-team.component';
-import { LineUpsTeamComponent } from 'src/app/pages/app/team/line-ups-team/line-ups-team.component';
 import { MatchesTeamComponent } from 'src/app/pages/app/team/matches-team/matches-team.component';
 import { OverviewTeamComponent } from 'src/app/pages/app/team/overview-team/overview-team.component';
 import { PlayersTeamComponent } from 'src/app/pages/app/team/players-team/players-team.component';
 import { PracticeMatchesTeamComponent } from 'src/app/pages/app/team/practice-matches-team/practice-matches-team.component';
 import { RankingTeamComponent } from 'src/app/pages/app/team/ranking-team/ranking-team.component';
 import { SettingsTeamComponent } from 'src/app/pages/app/team/settings-team/settings-team.component';
+import { LineUpRoutes } from './line-up-routes';
 
 export const DetailTeamRoutes: Routes = [{
   path: detailTeamRoutesEnum.overview,
@@ -29,7 +29,7 @@ export const DetailTeamRoutes: Routes = [{
   component: AddPlayersTeamComponent
 }, {
   path: detailTeamRoutesEnum['line-ups'],
-  component: LineUpsTeamComponent
+  children: LineUpRoutes
 }, {
   path: detailTeamRoutesEnum.settings,
   component: SettingsTeamComponent

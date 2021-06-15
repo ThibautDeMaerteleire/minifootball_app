@@ -45,3 +45,9 @@ export enum detailTeamRoutesEnum {
   add_players = 'add-players',
   settings = 'settings',
 }
+
+export enum lineUpRoutesEnum {
+  overview = 'overview',
+  detail = 'detail/:lineupId',
+  create = 'create',
+}

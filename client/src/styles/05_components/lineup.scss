@@ -1,0 +1,32 @@
+.field {
+  background: url('/assets/img/field.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 50vw;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+
+  .player {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 200%;
+    background-color: $purple;
+    color: $white;
+    border: 2px solid $white;
+    font-weight: 600;
+    
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .field {
+    min-height: 100vw;
+  }
+}

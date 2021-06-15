@@ -270,6 +270,16 @@ $overflows: auto, hidden, visible;
 // Embed
 $embed-responsive-aspect-ratios: ((21 9), (16 9), (4 3), (3 1), (1 1));
 
+$aspect-ratios: (
+  "1x1": 100%,
+  "4x3": calc(3 / 4 * 100%),
+  "16x9": calc(9 / 16 * 100%),
+  "21x9": calc(9 / 21 * 100%),
+  "3x4": calc(4 / 3 * 100%),
+  "9x16": calc(16 / 9 * 100%),
+  "9x21": calc(21 / 9 * 100%),
+);
+
 $modal-fade-transform:        0;
 
 // Carets

@@ -25,8 +25,10 @@ import { MatchesTeamComponent } from './team/matches-team/matches-team.component
 import { PracticeMatchesTeamComponent } from './team/practice-matches-team/practice-matches-team.component';
 import { PlayersTeamComponent } from './team/players-team/players-team.component';
 import { AddPlayersTeamComponent } from './team/add-players-team/add-players-team.component';
-import { LineUpsTeamComponent } from './team/line-ups-team/line-ups-team.component';
 import { SettingsTeamComponent } from './team/settings-team/settings-team.component';
+import { LineUpsOverviewComponent } from './team/line-ups/line-ups-overview/line-ups-overview.component';
+import { LineUpsDetailComponent } from './team/line-ups/line-ups-detail/line-ups-detail.component';
+import { LineUpsCreateComponent } from './team/line-ups/line-ups-create/line-ups-create.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -49,8 +51,10 @@ import { SettingsTeamComponent } from './team/settings-team/settings-team.compon
     PracticeMatchesTeamComponent,
     PlayersTeamComponent,
     AddPlayersTeamComponent,
-    LineUpsTeamComponent,
     SettingsTeamComponent,
+    LineUpsOverviewComponent,
+    LineUpsDetailComponent,
+    LineUpsCreateComponent,
   ],
   imports: [
     CommonModule,
