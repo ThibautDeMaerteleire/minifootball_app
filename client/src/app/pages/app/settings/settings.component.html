@@ -1,0 +1,25 @@
+<app-header class="app-header mb-3">
+    <h1 class="h5 m-0">Dashboard</h1>
+</app-header>
+<div class="container-fluid">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <app-base-card>
+                    <h3 class="mb-2">Delete account</h3>
+                    <div class="line bg-purple mb-3"></div>
+                    <p>
+                        If you are sure you want to delete your account you can click the red button. This action is irreversable. Once you have clicked the data is gone.
+                    </p>
+                    <button
+                        class="btn bg-red text-white br-3 op-7"
+                        role="button"
+                        (click)="deleteAccount()"
+                    >
+                        Delete account
+                    </button>
+                </app-base-card>
+            </div>
+        </div>
+    </div>
+</div>

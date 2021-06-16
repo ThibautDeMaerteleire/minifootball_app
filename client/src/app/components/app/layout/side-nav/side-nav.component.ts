@@ -1,6 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { baseRoutesEnum } from 'src/app/constants/routes.enum';
+import { AuthGuardService } from 'src/app/services/auth-guard/auth-guard.service';
 
 
 @Component({
@@ -13,7 +12,9 @@ export class SideNavComponent implements OnInit {
   public isCollapsed = false;
   public innerWidth: number | string = '';
 
-  constructor(private router: Router) {}
+  constructor(
+    public auth: AuthGuardService,
+  ) {}
 
   ngOnInit(): void {
     this.innerWidth = window.innerWidth;
@@ -25,10 +26,5 @@ export class SideNavComponent implements OnInit {
 
   public toggleCollapse(): void {
     this.isCollapsed = !this.isCollapsed;
-  }
-
-  public logout(): void {
-    window.localStorage.removeItem('Authentication');
-    this.router.navigate([baseRoutesEnum.login]);
   }
 }

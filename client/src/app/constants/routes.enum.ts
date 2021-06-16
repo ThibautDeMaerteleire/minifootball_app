@@ -27,6 +27,7 @@ export enum appRoutesEnum {
   me = 'me',
   tutorials = 'tutorials',
   team = 'team/:id',
+  settings = 'settings',
 }
 
 export enum teamRoutesEnum {

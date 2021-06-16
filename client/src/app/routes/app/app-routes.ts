@@ -9,6 +9,7 @@ import { PlayerComponent } from 'src/app/pages/app/player/player.component';
 import { TeamRoutes } from './team-routes';
 import { TeamComponent } from 'src/app/pages/app/team/team.component';
 import { DetailTeamRoutes } from './detail-team-routes';
+import { SettingsComponent } from 'src/app/pages/app/settings/settings.component';
 
 export const AppRoutes: Routes = [{
   path: appRoutesEnum.dashboard,
@@ -31,6 +32,9 @@ export const AppRoutes: Routes = [{
 }, {
   path: appRoutesEnum.player,
   component: PlayerComponent
+}, {
+  path: appRoutesEnum.settings,
+  component: SettingsComponent
 }, {
   path: appRoutesEnum.team,
   component: TeamComponent,

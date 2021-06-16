@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lineups;
+use App\Models\Teams;
 use Illuminate\Http\Request;
 
 class LineupsController extends Controller {
@@ -21,11 +22,10 @@ class LineupsController extends Controller {
 
   public function createLineup(Request $request) {
     $lineup = Lineups::insert([
-      'name' => $request->name,
+      'name' => strlen($request->name) > 0 ? $request->name : "{{$request->user()->username}}'s {{$request->formation}}",
       'team_id' => $request->team_id,
-      'defenders' => $request->defenders,
-      'attackers' => $request->attackers,
-      'selection' => $request->selection,
+      'formation' => $request->formation,
+      'selection' => json_encode($request->selection),
     ]);
     
     return $lineup;

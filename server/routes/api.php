@@ -63,6 +63,8 @@ Route::get('/player/{id}', [UserController::class, 'getUser'])->middleware('auth
 
 Route::get('/me', [UserController::class, 'me'])->middleware('auth:sanctum');
 
+Route::delete('/user', [UserController::class, 'deleteUser'])->middleware('auth:sanctum');
+
 Route::get('/birthdays', [TeammembersController::class, 'getBirthdays'])->middleware('auth:sanctum');
 
 Route::post('/upload/image', [AssetsController::class, 'uploadImage'])->middleware('auth:sanctum');

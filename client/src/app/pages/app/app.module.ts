@@ -29,6 +29,7 @@ import { SettingsTeamComponent } from './team/settings-team/settings-team.compon
 import { LineUpsOverviewComponent } from './team/line-ups/line-ups-overview/line-ups-overview.component';
 import { LineUpsDetailComponent } from './team/line-ups/line-ups-detail/line-ups-detail.component';
 import { LineUpsCreateComponent } from './team/line-ups/line-ups-create/line-ups-create.component';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -55,6 +56,7 @@ import { LineUpsCreateComponent } from './team/line-ups/line-ups-create/line-ups
     LineUpsOverviewComponent,
     LineUpsDetailComponent,
     LineUpsCreateComponent,
+    SettingsComponent,
   ],
   imports: [
     CommonModule,

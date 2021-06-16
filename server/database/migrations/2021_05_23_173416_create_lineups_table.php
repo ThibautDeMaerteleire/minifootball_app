@@ -16,8 +16,7 @@ class CreateLineupsTable extends Migration
             $table->id();
             $table->string('name');
             $table->integer('team_id');
-            $table->integer('defenders');
-            $table->integer('attackers');
+            $table->string('formation');
             $table->json('selection')->comment('An array with all of the features listed as strings');
             $table->timestamps();
         });

@@ -8,7 +8,9 @@ import { baseRoutesEnum } from '../../constants/routes.enum';
 })
 export class AuthGuardService {
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+  ) { }
 
   canActivate(next: ActivatedRouteSnapshot): boolean {
     if (window.localStorage.getItem('Authentication')) {
@@ -31,5 +33,10 @@ export class AuthGuardService {
   public getAuthHeaders(): HttpHeaders {
     const authkey: string = window.localStorage.getItem('Authentication') || '';
     return new HttpHeaders().set('Authorization', authkey);
+  }
+
+  public logout(): void {
+    window.localStorage.removeItem('Authentication');
+    this.router.navigateByUrl(baseRoutesEnum.login);
   }
 }
